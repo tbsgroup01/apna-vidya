@@ -174,7 +174,7 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/apna-vidya">
       <AuthProvider>
         <SettingsProvider>
           <DemoModalProvider>
