@@ -1,0 +1,108 @@
+export const paymentStats = {
+  totalRevenue: "₹42,85,000",
+  thisMonth: "₹7,60,000",
+  pendingFees: "₹6,40,000",
+  successfulCount: 1428,
+  refundsCount: 6,
+};
+
+export const initialPayments = [
+  {
+    id: "PAY-10892",
+    invoiceId: "INV-2026-0892",
+    studentId: "STU-2026-001",
+    studentName: "Aman Singhania",
+    studentEmail: "aman.singh@gmail.com",
+    course: "Full Stack Web Development",
+    amount: 16000,
+    method: "UPI (PhonePe)",
+    date: "2026-09-21 14:22",
+    status: "Paid",
+    transactionRef: "UPI/382910481920/CR",
+    notes: "Final installment paid on time."
+  },
+  {
+    id: "PAY-10891",
+    invoiceId: "INV-2026-0891",
+    studentId: "STU-2026-002",
+    studentName: "Rhea Deshmukh",
+    studentEmail: "rhea.d@gmail.com",
+    course: "Data Science & Artificial Intelligence",
+    amount: 20000,
+    method: "Credit Card (HDFC)",
+    date: "2026-09-20 11:15",
+    status: "Paid",
+    transactionRef: "CC/HDFC-882193-AUTH",
+    notes: "Part fee paid. Balance due on 15th October."
+  },
+  {
+    id: "PAY-10890",
+    invoiceId: "INV-2026-0890",
+    studentId: "STU-2026-004",
+    studentName: "Pooja Hegde",
+    studentEmail: "pooja.hegde@hotmail.com",
+    course: "Mobile App Development",
+    amount: 15000,
+    method: "Debit Card (ICICI)",
+    date: "2026-09-19 16:40",
+    status: "Paid",
+    transactionRef: "DC/ICICI-49102-OK",
+    notes: "First installment."
+  },
+  {
+    id: "PAY-10889",
+    invoiceId: "INV-2026-0889",
+    studentId: "STU-2026-005",
+    studentName: "Mohd. Zeeshan",
+    studentEmail: "zeeshan.m@gmail.com",
+    course: "Data Structures, Algorithms",
+    amount: 5000,
+    method: "UPI (Google Pay)",
+    date: "2026-09-18 09:10",
+    status: "Paid",
+    transactionRef: "UPI/991204810294/CR",
+    notes: "Registration token fee."
+  },
+  {
+    id: "PAY-10888",
+    invoiceId: "INV-2026-0888",
+    studentId: "STU-2026-006",
+    studentName: "Tanya Aggarwal",
+    studentEmail: "tanya.aggarwal@gmail.com",
+    course: "Full Stack Web Development",
+    amount: 16000,
+    method: "Net Banking",
+    date: "2026-09-17 18:05",
+    status: "Failed",
+    transactionRef: "NET/NB-SBI-TIMEOUT",
+    notes: "Transaction failed at bank gateway. Student informed."
+  },
+  {
+    id: "PAY-10887",
+    invoiceId: "INV-2026-0887",
+    studentId: "STU-2026-007",
+    studentName: "Harshit Verma",
+    studentEmail: "harshit.v@gmail.com",
+    course: "Web Development",
+    amount: 12000,
+    method: "UPI",
+    date: "2026-09-14 12:30",
+    status: "Refunded",
+    transactionRef: "REF/98124910-PROCESSED",
+    notes: "Student withdrew before batch start date. 100% refund."
+  },
+  {
+    id: "PAY-10886",
+    invoiceId: "INV-2026-0886",
+    studentId: "STU-2026-008",
+    studentName: "Simran Kaur",
+    studentEmail: "simran.k@yahoo.com",
+    course: "Data Science & Artificial Intelligence",
+    amount: 19000,
+    method: "Pending",
+    date: "2026-09-22 10:00",
+    status: "Pending",
+    transactionRef: "INV-GENERATED",
+    notes: "Installment invoice sent."
+  }
+];

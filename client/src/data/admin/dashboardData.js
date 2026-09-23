@@ -1,0 +1,152 @@
+export const dashboardStats = [
+  {
+    id: "students",
+    title: "Total Students",
+    value: "5,248",
+    change: "+12.5%",
+    isPositive: true,
+    comparison: "vs last month",
+    icon: "Users",
+    color: "blue",
+  },
+  {
+    id: "courses",
+    title: "Total Courses",
+    value: "28",
+    change: "+4.2%",
+    isPositive: true,
+    comparison: "vs last month",
+    icon: "BookOpen",
+    color: "indigo",
+  },
+  {
+    id: "leads",
+    title: "Total Leads",
+    value: "1,420",
+    change: "+18.3%",
+    isPositive: true,
+    comparison: "vs last month",
+    icon: "Target",
+    color: "amber",
+  },
+  {
+    id: "pending_leads",
+    title: "Pending Leads",
+    value: "164",
+    change: "-5.1%",
+    isPositive: true,
+    comparison: "vs last week",
+    icon: "Clock",
+    color: "rose",
+  },
+  {
+    id: "revenue",
+    title: "Total Revenue",
+    value: "₹42.8 Lakh",
+    change: "+14.8%",
+    isPositive: true,
+    comparison: "vs last month",
+    icon: "IndianRupee",
+    color: "emerald",
+  },
+  {
+    id: "pending_fees",
+    title: "Pending Fees",
+    value: "₹6.4 Lakh",
+    change: "-2.4%",
+    isPositive: true,
+    comparison: "recovery rate 88%",
+    icon: "AlertCircle",
+    color: "purple",
+  },
+  {
+    id: "demo_classes",
+    title: "Demo Classes",
+    value: "382",
+    change: "+22.6%",
+    isPositive: true,
+    comparison: "vs last month",
+    icon: "PlayCircle",
+    color: "cyan",
+  },
+  {
+    id: "certificates",
+    title: "Certificates Issued",
+    value: "3,110",
+    change: "+9.0%",
+    isPositive: true,
+    comparison: "vs last month",
+    icon: "Award",
+    color: "emerald",
+  },
+];
+
+export const enrollmentChartData = [
+  { month: "Jan", students: 280 },
+  { month: "Feb", students: 340 },
+  { month: "Mar", students: 410 },
+  { month: "Apr", students: 490 },
+  { month: "May", students: 580 },
+  { month: "Jun", students: 640 },
+  { month: "Jul", students: 720 },
+  { month: "Aug", students: 810 },
+  { month: "Sep", students: 950 },
+];
+
+export const revenueChartData = [
+  { month: "Jan", amount: 2.8 },
+  { month: "Feb", amount: 3.4 },
+  { month: "Mar", amount: 4.1 },
+  { month: "Apr", amount: 3.9 },
+  { month: "May", amount: 5.2 },
+  { month: "Jun", amount: 6.1 },
+  { month: "Jul", amount: 5.8 },
+  { month: "Aug", amount: 6.9 },
+  { month: "Sep", amount: 7.6 },
+];
+
+export const coursePopularityData = [
+  { course: "Full Stack Development", count: 1840, percentage: 88 },
+  { course: "Frontend React Mastery", count: 1220, percentage: 65 },
+  { course: "Data Science & AI", count: 980, percentage: 52 },
+  { course: "Mobile App Development", count: 740, percentage: 40 },
+  { course: "Python & DSA Bootcamp", count: 620, percentage: 33 },
+];
+
+export const leadConversionData = [
+  { label: "Converted to Admission", value: 42, color: "#2563eb" },
+  { label: "Follow-up Scheduled", value: 28, color: "#6366f1" },
+  { label: "Interested in Demo", value: 18, color: "#06b6d4" },
+  { label: "Lost / Not Interested", value: 12, color: "#94a3b8" },
+];
+
+export const quickNotifications = [
+  {
+    id: 1,
+    title: "New Lead Received",
+    description: "Ananya Roy requested a free trial for Full Stack Development",
+    time: "5 minutes ago",
+    unread: true,
+  },
+  {
+    id: 2,
+    title: "Student Payment Received",
+    description: "Rohan Verma paid ₹18,000 installment via UPI",
+    time: "24 minutes ago",
+    unread: true,
+  },
+  {
+    id: 3,
+    title: "Demo Class Scheduled",
+    description: "Karan Patel booked evening demo slot for Python DSA",
+    time: "1 hour ago",
+    unread: false,
+  },
+  {
+    id: 4,
+    title: "Certificate Verification Request",
+    description: "HCL HR scanned Certificate AV-2025-0842",
+    time: "3 hours ago",
+    unread: false,
+  },
+];

@@ -1,0 +1,101 @@
+export const blogStats = {
+  total: 24,
+  published: 18,
+  drafts: 4,
+  scheduled: 2,
+};
+
+export const initialBlogCategories = [
+  { id: "CAT-1", name: "Web Development", slug: "web-development", description: "Frontend, backend, full stack frameworks and tools", postCount: 10, status: "Active" },
+  { id: "CAT-2", name: "Career Guidance", slug: "career-guidance", description: "Resume tips, mock interviews, salary negotiation and placements", postCount: 6, status: "Active" },
+  { id: "CAT-3", name: "Data Science & AI", slug: "data-science-ai", description: "Machine learning, Python, analytics and LLM workflows", postCount: 5, status: "Active" },
+  { id: "CAT-4", name: "Programming Tips", slug: "programming-tips", description: "DSA, problem-solving, clean code and architecture patterns", postCount: 3, status: "Active" },
+];
+
+export const initialBlogs = [
+  {
+    id: "BLG-101",
+    title: "How to Become a Full Stack Developer in 2026: Roadmap & Skills",
+    slug: "how-to-become-full-stack-developer-2026",
+    category: "Web Development",
+    author: "Dr. Vikramaditya Sen",
+    authorRole: "Chief Academic Officer",
+    publishedDate: "2026-09-15",
+    status: "Published",
+    views: 4890,
+    tags: ["Full Stack", "React", "Node.js", "Career"],
+    featuredImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    excerpt: "A comprehensive guide on learning frontend, backend, databases, and DevOps with high market demand.",
+    content: "The software engineering industry in 2026 prioritizes developers who can build and deploy end-to-end applications...",
+    seoTitle: "Full Stack Developer Roadmap 2026 | Apna Vidya Blog",
+    seoDescription: "Step-by-step roadmap to become a high-earning full stack developer in 2026."
+  },
+  {
+    id: "BLG-102",
+    title: "Top 10 High-Paying Tech Skills Companies Are Hiring For in India",
+    slug: "top-10-high-paying-tech-skills-india",
+    category: "Career Guidance",
+    author: "Pooja Sharma",
+    authorRole: "Head of Placements",
+    publishedDate: "2026-09-10",
+    status: "Published",
+    views: 6240,
+    tags: ["Jobs", "Salaries", "Hiring", "India"],
+    featuredImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    excerpt: "Discover the top programming languages and frameworks driving placement packages in tier 1 tech hubs.",
+    content: "With the rise of generative AI and cloud microservices, developer demand has shifted drastically...",
+    seoTitle: "High-Paying Tech Skills in India 2026 | Apna Vidya",
+    seoDescription: "Learn which software skills command the highest packages in the Indian IT sector."
+  },
+  {
+    id: "BLG-103",
+    title: "Cracking DSA Coding Rounds for FAANG & Product Startups",
+    slug: "cracking-dsa-coding-rounds-faang",
+    category: "Programming Tips",
+    author: "Dr. Vikramaditya Sen",
+    authorRole: "Chief Academic Officer",
+    publishedDate: "2026-09-02",
+    status: "Published",
+    views: 3820,
+    tags: ["DSA", "LeetCode", "Interviews"],
+    featuredImage: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=80",
+    excerpt: "The exact pattern-based approach to solve dynamic programming, graphs, and tree questions with ease.",
+    content: "Memorizing code never works in a live Google or Amazon technical interview. You need pattern recognition...",
+    seoTitle: "Master DSA Coding Rounds for Product Companies | Apna Vidya",
+    seoDescription: "A proven guide to cracking technical interviews with pattern-based problem solving."
+  },
+  {
+    id: "BLG-104",
+    title: "Generative AI & LLMs in Production: What Developers Must Know",
+    slug: "generative-ai-llm-production-guide",
+    category: "Data Science & AI",
+    author: "Er. Neha Kashyap",
+    authorRole: "Lead AI Mentor",
+    publishedDate: "2026-09-25",
+    status: "Scheduled",
+    views: 0,
+    tags: ["AI", "LLM", "Python", "RAG"],
+    featuredImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    excerpt: "Moving beyond basic OpenAI API calls to building production Retrieval-Augmented Generation (RAG) systems.",
+    content: "Enterprise software teams are embedding conversational intelligence into every workflow...",
+    seoTitle: "Building Production LLM Applications | Apna Vidya Blog",
+    seoDescription: "Complete guide on vector embeddings, LangChain, and RAG pipelines."
+  },
+  {
+    id: "BLG-105",
+    title: "Beginner Guide to Tailwind CSS v4 and Modern Layouts",
+    slug: "beginner-guide-tailwind-v4",
+    category: "Web Development",
+    author: "Amitabh Roy",
+    authorRole: "Senior Frontend Lead",
+    publishedDate: "2026-09-22",
+    status: "Draft",
+    views: 0,
+    tags: ["Tailwind", "CSS", "Frontend"],
+    featuredImage: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+    excerpt: "Get up to speed with the latest CSS engine improvements and utility-first best practices.",
+    content: "Tailwind CSS v4 brings massive speed improvements and simplifies theme configuration...",
+    seoTitle: "Tailwind CSS v4 Complete Guide | Apna Vidya",
+    seoDescription: "Learn everything new in Tailwind CSS v4 with practical examples."
+  }
+];
