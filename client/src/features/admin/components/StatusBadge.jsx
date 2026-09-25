@@ -8,7 +8,7 @@ const statusStyles = {
   published: "bg-emerald-50 text-emerald-700 border-emerald-200 ring-emerald-600/20",
   converted: "bg-emerald-50 text-emerald-700 border-emerald-200 ring-emerald-600/20",
   sent: "bg-emerald-50 text-emerald-700 border-emerald-200 ring-emerald-600/20",
-  
+
   new: "bg-blue-50 text-blue-700 border-blue-200 ring-blue-600/20",
   upcoming: "bg-blue-50 text-blue-700 border-blue-200 ring-blue-600/20",
   scheduled: "bg-blue-50 text-blue-700 border-blue-200 ring-blue-600/20",
@@ -20,9 +20,9 @@ const statusStyles = {
   pending: "bg-amber-50 text-amber-700 border-amber-200 ring-amber-600/20",
   requested: "bg-amber-50 text-amber-700 border-amber-200 ring-amber-600/20",
   contacted: "bg-cyan-50 text-cyan-700 border-cyan-200 ring-cyan-600/20",
-  draft: "bg-slate-100 text-slate-700 border-slate-200 ring-slate-600/20",
-  inactive: "bg-slate-100 text-slate-600 border-slate-200 ring-slate-600/20",
-  disabled: "bg-slate-100 text-slate-600 border-slate-200 ring-slate-600/20",
+  draft: "bg-slate-100 text-[13px]late-700 border-slate-200 ring-slate-600/20",
+  inactive: "bg-slate-100 text-[13px]late-600 border-slate-200 ring-slate-600/20",
+  disabled: "bg-slate-100 text-[13px]late-600 border-slate-200 ring-slate-600/20",
 
   failed: "bg-rose-50 text-rose-700 border-rose-200 ring-rose-600/20",
   overdue: "bg-rose-50 text-rose-700 border-rose-200 ring-rose-600/20",
@@ -35,9 +35,9 @@ const statusStyles = {
 const StatusBadge = ({ status, size = "md" }) => {
   if (!status) return null;
   const key = String(status).toLowerCase().trim();
-  const classes = statusStyles[key] || "bg-slate-100 text-slate-700 border-slate-200";
+  const classes = statusStyles[key] || "bg-slate-100 text-[13px]late-700 border-slate-200";
 
-  const sizeClasses = size === "sm" ? "px-2 py-0.5 text-[11px]" : "px-2.5 py-1 text-xs";
+  const sizeClasses = size === "sm" ? "px-2 py-0.5 text-[13px]" : "px-2.5 py-1 text-xs";
 
   return (
     <span

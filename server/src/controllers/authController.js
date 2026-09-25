@@ -43,6 +43,8 @@ const sendAuthResponse = (res, user, statusCode = 200, message = "Success") => {
         email: user.email,
         phone: user.phone,
         profileImage: user.profileImage,
+        bio: user.bio,
+        designation: user.designation,
         status: user.status,
         role: roleName,
         roleId: user.roleId,
@@ -130,6 +132,68 @@ const getMe = (req, res) => {
       user: req.user,
     },
   });
+};
+
+const updateProfile = async (req, res) => {
+  try {
+    const user = req.userInstance;
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User account not found.",
+      });
+    }
+
+    const { name, phone, bio, designation, profileImage } = req.body;
+
+    if (name && typeof name === "string") {
+      user.name = name.trim();
+    }
+    if (phone !== undefined) {
+      user.phone = phone ? String(phone).trim() : null;
+    }
+    if (bio !== undefined) {
+      user.bio = bio ? String(bio).trim() : null;
+    }
+    if (designation !== undefined) {
+      user.designation = designation ? String(designation).trim() : null;
+    }
+    if (profileImage !== undefined) {
+      user.profileImage = profileImage ? String(profileImage).trim() : null;
+    }
+
+    await user.save();
+
+    const roleName = user.role ? user.role.name : (req.user?.role || "Admin");
+
+    const updatedUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      profileImage: user.profileImage,
+      bio: user.bio,
+      designation: user.designation,
+      status: user.status,
+      role: roleName,
+      roleId: user.roleId,
+      permissions: req.user?.permissions || [],
+      lastLogin: user.lastLogin,
+    };
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile updated successfully.",
+      data: {
+        user: updatedUser,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message || "Failed to update profile.",
+    });
+  }
 };
 
 const changePassword = async (req, res) => {
@@ -236,11 +300,73 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const registerAdmin = async (req, res) => {
+  try {
+    const { name, email, password, phone, role = "Admin", profileImage } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, email, and password are required.",
+      });
+    }
+
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User with this email already exists.",
+      });
+    }
+
+    const targetRole = await Role.findOne({
+      where: { name: role },
+    });
+
+    if (!targetRole) {
+      return res.status(400).json({
+        success: false,
+        message: `Role '${role}' not found. Available roles: Super Admin, Admin, Counsellor, Accountant, Content Manager, Student`,
+      });
+    }
+
+    const newUser = await User.create({
+      name,
+      email,
+      password,
+      phone: phone || null,
+      roleId: targetRole.id,
+      status: "Active",
+      profileImage: profileImage || null,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Admin account created successfully.",
+      data: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        phone: newUser.phone,
+        role: targetRole.name,
+        status: newUser.status,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message || "Failed to create admin account.",
+    });
+  }
+};
+
 module.exports = {
   login,
   logout,
   getMe,
+  updateProfile,
   changePassword,
   forgotPassword,
   resetPassword,
+  registerAdmin,
 };

@@ -161,7 +161,7 @@ const BlogForm = () => {
     return (
       <div className="py-16 text-center space-y-3">
         <div className="animate-spin inline-block h-8 w-8 rounded-full border-2 border-blue-600 border-t-transparent" />
-        <p className="text-xs font-semibold text-slate-500">Loading article editor...</p>
+        <p className="text-xs font-semibold text-[13px]late-500">Loading article editor...</p>
       </div>
     );
   }
@@ -179,7 +179,7 @@ const BlogForm = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/blogs"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors cursor-pointer"
             >
               <ArrowLeft size={15} />
               <span>Cancel</span>
@@ -188,7 +188,7 @@ const BlogForm = () => {
               <Link
                 to={`/blog/${formData.slug}`}
                 target="_blank"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
               >
                 <Eye size={15} />
                 <span>Preview</span>
@@ -216,14 +216,14 @@ const BlogForm = () => {
         )}
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-5">
-          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
             <Newspaper size={18} className="text-blue-600" />
             <span>Article Metadata & Overview</span>
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2 space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Article Title *
               </label>
               <input
@@ -232,12 +232,12 @@ const BlogForm = () => {
                 value={formData.title}
                 onChange={(e) => handleChange("title", e.target.value)}
                 placeholder="e.g. Top 10 Full-Stack Web Development Trends in 2026"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 URL Slug *
               </label>
               <input
@@ -246,18 +246,18 @@ const BlogForm = () => {
                 value={formData.slug}
                 onChange={(e) => handleChange("slug", slugify(e.target.value))}
                 placeholder="e.g. top-10-web-dev-trends-2026"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs font-mono text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs font-mono text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Category
               </label>
               <select
                 value={formData.category}
                 onChange={(e) => handleChange("category", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
               >
                 {CATEGORY_OPTIONS.map((cat) => (
                   <option key={cat} value={cat}>
@@ -268,7 +268,7 @@ const BlogForm = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Author Name
               </label>
               <input
@@ -276,12 +276,12 @@ const BlogForm = () => {
                 value={formData.author}
                 onChange={(e) => handleChange("author", e.target.value)}
                 placeholder="e.g. Dr. Vikramaditya Sen"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Author Designation / Role
               </label>
               <input
@@ -289,12 +289,12 @@ const BlogForm = () => {
                 value={formData.authorRole}
                 onChange={(e) => handleChange("authorRole", e.target.value)}
                 placeholder="e.g. Chief Academic Officer"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Estimated Read Time
               </label>
               <input
@@ -302,18 +302,18 @@ const BlogForm = () => {
                 value={formData.readTime}
                 onChange={(e) => handleChange("readTime", e.target.value)}
                 placeholder="e.g. 5 min read"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Publication Status
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => handleChange("status", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
               >
                 <option value="Published">Published (Live on Website)</option>
                 <option value="Draft">Draft (Internal)</option>
@@ -322,7 +322,7 @@ const BlogForm = () => {
             </div>
 
             <div className="sm:col-span-2 space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Article Excerpt / Summary
               </label>
               <textarea
@@ -330,7 +330,7 @@ const BlogForm = () => {
                 value={formData.excerpt}
                 onChange={(e) => handleChange("excerpt", e.target.value)}
                 placeholder="A compelling 1-2 sentence preview to engage readers in the blog listing cards..."
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
@@ -342,7 +342,7 @@ const BlogForm = () => {
                   onChange={(e) => handleChange("featured", e.target.checked)}
                   className="h-4 w-4 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                 />
-                <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <span className="text-xs font-bold text-[13px]late-700 flex items-center gap-1.5">
                   <Sparkles size={13} className="text-amber-500" />
                   Spotlight as Featured Lead Article
                 </span>
@@ -352,7 +352,7 @@ const BlogForm = () => {
         </div>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-4">
-          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
             <ImageIcon size={18} className="text-emerald-600" />
             <span>Featured Cover Image</span>
           </div>
@@ -380,17 +380,17 @@ const BlogForm = () => {
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs space-y-4">
           <div className="pb-3 border-b border-slate-100">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[13px]late-700">
               Search Engine Optimization (SEO)
             </h3>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[13px] text-[13px]late-400">
               Customize title tags and meta descriptions for search engines
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 SEO Meta Title
               </label>
               <input
@@ -398,12 +398,12 @@ const BlogForm = () => {
                 value={formData.seoTitle}
                 onChange={(e) => handleChange("seoTitle", e.target.value)}
                 placeholder="e.g. Top 10 Web Development Trends in 2026 | Apna Vidya"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 Tags (Comma separated)
               </label>
               <input
@@ -411,12 +411,12 @@ const BlogForm = () => {
                 value={formData.tags}
                 onChange={(e) => handleChange("tags", e.target.value)}
                 placeholder="e.g. React, Next.js, Career, WebDev"
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
 
             <div className="sm:col-span-2 space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">
+              <label className="text-xs font-bold text-[13px]late-700">
                 SEO Meta Description
               </label>
               <textarea
@@ -424,7 +424,7 @@ const BlogForm = () => {
                 value={formData.seoDescription}
                 onChange={(e) => handleChange("seoDescription", e.target.value)}
                 placeholder="Concise summary for search engine snippets (150-160 characters)..."
-                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
           </div>
@@ -433,7 +433,7 @@ const BlogForm = () => {
         <div className="flex items-center justify-end gap-3 pt-2">
           <Link
             to="/admin/blogs"
-            className="rounded-xl border border-slate-200 px-5 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
+            className="rounded-xl border border-slate-200 px-5 py-2.5 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50 cursor-pointer"
           >
             Cancel
           </Link>

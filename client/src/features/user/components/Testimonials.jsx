@@ -48,11 +48,11 @@ const Testimonials = () => {
           <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1.5 text-xs font-semibold text-blue-600">
             Real Student Stories
           </span>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
             Loved by Students,{" "}
             <span className="text-blue-600">Trusted by Parents</span>
           </h2>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Hear from our alumni who transformed their knowledge, built projects,
             and cracked their dream roles.
           </p>
@@ -77,7 +77,7 @@ const Testimonials = () => {
                   </div>
                   <Quote size={24} className="text-blue-200" />
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                <p className="mt-4 text-[13px]m leading-relaxed text-[13px]late-600">
                   &ldquo;{item.review}&rdquo;
                 </p>
               </div>
@@ -89,11 +89,11 @@ const Testimonials = () => {
                   className="h-11 w-11 rounded-full object-cover ring-2 ring-blue-100"
                 />
                 <div>
-                  <h4 className="text-sm font-bold text-slate-900">
+                  <h4 className="text-[13px]m font-bold text-[13px]late-900">
                     {item.name}
                   </h4>
                   <p className="text-xs text-blue-600 font-medium">{item.role}</p>
-                  <p className="text-[11px] text-slate-400">{item.course}</p>
+                  <p className="text-[13px] text-[13px]late-400">{item.course}</p>
                 </div>
               </div>
             </div>
@@ -101,14 +101,14 @@ const Testimonials = () => {
         </div>
 
         {/* <div className="mt-16 rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <p className="text-center text-xs font-semibold uppercase tracking-wider text-[13px]late-400">
             Our Alumni Work At Leading Companies
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
             {hiringPartners.map((partner, idx) => (
               <span
                 key={idx}
-                className="text-sm font-bold text-slate-600 transition-colors hover:text-blue-600 sm:text-base"
+                className="text-[13px]m font-bold text-[13px]late-600 transition-colors hover:text-blue-600 sm:text-base"
               >
                 {partner}
               </span>

@@ -51,14 +51,14 @@ const CertificateShowcase = () => {
             <span>Institutional Honors & Certifications</span>
           </div>
 
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl lg:text-5xl">
             Recognized & Certified by{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
               Leading Global Authorities
             </span>
           </h2>
 
-          <p className="mt-4 text-base text-slate-600 sm:text-lg leading-relaxed">
+          <p className="mt-4 text-base text-[13px]late-600 sm:text-lg leading-relaxed">
             Apna Vidya is backed by internationally recognized quality management
             frameworks and honors to ensure your learning credentials hold authentic global value.
           </p>
@@ -98,7 +98,7 @@ const CertificateShowcase = () => {
 
                     <div className="absolute top-3 left-3 flex items-center gap-1.5">
                       {award.featured && (
-                        <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/95 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs shadow-xs">
+                        <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/95 px-2 py-0.5 text-[12px] font-bold text-white backdrop-blur-xs shadow-xs">
                           <Sparkles size={10} />
                           Featured
                         </span>
@@ -114,8 +114,8 @@ const CertificateShowcase = () => {
                       <Eye size={14} />
                     </button>
 
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-semibold">
-                      <span className="inline-flex items-center gap-1 text-slate-200">
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[13px] font-semibold">
+                      <span className="inline-flex items-center gap-1 text-[13px]late-200">
                         <Calendar size={12} className="text-amber-400" />
                         {award.year}
                       </span>
@@ -127,12 +127,12 @@ const CertificateShowcase = () => {
                   </div>
 
                   <div className="p-4 space-y-2">
-                    <h3 className="text-sm font-bold text-slate-900 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-[13px]m font-bold text-[13px]late-900 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
                       {award.title}
                     </h3>
 
                     {award.description && (
-                      <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-[13px]late-500 line-clamp-2 leading-relaxed">
                         {award.description}
                       </p>
                     )}
@@ -152,7 +152,7 @@ const CertificateShowcase = () => {
                         <ExternalLink size={12} />
                       </a>
                     ) : (
-                      <span className="text-[11px] font-medium text-slate-400">
+                      <span className="text-[13px] font-medium text-[13px]late-400">
                         Verified Record
                       </span>
                     )}
@@ -160,7 +160,7 @@ const CertificateShowcase = () => {
                     <button
                       type="button"
                       onClick={() => setPreviewAward(award)}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[13px]late-500 hover:text-blue-600 transition-colors cursor-pointer"
                     >
                       <span>Details</span>
                       <ChevronRight size={13} />
@@ -205,7 +205,7 @@ const CertificateShowcase = () => {
             </div>
 
             <div className="p-6 space-y-4">
-              <div className="flex items-center gap-4 text-xs font-semibold text-slate-600 border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-4 text-xs font-semibold text-[13px]late-600 border-b border-slate-100 pb-3">
                 <span className="inline-flex items-center gap-1.5">
                   <Calendar size={14} className="text-amber-500" />
                   Validity / Year: {previewAward.year}
@@ -218,10 +218,10 @@ const CertificateShowcase = () => {
 
               {previewAward.description && (
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
                     Scope of Award
                   </h4>
-                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
+                  <p className="mt-1.5 text-xs text-[13px]late-600 leading-relaxed">
                     {previewAward.description}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ const CertificateShowcase = () => {
                 <button
                   type="button"
                   onClick={() => setPreviewAward(null)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Close
                 </button>

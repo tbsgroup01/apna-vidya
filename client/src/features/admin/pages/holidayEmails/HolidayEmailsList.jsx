@@ -45,8 +45,8 @@ const HolidayEmailsList = () => {
       sortable: true,
       render: (row) => (
         <div>
-          <span className="font-bold text-slate-900 block">{row.holidayName}</span>
-          <span className="text-[11px] font-mono text-slate-400">{row.id}</span>
+          <span className="font-bold text-[13px]late-900 block">{row.holidayName}</span>
+          <span className="text-[13px] font-mono text-[13px]late-400">{row.id}</span>
         </div>
       ),
     },
@@ -56,8 +56,8 @@ const HolidayEmailsList = () => {
       sortable: true,
       render: (row) => (
         <div>
-          <p className="font-medium text-slate-800 line-clamp-1">{row.subject}</p>
-          <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{row.content}</p>
+          <p className="font-medium text-[13px]late-800 line-clamp-1">{row.subject}</p>
+          <p className="text-[13px] text-[13px]late-400 line-clamp-1 mt-0.5">{row.content}</p>
         </div>
       ),
     },
@@ -65,7 +65,7 @@ const HolidayEmailsList = () => {
       key: "recipients",
       header: "Target Recipients",
       render: (row) => (
-        <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+        <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[13px] font-semibold text-[13px]late-700">
           {row.recipients} ({row.recipientCount.toLocaleString()})
         </span>
       ),
@@ -75,7 +75,7 @@ const HolidayEmailsList = () => {
       header: "Holiday Date",
       sortable: true,
       render: (row) => (
-        <span className="text-slate-500 font-mono text-xs">{row.date}</span>
+        <span className="text-[13px]late-500 font-mono text-xs">{row.date}</span>
       ),
     },
     {
@@ -93,7 +93,7 @@ const HolidayEmailsList = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-400 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Campaign"
           >
             <Trash2 size={14} />

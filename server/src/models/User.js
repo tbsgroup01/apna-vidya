@@ -34,6 +34,14 @@ const User = sequelize.define(
       type: DataTypes.STRING(500),
       allowNull: true,
     },
+    bio: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    designation: {
+      type: DataTypes.STRING(150),
+      allowNull: true,
+    },
     roleId: {
       type: DataTypes.INTEGER,
       allowNull: false,

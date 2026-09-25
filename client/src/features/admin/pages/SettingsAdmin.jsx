@@ -329,7 +329,7 @@ const SettingsAdmin = () => {
       <div className="flex h-96 items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <div className="h-9 w-9 animate-spin rounded-full border-3 border-blue-600 border-t-transparent"></div>
-          <p className="text-xs font-semibold text-slate-500">Loading platform settings...</p>
+          <p className="text-xs font-semibold text-[13px]late-500">Loading platform settings...</p>
         </div>
       </div>
     );
@@ -372,14 +372,14 @@ const SettingsAdmin = () => {
               type="button"
               onClick={() => handleTabClick(tab.id)}
               className={`flex items-center gap-2.5 px-4 py-3 text-xs font-bold transition-all border-b-2 cursor-pointer ${isActive
-                  ? "border-blue-600 text-blue-600 bg-blue-50/40 rounded-t-xl"
-                  : "border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-t-xl"
+                ? "border-blue-600 text-blue-600 bg-blue-50/40 rounded-t-xl"
+                : "border-transparent text-[13px]late-500 hover:text-[13px]late-900 hover:bg-slate-50 rounded-t-xl"
                 }`}
             >
               <Icon size={16} />
               <span>{tab.label}</span>
               <span
-                className={`hidden sm:inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${isActive ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-500"
+                className={`hidden sm:inline-block rounded-full px-2 py-0.5 text-[12px] font-semibold ${isActive ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-[13px]late-500"
                   }`}
               >
                 {tab.badge}
@@ -398,8 +398,8 @@ const SettingsAdmin = () => {
                   <Building2 size={18} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Institution Branding & Identity</h3>
-                  <p className="text-xs text-slate-400">Configure institutional marks, platform motto, header logos, and favicon URLs.</p>
+                  <h3 className="text-[13px]m font-bold text-[13px]late-900">Institution Branding & Identity</h3>
+                  <p className="text-xs text-[13px]late-400">Configure institutional marks, platform motto, header logos, and favicon URLs.</p>
                 </div>
               </div>
             </div>
@@ -447,8 +447,8 @@ const SettingsAdmin = () => {
                 <Search size={18} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Search Engine Optimization (SEO)</h3>
-                <p className="text-xs text-slate-400">Meta tags and Open Graph representations indexed by search engines and social scrapers.</p>
+                <h3 className="text-[13px]m font-bold text-[13px]late-900">Search Engine Optimization (SEO)</h3>
+                <p className="text-xs text-[13px]late-400">Meta tags and Open Graph representations indexed by search engines and social scrapers.</p>
               </div>
             </div>
 
@@ -490,8 +490,8 @@ const SettingsAdmin = () => {
                   <Code2 size={18} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">Custom Meta & Script Tags Injector</h3>
-                  <p className="text-xs text-slate-400">Inject custom &lt;meta&gt;, &lt;script&gt;, or analytics tags into platform &lt;head&gt; or &lt;body&gt;.</p>
+                  <h3 className="text-[13px]m font-bold text-[13px]late-900">Custom Meta & Script Tags Injector</h3>
+                  <p className="text-xs text-[13px]late-400">Inject custom &lt;meta&gt;, &lt;script&gt;, or analytics tags into platform &lt;head&gt; or &lt;body&gt;.</p>
                 </div>
               </div>
               <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-bold text-indigo-700">
@@ -511,7 +511,7 @@ const SettingsAdmin = () => {
             <form onSubmit={handleAddTag} className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div className="sm:col-span-2">
-                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                     Tag Label / Identifier *
                   </label>
                   <input
@@ -519,18 +519,18 @@ const SettingsAdmin = () => {
                     value={newTag.name}
                     onChange={(e) => setNewTag({ ...newTag, name: e.target.value })}
                     placeholder="e.g. Google Analytics GA4, Canonical Tag, Meta Verification"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                     Placement Target *
                   </label>
                   <select
                     value={newTag.placement}
                     onChange={(e) => setNewTag({ ...newTag, placement: e.target.value })}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:border-blue-600 focus:outline-none cursor-pointer"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-800 focus:border-blue-600 focus:outline-none cursor-pointer"
                   >
                     <option value="head">&lt;head&gt; (Header)</option>
                     <option value="body">&lt;body&gt; (Body / Footer)</option>
@@ -539,7 +539,7 @@ const SettingsAdmin = () => {
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                   Tag / Script HTML Content *
                 </label>
                 <textarea
@@ -547,7 +547,7 @@ const SettingsAdmin = () => {
                   value={newTag.code}
                   onChange={(e) => setNewTag({ ...newTag, code: e.target.value })}
                   placeholder={'<meta name="google-site-verification" content="XYZ..." />\n<script async src="https://www.googletagmanager.com/gtag/js?id=G-..." defer></script>'}
-                  className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 font-mono text-xs text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 font-mono text-xs text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                 />
               </div>
 
@@ -563,15 +563,15 @@ const SettingsAdmin = () => {
             </form>
 
             <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
                 Configured Tags List ({(settings.customTags || []).length})
               </h4>
 
               {(settings.customTags || []).length === 0 ? (
                 <div className="rounded-xl border border-dashed border-slate-200 p-8 text-center bg-slate-50/40">
-                  <Code2 size={24} className="mx-auto text-slate-300 mb-2" />
-                  <p className="text-xs font-semibold text-slate-600">No custom meta or script tags configured yet.</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Add tracking codes or verification tags using the form above.</p>
+                  <Code2 size={24} className="mx-auto text-[13px]late-300 mb-2" />
+                  <p className="text-xs font-semibold text-[13px]late-600">No custom meta or script tags configured yet.</p>
+                  <p className="text-[13px] text-[13px]late-400 mt-0.5">Add tracking codes or verification tags using the form above.</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -579,30 +579,30 @@ const SettingsAdmin = () => {
                     <div
                       key={tag.id}
                       className={`rounded-xl border p-4 transition-all ${tag.active !== false
-                          ? "border-slate-200 bg-white shadow-2xs"
-                          : "border-slate-200 bg-slate-50/70 opacity-60"
+                        ? "border-slate-200 bg-white shadow-2xs"
+                        : "border-slate-200 bg-slate-50/70 opacity-60"
                         }`}
                     >
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                         <div className="flex items-center gap-2">
                           <span
-                            className={`rounded-md px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider ${tag.placement === "head"
-                                ? "bg-blue-50 text-blue-700 border border-blue-200"
-                                : "bg-purple-50 text-purple-700 border border-purple-200"
+                            className={`rounded-md px-2 py-0.5 font-mono text-[12px] font-bold uppercase tracking-wider ${tag.placement === "head"
+                              ? "bg-blue-50 text-blue-700 border border-blue-200"
+                              : "bg-purple-50 text-purple-700 border border-purple-200"
                               }`}
                           >
                             &lt;{tag.placement}&gt;
                           </span>
-                          <span className="text-xs font-bold text-slate-900">{tag.name}</span>
+                          <span className="text-xs font-bold text-[13px]late-900">{tag.name}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
                           <button
                             type="button"
                             onClick={() => handleToggleTag(tag.id)}
-                            className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${tag.active !== false
-                                ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-                                : "bg-slate-200 text-slate-700 hover:bg-slate-300"
+                            className={`rounded-lg px-2.5 py-1 text-[13px] font-semibold transition-colors cursor-pointer ${tag.active !== false
+                              ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                              : "bg-slate-200 text-[13px]late-700 hover:bg-slate-300"
                               }`}
                           >
                             {tag.active !== false ? "Active" : "Disabled"}
@@ -611,7 +611,7 @@ const SettingsAdmin = () => {
                           <button
                             type="button"
                             onClick={() => handleDeleteTag(tag.id)}
-                            className="rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                            className="rounded-lg p-1.5 text-[13px]late-400 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
                             title="Remove tag"
                           >
                             <Trash2 size={15} />
@@ -619,7 +619,7 @@ const SettingsAdmin = () => {
                         </div>
                       </div>
 
-                      <pre className="overflow-x-auto rounded-lg bg-slate-900 p-3 text-[11px] font-mono text-emerald-400 leading-relaxed max-h-28">
+                      <pre className="overflow-x-auto rounded-lg bg-slate-900 p-3 text-[13px] font-mono text-emerald-400 leading-relaxed max-h-28">
                         <code>{tag.code}</code>
                       </pre>
                     </div>
@@ -648,13 +648,13 @@ const SettingsAdmin = () => {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
             <form onSubmit={handleSaveSettings} className="space-y-6 lg:col-span-7">
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-                <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+                <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
                     <PhoneCall size={18} />
                   </div>
                   <div>
                     <span>Helpline & Communication Channels</span>
-                    <p className="text-xs font-normal text-slate-400">Institutional telephone numbers, emails, and address.</p>
+                    <p className="text-xs font-normal text-[13px]late-400">Institutional telephone numbers, emails, and address.</p>
                   </div>
                 </div>
 
@@ -720,13 +720,13 @@ const SettingsAdmin = () => {
               </div>
 
               <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-                <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+                <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
                     <Share2 size={18} />
                   </div>
                   <div>
                     <span>Official Social Media Handles</span>
-                    <p className="text-xs font-normal text-slate-400">Institutional community handles displayed across header and footer.</p>
+                    <p className="text-xs font-normal text-[13px]late-400">Institutional community handles displayed across header and footer.</p>
                   </div>
                 </div>
 
@@ -773,55 +773,55 @@ const SettingsAdmin = () => {
             </form>
 
             <div className="lg:col-span-5 space-y-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <p className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
                 Live Public Card Preview
               </p>
 
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-sm shadow-sm">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-[13px]m shadow-sm">
                     AV
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900 text-sm">{settings.general.siteName}</h4>
-                    <p className="text-[11px] text-slate-400">{settings.contact.workingHours}</p>
+                    <h4 className="font-bold text-[13px]late-900 text-[13px]m">{settings.general.siteName}</h4>
+                    <p className="text-[13px] text-[13px]late-400">{settings.contact.workingHours}</p>
                   </div>
                 </div>
 
-                <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4">
+                <div className="space-y-3 text-xs text-[13px]late-600 border-t border-slate-100 pt-4">
                   <div className="flex items-center gap-3">
                     <Phone size={15} className="text-blue-600 shrink-0" />
-                    <span className="font-mono font-bold text-slate-900">{settings.contact.phone}</span>
+                    <span className="font-mono font-bold text-[13px]late-900">{settings.contact.phone}</span>
                   </div>
                   {settings.contact.alternatePhone && (
                     <div className="flex items-center gap-3">
-                      <Phone size={15} className="text-slate-400 shrink-0" />
-                      <span className="font-mono text-slate-600">{settings.contact.alternatePhone}</span>
+                      <Phone size={15} className="text-[13px]late-400 shrink-0" />
+                      <span className="font-mono text-[13px]late-600">{settings.contact.alternatePhone}</span>
                     </div>
                   )}
                   <div className="flex items-center gap-3">
                     <Mail size={15} className="text-blue-600 shrink-0" />
-                    <span className="text-slate-800 truncate">{settings.contact.email}</span>
+                    <span className="text-[13px]late-800 truncate">{settings.contact.email}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <MapPin size={15} className="text-blue-600 shrink-0 mt-0.5" />
-                    <span className="text-slate-700 leading-snug">{settings.contact.address}</span>
+                    <span className="text-[13px]late-700 leading-snug">{settings.contact.address}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Clock size={15} className="text-blue-600 shrink-0" />
-                    <span className="text-slate-700">{settings.contact.workingHours}</span>
+                    <span className="text-[13px]late-700">{settings.contact.workingHours}</span>
                   </div>
                 </div>
 
                 <div className="border-t border-slate-100 pt-3">
-                  <p className="text-[11px] font-bold text-slate-400 uppercase mb-2">
+                  <p className="text-[13px] font-bold text-[13px]late-400 uppercase mb-2">
                     Connected Social Channels
                   </p>
-                  <div className="flex flex-wrap gap-2 text-[11px]">
+                  <div className="flex flex-wrap gap-2 text-[13px]">
                     {Object.entries(settings.contact.social || {}).map(([key, val]) => (
                       <span
                         key={key}
-                        className={`rounded-md px-2.5 py-1 font-semibold capitalize ${val ? "bg-blue-50 text-blue-700 border border-blue-100" : "bg-slate-100 text-slate-400"
+                        className={`rounded-md px-2.5 py-1 font-semibold capitalize ${val ? "bg-blue-50 text-blue-700 border border-blue-100" : "bg-slate-100 text-[13px]late-400"
                           }`}
                       >
                         {key}
@@ -845,8 +845,8 @@ const SettingsAdmin = () => {
                     <Mail size={18} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">Gmail App SMTP Relay Configuration</h3>
-                    <p className="text-xs text-slate-400">Configure automated notification delivery using Google Gmail App Passwords.</p>
+                    <h3 className="text-[13px]m font-bold text-[13px]late-900">Gmail App SMTP Relay Configuration</h3>
+                    <p className="text-xs text-[13px]late-400">Configure automated notification delivery using Google Gmail App Passwords.</p>
                   </div>
                 </div>
                 <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 border border-emerald-200">
@@ -884,13 +884,13 @@ const SettingsAdmin = () => {
                 />
 
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                  <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                     Encryption Protocol
                   </label>
                   <select
                     value={settings.email.encryption || "SSL"}
                     onChange={(e) => handleNestedChange("email", "encryption", e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:border-blue-600 focus:outline-none cursor-pointer"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-800 focus:border-blue-600 focus:outline-none cursor-pointer"
                   >
                     <option value="SSL">SSL / Direct TLS (Port 465)</option>
                     <option value="TLS">STARTTLS (Port 587)</option>
@@ -918,7 +918,7 @@ const SettingsAdmin = () => {
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                   Gmail 16-Character App Password *
                 </label>
                 <div className="relative">
@@ -927,17 +927,17 @@ const SettingsAdmin = () => {
                     value={settings.email.gmailAppPassword || ""}
                     onChange={(e) => handleNestedChange("email", "gmailAppPassword", e.target.value)}
                     placeholder="•••• •••• •••• •••• (16-letter App Password)"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 font-mono text-sm tracking-wider text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 font-mono text-[13px]m tracking-wider text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => setShowAppPassword(!showAppPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
                   >
                     {showAppPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-400">
+                <p className="mt-1 text-[13px] text-[13px]late-400">
                   Spaces are automatically trimmed during email socket dispatch.
                 </p>
               </div>
@@ -961,16 +961,16 @@ const SettingsAdmin = () => {
                 <Send size={16} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Test Email Configuration & Socket Verification</h3>
-                <p className="text-xs text-slate-500">Send an instant test email to verify Gmail credentials and TLS handshake.</p>
+                <h3 className="text-[13px]m font-bold text-[13px]late-900">Test Email Configuration & Socket Verification</h3>
+                <p className="text-xs text-[13px]late-500">Send an instant test email to verify Gmail credentials and TLS handshake.</p>
               </div>
             </div>
 
             {testEmailResult && (
               <div
                 className={`flex items-start gap-2.5 rounded-xl border p-4 text-xs font-semibold animate-in fade-in ${testEmailResult.success
-                    ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-                    : "bg-rose-50 border-rose-200 text-rose-900"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                  : "bg-rose-50 border-rose-200 text-rose-900"
                   }`}
               >
                 {testEmailResult.success ? (
@@ -980,7 +980,7 @@ const SettingsAdmin = () => {
                 )}
                 <div>
                   <p className="font-bold">{testEmailResult.success ? "Success!" : "Connection Failed"}</p>
-                  <p className="font-normal text-[11px] mt-0.5">{testEmailResult.message}</p>
+                  <p className="font-normal text-[13px] mt-0.5">{testEmailResult.message}</p>
                 </div>
               </div>
             )}
@@ -993,7 +993,7 @@ const SettingsAdmin = () => {
                   value={testRecipient}
                   onChange={(e) => setTestRecipient(e.target.value)}
                   placeholder="Enter recipient email address (e.g. your-email@gmail.com)"
-                  className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                 />
               </div>
 
@@ -1027,16 +1027,16 @@ const SettingsAdmin = () => {
                 <KeyRound size={18} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Administrator Password Management</h3>
-                <p className="text-xs text-slate-400">Change your administrator account password to secure portal access.</p>
+                <h3 className="text-[13px]m font-bold text-[13px]late-900">Administrator Password Management</h3>
+                <p className="text-xs text-[13px]late-400">Change your administrator account password to secure portal access.</p>
               </div>
             </div>
 
             {passwordStatus && (
               <div
                 className={`flex items-start gap-2.5 rounded-xl border p-4 text-xs font-semibold animate-in fade-in ${passwordStatus.success
-                    ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-                    : "bg-rose-50 border-rose-200 text-rose-900"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                  : "bg-rose-50 border-rose-200 text-rose-900"
                   }`}
               >
                 {passwordStatus.success ? (
@@ -1046,14 +1046,14 @@ const SettingsAdmin = () => {
                 )}
                 <div>
                   <p className="font-bold">{passwordStatus.success ? "Password Updated" : "Update Failed"}</p>
-                  <p className="font-normal text-[11px] mt-0.5">{passwordStatus.message}</p>
+                  <p className="font-normal text-[13px] mt-0.5">{passwordStatus.message}</p>
                 </div>
               </div>
             )}
 
             <form onSubmit={handleUpdatePassword} className="space-y-4 max-w-xl">
               <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                   Current Password *
                 </label>
                 <div className="relative">
@@ -1065,12 +1065,12 @@ const SettingsAdmin = () => {
                       setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
                     }
                     placeholder="Enter your existing password"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
                   >
                     {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -1078,7 +1078,7 @@ const SettingsAdmin = () => {
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                   New Password *
                 </label>
                 <div className="relative">
@@ -1090,12 +1090,12 @@ const SettingsAdmin = () => {
                       setPasswordForm({ ...passwordForm, newPassword: e.target.value })
                     }
                     placeholder="Enter new password (min. 6 characters)"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => setShowNewPassword(!showNewPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
                   >
                     {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -1103,7 +1103,7 @@ const SettingsAdmin = () => {
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                   Confirm New Password *
                 </label>
                 <div className="relative">
@@ -1115,19 +1115,19 @@ const SettingsAdmin = () => {
                       setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })
                     }
                     placeholder="Repeat new password"
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
                   >
                     {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
               </div>
 
-              <div className="space-y-1.5 rounded-xl bg-slate-50 p-3 text-[11px] text-slate-600">
+              <div className="space-y-1.5 rounded-xl bg-slate-50 p-3 text-[13px] text-[13px]late-600">
                 <div className="flex items-center gap-2">
                   <div
                     className={`h-2 w-2 rounded-full ${passwordForm.newPassword.length >= 6 ? "bg-emerald-500" : "bg-slate-300"
@@ -1138,9 +1138,9 @@ const SettingsAdmin = () => {
                 <div className="flex items-center gap-2">
                   <div
                     className={`h-2 w-2 rounded-full ${passwordForm.newPassword &&
-                        passwordForm.newPassword === passwordForm.confirmPassword
-                        ? "bg-emerald-500"
-                        : "bg-slate-300"
+                      passwordForm.newPassword === passwordForm.confirmPassword
+                      ? "bg-emerald-500"
+                      : "bg-slate-300"
                       }`}
                   />
                   <span>New password and confirmation match</span>

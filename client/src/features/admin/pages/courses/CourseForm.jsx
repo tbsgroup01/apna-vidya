@@ -119,22 +119,22 @@ const CourseForm = () => {
               learningOutcomes: Array.isArray(c.learningOutcomes) && c.learningOutcomes.length > 0
                 ? c.learningOutcomes
                 : [
-                    "Industry-standard project portfolio",
-                    "1-on-1 weekly code review sessions",
-                    "Live interactive query resolution",
-                    "Official ISO certification upon completion",
-                  ],
+                  "Industry-standard project portfolio",
+                  "1-on-1 weekly code review sessions",
+                  "Live interactive query resolution",
+                  "Official ISO certification upon completion",
+                ],
               prerequisites: c.prerequisites || "Basic computer familiarity.",
               certificateInfo: c.certificateInfo || "ISO 9001:2015 Verified Certificate of Completion.",
               targetAudience: c.targetAudience || "College Students, Working Professionals",
               faqs: Array.isArray(c.faqs) && c.faqs.length > 0
                 ? c.faqs
                 : [
-                    {
-                      question: "Is this course suitable for beginners?",
-                      answer: "Yes, our curriculum starts from fundamental principles.",
-                    },
-                  ],
+                  {
+                    question: "Is this course suitable for beginners?",
+                    answer: "Yes, our curriculum starts from fundamental principles.",
+                  },
+                ],
               image: c.image || "",
               seoTitle: c.name ? `${c.name} | Apna Vidya` : "",
               seoDescription: c.description || "",
@@ -281,7 +281,7 @@ const CourseForm = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/courses"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
             >
               <ArrowLeft size={15} />
               <span>Back</span>
@@ -314,11 +314,10 @@ const CourseForm = () => {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
-                isActive
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "bg-white text-slate-600 border border-slate-200/80 hover:bg-slate-50"
-              }`}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${isActive
+                ? "bg-blue-600 text-white shadow-sm"
+                : "bg-white text-[13px]late-600 border border-slate-200/80 hover:bg-slate-50"
+                }`}
             >
               <Icon size={15} />
               <span>{tab.label}</span>
@@ -331,7 +330,7 @@ const CourseForm = () => {
         {activeTab === "basic" && (
           <div className="space-y-6">
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                 <BookOpen size={18} className="text-blue-600" />
                 <span>Basic Course Identity</span>
               </div>
@@ -356,13 +355,13 @@ const CourseForm = () => {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                       Category <span className="text-rose-500">*</span>
                     </label>
                     <button
                       type="button"
                       onClick={() => setQuickCatModalOpen(true)}
-                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 text-[13px] font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
                     >
                       <Plus size={12} />
                       <span>New Category</span>
@@ -371,7 +370,7 @@ const CourseForm = () => {
                   <select
                     value={formData.categoryId}
                     onChange={(e) => handleChange("categoryId", e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-2xs transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-[13px]m text-[13px]late-800 shadow-2xs transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
                   >
                     <option value="">Select Category</option>
                     {categoriesList.map((cat) => (
@@ -423,7 +422,7 @@ const CourseForm = () => {
             </div>
 
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                 <ImageIcon size={18} className="text-emerald-600" />
                 <span>Media & Visual Assets</span>
               </div>
@@ -441,7 +440,7 @@ const CourseForm = () => {
 
         {activeTab === "pricing" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-5">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <Layers size={18} className="text-indigo-600" />
               <span>Tuition Fees & Delivery Highlights</span>
             </div>
@@ -461,10 +460,10 @@ const CourseForm = () => {
                 onChange={(e) => handleChange("originalFees", Number(e.target.value))}
               />
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                   Effective Discount
                 </label>
-                <div className="h-10.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 flex items-center text-sm font-bold text-emerald-600">
+                <div className="h-10.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 flex items-center text-[13px]m font-bold text-emerald-600">
                   {formData.originalFees > formData.fees
                     ? `${Math.round(((formData.originalFees - formData.fees) / formData.originalFees) * 100)}% Discount`
                     : "Standard Price"}
@@ -503,7 +502,7 @@ const CourseForm = () => {
 
         {activeTab === "overview" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <Sparkles size={18} className="text-purple-600" />
               <span>Comprehensive Course Overview (Rich Text)</span>
             </div>
@@ -521,11 +520,11 @@ const CourseForm = () => {
         {activeTab === "outcomes" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-5">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
                 <ListChecks size={18} className="text-emerald-600" />
                 <span>What You Will Learn & Build</span>
               </div>
-              <span className="text-xs font-bold text-slate-500">
+              <span className="text-xs font-bold text-[13px]late-500">
                 {formData.learningOutcomes.length} Outcomes Listed
               </span>
             </div>
@@ -536,7 +535,7 @@ const CourseForm = () => {
                 value={newOutcome}
                 onChange={(e) => setNewOutcome(e.target.value)}
                 placeholder="e.g. Master React 19 Server Components and Suspense streaming"
-                className="flex-1 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-800 focus:border-blue-600 focus:outline-none"
+                className="flex-1 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-[13px]late-800 focus:border-blue-600 focus:outline-none"
               />
               <button
                 type="button"
@@ -552,7 +551,7 @@ const CourseForm = () => {
               {formData.learningOutcomes.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-3.5 text-xs text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="flex items-center justify-between p-3.5 text-xs text-[13px]late-700 hover:bg-slate-50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
@@ -561,7 +560,7 @@ const CourseForm = () => {
                   <button
                     type="button"
                     onClick={() => handleRemoveOutcome(idx)}
-                    className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                    className="p-1 text-[13px]late-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -574,7 +573,7 @@ const CourseForm = () => {
         {activeTab === "certs" && (
           <div className="space-y-6">
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                 <Award size={18} className="text-amber-600" />
                 <span>Prerequisites & Certification</span>
               </div>
@@ -605,7 +604,7 @@ const CourseForm = () => {
 
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+                <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
                   <HelpCircle size={18} className="text-blue-600" />
                   <span>Frequently Asked Questions (FAQs)</span>
                 </div>
@@ -628,7 +627,7 @@ const CourseForm = () => {
                     <button
                       type="button"
                       onClick={() => handleRemoveFaq(idx)}
-                      className="absolute top-3 right-3 p-1 text-slate-400 hover:text-rose-600 rounded-lg cursor-pointer"
+                      className="absolute top-3 right-3 p-1 text-[13px]late-400 hover:text-rose-600 rounded-lg cursor-pointer"
                       title="Remove FAQ"
                     >
                       <Trash2 size={14} />
@@ -638,14 +637,14 @@ const CourseForm = () => {
                       placeholder="Question: e.g. What if I miss a live class?"
                       value={faq.question}
                       onChange={(e) => handleFaqChange(idx, "question", e.target.value)}
-                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-[13px]late-800 focus:outline-none"
                     />
                     <textarea
                       rows={2}
                       placeholder="Answer: e.g. All live sessions are recorded and available in your student portal."
                       value={faq.answer}
                       onChange={(e) => handleFaqChange(idx, "answer", e.target.value)}
-                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-700 focus:outline-none resize-none"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-[13px]late-700 focus:outline-none resize-none"
                     />
                   </div>
                 ))}
@@ -656,7 +655,7 @@ const CourseForm = () => {
 
         {activeTab === "seo" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <SearchIcon size={18} className="text-indigo-600" />
               <span>SEO Meta & Search Optimization</span>
             </div>
@@ -680,7 +679,7 @@ const CourseForm = () => {
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
           <Link
             to="/admin/courses"
-            className="rounded-xl border border-slate-200 px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="rounded-xl border border-slate-200 px-5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
           >
             Cancel
           </Link>
@@ -704,10 +703,10 @@ const CourseForm = () => {
                   <Tags size={18} />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-slate-900">
+                  <h3 className="text-base font-bold text-[13px]late-900">
                     Create Course Category
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-[13px]late-500">
                     Add a new category to assign this course immediately.
                   </p>
                 </div>
@@ -730,7 +729,7 @@ const CourseForm = () => {
                     setQuickCatModalOpen(false);
                     setNewCatName("");
                   }}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>

@@ -21,7 +21,7 @@ const NotificationsAdmin = () => {
     setNotifications(newList);
     try {
       localStorage.setItem("apna_admin_notifications", JSON.stringify(newList));
-    } catch {}
+    } catch { }
   };
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -112,9 +112,9 @@ const NotificationsAdmin = () => {
       sortable: true,
       render: (row) => (
         <div>
-          <span className="font-bold text-slate-900">{row.title}</span>
-          <p className="text-xs text-slate-600 line-clamp-1 mt-0.5">{row.message}</p>
-          <span className="text-[11px] font-mono text-blue-600 font-semibold">{row.link}</span>
+          <span className="font-bold text-[13px]late-900">{row.title}</span>
+          <p className="text-xs text-[13px]late-600 line-clamp-1 mt-0.5">{row.message}</p>
+          <span className="text-[13px] font-mono text-blue-600 font-semibold">{row.link}</span>
         </div>
       ),
     },
@@ -122,7 +122,7 @@ const NotificationsAdmin = () => {
       key: "targetAudience",
       header: "Target Audience",
       render: (row) => (
-        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700">
+        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-[13px]late-700">
           {row.targetAudience}
         </span>
       ),
@@ -131,9 +131,9 @@ const NotificationsAdmin = () => {
       key: "dates",
       header: "Active Dates",
       render: (row) => (
-        <div className="text-[11px] font-mono text-slate-500">
+        <div className="text-[13px] font-mono text-[13px]late-500">
           <p>{row.startDate}</p>
-          <p className="text-slate-400">to {row.endDate}</p>
+          <p className="text-[13px]late-400">to {row.endDate}</p>
         </div>
       ),
     },
@@ -152,7 +152,7 @@ const NotificationsAdmin = () => {
           <button
             type="button"
             onClick={() => handleOpenEdit(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800 cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-slate-100 hover:text-[13px]late-800 cursor-pointer"
             title="Edit Announcement"
           >
             <Edit size={14} />
@@ -160,7 +160,7 @@ const NotificationsAdmin = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-400 hover:bg-rose-50 hover:text-rose-600 cursor-pointer"
             title="Delete"
           >
             <Trash2 size={14} />
@@ -224,10 +224,10 @@ const NotificationsAdmin = () => {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-slate-100">
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-[13px]late-900">
               {editingNotif ? "Edit Announcement" : "Create Announcement Bar"}
             </h3>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-[13px]late-500">
               Publish a highlighted ribbon banner at the top of the website.
             </p>
 
@@ -290,7 +290,7 @@ const NotificationsAdmin = () => {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50"
                 >
                   Cancel
                 </button>

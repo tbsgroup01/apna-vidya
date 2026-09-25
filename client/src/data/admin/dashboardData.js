@@ -114,10 +114,10 @@ export const coursePopularityData = [
 ];
 
 export const leadConversionData = [
-  { label: "Converted to Admission", value: 42, color: "#2563eb" },
-  { label: "Follow-up Scheduled", value: 28, color: "#6366f1" },
-  { label: "Interested in Demo", value: 18, color: "#06b6d4" },
-  { label: "Lost / Not Interested", value: 12, color: "#94a3b8" },
+  { label: "Converted to Admission", value: 42, color: "#10b981" },
+  { label: "Follow-up Scheduled", value: 28, color: "#3b82f6" },
+  { label: "Interested in Demo", value: 18, color: "#8b5cf6" },
+  { label: "Lost / Not Interested", value: 12, color: "#f43f5e" },
 ];
 
 export const quickNotifications = [

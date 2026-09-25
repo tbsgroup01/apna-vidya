@@ -297,7 +297,7 @@ const CertificatesList = () => {
           <div className="relative flex-1 max-w-md">
             <Search
               size={16}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400"
             />
             <input
               type="text"
@@ -307,7 +307,7 @@ const CertificatesList = () => {
                 setCurrentPage(1);
               }}
               placeholder="Search awards by title or description..."
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-hidden transition-all"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 pl-10 pr-4 py-2 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:bg-white focus:outline-hidden transition-all"
             />
             {searchQuery && (
               <button
@@ -316,7 +316,7 @@ const CertificatesList = () => {
                   setSearchQuery("");
                   setCurrentPage(1);
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
               >
                 <X size={14} />
               </button>
@@ -330,7 +330,7 @@ const CertificatesList = () => {
                 setSelectedStatus(e.target.value);
                 setCurrentPage(1);
               }}
-              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:border-slate-300 focus:border-blue-500 focus:outline-hidden cursor-pointer"
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-[13px]late-700 hover:border-slate-300 focus:border-blue-500 focus:outline-hidden cursor-pointer"
             >
               {STATUS_OPTIONS.map((st) => (
                 <option key={st} value={st}>
@@ -343,11 +343,10 @@ const CertificatesList = () => {
               <button
                 type="button"
                 onClick={() => setViewMode("grid")}
-                className={`rounded-lg p-1.5 transition-colors cursor-pointer ${
-                  viewMode === "grid"
-                    ? "bg-white text-blue-600 shadow-xs"
-                    : "text-slate-400 hover:text-slate-700"
-                }`}
+                className={`rounded-lg p-1.5 transition-colors cursor-pointer ${viewMode === "grid"
+                  ? "bg-white text-blue-600 shadow-xs"
+                  : "text-[13px]late-400 hover:text-[13px]late-700"
+                  }`}
                 title="Grid Card View"
               >
                 <LayoutGrid size={15} />
@@ -355,11 +354,10 @@ const CertificatesList = () => {
               <button
                 type="button"
                 onClick={() => setViewMode("table")}
-                className={`rounded-lg p-1.5 transition-colors cursor-pointer ${
-                  viewMode === "table"
-                    ? "bg-white text-blue-600 shadow-xs"
-                    : "text-slate-400 hover:text-slate-700"
-                }`}
+                className={`rounded-lg p-1.5 transition-colors cursor-pointer ${viewMode === "table"
+                  ? "bg-white text-blue-600 shadow-xs"
+                  : "text-[13px]late-400 hover:text-[13px]late-700"
+                  }`}
                 title="Table View"
               >
                 <List size={15} />
@@ -372,7 +370,7 @@ const CertificatesList = () => {
       {selectedAwardIds.length > 0 && (
         <div className="flex items-center justify-between rounded-xl bg-blue-50/90 px-4 py-2.5 border border-blue-100 shadow-xs">
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-blue-600 text-[11px] font-bold text-white">
+            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-blue-600 text-[13px] font-bold text-white">
               {selectedAwardIds.length}
             </span>
             <span className="text-xs font-semibold text-blue-900">
@@ -417,10 +415,10 @@ const CertificatesList = () => {
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
             <Award size={28} />
           </div>
-          <h3 className="mt-4 text-base font-bold text-slate-900">
+          <h3 className="mt-4 text-base font-bold text-[13px]late-900">
             No awards or certificates match your criteria
           </h3>
-          <p className="mt-1 text-xs text-slate-500 max-w-sm mx-auto">
+          <p className="mt-1 text-xs text-[13px]late-500 max-w-sm mx-auto">
             Try adjusting your search terms, or add your first award or certificate to the showcase.
           </p>
           <button
@@ -459,7 +457,7 @@ const CertificatesList = () => {
                       className="h-4 w-4 rounded border-white/60 bg-black/40 text-blue-600 focus:ring-blue-500 cursor-pointer shadow-md"
                     />
                     {award.featured && (
-                      <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/90 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-xs shadow-xs">
+                      <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/90 px-2 py-0.5 text-[12px] font-bold text-white backdrop-blur-xs shadow-xs">
                         <Sparkles size={11} />
                         Featured
                       </span>
@@ -468,20 +466,19 @@ const CertificatesList = () => {
 
                   <div className="absolute top-3 right-3">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold shadow-xs backdrop-blur-xs ${
-                        award.status === "Active"
-                          ? "bg-emerald-500/90 text-white"
-                          : award.status === "Draft"
+                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[12px] font-bold shadow-xs backdrop-blur-xs ${award.status === "Active"
+                        ? "bg-emerald-500/90 text-white"
+                        : award.status === "Draft"
                           ? "bg-amber-500/90 text-white"
                           : "bg-slate-700/90 text-white"
-                      }`}
+                        }`}
                     >
                       {award.status}
                     </span>
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-200">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[13px]late-200">
                       <Calendar size={13} />
                       {award.year}
                     </span>
@@ -489,12 +486,12 @@ const CertificatesList = () => {
                 </div>
 
                 <div className="p-5 space-y-2">
-                  <h4 className="text-sm font-bold text-slate-900 leading-snug line-clamp-2">
+                  <h4 className="text-[13px]m font-bold text-[13px]late-900 leading-snug line-clamp-2">
                     {award.title}
                   </h4>
 
                   {award.description && (
-                    <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[13px]late-500 line-clamp-3 leading-relaxed">
                       {award.description}
                     </p>
                   )}
@@ -513,7 +510,7 @@ const CertificatesList = () => {
                     <ExternalLink size={12} />
                   </a>
                 ) : (
-                  <span className="text-[11px] font-medium text-slate-400">
+                  <span className="text-[13px] font-medium text-[13px]late-400">
                     Institutional Record
                   </span>
                 )}
@@ -522,7 +519,7 @@ const CertificatesList = () => {
                   <button
                     type="button"
                     onClick={() => handleOpenEditModal(award)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer"
+                    className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer"
                     title="Edit Award"
                   >
                     <Edit3 size={15} />
@@ -530,7 +527,7 @@ const CertificatesList = () => {
                   <button
                     type="button"
                     onClick={() => handleOpenDelete(award)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                    className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
                     title="Delete Award"
                   >
                     <Trash2 size={15} />
@@ -544,7 +541,7 @@ const CertificatesList = () => {
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-200 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+              <thead className="border-b border-slate-200 bg-slate-50 text-[13px]late-500 font-semibold uppercase tracking-wider text-[13px]">
                 <tr>
                   <th className="py-3 px-4 w-10 text-center">
                     <input
@@ -587,35 +584,34 @@ const CertificatesList = () => {
                         />
                         <div className="max-w-md">
                           <div className="flex items-center gap-1.5">
-                            <span className="font-bold text-slate-900 leading-snug">
+                            <span className="font-bold text-[13px]late-900 leading-snug">
                               {award.title}
                             </span>
                             {award.featured && (
-                              <span className="rounded-md bg-amber-50 text-amber-700 px-1.5 py-0.2 text-[10px] font-bold border border-amber-200">
+                              <span className="rounded-md bg-amber-50 text-amber-700 px-1.5 py-0.2 text-[12px] font-bold border border-amber-200">
                                 Featured
                               </span>
                             )}
                           </div>
                           {award.description && (
-                            <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                            <p className="text-[13px] text-[13px]late-400 line-clamp-1 mt-0.5">
                               {award.description}
                             </p>
                           )}
                         </div>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 font-mono font-semibold text-slate-600">
+                    <td className="py-3.5 px-4 font-mono font-semibold text-[13px]late-600">
                       {award.year}
                     </td>
                     <td className="py-3.5 px-4">
                       <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold ${
-                          award.status === "Active"
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                            : award.status === "Draft"
+                        className={`inline-flex items-center px-2 py-0.5 rounded-md text-[13px] font-semibold ${award.status === "Active"
+                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                          : award.status === "Draft"
                             ? "bg-amber-50 text-amber-700 border border-amber-200"
-                            : "bg-slate-100 text-slate-600 border border-slate-200"
-                        }`}
+                            : "bg-slate-100 text-[13px]late-600 border border-slate-200"
+                          }`}
                       >
                         {award.status}
                       </span>
@@ -632,7 +628,7 @@ const CertificatesList = () => {
                           <ExternalLink size={12} />
                         </a>
                       ) : (
-                        <span className="text-slate-400 font-mono text-[11px]">
+                        <span className="text-[13px]late-400 font-mono text-[13px]">
                           Internal
                         </span>
                       )}
@@ -642,7 +638,7 @@ const CertificatesList = () => {
                         <button
                           type="button"
                           onClick={() => handleOpenEditModal(award)}
-                          className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer"
+                          className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer"
                           title="Edit"
                         >
                           <Edit3 size={15} />
@@ -650,7 +646,7 @@ const CertificatesList = () => {
                         <button
                           type="button"
                           onClick={() => handleOpenDelete(award)}
-                          className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                          className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
                           title="Delete"
                         >
                           <Trash2 size={15} />
@@ -666,19 +662,19 @@ const CertificatesList = () => {
       )}
 
       {filteredAwards.length > 0 && (
-        <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between border border-slate-200 rounded-2xl bg-white text-xs text-slate-500 shadow-xs">
+        <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between border border-slate-200 rounded-2xl bg-white text-xs text-[13px]late-500 shadow-xs">
           <div className="flex flex-wrap items-center gap-4">
             <div>
               Showing{" "}
-              <span className="font-semibold text-slate-800">
+              <span className="font-semibold text-[13px]late-800">
                 {(currentPage - 1) * pageSize + 1}
               </span>{" "}
               to{" "}
-              <span className="font-semibold text-slate-800">
+              <span className="font-semibold text-[13px]late-800">
                 {Math.min(currentPage * pageSize, filteredAwards.length)}
               </span>{" "}
               of{" "}
-              <span className="font-semibold text-slate-800">
+              <span className="font-semibold text-[13px]late-800">
                 {filteredAwards.length}
               </span>{" "}
               results
@@ -692,7 +688,7 @@ const CertificatesList = () => {
                   setPageSize(Number(e.target.value));
                   setCurrentPage(1);
                 }}
-                className="rounded-lg border border-slate-200 bg-slate-50/50 px-2 py-1 text-xs font-semibold text-slate-700 focus:border-blue-600 focus:bg-white focus:outline-none transition-all cursor-pointer"
+                className="rounded-lg border border-slate-200 bg-slate-50/50 px-2 py-1 text-xs font-semibold text-[13px]late-700 focus:border-blue-600 focus:bg-white focus:outline-none transition-all cursor-pointer"
               >
                 {PAGE_SIZE_OPTIONS.map((opt) => (
                   <option key={opt} value={opt}>
@@ -721,11 +717,10 @@ const CertificatesList = () => {
                     key={page}
                     type="button"
                     onClick={() => setCurrentPage(page)}
-                    className={`h-7 w-7 rounded-lg font-bold text-xs transition-colors cursor-pointer ${
-                      currentPage === page
-                        ? "bg-blue-600 text-white"
-                        : "hover:bg-slate-100 text-slate-700"
-                    }`}
+                    className={`h-7 w-7 rounded-lg font-bold text-xs transition-colors cursor-pointer ${currentPage === page
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-slate-100 text-[13px]late-700"
+                      }`}
                   >
                     {page}
                   </button>
@@ -749,19 +744,19 @@ const CertificatesList = () => {
           <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl border border-slate-100">
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4">
               <div>
-                <h3 className="text-base font-bold text-slate-900">
+                <h3 className="text-base font-bold text-[13px]late-900">
                   {editingAward
                     ? "Edit Award / Certification"
                     : "Add Institutional Award"}
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[13px]late-500">
                   Store award details in database for portal showcase
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setModalOpen(false)}
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 cursor-pointer"
+                className="rounded-lg p-1.5 text-[13px]late-400 hover:bg-slate-100 hover:text-[13px]late-600 cursor-pointer"
               >
                 <X size={18} />
               </button>
@@ -777,7 +772,7 @@ const CertificatesList = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2 space-y-1">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label className="text-xs font-bold text-[13px]late-700">
                     Award or Certification Title *
                   </label>
                   <input
@@ -788,12 +783,12 @@ const CertificatesList = () => {
                       setFormData({ ...formData, title: e.target.value })
                     }
                     placeholder="e.g. ISO 9001:2015 Quality Management Standard"
-                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label className="text-xs font-bold text-[13px]late-700">
                     Year / Validity
                   </label>
                   <input
@@ -803,12 +798,12 @@ const CertificatesList = () => {
                       setFormData({ ...formData, year: e.target.value })
                     }
                     placeholder="e.g. 2025 or 2024 - 2027"
-                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label className="text-xs font-bold text-[13px]late-700">
                     Status
                   </label>
                   <select
@@ -816,7 +811,7 @@ const CertificatesList = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, status: e.target.value })
                     }
-                    className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
+                    className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-xs text-[13px]late-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
                   >
                     <option value="Active">Active (Visible)</option>
                     <option value="Draft">Draft (Internal)</option>
@@ -825,7 +820,7 @@ const CertificatesList = () => {
                 </div>
 
                 <div className="sm:col-span-2 space-y-1">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label className="text-xs font-bold text-[13px]late-700">
                     Official Verification URL
                   </label>
                   <input
@@ -835,7 +830,7 @@ const CertificatesList = () => {
                       setFormData({ ...formData, verificationUrl: e.target.value })
                     }
                     placeholder="https://cert.verificationregistry.com/verify/..."
-                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
                   />
                 </div>
 
@@ -851,7 +846,7 @@ const CertificatesList = () => {
                 </div>
 
                 <div className="sm:col-span-2 space-y-1">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label className="text-xs font-bold text-[13px]late-700">
                     Description / Scope of Award
                   </label>
                   <textarea
@@ -861,7 +856,7 @@ const CertificatesList = () => {
                       setFormData({ ...formData, description: e.target.value })
                     }
                     placeholder="Describe the significance of this award or recognized curriculum excellence..."
-                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+                    className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
                   />
                 </div>
 
@@ -875,13 +870,13 @@ const CertificatesList = () => {
                       }
                       className="h-4 w-4 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                     />
-                    <span className="text-xs font-bold text-slate-700">
+                    <span className="text-xs font-bold text-[13px]late-700">
                       Feature on Homepage Showcase
                     </span>
                   </label>
 
                   <div className="inline-flex items-center gap-2">
-                    <span className="text-xs font-bold text-slate-700">
+                    <span className="text-xs font-bold text-[13px]late-700">
                       Display Order:
                     </span>
                     <input
@@ -893,7 +888,7 @@ const CertificatesList = () => {
                           orderIndex: Number(e.target.value),
                         })
                       }
-                      className="w-16 rounded-lg border border-slate-200 px-2 py-1 text-xs text-center text-slate-900"
+                      className="w-16 rounded-lg border border-slate-200 px-2 py-1 text-xs text-center text-[13px]late-900"
                     />
                   </div>
                 </div>
@@ -903,7 +898,7 @@ const CertificatesList = () => {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>

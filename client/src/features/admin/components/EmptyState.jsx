@@ -10,11 +10,11 @@ const EmptyState = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-white p-12 text-center shadow-2xs">
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 text-slate-400">
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 text-[13px]late-400">
         <Icon size={32} strokeWidth={1.5} />
       </div>
-      <h3 className="mt-4 text-base font-bold text-slate-800">{title}</h3>
-      <p className="mt-1 max-w-sm text-xs text-slate-500 leading-relaxed">
+      <h3 className="mt-4 text-base font-bold text-[13px]late-800">{title}</h3>
+      <p className="mt-1 max-w-sm text-xs text-[13px]late-500 leading-relaxed">
         {description}
       </p>
       {actionLabel && onAction && (

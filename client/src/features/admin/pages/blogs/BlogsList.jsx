@@ -144,11 +144,11 @@ const BlogsList = () => {
           <div className="max-w-xs sm:max-w-md">
             <Link
               to={`/admin/blogs/${row.id}/edit`}
-              className="font-bold text-slate-900 hover:text-blue-600 transition-colors line-clamp-1"
+              className="font-bold text-[13px]late-900 hover:text-blue-600 transition-colors line-clamp-1"
             >
               {row.title}
             </Link>
-            <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+            <div className="flex items-center gap-2 text-[13px] text-[13px]late-400 mt-0.5">
               <span className="font-semibold text-blue-600">{row.category}</span>
               <span>•</span>
               <span className="font-mono">{(row.views || 0).toLocaleString()} Reads</span>
@@ -169,8 +169,8 @@ const BlogsList = () => {
       sortable: true,
       render: (row) => (
         <div>
-          <p className="font-semibold text-slate-800 text-xs">{row.author}</p>
-          <p className="text-[10px] text-slate-400">{row.authorRole || "Mentor"}</p>
+          <p className="font-semibold text-[13px]late-800 text-xs">{row.author}</p>
+          <p className="text-[12px] text-[13px]late-400">{row.authorRole || "Mentor"}</p>
         </div>
       ),
     },
@@ -179,7 +179,7 @@ const BlogsList = () => {
       header: "Publish Date",
       sortable: true,
       render: (row) => (
-        <span className="text-slate-500 font-mono text-[11px]">
+        <span className="text-[13px]late-500 font-mono text-[13px]">
           {row.publishedDate}
         </span>
       ),
@@ -199,14 +199,14 @@ const BlogsList = () => {
           <Link
             to={`/blog/${row.slug}`}
             target="_blank"
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             title="Preview Live Article"
           >
             <Eye size={15} />
           </Link>
           <Link
             to={`/admin/blogs/${row.id}/edit`}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-slate-100 hover:text-[13px]late-700 transition-colors"
             title="Edit Article"
           >
             <Edit size={15} />
@@ -214,7 +214,7 @@ const BlogsList = () => {
           <button
             type="button"
             onClick={() => handleDuplicate(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-indigo-50 hover:text-indigo-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-indigo-50 hover:text-indigo-600 transition-colors cursor-pointer"
             title="Duplicate Draft"
           >
             <Copy size={15} />
@@ -222,7 +222,7 @@ const BlogsList = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Article"
           >
             <Trash2 size={15} />
@@ -242,7 +242,7 @@ const BlogsList = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/blog-categories"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
             >
               <Tag size={15} />
               <span>Categories</span>

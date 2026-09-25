@@ -24,6 +24,7 @@ const getStudents = async (req, res) => {
         { name: { [Op.like]: `%${search}%` } },
         { email: { [Op.like]: `%${search}%` } },
         { phone: { [Op.like]: `%${search}%` } },
+        { registrationNumber: { [Op.like]: `%${search}%` } },
       ];
     }
 

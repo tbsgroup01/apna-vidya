@@ -97,7 +97,7 @@ const RichTextEditor = ({
     <div className="space-y-1.5">
       {label && (
         <div className="flex items-center justify-between">
-          <label className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+          <label className="text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
             {label} {required && <span className="text-rose-500">*</span>}
           </label>
           <button
@@ -106,7 +106,7 @@ const RichTextEditor = ({
               e.preventDefault();
               setIsHtmlMode(!isHtmlMode);
             }}
-            className="inline-flex items-center gap-1 text-[11px] font-medium text-blue-600 hover:text-blue-700 cursor-pointer"
+            className="inline-flex items-center gap-1 text-[13px] font-medium text-blue-600 hover:text-blue-700 cursor-pointer"
           >
             {isHtmlMode ? (
               <>
@@ -124,7 +124,7 @@ const RichTextEditor = ({
       )}
 
       <div className="rounded-xl border border-slate-200 bg-white shadow-2xs overflow-hidden focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
-        <div className="flex flex-wrap items-center gap-1 border-b border-slate-100 bg-slate-50/70 p-2 text-slate-600">
+        <div className="flex flex-wrap items-center gap-1 border-b border-slate-100 bg-slate-50/70 p-2 text-[13px]late-600">
           <button
             type="button"
             disabled={isHtmlMode}
@@ -333,7 +333,7 @@ const RichTextEditor = ({
             value={htmlContent}
             onChange={handleHtmlChange}
             style={{ minHeight }}
-            className="w-full p-4 font-mono text-xs text-slate-100 focus:outline-none resize-y bg-slate-900"
+            className="w-full p-4 font-mono text-xs text-[13px]late-100 focus:outline-none resize-y bg-slate-900"
             placeholder="Edit HTML directly..."
           />
         ) : (
@@ -343,7 +343,7 @@ const RichTextEditor = ({
             onInput={handleInput}
             style={{ minHeight }}
             data-placeholder={placeholder}
-            className="rich-editor-content w-full p-4 text-sm text-slate-800 focus:outline-none overflow-y-auto empty:before:content-[attr(data-placeholder)] empty:before:text-slate-400 empty:before:pointer-events-none"
+            className="rich-editor-content w-full p-4 text-[13px]m text-[13px]late-800 focus:outline-none overflow-y-auto empty:before:content-[attr(data-placeholder)] empty:before:text-[13px]late-400 empty:before:pointer-events-none"
           />
         )}
       </div>

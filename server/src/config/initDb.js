@@ -740,6 +740,22 @@ const seedDatabase = async () => {
 const initDb = async () => {
   try {
     await sequelize.sync();
+    try {
+      await sequelize.query(
+        "ALTER TABLE students ADD COLUMN registrationNumber VARCHAR(50) NULL"
+      );
+    } catch (e) {}
+    try {
+      await sequelize.query(
+        "UPDATE students SET registrationNumber = CONCAT('AV-STU-', LPAD(id, 4, '0')) WHERE registrationNumber IS NULL OR registrationNumber = ''"
+      );
+    } catch (e) {}
+    try {
+      await sequelize.query("ALTER TABLE users ADD COLUMN bio TEXT NULL");
+    } catch (e) {}
+    try {
+      await sequelize.query("ALTER TABLE users ADD COLUMN designation VARCHAR(150) NULL");
+    } catch (e) {}
     console.log("Database models synchronized successfully.");
     await seedDatabase();
     console.log("Database seeded successfully.");

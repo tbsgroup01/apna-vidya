@@ -81,21 +81,21 @@ const Navbar = () => {
                     <nav className="hidden items-center gap-1 lg:flex">
                         <Link
                             to="/"
-                            className="rounded-lg px-4 py-2.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50"
+                            className="rounded-lg px-4 py-2.5 text-[13px]m font-medium text-blue-600 transition-colors hover:bg-blue-50"
                         >
                             Home
                         </Link>
 
                         <Link
                             to="/about"
-                            className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
+                            className="rounded-lg px-4 py-2.5 text-[13px]m font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
                         >
                             About Us
                         </Link>
 
                         <Link
                             to="/courses"
-                            className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
+                            className="rounded-lg px-4 py-2.5 text-[13px]m font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
                         >
                             Courses
                         </Link>
@@ -107,7 +107,7 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     to={link.path}
-                                    className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
+                                    className="rounded-lg px-4 py-2.5 text-[13px]m font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
                                 >
                                     {link.name}
                                 </Link>
@@ -137,7 +137,7 @@ const Navbar = () => {
                         <button
                             type="button"
                             onClick={() => openDemoModal()}
-                            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-95 cursor-pointer"
+                            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-[13px]m font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-95 cursor-pointer"
                         >
                             <PlayCircle size={17} />
                             Demo
@@ -160,7 +160,7 @@ const Navbar = () => {
                             <Link
                                 to="/"
                                 onClick={closeMobileMenu}
-                                className="flex items-center gap-3 rounded-lg bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-600"
+                                className="flex items-center gap-3 rounded-lg bg-blue-50 px-4 py-3 text-[13px]m font-semibold text-blue-600"
                             >
                                 <Home size={18} />
                                 Home
@@ -169,7 +169,7 @@ const Navbar = () => {
                             <Link
                                 to="/about"
                                 onClick={closeMobileMenu}
-                                className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+                                className="flex items-center gap-3 rounded-lg px-4 py-3 text-[13px]m font-medium text-gray-600 hover:bg-gray-50"
                             >
                                 <BookOpen size={18} />
                                 About Us
@@ -178,7 +178,7 @@ const Navbar = () => {
                             <Link
                                 to="/courses"
                                 onClick={closeMobileMenu}
-                                className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+                                className="flex items-center gap-3 rounded-lg px-4 py-3 text-[13px]m font-medium text-gray-600 hover:bg-gray-50"
                             >
                                 <GraduationCap size={18} />
                                 Courses
@@ -192,7 +192,7 @@ const Navbar = () => {
                                         key={link.name}
                                         to={link.path}
                                         onClick={closeMobileMenu}
-                                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50"
+                                        className="flex items-center gap-3 rounded-lg px-4 py-3 text-[13px]m font-medium text-gray-600 hover:bg-gray-50"
                                     >
                                         <Icon size={18} />
                                         {link.name}
@@ -205,7 +205,7 @@ const Navbar = () => {
                                     <Link
                                         to={dashboardPath}
                                         onClick={closeMobileMenu}
-                                        className="mb-2 flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-50 border border-blue-200 px-4 py-3 text-sm font-bold text-blue-700 hover:bg-blue-100 transition-colors"
+                                        className="mb-2 flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-50 border border-blue-200 px-4 py-3 text-[13px]m font-bold text-blue-700 hover:bg-blue-100 transition-colors"
                                     >
                                         <GraduationCap size={17} />
                                         <span>{dashboardLabel}</span>
@@ -218,7 +218,7 @@ const Navbar = () => {
                                         closeMobileMenu();
                                         openDemoModal();
                                     }}
-                                    className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
+                                    className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 py-3 text-[13px]m font-semibold text-white hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
                                 >
                                     <PlayCircle size={17} />
                                     Demo

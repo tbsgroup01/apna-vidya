@@ -15,7 +15,7 @@ import { quickNotifications } from "../../../data/admin/dashboardData";
 import { adminProfileData } from "../../../data/admin/settingsData";
 import { useAuth } from "../../../context/AuthContext";
 
-const Topbar = ({ setMobileOpen }) => {
+const Topbar = ({ sidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -86,18 +86,28 @@ const Topbar = ({ setMobileOpen }) => {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => setMobileOpen(true)}
-            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-800 lg:hidden cursor-pointer"
-            aria-label="Open sidebar"
+            onClick={toggleSidebar}
+            className="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[13px]late-600 hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-600 transition-all duration-200 cursor-pointer active:scale-90 shadow-2xs"
+            aria-label="Toggle sidebar"
+            title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
-            <Menu size={20} />
+            <div
+              className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${sidebarOpen ? "rotate-90 text-[13px]late-700" : "rotate-0 text-[13px]late-600"
+                }`}
+            >
+              {sidebarOpen ? (
+                <X size={20} strokeWidth={2.2} color="red" />
+              ) : (
+                <Menu size={20} strokeWidth={2.2} color="blue" />
+              )}
+            </div>
           </button>
 
           <div className="flex flex-col">
             <span className="text-xs font-semibold text-blue-600 hidden sm:block">
               Apna Vidya Admin
             </span>
-            <h2 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
+            <h2 className="text-[13px]m sm:text-base font-bold text-[13px]late-900 leading-tight">
               {getPageTitle()}
             </h2>
           </div>
@@ -107,7 +117,7 @@ const Topbar = ({ setMobileOpen }) => {
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-400 hover:border-slate-300 hover:bg-white hover:text-slate-600 transition-all cursor-pointer"
+            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-[13px]late-400 hover:border-slate-300 hover:bg-white hover:text-[13px]late-600 transition-all cursor-pointer"
           >
             <Search size={14} />
             <span className="hidden md:inline">Quick search module...</span>
@@ -117,7 +127,7 @@ const Topbar = ({ setMobileOpen }) => {
           <Link
             to="/"
             target="_blank"
-            className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
             title="View live public website"
           >
             <span>Live Site</span>
@@ -128,7 +138,7 @@ const Topbar = ({ setMobileOpen }) => {
             <button
               type="button"
               onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
+              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-[13px]late-600 hover:bg-slate-50 transition-colors cursor-pointer"
               aria-label="Notifications"
             >
               <Bell size={17} />
@@ -138,10 +148,10 @@ const Topbar = ({ setMobileOpen }) => {
             {notificationsOpen && (
               <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl z-50 animate-in fade-in zoom-in-95 duration-100">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[13px]late-800">
                     Recent Notifications
                   </h4>
-                  <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-bold text-blue-600">
+                  <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[12px] font-bold text-blue-600">
                     {quickNotifications.filter((n) => n.unread).length} New
                   </span>
                 </div>
@@ -154,14 +164,14 @@ const Topbar = ({ setMobileOpen }) => {
                         }`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-xs font-bold text-slate-900">
+                        <p className="text-xs font-bold text-[13px]late-900">
                           {notif.title}
                         </p>
-                        <span className="text-[10px] text-slate-400 shrink-0">
+                        <span className="text-[12px] text-[13px]late-400 shrink-0">
                           {notif.time}
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-slate-600 leading-snug">
+                      <p className="mt-1 text-xs text-[13px]late-600 leading-snug">
                         {notif.description}
                       </p>
                     </div>
@@ -263,7 +273,7 @@ const Topbar = ({ setMobileOpen }) => {
             <form onSubmit={handleSearchSubmit} className="relative">
               <Search
                 size={18}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400"
               />
               <input
                 type="text"
@@ -271,18 +281,18 @@ const Topbar = ({ setMobileOpen }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search leads, students, courses, payments..."
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600"
               >
                 <X size={18} />
               </button>
             </form>
-            <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-500">
-              <span className="font-semibold text-slate-400">Jump to:</span>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs text-[13px]late-500">
+              <span className="font-semibold text-[13px]late-400">Jump to:</span>
               <button
                 type="button"
                 onClick={() => {

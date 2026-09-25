@@ -29,9 +29,18 @@ export const EnrollmentLineChart = ({ data = [] }) => {
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-48 sm:h-56">
           <defs>
             <linearGradient id="enrollmentGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2563eb" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0" />
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.4" />
+              <stop offset="60%" stopColor="#6366f1" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.0" />
             </linearGradient>
+            <linearGradient id="enrollmentLineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#2563eb" />
+              <stop offset="50%" stopColor="#4f46e5" />
+              <stop offset="100%" stopColor="#7c3aed" />
+            </linearGradient>
+            <filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="3" floodColor="#4f46e5" floodOpacity="0.3" />
+            </filter>
           </defs>
 
           {[0, 0.33, 0.66, 1].map((ratio, idx) => {
@@ -51,21 +60,37 @@ export const EnrollmentLineChart = ({ data = [] }) => {
           })}
 
           <path d={areaD} fill="url(#enrollmentGrad)" />
-          <path d={pathD} fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d={pathD}
+            fill="none"
+            stroke="url(#enrollmentLineGrad)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#lineGlow)"
+          />
 
           {points.map((pt, idx) => (
-            <g key={idx} onMouseEnter={() => setHoveredIdx(idx)} onMouseLeave={() => setHoveredIdx(null)}>
+            <g
+              key={idx}
+              onMouseEnter={() => setHoveredIdx(idx)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              className="cursor-pointer"
+            >
               <circle
                 cx={pt.x}
                 cy={pt.y}
-                r={hoveredIdx === idx ? 6 : 4}
-                className="fill-white stroke-blue-600 stroke-2 cursor-pointer transition-all"
+                r={hoveredIdx === idx ? 7 : 4.5}
+                className={`transition-all duration-200 ${hoveredIdx === idx
+                  ? "fill-white stroke-indigo-600 stroke-[3px]"
+                  : "fill-white stroke-blue-600 stroke-2"
+                  }`}
               />
               <text
                 x={pt.x}
                 y={height - 10}
                 textAnchor="middle"
-                className="fill-slate-400 text-[11px] font-medium"
+                className="fill-slate-500 text-[13px] font-semibold"
               >
                 {pt.month}
               </text>
@@ -73,22 +98,27 @@ export const EnrollmentLineChart = ({ data = [] }) => {
           ))}
 
           {hoveredIdx !== null && (
-            <g transform={`translate(${points[hoveredIdx].x}, ${points[hoveredIdx].y - 30})`}>
+            <g transform={`translate(${points[hoveredIdx].x}, ${points[hoveredIdx].y - 32})`}>
               <rect
-                x="-32"
+                x="-36"
                 y="-18"
-                width="64"
+                width="72"
                 height="24"
-                rx="6"
-                className="fill-slate-900 shadow-lg"
+                rx="8"
+                className="fill-slate-900 shadow-xl"
+              />
+              <polygon
+                points="0,-2 -4,-6 4,-6"
+                className="fill-slate-900"
+                transform="translate(0, 10)"
               />
               <text
                 x="0"
                 y="-2"
                 textAnchor="middle"
-                className="fill-white text-[11px] font-bold"
+                className="fill-white text-[13px] font-black"
               >
-                {points[hoveredIdx].students}
+                {points[hoveredIdx].students} Enrolled
               </text>
             </g>
           )}
@@ -116,6 +146,20 @@ export const RevenueBarChart = ({ data = [] }) => {
     <div className="w-full">
       <div className="relative overflow-x-auto">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-48 sm:h-56">
+          <defs>
+            <linearGradient id="revenueBarGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#10b981" />
+              <stop offset="100%" stopColor="#059669" />
+            </linearGradient>
+            <linearGradient id="revenueBarHoverGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#34d399" />
+              <stop offset="100%" stopColor="#047857" />
+            </linearGradient>
+            <filter id="barShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="3" stdDeviation="2" floodColor="#059669" floodOpacity="0.25" />
+            </filter>
+          </defs>
+
           {[0, 0.33, 0.66, 1].map((ratio, idx) => {
             const y = height - paddingY - ratio * (height - paddingY * 2);
             return (
@@ -150,15 +194,15 @@ export const RevenueBarChart = ({ data = [] }) => {
                   width={barWidth}
                   height={barHeight}
                   rx="6"
-                  className={`transition-all duration-200 ${
-                    hoveredIdx === i ? "fill-blue-700" : "fill-blue-600/90"
-                  }`}
+                  fill={hoveredIdx === i ? "url(#revenueBarHoverGrad)" : "url(#revenueBarGrad)"}
+                  filter="url(#barShadow)"
+                  className="transition-all duration-200"
                 />
                 <text
                   x={x + barWidth / 2}
                   y={height - 10}
                   textAnchor="middle"
-                  className="fill-slate-400 text-[11px] font-medium"
+                  className="fill-slate-500 text-[13px] font-semibold"
                 >
                   {d.month}
                 </text>
@@ -168,27 +212,25 @@ export const RevenueBarChart = ({ data = [] }) => {
 
           {hoveredIdx !== null && (
             <g
-              transform={`translate(${
-                paddingX + (hoveredIdx / (data.length - 1)) * chartAreaWidth
-              }, ${
-                height - paddingY - (data[hoveredIdx].amount / maxVal) * (height - paddingY * 2) - 25
-              })`}
+              transform={`translate(${paddingX + (hoveredIdx / (data.length - 1)) * chartAreaWidth
+                }, ${height - paddingY - (data[hoveredIdx].amount / maxVal) * (height - paddingY * 2) - 25
+                })`}
             >
               <rect
-                x="-40"
+                x="-42"
                 y="-18"
-                width="80"
+                width="84"
                 height="24"
-                rx="6"
-                className="fill-slate-900 shadow-lg"
+                rx="8"
+                className="fill-slate-900 shadow-xl"
               />
               <text
                 x="0"
                 y="-2"
                 textAnchor="middle"
-                className="fill-white text-[11px] font-bold"
+                className="fill-white text-[13px] font-black"
               >
-                ₹{data[hoveredIdx].amount}L
+                ₹{data[hoveredIdx].amount} Lakhs
               </text>
             </g>
           )}
@@ -199,37 +241,77 @@ export const RevenueBarChart = ({ data = [] }) => {
 };
 
 export const CoursePopularityBars = ({ data = [] }) => {
+  const barGradients = [
+    "from-blue-500 via-indigo-500 to-indigo-600",
+    "from-emerald-500 via-teal-500 to-teal-600",
+    "from-purple-500 via-fuchsia-500 to-pink-600",
+    "from-amber-500 via-orange-500 to-orange-600",
+    "from-rose-500 via-pink-500 to-red-600",
+    "from-cyan-500 via-sky-500 to-blue-600",
+  ];
+
+  const dotGlows = [
+    "bg-blue-500 ring-blue-200",
+    "bg-emerald-500 ring-emerald-200",
+    "bg-purple-500 ring-purple-200",
+    "bg-amber-500 ring-amber-200",
+    "bg-rose-500 ring-rose-200",
+    "bg-cyan-500 ring-cyan-200",
+  ];
+
   return (
     <div className="space-y-4">
-      {data.map((item, idx) => (
-        <div key={idx}>
-          <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
-            <span className="text-slate-800 truncate pr-2">{item.course}</span>
-            <span className="text-slate-500 shrink-0 font-mono">
-              {Number(item.count ?? item.enrolled ?? 0).toLocaleString()} ({item.percentage ?? 0}%)
-            </span>
+      {data.map((item, idx) => {
+        const gradient = barGradients[idx % barGradients.length];
+        const dot = dotGlows[idx % dotGlows.length];
+
+        return (
+          <div key={idx} className="group">
+            <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
+              <div className="flex items-center gap-2 truncate pr-2">
+                <span className={`h-2.5 w-2.5 rounded-full ring-2 shrink-0 ${dot}`} />
+                <span className="text-[13px]late-800 font-bold truncate group-hover:text-blue-600 transition-colors">
+                  {item.course}
+                </span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="text-[13px]late-500 font-mono">
+                  {Number(item.count ?? item.enrolled ?? 0).toLocaleString()} learners
+                </span>
+                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[12px] font-bold text-[13px]late-700">
+                  {item.percentage ?? 0}%
+                </span>
+              </div>
+            </div>
+            <div className="h-2.5 w-full rounded-full bg-slate-100 overflow-hidden p-0.5">
+              <div
+                className={`h-full rounded-full bg-gradient-to-r ${gradient} shadow-sm transition-all duration-700`}
+                style={{ width: `${item.percentage ?? 0}%` }}
+              />
+            </div>
           </div>
-          <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-500"
-              style={{ width: `${item.percentage ?? 0}%` }}
-            />
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
 
 export const LeadConversionDonut = ({ data = [] }) => {
-  const total = data.reduce((acc, curr) => acc + curr.value, 0);
+  const vibrantColors = ["#10b981", "#3b82f6", "#8b5cf6", "#f59e0b"];
+
+  const enrichedData = data.map((d, i) => ({
+    ...d,
+    color: d.color === "#94a3b8" ? "#f43f5e" : d.color || vibrantColors[i % vibrantColors.length],
+  }));
+
+  const total = enrichedData.reduce((acc, curr) => acc + curr.value, 0) || 1;
   let accumulatedPercent = 0;
 
   return (
     <div className="flex flex-col sm:flex-row items-center gap-6">
       <div className="relative h-44 w-44 shrink-0">
         <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
-          {data.map((slice, i) => {
+          {enrichedData.map((slice, i) => {
             const percent = (slice.value / total) * 100;
             const strokeDasharray = `${percent} ${100 - percent}`;
             const strokeDashoffset = -accumulatedPercent;
@@ -252,24 +334,34 @@ export const LeadConversionDonut = ({ data = [] }) => {
           })}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-2xl font-black text-slate-900">42%</span>
-          <span className="text-[10px] uppercase font-bold text-slate-400">
+          <span className="text-2xl font-black text-[13px]late-900">
+            {enrichedData[0]?.value || 42}%
+          </span>
+          <span className="text-[12px] uppercase font-bold text-emerald-600 tracking-wider">
             Conversion
           </span>
         </div>
       </div>
 
       <div className="space-y-2.5 w-full">
-        {data.map((item, idx) => (
-          <div key={idx} className="flex items-center justify-between text-xs">
+        {enrichedData.map((item, idx) => (
+          <div
+            key={idx}
+            className="flex items-center justify-between text-xs rounded-lg p-1.5 hover:bg-slate-50 transition-colors"
+          >
             <div className="flex items-center gap-2">
               <span
-                className="h-2.5 w-2.5 rounded-full"
+                className="h-2.5 w-2.5 rounded-full ring-2 ring-white shadow-xs"
                 style={{ backgroundColor: item.color }}
               />
-              <span className="font-medium text-slate-700">{item.label}</span>
+              <span className="font-semibold text-[13px]late-700">{item.label}</span>
             </div>
-            <span className="font-bold text-slate-900 font-mono">{item.value}%</span>
+            <span
+              className="font-bold font-mono px-2 py-0.5 rounded-md text-[13px]"
+              style={{ backgroundColor: `${item.color}18`, color: item.color }}
+            >
+              {item.value}%
+            </span>
           </div>
         ))}
       </div>

@@ -54,13 +54,13 @@ const Stats = () => {
                   <Icon size={26} strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
+                  <p className="text-2xl font-extrabold text-[13px]late-900 sm:text-3xl">
                     {stat.value}
                   </p>
-                  <p className="text-sm font-semibold text-slate-700">
+                  <p className="text-[13px]m font-semibold text-[13px]late-700">
                     {stat.label}
                   </p>
-                  <p className="text-xs text-slate-500">{stat.subtext}</p>
+                  <p className="text-xs text-[13px]late-500">{stat.subtext}</p>
                 </div>
               </div>
             );

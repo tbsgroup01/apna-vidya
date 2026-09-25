@@ -22,7 +22,7 @@ const FinalCTA = () => {
           </span>
         </h2>
 
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[13px]late-400 sm:text-lg">
           Join over 50,000 students mastering practical coding skills, building
           real-world projects, and receiving career placement mentorship.
         </p>
@@ -31,7 +31,7 @@ const FinalCTA = () => {
           <button
             type="button"
             onClick={() => openDemoModal()}
-            className="group flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-sm font-bold text-white shadow-xl shadow-blue-600/30 transition-all hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/40 active:scale-95 sm:text-base cursor-pointer"
+            className="group flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-[13px]m font-bold text-white shadow-xl shadow-blue-600/30 transition-all hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/40 active:scale-95 sm:text-base cursor-pointer"
           >
             <PlayCircle size={18} />
             <span>Book a Free Demo Class</span>
@@ -39,7 +39,7 @@ const FinalCTA = () => {
 
           <Link
             to="/courses"
-            className="group flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-8 py-4 text-sm font-semibold text-slate-200 transition-all hover:border-slate-500 hover:bg-slate-800 hover:text-white sm:text-base"
+            className="group flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-8 py-4 text-[13px]m font-semibold text-[13px]late-200 transition-all hover:border-slate-500 hover:bg-slate-800 hover:text-white sm:text-base"
           >
             <span>Explore All Courses</span>
             <ArrowRight
@@ -49,7 +49,7 @@ const FinalCTA = () => {
           </Link>
         </div>
 
-        <p className="mt-6 text-xs text-slate-500">
+        <p className="mt-6 text-xs text-[13px]late-500">
           No credit card required • Instant confirmation • 100% free trial
         </p>
       </div>

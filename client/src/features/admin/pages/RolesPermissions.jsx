@@ -67,7 +67,7 @@ const RolesPermissions = () => {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         <div className="lg:col-span-4 space-y-3">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <p className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
             Institutional Roles
           </p>
 
@@ -77,19 +77,18 @@ const RolesPermissions = () => {
                 key={role.id}
                 type="button"
                 onClick={() => setSelectedRole(role)}
-                className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer ${
-                  selectedRole.id === role.id
-                    ? "border-blue-600 bg-blue-50/50 shadow-xs"
-                    : "border-slate-200 bg-white hover:bg-slate-50"
-                }`}
+                className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer ${selectedRole.id === role.id
+                  ? "border-blue-600 bg-blue-50/50 shadow-xs"
+                  : "border-slate-200 bg-white hover:bg-slate-50"
+                  }`}
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-slate-900 text-sm">{role.name}</h4>
-                  <span className="text-[11px] font-semibold text-slate-400">
+                  <h4 className="font-bold text-[13px]late-900 text-[13px]m">{role.name}</h4>
+                  <span className="text-[13px] font-semibold text-[13px]late-400">
                     {role.usersAssigned} Users
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                <p className="text-xs text-[13px]late-500 mt-1 leading-relaxed">
                   {role.description}
                 </p>
               </button>
@@ -102,17 +101,17 @@ const RolesPermissions = () => {
             <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-white">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-base font-bold text-slate-900">
+                  <h3 className="text-base font-bold text-[13px]late-900">
                     Permissions: {selectedRole.name}
                   </h3>
                   {selectedRole.name === "Super Admin" && (
-                    <span className="flex items-center gap-1 text-[11px] text-amber-600 font-semibold bg-amber-50 px-2 py-0.5 rounded">
+                    <span className="flex items-center gap-1 text-[13px] text-amber-600 font-semibold bg-amber-50 px-2 py-0.5 rounded">
                       <Lock size={11} />
                       Full Unrestricted Root Access
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-[13px]late-500 mt-0.5">
                   Checkboxes control individual module capability flags.
                 </p>
               </div>
@@ -131,7 +130,7 @@ const RolesPermissions = () => {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50/75 border-b border-slate-100 text-[11px] font-bold uppercase text-slate-500">
+                <thead className="bg-slate-50/75 border-b border-slate-100 text-[13px] font-bold uppercase text-[13px]late-500">
                   <tr>
                     <th className="p-4">Module Name</th>
                     <th className="p-4 text-center">View</th>
@@ -152,7 +151,7 @@ const RolesPermissions = () => {
 
                     return (
                       <tr key={m.key} className="hover:bg-slate-50/50">
-                        <td className="p-4 font-bold text-slate-900">
+                        <td className="p-4 font-bold text-[13px]late-900">
                           {m.label}
                         </td>
                         {["view", "create", "edit", "delete"].map((act) => (

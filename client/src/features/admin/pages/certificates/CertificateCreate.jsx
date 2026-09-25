@@ -82,7 +82,7 @@ const CertificateCreate = () => {
         actions={
           <Link
             to="/admin/certificates"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors cursor-pointer"
           >
             <ArrowLeft size={15} />
             <span>Back to Showcase</span>
@@ -103,7 +103,7 @@ const CertificateCreate = () => {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="sm:col-span-2 space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-bold text-[13px]late-700">
               Award or Certification Title *
             </label>
             <input
@@ -114,12 +114,12 @@ const CertificateCreate = () => {
                 setFormData({ ...formData, title: e.target.value })
               }
               placeholder="e.g. ISO 9001:2015 Quality Management Standard"
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-bold text-[13px]late-700">
               Year / Validity
             </label>
             <input
@@ -129,12 +129,12 @@ const CertificateCreate = () => {
                 setFormData({ ...formData, year: e.target.value })
               }
               placeholder="e.g. 2025 or 2024 - 2027"
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-bold text-[13px]late-700">
               Status
             </label>
             <select
@@ -142,7 +142,7 @@ const CertificateCreate = () => {
               onChange={(e) =>
                 setFormData({ ...formData, status: e.target.value })
               }
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
+              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 focus:border-blue-500 focus:outline-hidden cursor-pointer"
             >
               <option value="Active">Active (Live in Showcase)</option>
               <option value="Draft">Draft (Internal)</option>
@@ -151,7 +151,7 @@ const CertificateCreate = () => {
           </div>
 
           <div className="sm:col-span-2 space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-bold text-[13px]late-700">
               Official Verification URL
             </label>
             <input
@@ -161,7 +161,7 @@ const CertificateCreate = () => {
                 setFormData({ ...formData, verificationUrl: e.target.value })
               }
               placeholder="https://cert.registry.com/verify/..."
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
             />
           </div>
 
@@ -177,7 +177,7 @@ const CertificateCreate = () => {
           </div>
 
           <div className="sm:col-span-2 space-y-1.5">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-bold text-[13px]late-700">
               Scope of Recognition / Description
             </label>
             <textarea
@@ -187,7 +187,7 @@ const CertificateCreate = () => {
                 setFormData({ ...formData, description: e.target.value })
               }
               placeholder="Detail the recognition framework, audit achievements, or excellence recognized by this award..."
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-hidden"
+              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
             />
           </div>
 
@@ -201,13 +201,13 @@ const CertificateCreate = () => {
                 }
                 className="h-4 w-4 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
               />
-              <span className="text-xs font-bold text-slate-700">
+              <span className="text-xs font-bold text-[13px]late-700">
                 Feature on Public Website Spotlight
               </span>
             </label>
 
             <div className="inline-flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-700">
+              <span className="text-xs font-bold text-[13px]late-700">
                 Display Order:
               </span>
               <input
@@ -219,7 +219,7 @@ const CertificateCreate = () => {
                     orderIndex: Number(e.target.value),
                   })
                 }
-                className="w-20 rounded-lg border border-slate-200 px-2 py-1 text-xs text-center text-slate-900"
+                className="w-20 rounded-lg border border-slate-200 px-2 py-1 text-xs text-center text-[13px]late-900"
               />
             </div>
           </div>
@@ -228,7 +228,7 @@ const CertificateCreate = () => {
         <div className="flex items-center justify-end gap-3 pt-6 border-t border-slate-100">
           <Link
             to="/admin/certificates"
-            className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
+            className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50 cursor-pointer"
           >
             Cancel
           </Link>

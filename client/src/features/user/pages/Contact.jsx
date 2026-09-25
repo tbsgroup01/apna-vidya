@@ -80,10 +80,10 @@ const Contact = () => {
             <Headphones size={15} />
             We&apos;re Here to Help
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[13px]late-900 sm:text-5xl">
             Get in Touch with <span className="text-blue-600">{siteName}</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Have questions about course admissions, fee structures, demo classes,
             or enterprise partnerships? Our team is available 6 days a week.
           </p>
@@ -92,10 +92,10 @@ const Contact = () => {
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5 space-y-6">
             <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-[13px]late-900">
                 Contact Information
               </h2>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-[13px]late-500">
                 Reach out to our student helpline or drop by our learning center.
               </p>
 
@@ -105,24 +105,24 @@ const Contact = () => {
                     <Phone size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
                       Admissions Helpline
                     </h3>
                     <a
                       href={`tel:${primaryPhone.replace(/\s+/g, "")}`}
-                      className="mt-0.5 block text-sm font-bold text-slate-900 hover:text-blue-600"
+                      className="mt-0.5 block text-[13px]m font-bold text-[13px]late-900 hover:text-blue-600"
                     >
                       {primaryPhone}
                     </a>
                     {alternatePhone && alternatePhone !== primaryPhone && (
                       <a
                         href={`tel:${alternatePhone.replace(/\s+/g, "")}`}
-                        className="mt-0.5 block text-xs font-semibold text-slate-600 hover:text-blue-600"
+                        className="mt-0.5 block text-xs font-semibold text-[13px]late-600 hover:text-blue-600"
                       >
                         Alt: {alternatePhone}
                       </a>
                     )}
-                    <p className="text-xs text-slate-500 mt-0.5">{workingHours}</p>
+                    <p className="text-xs text-[13px]late-500 mt-0.5">{workingHours}</p>
                   </div>
                 </div>
 
@@ -131,24 +131,24 @@ const Contact = () => {
                     <Mail size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
                       Email Support
                     </h3>
                     <a
                       href={`mailto:${primaryEmail}`}
-                      className="mt-0.5 block text-sm font-bold text-slate-900 hover:text-blue-600"
+                      className="mt-0.5 block text-[13px]m font-bold text-[13px]late-900 hover:text-blue-600"
                     >
                       {primaryEmail}
                     </a>
                     {supportEmail && supportEmail !== primaryEmail && (
                       <a
                         href={`mailto:${supportEmail}`}
-                        className="mt-0.5 block text-xs font-semibold text-slate-600 hover:text-blue-600"
+                        className="mt-0.5 block text-xs font-semibold text-[13px]late-600 hover:text-blue-600"
                       >
                         Support: {supportEmail}
                       </a>
                     )}
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-[13px]late-500 mt-0.5">
                       We reply within 4 business hours
                     </p>
                   </div>
@@ -159,10 +159,10 @@ const Contact = () => {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
                       Corporate Campus
                     </h3>
-                    <p className="mt-0.5 text-sm font-bold text-slate-900 leading-snug">
+                    <p className="mt-0.5 text-[13px]m font-bold text-[13px]late-900 leading-snug">
                       {address}
                     </p>
                     {googleMapsUrl && (
@@ -185,13 +185,13 @@ const Contact = () => {
               <div className="flex items-center gap-3">
                 <Clock size={20} className="text-blue-600" />
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">
+                  <h3 className="text-[13px]m font-bold text-[13px]late-900">
                     Counseling Operating Hours
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-[13px]late-500">
                     {workingHours}
                   </p>
-                  <p className="text-xs text-slate-500 mt-0.5">Live sessions and counseling support</p>
+                  <p className="text-xs text-[13px]late-500 mt-0.5">Live sessions and counseling support</p>
                 </div>
               </div>
             </div>
@@ -201,10 +201,10 @@ const Contact = () => {
             <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-xl shadow-slate-200/50">
               {!isSent ? (
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900">
+                  <h2 className="text-2xl font-bold text-[13px]late-900">
                     Send Us a Message
                   </h2>
-                  <p className="mt-1 text-xs text-slate-500">
+                  <p className="mt-1 text-xs text-[13px]late-500">
                     Our academic advisors will get back to you with personalized
                     guidance.
                   </p>
@@ -218,7 +218,7 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Full Name *
                         </label>
                         <input
@@ -229,12 +229,12 @@ const Contact = () => {
                             setFormData({ ...formData, name: e.target.value })
                           }
                           placeholder="Your name"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Phone Number *
                         </label>
                         <input
@@ -245,14 +245,14 @@ const Contact = () => {
                             setFormData({ ...formData, phone: e.target.value })
                           }
                           placeholder="+91 98765 43210"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Email Address *
                         </label>
                         <input
@@ -263,12 +263,12 @@ const Contact = () => {
                             setFormData({ ...formData, email: e.target.value })
                           }
                           placeholder="you@example.com"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Inquiry Type
                         </label>
                         <select
@@ -276,7 +276,7 @@ const Contact = () => {
                           onChange={(e) =>
                             setFormData({ ...formData, subject: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         >
                           <optgroup label="General Categories">
                             <option value="General Inquiry">General Inquiry</option>
@@ -298,7 +298,7 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                         Your Message *
                       </label>
                       <textarea
@@ -309,14 +309,14 @@ const Contact = () => {
                           setFormData({ ...formData, message: e.target.value })
                         }
                         placeholder="Tell us about your learning goals or questions..."
-                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 resize-none"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={loading}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-[13px]m font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
                     >
                       <Send size={16} />
                       <span>{loading ? "Sending..." : "Send Inquiry Message"}</span>
@@ -328,10 +328,10 @@ const Contact = () => {
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                     <CheckCircle2 size={36} />
                   </div>
-                  <h3 className="mt-4 text-2xl font-bold text-slate-900">
+                  <h3 className="mt-4 text-2xl font-bold text-[13px]late-900">
                     Message Sent Successfully!
                   </h3>
-                  <p className="mt-2 text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+                  <p className="mt-2 text-[13px]m text-[13px]late-600 max-w-sm mx-auto leading-relaxed">
                     Thank you, <span className="font-bold">{formData.name}</span>.
                     Our academic counselor will contact you at{" "}
                     <span className="font-bold">{formData.phone}</span> within 4

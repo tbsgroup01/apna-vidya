@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "https://apna-vidya.towsindia.com/api",
+  baseURL:
+    import.meta.env.VITE_API_BASE_URL ||
+    (typeof window !== "undefined" && window.location.hostname === "localhost"
+      ? "http://localhost:3303/api"
+      : "https://apna-vidya.towsindia.com/api"),
   headers: {
     "Content-Type": "application/json",
   },

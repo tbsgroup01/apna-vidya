@@ -70,10 +70,25 @@ const Student = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    registrationNumber: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
   },
   {
     tableName: "students",
     timestamps: true,
+    hooks: {
+      beforeCreate: async (student) => {
+        if (!student.registrationNumber) {
+          const maxStudent = await Student.findOne({
+            order: [["id", "DESC"]],
+          });
+          const nextId = (maxStudent?.id || 0) + 1;
+          student.registrationNumber = `AV-STU-${String(nextId).padStart(4, "0")}`;
+        }
+      },
+    },
   }
 );
 

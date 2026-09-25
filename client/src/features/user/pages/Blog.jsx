@@ -61,10 +61,10 @@ const Blog = () => {
             <Newspaper size={15} />
             Apna Vidya Knowledge Base
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[13px]late-900 sm:text-5xl">
             Articles & <span className="text-blue-600">Guides</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Expert insights on software engineering careers, coding interviews,
             technology trends, and career development strategies.
           </p>
@@ -87,7 +87,7 @@ const Blog = () => {
             </div>
             <div className="p-6 sm:p-10 lg:col-span-5 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-3 text-xs text-slate-400">
+                <div className="flex items-center gap-3 text-xs text-[13px]late-400">
                   <span className="font-semibold text-blue-600">
                     {featuredBlog.category}
                   </span>
@@ -99,20 +99,20 @@ const Blog = () => {
                     {featuredBlog.readTime}
                   </span>
                 </div>
-                <h2 className="mt-3 text-2xl font-bold leading-tight text-slate-900 sm:text-3xl line-clamp-3">
+                <h2 className="mt-3 text-2xl font-bold leading-tight text-[13px]late-900 sm:text-3xl line-clamp-3">
                   {featuredBlog.title}
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-3">
+                <p className="mt-3 text-[13px]m leading-relaxed text-[13px]late-600 line-clamp-3">
                   {featuredBlog.excerpt}
                 </p>
               </div>
 
               <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
                 <div>
-                  <p className="text-xs font-bold text-slate-900">
+                  <p className="text-xs font-bold text-[13px]late-900">
                     {featuredBlog.author}
                   </p>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[13px] text-[13px]late-400">
                     {featuredBlog.authorRole || "Mentor"}
                   </p>
                 </div>
@@ -132,20 +132,20 @@ const Blog = () => {
           <div className="relative flex-1 max-w-md">
             <Search
               size={18}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[13px]late-400"
             />
             <input
               type="text"
               placeholder="Search articles, topics, or authors..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-10 text-sm text-slate-800 placeholder-slate-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
               >
                 <X size={15} />
               </button>
@@ -158,11 +158,10 @@ const Blog = () => {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
-                  selectedCategory === cat
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
-                }`}
+                className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${selectedCategory === cat
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "bg-white text-[13px]late-600 border border-slate-200 hover:bg-slate-100"
+                  }`}
               >
                 {cat}
               </button>
@@ -188,10 +187,10 @@ const Blog = () => {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
               <BookOpen size={28} />
             </div>
-            <h3 className="mt-4 text-base font-bold text-slate-900">
+            <h3 className="mt-4 text-base font-bold text-[13px]late-900">
               No articles match your search
             </h3>
-            <p className="mt-1 text-xs text-slate-500 max-w-sm mx-auto">
+            <p className="mt-1 text-xs text-[13px]late-500 max-w-sm mx-auto">
               Try adjusting your search terms or selecting a different category.
             </p>
           </div>
@@ -218,7 +217,7 @@ const Blog = () => {
                   </div>
 
                   <div className="p-6 space-y-2.5">
-                    <div className="flex items-center gap-3 text-xs text-slate-400">
+                    <div className="flex items-center gap-3 text-xs text-[13px]late-400">
                       <span>{blog.publishedDate}</span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
@@ -227,12 +226,12 @@ const Blog = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold leading-snug text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold leading-snug text-[13px]late-900 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {blog.title}
                     </h3>
 
                     {blog.excerpt && (
-                      <p className="text-xs leading-relaxed text-slate-500 line-clamp-3">
+                      <p className="text-xs leading-relaxed text-[13px]late-500 line-clamp-3">
                         {blog.excerpt}
                       </p>
                     )}
@@ -241,8 +240,8 @@ const Blog = () => {
 
                 <div className="border-t border-slate-100 p-6 pt-4 flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-bold text-slate-800">{blog.author}</p>
-                    <p className="text-[10px] text-slate-400">{blog.authorRole}</p>
+                    <p className="text-xs font-bold text-[13px]late-800">{blog.author}</p>
+                    <p className="text-[12px] text-[13px]late-400">{blog.authorRole}</p>
                   </div>
                   <Link
                     to={`/blog/${blog.slug}`}

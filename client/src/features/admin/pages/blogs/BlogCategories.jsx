@@ -55,8 +55,8 @@ const BlogCategories = () => {
       sortable: true,
       render: (row) => (
         <div>
-          <span className="font-bold text-slate-900">{row.name}</span>
-          <p className="text-[11px] font-mono text-slate-400">/{row.slug}</p>
+          <span className="font-bold text-[13px]late-900">{row.name}</span>
+          <p className="text-[13px] font-mono text-[13px]late-400">/{row.slug}</p>
         </div>
       ),
     },
@@ -64,7 +64,7 @@ const BlogCategories = () => {
       key: "description",
       header: "Description",
       render: (row) => (
-        <span className="text-xs text-slate-600 line-clamp-1">
+        <span className="text-xs text-[13px]late-600 line-clamp-1">
           {row.description}
         </span>
       ),
@@ -94,7 +94,7 @@ const BlogCategories = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Category"
           >
             <Trash2 size={15} />
@@ -117,7 +117,7 @@ const BlogCategories = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/blogs"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50"
             >
               <ArrowLeft size={15} />
               <span>Back to Blogs</span>
@@ -154,16 +154,16 @@ const BlogCategories = () => {
       {addModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-slate-100">
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-[13px]late-900">
               Create Blog Category
             </h3>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-[13px]late-500">
               Add a new category to group related tutorials.
             </p>
 
             <form onSubmit={handleCreate} className="mt-4 space-y-3.5 text-xs">
               <div>
-                <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                   Category Name *
                 </label>
                 <input
@@ -177,7 +177,7 @@ const BlogCategories = () => {
               </div>
 
               <div>
-                <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                   URL Slug
                 </label>
                 <input
@@ -190,7 +190,7 @@ const BlogCategories = () => {
               </div>
 
               <div>
-                <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                   Description
                 </label>
                 <textarea
@@ -206,7 +206,7 @@ const BlogCategories = () => {
                 <button
                   type="button"
                   onClick={() => setAddModalOpen(false)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50"
                 >
                   Cancel
                 </button>

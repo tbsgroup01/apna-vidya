@@ -50,7 +50,7 @@ const CertificateDetails = () => {
     return (
       <div className="space-y-6 max-w-3xl mx-auto py-12 text-center">
         <div className="animate-spin inline-block h-8 w-8 rounded-full border-2 border-blue-600 border-t-transparent" />
-        <p className="text-xs text-slate-500 font-semibold">Loading award details...</p>
+        <p className="text-xs text-[13px]late-500 font-semibold">Loading award details...</p>
       </div>
     );
   }
@@ -58,9 +58,9 @@ const CertificateDetails = () => {
   if (!award) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto py-12 text-center">
-        <Award size={36} className="mx-auto text-slate-400" />
-        <h2 className="text-base font-bold text-slate-900">Award Not Found</h2>
-        <p className="text-xs text-slate-500">The requested institutional award could not be located in the database.</p>
+        <Award size={36} className="mx-auto text-[13px]late-400" />
+        <h2 className="text-base font-bold text-[13px]late-900">Award Not Found</h2>
+        <p className="text-xs text-[13px]late-500">The requested institutional award could not be located in the database.</p>
         <Link
           to="/admin/certificates"
           className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white"
@@ -85,7 +85,7 @@ const CertificateDetails = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/certificates"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
             >
               <ArrowLeft size={15} />
               <span>Back to Showcase</span>
@@ -128,13 +128,12 @@ const CertificateDetails = () => {
 
           <div className="absolute top-4 right-4">
             <span
-              className={`rounded-lg px-3 py-1 text-xs font-bold shadow-xs backdrop-blur-xs ${
-                award.status === "Active"
-                  ? "bg-emerald-500/95 text-white"
-                  : award.status === "Draft"
+              className={`rounded-lg px-3 py-1 text-xs font-bold shadow-xs backdrop-blur-xs ${award.status === "Active"
+                ? "bg-emerald-500/95 text-white"
+                : award.status === "Draft"
                   ? "bg-amber-500/95 text-white"
                   : "bg-slate-700/95 text-white"
-              }`}
+                }`}
             >
               {award.status}
             </span>
@@ -144,7 +143,7 @@ const CertificateDetails = () => {
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white drop-shadow-xs">
               {award.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-200">
+            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-[13px]late-200">
               <span className="inline-flex items-center gap-1.5">
                 <Calendar size={14} className="text-amber-400" />
                 {award.year}
@@ -159,10 +158,10 @@ const CertificateDetails = () => {
 
         <div className="p-6 sm:p-8 space-y-6">
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400">
+            <h3 className="text-[13px]m font-bold uppercase tracking-wider text-[13px]late-400">
               Description & Scope of Award
             </h3>
-            <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+            <p className="mt-2 text-[13px]m text-[13px]late-700 leading-relaxed">
               {award.description ||
                 "Official institutional honor recognizing quality, achievement, or curricular rigor."}
             </p>
@@ -170,18 +169,18 @@ const CertificateDetails = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-slate-100 pt-6">
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[13px] font-bold uppercase tracking-wider text-[13px]late-400">
                 Year / Validity
               </span>
-              <p className="mt-1 text-xs font-bold text-slate-900">
+              <p className="mt-1 text-xs font-bold text-[13px]late-900">
                 {award.year}
               </p>
             </div>
             <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-4">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="text-[13px] font-bold uppercase tracking-wider text-[13px]late-400">
                 Display Order
               </span>
-              <p className="mt-1 text-xs font-bold text-slate-900">
+              <p className="mt-1 text-xs font-bold text-[13px]late-900">
                 Rank #{award.orderIndex || 1}
               </p>
             </div>
@@ -193,7 +192,7 @@ const CertificateDetails = () => {
                 <h4 className="text-xs font-bold text-blue-900">
                   External Verification Endpoint
                 </h4>
-                <p className="text-[11px] font-mono text-blue-600 truncate max-w-lg">
+                <p className="text-[13px] font-mono text-blue-600 truncate max-w-lg">
                   {award.verificationUrl}
                 </p>
               </div>

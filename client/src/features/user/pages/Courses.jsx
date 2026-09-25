@@ -95,10 +95,10 @@ const Courses = () => {
             <GraduationCap size={15} />
             Skill-Building Programs
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[13px]late-900 sm:text-5xl">
             Explore All <span className="text-blue-600">Courses</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Gain industry-demanded software engineering skills and academic
             excellence with step-by-step mentor guidance.
           </p>
@@ -108,29 +108,28 @@ const Courses = () => {
           <div className="relative flex-1 max-w-md">
             <Search
               size={18}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[13px]late-400"
             />
             <input
               type="text"
               placeholder="Search courses by keyword..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-[13px]m text-[13px]late-800 placeholder-slate-400 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <Filter size={16} className="text-slate-400 mr-1 hidden sm:inline" />
+            <Filter size={16} className="text-[13px]late-400 mr-1 hidden sm:inline" />
             {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
-                  selectedCategory === cat
+                className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${selectedCategory === cat
                     ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
-                }`}
+                    : "bg-white text-[13px]late-600 border border-slate-200 hover:bg-slate-100"
+                  }`}
               >
                 {cat}
               </button>
@@ -157,37 +156,37 @@ const Courses = () => {
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-center justify-between text-xs text-slate-500">
+                  <div className="flex items-center justify-between text-xs text-[13px]late-500">
                     <span className="font-semibold text-blue-600">
                       {course.category}
                     </span>
-                    <div className="flex items-center gap-1 font-bold text-slate-700">
+                    <div className="flex items-center gap-1 font-bold text-[13px]late-700">
                       <Star size={13} className="fill-amber-400 text-amber-400" />
                       <span>{course.rating}</span>
-                      <span className="text-slate-400">({course.studentsCount})</span>
+                      <span className="text-[13px]late-400">({course.studentsCount})</span>
                     </div>
                   </div>
 
-                  <h3 className="mt-2 text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="mt-2 text-xl font-bold text-[13px]late-900 group-hover:text-blue-600 transition-colors">
                     {course.title}
                   </h3>
 
-                  <p className="mt-2 text-xs leading-relaxed text-slate-500 line-clamp-2">
+                  <p className="mt-2 text-xs leading-relaxed text-[13px]late-500 line-clamp-2">
                     {course.description}
                   </p>
 
-                  <div className="mt-4 flex items-center gap-4 text-xs font-medium text-slate-600">
+                  <div className="mt-4 flex items-center gap-4 text-xs font-medium text-[13px]late-600">
                     <span className="flex items-center gap-1">
-                      <Clock size={14} className="text-slate-400" />
+                      <Clock size={14} className="text-[13px]late-400" />
                       {course.duration}
                     </span>
                     <span className="flex items-center gap-1">
-                      <BookOpen size={14} className="text-slate-400" />
+                      <BookOpen size={14} className="text-[13px]late-400" />
                       {course.level}
                     </span>
                   </div>
 
-                  <ul className="mt-4 space-y-2 border-t border-slate-100 pt-4 text-xs font-medium text-slate-600">
+                  <ul className="mt-4 space-y-2 border-t border-slate-100 pt-4 text-xs font-medium text-[13px]late-600">
                     {course.features.slice(0, 3).map((f, i) => (
                       <li key={i} className="flex items-center gap-2">
                         <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
@@ -203,10 +202,10 @@ const Courses = () => {
               <div className="border-t border-slate-100 p-6 pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-xl font-black text-slate-900">
+                    <span className="text-xl font-black text-[13px]late-900">
                       {course.price}
                     </span>
-                    <span className="ml-2 text-xs text-slate-400 line-through">
+                    <span className="ml-2 text-xs text-[13px]late-400 line-through">
                       {course.originalPrice}
                     </span>
                   </div>
@@ -225,7 +224,7 @@ const Courses = () => {
 
         {filteredCourses.length === 0 && (
           <div className="py-20 text-center">
-            <p className="text-lg font-bold text-slate-700">
+            <p className="text-lg font-bold text-[13px]late-700">
               No courses matched your query &ldquo;{searchQuery}&rdquo;
             </p>
             <button
@@ -234,7 +233,7 @@ const Courses = () => {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
-              className="mt-4 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
+              className="mt-4 rounded-xl bg-blue-600 px-5 py-2.5 text-[13px]m font-semibold text-white hover:bg-blue-700"
             >
               Reset Filters
             </button>

@@ -10,14 +10,14 @@ const RefundPolicy = () => {
             <RefreshCw size={16} />
             Student Protection
           </div>
-          <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-extrabold text-[13px]late-900 sm:text-4xl">
             Refund & Cancellation Policy
           </h1>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-[13px]late-400">
             Last Updated: September 2025 • Apna Vidya
           </p>
 
-          <div className="mt-6 rounded-2xl bg-blue-50/80 border border-blue-100 p-5 text-xs sm:text-sm text-blue-900">
+          <div className="mt-6 rounded-2xl bg-blue-50/80 border border-blue-100 p-5 text-xs sm:text-[13px]m text-blue-900">
             <p className="font-bold flex items-center gap-2">
               <CheckCircle2 size={18} className="text-blue-600" />
               100% Risk-Free Guarantee:
@@ -30,9 +30,9 @@ const RefundPolicy = () => {
             </p>
           </div>
 
-          <div className="mt-8 space-y-8 text-sm leading-relaxed text-slate-600 border-t border-slate-100 pt-8">
+          <div className="mt-8 space-y-8 text-[13px]m leading-relaxed text-[13px]late-600 border-t border-slate-100 pt-8">
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 1. 7-Day Money-Back Period
               </h2>
               <p className="mt-2">
@@ -44,7 +44,7 @@ const RefundPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 2. Processing & Timelines
               </h2>
               <p className="mt-2">
@@ -55,7 +55,7 @@ const RefundPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 3. Non-Refundable Scenarios
               </h2>
               <p className="mt-2">
@@ -66,7 +66,7 @@ const RefundPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 4. Batch Transfer & Deferral Option
               </h2>
               <p className="mt-2">

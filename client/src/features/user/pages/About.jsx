@@ -162,7 +162,7 @@ const About = () => {
       try {
         const parsed = JSON.parse(data.values);
         if (Array.isArray(parsed)) return parsed;
-      } catch {}
+      } catch { }
     }
     return DEFAULT_ABOUT.values;
   }, [data?.values]);
@@ -173,7 +173,7 @@ const About = () => {
       try {
         const parsed = JSON.parse(data.team);
         if (Array.isArray(parsed)) return parsed;
-      } catch {}
+      } catch { }
     }
     return DEFAULT_ABOUT.team;
   }, [data?.team]);
@@ -192,7 +192,7 @@ const About = () => {
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
             {data?.heroTitle || "Empowering the Next Generation of India's Builders"}
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[13px]late-300 sm:text-lg">
             {data?.heroDescription}
           </p>
         </div>
@@ -205,16 +205,16 @@ const About = () => {
               <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">
                 {data?.storyTag || "Our Story"}
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-extrabold text-[13px]late-900 sm:text-4xl">
                 {data?.storyTitle}
               </h2>
               {data?.storyParagraph1 && (
-                <p className="mt-4 text-base leading-relaxed text-slate-600">
+                <p className="mt-4 text-base leading-relaxed text-[13px]late-600">
                   {data.storyParagraph1}
                 </p>
               )}
               {data?.storyParagraph2 && (
-                <p className="mt-3 text-base leading-relaxed text-slate-600">
+                <p className="mt-3 text-base leading-relaxed text-[13px]late-600">
                   {data.storyParagraph2}
                 </p>
               )}
@@ -224,7 +224,7 @@ const About = () => {
                   <p className="text-3xl font-black text-blue-600">
                     {data?.stat1Value || "50,000+"}
                   </p>
-                  <p className="mt-1 text-xs font-medium text-slate-500">
+                  <p className="mt-1 text-xs font-medium text-[13px]late-500">
                     {data?.stat1Label || "Graduated Students"}
                   </p>
                 </div>
@@ -232,7 +232,7 @@ const About = () => {
                   <p className="text-3xl font-black text-indigo-600">
                     {data?.stat2Value || "120+"}
                   </p>
-                  <p className="mt-1 text-xs font-medium text-slate-500">
+                  <p className="mt-1 text-xs font-medium text-[13px]late-500">
                     {data?.stat2Label || "Hiring Company Partners"}
                   </p>
                 </div>
@@ -245,11 +245,11 @@ const About = () => {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white">
                     <Target size={20} />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold text-[13px]late-900">
                     {data?.missionTitle || "Our Mission"}
                   </h3>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                <p className="mt-3 text-[13px]m leading-relaxed text-[13px]late-600">
                   {data?.missionDescription}
                 </p>
               </div>
@@ -259,11 +259,11 @@ const About = () => {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white">
                     <Eye size={20} />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold text-[13px]late-900">
                     {data?.visionTitle || "Our Vision"}
                   </h3>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                <p className="mt-3 text-[13px]m leading-relaxed text-[13px]late-600">
                   {data?.visionDescription}
                 </p>
               </div>
@@ -279,7 +279,7 @@ const About = () => {
               <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
                 {data?.valuesTag || "Our Pillars"}
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
                 {data?.valuesTitle || "Values That Drive Everything We Do"}
               </h2>
             </div>
@@ -295,10 +295,10 @@ const About = () => {
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                       <Icon size={24} />
                     </div>
-                    <h3 className="mt-4 text-base font-bold text-slate-900">
+                    <h3 className="mt-4 text-base font-bold text-[13px]late-900">
                       {val.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    <p className="mt-2 text-xs leading-relaxed text-[13px]late-500">
                       {val.desc}
                     </p>
                   </div>
@@ -316,11 +316,11 @@ const About = () => {
               <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
                 {data?.teamTag || "Experienced Educators"}
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
                 {data?.teamTitle || "Meet the Mentors Behind Apna Vidya"}
               </h2>
               {data?.teamSubtitle && (
-                <p className="mt-3 text-sm text-slate-500 sm:text-base">
+                <p className="mt-3 text-[13px]m text-[13px]late-500 sm:text-base">
                   {data.teamSubtitle}
                 </p>
               )}
@@ -338,13 +338,13 @@ const About = () => {
                     className="h-60 w-full object-cover"
                   />
                   <div className="p-5">
-                    <h3 className="text-base font-bold text-slate-900">
+                    <h3 className="text-base font-bold text-[13px]late-900">
                       {member.name}
                     </h3>
                     <p className="text-xs font-semibold text-blue-600 mt-0.5">
                       {member.role}
                     </p>
-                    <p className="mt-2 text-xs text-slate-500">
+                    <p className="mt-2 text-xs text-[13px]late-500">
                       {member.credentials}
                     </p>
                   </div>
@@ -369,13 +369,13 @@ const About = () => {
             <button
               type="button"
               onClick={() => openDemoModal()}
-              className="rounded-xl bg-white px-8 py-3.5 text-sm font-bold text-blue-600 shadow-lg hover:bg-blue-50 transition-colors cursor-pointer active:scale-95"
+              className="rounded-xl bg-white px-8 py-3.5 text-[13px]m font-bold text-blue-600 shadow-lg hover:bg-blue-50 transition-colors cursor-pointer active:scale-95"
             >
               {data?.ctaPrimaryText || "Book a Free Demo Class"}
             </button>
             <Link
               to={data?.ctaSecondaryLink || "/courses"}
-              className="rounded-xl border border-blue-400 px-8 py-3.5 text-sm font-bold text-white hover:bg-blue-700 transition-colors"
+              className="rounded-xl border border-blue-400 px-8 py-3.5 text-[13px]m font-bold text-white hover:bg-blue-700 transition-colors"
             >
               {data?.ctaSecondaryText || "Explore All Courses"}
             </Link>

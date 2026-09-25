@@ -10,16 +10,16 @@ const TermsConditions = () => {
             <FileText size={16} />
             User Agreement
           </div>
-          <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-extrabold text-[13px]late-900 sm:text-4xl">
             Terms & Conditions
           </h1>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-[13px]late-400">
             Effective Date: September 2025 • Apna Vidya Private Limited
           </p>
 
-          <div className="mt-8 space-y-8 text-sm leading-relaxed text-slate-600 border-t border-slate-100 pt-8">
+          <div className="mt-8 space-y-8 text-[13px]m leading-relaxed text-[13px]late-600 border-t border-slate-100 pt-8">
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 1. Acceptance of Terms
               </h2>
               <p className="mt-2">
@@ -30,7 +30,7 @@ const TermsConditions = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 2. Academic Code of Conduct
               </h2>
               <p className="mt-2">
@@ -43,7 +43,7 @@ const TermsConditions = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 3. Intellectual Property Rights
               </h2>
               <p className="mt-2">
@@ -55,7 +55,7 @@ const TermsConditions = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 4. Course Certification & Verification
               </h2>
               <p className="mt-2">
@@ -66,7 +66,7 @@ const TermsConditions = () => {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-[13px]late-900">
                 5. Governing Law & Jurisdiction
               </h2>
               <p className="mt-2">

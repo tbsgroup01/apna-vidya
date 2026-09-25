@@ -100,14 +100,14 @@ const PopularCourses = () => {
                             Our Courses
                         </div>
 
-                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                        <h2 className="text-3xl font-bold tracking-tight text-[13px]late-900 sm:text-4xl">
                             Our Popular{" "}
                             <span className="text-blue-600">
                                 Courses
                             </span>
                         </h2>
 
-                        <p className="mt-3 text-sm leading-6 text-slate-500 sm:text-base">
+                        <p className="mt-3 text-[13px]m leading-6 text-[13px]late-500 sm:text-base">
                             Choose from industry-focused training programs and start
                             your learning journey with Apna Vidya.
                         </p>
@@ -115,7 +115,7 @@ const PopularCourses = () => {
 
                     <Link
                         to="/courses"
-                        className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-sm font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                        className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-[13px]m font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-600 hover:text-white"
                     >
                         View All Courses
                         <ArrowRight
@@ -146,11 +146,11 @@ const PopularCourses = () => {
                             </div>
 
                             <div className="p-5">
-                                <h3 className="text-lg font-bold leading-6 text-slate-900">
+                                <h3 className="text-lg font-bold leading-6 text-[13px]late-900">
                                     {course.title}
                                 </h3>
 
-                                <p className="mt-2 min-h-[60px] text-sm leading-5 text-slate-500">
+                                <p className="mt-2 min-h-[60px] text-[13px]m leading-5 text-[13px]late-500">
                                     {course.description}
                                 </p>
 
@@ -158,7 +158,7 @@ const PopularCourses = () => {
                                     {course.features.map((feature) => (
                                         <li
                                             key={feature}
-                                            className="flex items-start gap-2 text-xs font-medium text-slate-600"
+                                            className="flex items-start gap-2 text-xs font-medium text-[13px]late-600"
                                         >
                                             <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
                                                 <Check
@@ -173,7 +173,7 @@ const PopularCourses = () => {
 
                                 <Link
                                     to={course.path}
-                                    className="group/button mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-sm font-semibold text-blue-600 transition-all hover:bg-blue-600 hover:text-white"
+                                    className="group/button mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-[13px]m font-semibold text-blue-600 transition-all hover:bg-blue-600 hover:text-white"
                                 >
                                     View Course
                                     <ArrowRight

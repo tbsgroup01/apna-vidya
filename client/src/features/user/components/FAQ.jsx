@@ -43,10 +43,10 @@ const FAQ = () => {
             <HelpCircle size={14} />
             Got Questions?
           </span>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
             Frequently Asked <span className="text-blue-600">Questions</span>
           </h2>
-          <p className="mt-3 text-sm text-slate-500 sm:text-base">
+          <p className="mt-3 text-[13px]m text-[13px]late-500 sm:text-base">
             Everything you need to know about our teaching format, mentors,
             certifications, and demo classes.
           </p>
@@ -65,20 +65,19 @@ const FAQ = () => {
                   onClick={() => toggle(idx)}
                   className="flex w-full items-center justify-between p-5 sm:p-6 text-left"
                 >
-                  <span className="text-base font-bold text-slate-900 pr-4">
+                  <span className="text-base font-bold text-[13px]late-900 pr-4">
                     {faq.q}
                   </span>
                   <div
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 bg-blue-50 text-blue-600" : ""
-                    }`}
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-[13px]late-600 transition-transform duration-200 ${isOpen ? "rotate-180 bg-blue-50 text-blue-600" : ""
+                      }`}
                   >
                     <ChevronDown size={18} />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="border-t border-slate-100 bg-slate-50/60 p-5 sm:p-6 pt-4 text-sm leading-relaxed text-slate-600">
+                  <div className="border-t border-slate-100 bg-slate-50/60 p-5 sm:p-6 pt-4 text-[13px]m leading-relaxed text-[13px]late-600">
                     {faq.a}
                   </div>
                 )}

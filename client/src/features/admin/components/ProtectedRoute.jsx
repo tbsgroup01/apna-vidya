@@ -14,7 +14,7 @@ const ProtectedRoute = ({ requiredRole = null, requiredPermission = null, childr
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-lg shadow-lg shadow-blue-600/30">
             AV
           </div>
-          <div className="flex items-center gap-2.5 text-slate-400 text-xs font-semibold">
+          <div className="flex items-center gap-2.5 text-[13px]late-400 text-xs font-semibold">
             <Loader2 size={16} className="animate-spin text-blue-500" />
             <span>Verifying administrator credentials...</span>
           </div>

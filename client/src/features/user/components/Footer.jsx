@@ -97,6 +97,7 @@ const Footer = () => {
         };
     }, []);
 
+
     return (
         <footer className="bg-slate-950 text-white">
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -107,7 +108,7 @@ const Footer = () => {
                             className="mb-6 inline-flex items-center gap-3 group focus:outline-none"
                             aria-label={`${siteName} Home`}
                         >
-                            <div className="inline-flex items-center rounded-2xl bg-white/95 px-3.5 py-2 shadow-xs transition-all duration-200 group-hover:bg-white group-hover:shadow-md group-hover:scale-[1.02]">
+                            <div className="footer-logo-badge inline-flex items-center rounded-2xl py-2  ">
                                 <img
                                     src={logoSrc}
                                     alt={`${siteName} Logo`}
@@ -116,12 +117,12 @@ const Footer = () => {
                                             e.currentTarget.src = logo;
                                         }
                                     }}
-                                    className="h-11 sm:h-12 w-auto max-h-14 max-w-[210px] object-contain"
+                                    className="h-14 sm:h-16 md:h-18 w-auto max-h-20 max-w-[260px] object-contain"
                                 />
                             </div>
                         </Link>
 
-                        <p className="max-w-sm text-sm leading-7 text-slate-400">
+                        <p className="max-w-sm text-[13px]m leading-7 text-[13px]late-400">
                             Empowering students with quality education, practical
                             skills, and industry-focused learning programs to build
                             a successful career.
@@ -134,7 +135,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Facebook"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-slate-400 transition-all hover:bg-blue-600 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-blue-600 hover:text-white"
                                 >
                                     <FacebookIcon size={18} />
                                 </a>
@@ -146,7 +147,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Instagram"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-slate-400 transition-all hover:bg-pink-600 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-pink-600 hover:text-white"
                                 >
                                     <InstagramIcon size={18} />
                                 </a>
@@ -158,7 +159,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="LinkedIn"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-slate-400 transition-all hover:bg-blue-700 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-blue-700 hover:text-white"
                                 >
                                     <LinkedinIcon size={18} />
                                 </a>
@@ -170,7 +171,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="YouTube"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-slate-400 transition-all hover:bg-red-600 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-red-600 hover:text-white"
                                 >
                                     <YoutubeIcon size={18} />
                                 </a>
@@ -182,7 +183,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Twitter"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-slate-400 transition-all hover:bg-sky-500 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-sky-500 hover:text-white"
                                 >
                                     <TwitterIcon size={18} />
                                 </a>
@@ -191,7 +192,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-6 text-sm font-semibold uppercase tracking-wider text-white">
+                        <h3 className="mb-6 text-[13px]m font-semibold uppercase tracking-wider text-white">
                             Quick Links
                         </h3>
 
@@ -200,7 +201,7 @@ const Footer = () => {
                                 <li key={link.name}>
                                     <Link
                                         to={link.path}
-                                        className="group flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-blue-400"
+                                        className="group flex items-center gap-2 text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
                                     >
                                         <ArrowRight
                                             size={14}
@@ -216,7 +217,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-6 text-sm font-semibold uppercase tracking-wider text-white">
+                        <h3 className="mb-6 text-[13px]m font-semibold uppercase tracking-wider text-white">
                             Popular Courses
                         </h3>
 
@@ -225,7 +226,7 @@ const Footer = () => {
                                 <li key={course.name}>
                                     <Link
                                         to={course.path}
-                                        className="group flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-blue-400"
+                                        className="group flex items-center gap-2 text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
                                     >
                                         <ArrowRight
                                             size={14}
@@ -250,7 +251,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-6 text-sm font-semibold uppercase tracking-wider text-white">
+                        <h3 className="mb-6 text-[13px]m font-semibold uppercase tracking-wider text-white">
                             Get In Touch
                         </h3>
 
@@ -260,10 +261,10 @@ const Footer = () => {
                                     <MapPin size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-slate-500">
+                                    <p className="text-xs font-medium text-[13px]late-500">
                                         Address
                                     </p>
-                                    <p className="mt-1 text-sm leading-6 text-slate-400">
+                                    <p className="mt-1 text-[13px]m leading-6 text-[13px]late-400">
                                         {address}
                                     </p>
                                 </div>
@@ -274,12 +275,12 @@ const Footer = () => {
                                     <Phone size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-slate-500">
+                                    <p className="text-xs font-medium text-[13px]late-500">
                                         Phone
                                     </p>
                                     <a
                                         href={`tel:${phone.replace(/\s+/g, "")}`}
-                                        className="mt-1 block text-sm text-slate-400 transition-colors hover:text-blue-400"
+                                        className="mt-1 block text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
                                     >
                                         {phone}
                                     </a>
@@ -291,12 +292,12 @@ const Footer = () => {
                                     <Mail size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-slate-500">
+                                    <p className="text-xs font-medium text-[13px]late-500">
                                         Email
                                     </p>
                                     <a
                                         href={`mailto:${email}`}
-                                        className="mt-1 block text-sm text-slate-400 transition-colors hover:text-blue-400"
+                                        className="mt-1 block text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
                                     >
                                         {email}
                                     </a>
@@ -308,10 +309,10 @@ const Footer = () => {
                                     <Clock size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-slate-500">
+                                    <p className="text-xs font-medium text-[13px]late-500">
                                         Working Hours
                                     </p>
-                                    <p className="mt-1 text-sm text-slate-400">
+                                    <p className="mt-1 text-[13px]m text-[13px]late-400">
                                         {workingHours}
                                     </p>
                                 </div>
@@ -323,11 +324,11 @@ const Footer = () => {
 
             <div className="border-t border-slate-800">
                 <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-                    <p className="text-center text-sm text-slate-500 md:text-left">
+                    <p className="text-center text-[13px]m text-[13px]late-500 md:text-left">
                         © {currentYear} {siteName}. All rights reserved.
                     </p>
 
-                    <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-slate-500">
+                    <div className="flex flex-wrap items-center justify-center gap-5 text-[13px]m text-[13px]late-500">
                         <Link
                             to="/privacy-policy"
                             className="transition-colors hover:text-blue-400"

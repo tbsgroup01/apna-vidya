@@ -70,6 +70,8 @@ const authenticate = async (req, res, next) => {
       email: user.email,
       phone: user.phone,
       profileImage: user.profileImage,
+      bio: user.bio,
+      designation: user.designation,
       status: user.status,
       role: user.role ? user.role.name : null,
       roleId: user.roleId,

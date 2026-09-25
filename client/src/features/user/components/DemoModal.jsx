@@ -108,7 +108,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
               <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
                 Book a Free Demo Class
               </h3>
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-[13px]m text-gray-500">
                 Fill in your details below and our academic mentor will connect with you.
               </p>
             </div>
@@ -131,7 +131,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Enter student full name"
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
 
@@ -146,7 +146,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="e.g. +91 98765 43210"
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
 
@@ -161,7 +161,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="student@example.com"
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
 
@@ -174,7 +174,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   required
                   value={formData.course}
                   onChange={handleInputChange}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all bg-white"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all bg-white"
                 >
                   <option value="">Select a Course or Program *</option>
                   {coursesList && coursesList.length > 0 ? (
@@ -197,13 +197,13 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer active:scale-[0.99]"
+                  className="w-full rounded-xl bg-blue-600 py-3 text-[13px]m font-semibold text-white shadow-md hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer active:scale-[0.99]"
                 >
                   {loading ? "Registering Demo..." : "Confirm & Book Free Demo"}
                 </button>
               </div>
 
-              <p className="text-center text-[11px] text-gray-400">
+              <p className="text-center text-[13px] text-gray-400">
                 🔒 Your personal information is secure and will never be shared.
               </p>
             </form>
@@ -217,14 +217,14 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
               <h3 className="text-xl font-bold text-gray-900">
                 Demo Class Booked Successfully!
               </h3>
-              <p className="mt-2 text-sm text-gray-600 max-w-sm mx-auto">
+              <p className="mt-2 text-[13px]m text-gray-600 max-w-sm mx-auto">
                 Thank you, <span className="font-semibold text-gray-800">{formData.name}</span>! We have received your request for <span className="font-semibold text-blue-600">{formData.course}</span>. Our academic counselor will contact you at <span className="font-semibold text-gray-800">{formData.phone}</span> shortly.
               </p>
             </div>
             <button
               type="button"
               onClick={handleClose}
-              className="rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer"
+              className="rounded-xl bg-blue-600 px-6 py-2.5 text-[13px]m font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer"
             >
               Got it, thanks!
             </button>

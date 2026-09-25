@@ -121,7 +121,7 @@ const BatchForm = () => {
         actions={
           <Link
             to="/admin/batches"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
           >
             <ArrowLeft size={15} />
             <span>Back</span>
@@ -137,7 +137,7 @@ const BatchForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-2 text-slate-900 font-bold text-sm">
+          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-2 text-[13px]late-900 font-bold text-[13px]m">
             <CalendarDays size={18} className="text-blue-600" />
             <span>Batch & Faculty Configuration</span>
           </div>
@@ -151,13 +151,13 @@ const BatchForm = () => {
               placeholder="e.g. FS-NOV-26 (Weekend Live)"
             />
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                 Associated Course <span className="text-rose-500">*</span>
               </label>
               <select
                 value={formData.courseId}
                 onChange={(e) => handleChange("courseId", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-2xs transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-[13px]m text-[13px]late-800 shadow-2xs transition-all focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
               >
                 <option value="">Select Course</option>
                 {coursesList.map((c) => (
@@ -248,7 +248,7 @@ const BatchForm = () => {
         <div className="flex items-center justify-end gap-3">
           <Link
             to="/admin/batches"
-            className="rounded-xl border border-slate-200 px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="rounded-xl border border-slate-200 px-5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
           >
             Cancel
           </Link>

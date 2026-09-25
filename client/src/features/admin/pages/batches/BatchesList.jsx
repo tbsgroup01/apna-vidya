@@ -69,12 +69,12 @@ const BatchesList = () => {
         <div>
           <Link
             to={`/admin/batches/${row.id}`}
-            className="font-bold text-slate-900 hover:text-blue-600 transition-colors block"
+            className="font-bold text-[13px]late-900 hover:text-blue-600 transition-colors block"
           >
             {row.name}
           </Link>
           <span className="text-xs text-blue-600 font-semibold">{row.course?.name || "General Program"}</span>
-          <p className="text-[11px] font-mono text-slate-400 mt-0.5">BATCH-{row.id}</p>
+          <p className="text-[13px] font-mono text-[13px]late-400 mt-0.5">BATCH-{row.id}</p>
         </div>
       ),
     },
@@ -83,7 +83,7 @@ const BatchesList = () => {
       header: "Lead Mentor",
       sortable: true,
       render: (row) => (
-        <span className="text-slate-800 font-semibold text-xs">{row.trainer}</span>
+        <span className="text-[13px]late-800 font-semibold text-xs">{row.trainer}</span>
       ),
     },
     {
@@ -91,8 +91,8 @@ const BatchesList = () => {
       header: "Schedule & Timing",
       render: (row) => (
         <div className="text-xs space-y-0.5">
-          <p className="font-semibold text-slate-700">{row.days || "Mon, Wed, Fri"}</p>
-          <p className="text-[11px] text-slate-400 font-mono">
+          <p className="font-semibold text-[13px]late-700">{row.days || "Mon, Wed, Fri"}</p>
+          <p className="text-[13px] text-[13px]late-400 font-mono">
             {row.startTime || "10:00 AM"} - {row.endTime || "01:00 PM"}
           </p>
         </div>
@@ -102,9 +102,9 @@ const BatchesList = () => {
       key: "timeline",
       header: "Duration Dates",
       render: (row) => (
-        <div className="text-[11px] font-mono text-slate-600">
+        <div className="text-[13px] font-mono text-[13px]late-600">
           <p>{row.startDate || "N/A"}</p>
-          <p className="text-slate-400">to {row.endDate || "N/A"}</p>
+          <p className="text-[13px]late-400">to {row.endDate || "N/A"}</p>
         </div>
       ),
     },
@@ -118,15 +118,14 @@ const BatchesList = () => {
         const percent = Math.min(100, Math.round((enrolledCount / cap) * 100));
         return (
           <div className="w-28">
-            <div className="flex items-center justify-between text-[11px] font-mono font-bold text-slate-800 mb-1">
+            <div className="flex items-center justify-between text-[13px] font-mono font-bold text-[13px]late-800 mb-1">
               <span>{enrolledCount} / {cap}</span>
-              <span className="text-slate-400">{percent}%</span>
+              <span className="text-[13px]late-400">{percent}%</span>
             </div>
             <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
               <div
-                className={`h-full rounded-full ${
-                  percent >= 90 ? "bg-amber-500" : "bg-blue-600"
-                }`}
+                className={`h-full rounded-full ${percent >= 90 ? "bg-amber-500" : "bg-blue-600"
+                  }`}
                 style={{ width: `${percent}%` }}
               />
             </div>
@@ -148,7 +147,7 @@ const BatchesList = () => {
         <div className="flex items-center justify-end gap-1.5">
           <Link
             to={`/admin/batches/${row.id}`}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             title="Batch Details & Students"
           >
             <Eye size={15} />
@@ -156,7 +155,7 @@ const BatchesList = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Batch"
           >
             <Trash2 size={15} />

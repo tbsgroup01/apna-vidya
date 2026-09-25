@@ -185,30 +185,30 @@ const SyllabusAdmin = () => {
       <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
+            <label className="text-xs font-bold uppercase tracking-wider text-[13px]late-700 block">
               Select Course to Manage Curriculum
             </label>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-[13px]late-400 mt-0.5">
               Choose an active program to organize its learning journey week-by-week.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="relative">
-              <Search size={14} className="absolute left-3 top-2.5 text-slate-400" />
+              <Search size={14} className="absolute left-3 top-2.5 text-[13px]late-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search courses..."
-                className="w-48 sm:w-56 rounded-xl border border-slate-200 pl-8 pr-3 py-1.5 text-xs text-slate-700 focus:border-blue-600 focus:outline-none"
+                className="w-48 sm:w-56 rounded-xl border border-slate-200 pl-8 pr-3 py-1.5 text-xs text-[13px]late-700 focus:border-blue-600 focus:outline-none"
               />
             </div>
 
             <select
               value={selectedCourseId}
               onChange={(e) => setSelectedCourseId(e.target.value)}
-              className="rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-800 focus:border-blue-600 focus:outline-none"
+              className="rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-[13px]late-800 focus:border-blue-600 focus:outline-none"
             >
               {filteredCourses.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -229,20 +229,20 @@ const SyllabusAdmin = () => {
               />
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-bold text-slate-900 text-sm">
+                  <span className="font-bold text-[13px]late-900 text-[13px]m">
                     {course.name}
                   </span>
                   <StatusBadge status={course.status} size="sm" />
-                  <span className="rounded-full bg-blue-100/80 px-2 py-0.5 text-[10px] font-bold text-blue-700">
+                  <span className="rounded-full bg-blue-100/80 px-2 py-0.5 text-[12px] font-bold text-blue-700">
                     {course.category?.name || "Professional"}
                   </span>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-slate-500 mt-1">
+                <div className="flex items-center gap-3 text-xs text-[13px]late-500 mt-1">
                   <span>Duration: {course.duration || "6 Months"}</span>
                   <span>•</span>
                   <span>Fee: ₹{Number(course.fees || 0).toLocaleString()}</span>
                   <span>•</span>
-                  <span className="font-semibold text-slate-700">
+                  <span className="font-semibold text-[13px]late-700">
                     Level: {course.level || "Beginner to Advanced"}
                   </span>
                 </div>
@@ -251,7 +251,7 @@ const SyllabusAdmin = () => {
 
             <div className="flex items-center gap-4 border-t md:border-t-0 md:border-l border-slate-200 pt-3 md:pt-0 md:pl-5 shrink-0">
               <div className="text-center">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                <span className="text-[12px] uppercase font-bold text-[13px]late-400 block">
                   Total Modules
                 </span>
                 <span className="text-base font-extrabold text-blue-600 font-mono">
@@ -259,16 +259,16 @@ const SyllabusAdmin = () => {
                 </span>
               </div>
               <div className="text-center">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">
+                <span className="text-[12px] uppercase font-bold text-[13px]late-400 block">
                   Topics / Lessons
                 </span>
-                <span className="text-base font-extrabold text-slate-800 font-mono">
+                <span className="text-base font-extrabold text-[13px]late-800 font-mono">
                   {totalLessons}
                 </span>
               </div>
               <Link
                 to={`/admin/courses/${course.id}/edit`}
-                className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-white border border-transparent hover:border-slate-200 transition-colors"
+                className="p-2 rounded-xl text-[13px]late-400 hover:text-blue-600 hover:bg-white border border-transparent hover:border-slate-200 transition-colors"
                 title="Edit Course Details"
               >
                 <Edit size={16} />
@@ -293,7 +293,7 @@ const SyllabusAdmin = () => {
             <button
               type="button"
               onClick={() => setShowAddModule(false)}
-              className="text-xs text-slate-400 hover:text-slate-600 cursor-pointer"
+              className="text-xs text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
             >
               Cancel
             </button>
@@ -301,7 +301,7 @@ const SyllabusAdmin = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="sm:col-span-2">
-              <label className="block text-[11px] font-bold text-slate-700 mb-1">
+              <label className="block text-[13px] font-bold text-[13px]late-700 mb-1">
                 Module Title *
               </label>
               <input
@@ -310,11 +310,11 @@ const SyllabusAdmin = () => {
                 value={newModuleTitle}
                 onChange={(e) => setNewModuleTitle(e.target.value)}
                 placeholder="e.g. Module 3: State Management & Redux Toolkit"
-                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 focus:border-blue-600 focus:outline-none"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-[13px]late-800 focus:border-blue-600 focus:outline-none"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-bold text-slate-700 mb-1">
+              <label className="block text-[13px] font-bold text-[13px]late-700 mb-1">
                 Duration / Pacing
               </label>
               <input
@@ -322,7 +322,7 @@ const SyllabusAdmin = () => {
                 value={newModuleDuration}
                 onChange={(e) => setNewModuleDuration(e.target.value)}
                 placeholder="e.g. 4 Weeks"
-                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 focus:border-blue-600 focus:outline-none"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-[13px]late-800 focus:border-blue-600 focus:outline-none"
               />
             </div>
           </div>
@@ -331,7 +331,7 @@ const SyllabusAdmin = () => {
             <button
               type="button"
               onClick={() => setShowAddModule(false)}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
+              className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50 cursor-pointer"
             >
               Cancel
             </button>
@@ -364,12 +364,12 @@ const SyllabusAdmin = () => {
                     {modIdx + 1}
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">
+                    <h4 className="text-[13px]m font-bold text-[13px]late-900">
                       {mod.title}
                     </h4>
-                    <div className="flex items-center gap-3 text-[11px] text-slate-500 mt-0.5">
+                    <div className="flex items-center gap-3 text-[13px] text-[13px]late-500 mt-0.5">
                       <span className="flex items-center gap-1 font-medium">
-                        <Clock size={12} className="text-slate-400" />
+                        <Clock size={12} className="text-[13px]late-400" />
                         {mod.duration || "4 Weeks"}
                       </span>
                       <span>•</span>
@@ -386,11 +386,10 @@ const SyllabusAdmin = () => {
                     onClick={() =>
                       setActiveLessonModId(activeLessonModId === mod.id ? null : mod.id)
                     }
-                    className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${
-                      activeLessonModId === mod.id
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                    }`}
+                    className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${activeLessonModId === mod.id
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "border-slate-200 bg-white text-[13px]late-700 hover:bg-slate-50"
+                      }`}
                   >
                     <Plus size={13} />
                     <span>Add Lesson / Topic</span>
@@ -399,7 +398,7 @@ const SyllabusAdmin = () => {
                   <button
                     type="button"
                     onClick={() => handleDeleteModule(mod.id)}
-                    className="rounded-xl p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                    className="rounded-xl p-2 text-[13px]late-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                     title="Delete Module"
                   >
                     <Trash2 size={15} />
@@ -416,7 +415,7 @@ const SyllabusAdmin = () => {
                     <button
                       type="button"
                       onClick={() => setActiveLessonModId(null)}
-                      className="text-xs text-slate-400 hover:text-slate-600"
+                      className="text-xs text-[13px]late-400 hover:text-[13px]late-600"
                     >
                       Close
                     </button>
@@ -427,14 +426,14 @@ const SyllabusAdmin = () => {
                       placeholder="e.g. Master React Portals, Error Boundaries & Custom Hooks"
                       value={newLessonTitle}
                       onChange={(e) => setNewLessonTitle(e.target.value)}
-                      className="flex-1 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 focus:border-blue-600 focus:outline-none"
+                      className="flex-1 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-[13px]late-800 focus:border-blue-600 focus:outline-none"
                     />
                     <input
                       type="text"
                       placeholder="Duration (e.g. 60 mins)"
                       value={newLessonDuration}
                       onChange={(e) => setNewLessonDuration(e.target.value)}
-                      className="w-full sm:w-36 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 focus:border-blue-600 focus:outline-none"
+                      className="w-full sm:w-36 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-[13px]late-800 focus:border-blue-600 focus:outline-none"
                     />
                     <div className="flex gap-2 w-full sm:w-auto shrink-0">
                       <button
@@ -448,7 +447,7 @@ const SyllabusAdmin = () => {
                       <button
                         type="button"
                         onClick={() => setActiveLessonModId(null)}
-                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-500 cursor-pointer"
+                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-[13px]late-500 cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -465,17 +464,17 @@ const SyllabusAdmin = () => {
                       className="flex items-center justify-between py-2.5 px-3 text-xs hover:bg-slate-50/80 rounded-xl transition-colors"
                     >
                       <div className="flex items-center gap-2.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-md bg-slate-100 font-mono text-[10px] text-slate-500 font-bold">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-md bg-slate-100 font-mono text-[12px] text-[13px]late-500 font-bold">
                           {lIdx + 1}
                         </span>
-                        <span className="font-medium text-slate-800">{les.title}</span>
+                        <span className="font-medium text-[13px]late-800">{les.title}</span>
                       </div>
-                      <div className="flex items-center gap-3 text-[11px] text-slate-400 shrink-0">
+                      <div className="flex items-center gap-3 text-[13px] text-[13px]late-400 shrink-0">
                         <span className="font-mono">{les.duration}</span>
                         <button
                           type="button"
                           onClick={() => handleDeleteLesson(les.id)}
-                          className="text-slate-300 hover:text-rose-600 transition-colors cursor-pointer"
+                          className="text-[13px]late-300 hover:text-rose-600 transition-colors cursor-pointer"
                           title="Delete Lesson"
                         >
                           <Trash2 size={13} />
@@ -484,7 +483,7 @@ const SyllabusAdmin = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-xs text-slate-400 italic py-2 px-3">
+                  <p className="text-xs text-[13px]late-400 italic py-2 px-3">
                     No lesson topics defined yet. Click &ldquo;Add Lesson / Topic&rdquo; to build this module.
                   </p>
                 )}
@@ -494,11 +493,11 @@ const SyllabusAdmin = () => {
         </div>
       ) : (
         <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-slate-200 p-8 shadow-xs">
-          <BookOpen size={40} className="mx-auto text-slate-300 mb-3" />
-          <h3 className="text-sm font-bold text-slate-900">
+          <BookOpen size={40} className="mx-auto text-[13px]late-300 mb-3" />
+          <h3 className="text-[13px]m font-bold text-[13px]late-900">
             No Modules Created For This Course
           </h3>
-          <p className="text-xs text-slate-400 max-w-md mx-auto mt-1 mb-5">
+          <p className="text-xs text-[13px]late-400 max-w-md mx-auto mt-1 mb-5">
             Break down this program into weekly modules to give learners a clear curriculum roadmap.
           </p>
           <button

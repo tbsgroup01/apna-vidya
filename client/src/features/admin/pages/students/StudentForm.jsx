@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
-import { ArrowLeft, Save, User, BookOpen, CreditCard, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, Save, User, BookOpen, CreditCard, Sparkles, Loader2, Hash } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import { FormInput, FormSelect, FormTextarea, ImageUploadPreview } from "../../components/FormControls";
 import api from "../../../../services/api";
@@ -31,6 +31,7 @@ const StudentForm = () => {
     paidFees: 16000,
     status: "Active",
     notes: "",
+    registrationNumber: "",
     profileImage:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
   });
@@ -56,7 +57,7 @@ const StudentForm = () => {
             setFormData((prev) => ({ ...prev, batchId: batchData[0].id }));
           }
         }
-      } catch {}
+      } catch { }
     };
     fetchOptions();
   }, []);
@@ -83,6 +84,9 @@ const StudentForm = () => {
               paidFees: s.paidFees || 0,
               status: s.status || "Active",
               notes: s.notes || "",
+              registrationNumber:
+                s.registrationNumber ||
+                `AV-STU-${String(s.id).padStart(4, "0")}`,
               profileImage:
                 s.profileImage ||
                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
@@ -126,7 +130,7 @@ const StudentForm = () => {
   if (loading) {
     return (
       <div className="flex h-64 items-center justify-center rounded-2xl border border-slate-200 bg-white">
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+        <div className="flex items-center gap-2 text-xs font-semibold text-[13px]late-500">
           <Loader2 size={18} className="animate-spin text-blue-600" />
           <span>Loading student profile form...</span>
         </div>
@@ -140,7 +144,7 @@ const StudentForm = () => {
         title={isEdit ? `Edit Student: ${formData.name}` : "Enroll New Student"}
         description={
           isEdit
-            ? `Update student records, fee status, and contact information for #${id}.`
+            ? `Update student records, fee status, and contact information for ${formData.registrationNumber || `#${id}`}.`
             : "Complete learner onboarding form with batch assignment and fee ledger."
         }
         breadcrumbs={[
@@ -150,7 +154,7 @@ const StudentForm = () => {
         actions={
           <Link
             to="/admin/students"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
           >
             <ArrowLeft size={15} />
             <span>Back to Directory</span>
@@ -160,9 +164,22 @@ const StudentForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-5 text-slate-900 font-bold text-sm">
-            <User size={18} className="text-blue-600" />
-            <span>Personal Information</span>
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+            <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
+              <User size={18} className="text-blue-600" />
+              <span>Personal Information</span>
+            </div>
+            {isEdit ? (
+              <span className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200/90 px-3 py-1 font-mono text-xs font-bold text-violet-700 shadow-2xs">
+                <Hash size={13} className="text-violet-500" />
+                <span>{formData.registrationNumber || `AV-STU-${String(id).padStart(4, "0")}`}</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2.5 py-1 text-[13px] font-semibold text-[13px]late-600">
+                <Sparkles size={12} className="text-blue-500" />
+                <span>Auto-generated Reg. Number (e.g. AV-STU-0004)</span>
+              </span>
+            )}
           </div>
 
           <div className="space-y-4">
@@ -230,20 +247,20 @@ const StudentForm = () => {
         </div>
 
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-5 text-slate-900 font-bold text-sm">
+          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-5 text-[13px]late-900 font-bold text-[13px]m">
             <BookOpen size={18} className="text-blue-600" />
             <span>Academic Program & Batch Assignment</span>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                 Enrolled Course
               </label>
               <select
                 value={formData.courseId}
                 onChange={(e) => handleChange("courseId", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-slate-800 bg-white"
+                className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-[13px]late-800 bg-white"
                 required
               >
                 <option value="">Select Course Program...</option>
@@ -256,13 +273,13 @@ const StudentForm = () => {
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                 Assigned Batch
               </label>
               <select
                 value={formData.batchId}
                 onChange={(e) => handleChange("batchId", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-slate-800 bg-white"
+                className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-[13px]late-800 bg-white"
               >
                 <option value="">Select Batch (Optional)...</option>
                 {batches.map((b) => (
@@ -295,7 +312,7 @@ const StudentForm = () => {
         </div>
 
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-5 text-slate-900 font-bold text-sm">
+          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 mb-5 text-[13px]late-900 font-bold text-[13px]m">
             <CreditCard size={18} className="text-blue-600" />
             <span>Fee Structure & Payment</span>
           </div>
@@ -319,7 +336,7 @@ const StudentForm = () => {
         <div className="flex items-center justify-end gap-3 pt-2">
           <Link
             to="/admin/students"
-            className="rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
           >
             Cancel
           </Link>

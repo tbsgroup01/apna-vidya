@@ -50,7 +50,7 @@ const HowItWorks = () => {
               Transforms Your Career
             </span>
           </h2>
-          <p className="mt-3 text-sm text-slate-400 sm:text-base">
+          <p className="mt-3 text-[13px]m text-[13px]late-400 sm:text-base">
             From your very first lesson to receiving your job offer letter, our
             structured roadmap keeps you focused and motivated.
           </p>
@@ -68,14 +68,14 @@ const HowItWorks = () => {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-blue-400 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                     <Icon size={22} strokeWidth={2} />
                   </div>
-                  <span className="font-mono text-2xl font-black text-slate-700 transition-colors group-hover:text-blue-400">
+                  <span className="font-mono text-2xl font-black text-[13px]late-700 transition-colors group-hover:text-blue-400">
                     {item.step}
                   </span>
                 </div>
                 <h3 className="mt-5 text-base font-bold text-white">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                <p className="mt-2 text-xs leading-relaxed text-[13px]late-400">
                   {item.description}
                 </p>
               </div>
@@ -86,7 +86,7 @@ const HowItWorks = () => {
         <div className="mt-12 text-center">
           <Link
             to="/syllabus"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-700"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-700"
           >
             <span>Explore Complete Curriculum Roadmaps</span>
             <ArrowRight size={17} />

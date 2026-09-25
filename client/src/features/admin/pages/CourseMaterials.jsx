@@ -119,8 +119,8 @@ const CourseMaterials = () => {
             <FileText size={18} />
           </div>
           <div>
-            <p className="font-bold text-slate-900">{row.title}</p>
-            <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+            <p className="font-bold text-[13px]late-900">{row.title}</p>
+            <div className="flex items-center gap-2 text-[13px] text-[13px]late-400 mt-0.5">
               <span>{row.fileType || "PDF Document"}</span>
               <span>•</span>
               <span className="font-mono">{row.fileSize || "1.5 MB"}</span>
@@ -134,14 +134,14 @@ const CourseMaterials = () => {
       header: "Course",
       sortable: true,
       render: (row) => (
-        <span className="font-semibold text-slate-800">{row.course?.name || "General Program"}</span>
+        <span className="font-semibold text-[13px]late-800">{row.course?.name || "General Program"}</span>
       ),
     },
     {
       key: "visibility",
       header: "Visibility",
       render: (row) => (
-        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-700">
+        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-[13px]late-700">
           {row.visibility || "Enrolled Students"}
         </span>
       ),
@@ -151,8 +151,8 @@ const CourseMaterials = () => {
       header: "Uploaded By",
       render: (row) => (
         <div>
-          <p className="text-slate-700 font-medium">{row.uploadedBy || "Faculty Mentor"}</p>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[13px]late-700 font-medium">{row.uploadedBy || "Faculty Mentor"}</p>
+          <p className="text-[13px] text-[13px]late-400">
             {row.createdAt ? new Date(row.createdAt).toISOString().split("T")[0] : "Recent"}
           </p>
         </div>
@@ -174,7 +174,7 @@ const CourseMaterials = () => {
             href={row.file || "#"}
             target="_blank"
             rel="noreferrer"
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition-colors"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-slate-100 hover:text-[13px]late-800 transition-colors"
             title="Download / View Asset"
           >
             <Download size={15} />
@@ -182,7 +182,7 @@ const CourseMaterials = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Asset"
           >
             <Trash2 size={15} />
@@ -233,16 +233,16 @@ const CourseMaterials = () => {
       {uploadModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-slate-100">
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-[13px]late-900">
               Upload New Course Resource
             </h3>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-[13px]late-500">
               Select target course and configure access permissions.
             </p>
 
             <form onSubmit={handleUploadSubmit} className="mt-4 space-y-3.5 text-xs">
               <div>
-                <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                   Material Title *
                 </label>
                 <input
@@ -256,7 +256,7 @@ const CourseMaterials = () => {
               </div>
 
               <div>
-                <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                   Associated Course *
                 </label>
                 <select
@@ -274,7 +274,7 @@ const CourseMaterials = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                  <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                     Resource Type
                   </label>
                   <select
@@ -289,7 +289,7 @@ const CourseMaterials = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                  <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                     Visibility
                   </label>
                   <select
@@ -304,7 +304,7 @@ const CourseMaterials = () => {
               </div>
 
               <div>
-                <label className="mb-1 block font-semibold uppercase tracking-wider text-slate-700 text-[11px]">
+                <label className="mb-1 block font-semibold uppercase tracking-wider text-[13px]late-700 text-[13px]">
                   Attach File
                 </label>
                 <input
@@ -312,14 +312,14 @@ const CourseMaterials = () => {
                   onChange={(e) => setSelectedFile(e.target.files[0])}
                   className="w-full rounded-xl border border-slate-200 p-2 text-xs bg-white focus:outline-none"
                 />
-                <p className="mt-1 text-[10px] text-slate-400">PDF, ZIP, IPYNB, MP4 up to 50MB</p>
+                <p className="mt-1 text-[12px] text-[13px]late-400">PDF, ZIP, IPYNB, MP4 up to 50MB</p>
               </div>
 
               <div className="mt-6 flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setUploadModalOpen(false)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>

@@ -69,11 +69,11 @@ const WhyChooseUs = () => {
             <Sparkles size={14} />
             The Apna Vidya Advantage
           </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
             Why Thousands of Learners{" "}
             <span className="text-blue-600">Choose Us</span>
           </h2>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             We combine high-touch live mentorship, practical real-world
             curriculum, and outcome-oriented placement support to give you the
             best learning experience.
@@ -92,15 +92,15 @@ const WhyChooseUs = () => {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                     <Icon size={24} strokeWidth={2} />
                   </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600">
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-[13px] font-semibold text-[13px]late-600 group-hover:bg-blue-50 group-hover:text-blue-600">
                     {feature.badge}
                   </span>
                 </div>
 
-                <h3 className="mt-5 text-lg font-bold text-slate-900">
+                <h3 className="mt-5 text-lg font-bold text-[13px]late-900">
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                <p className="mt-2 text-[13px]m leading-relaxed text-[13px]late-500">
                   {feature.description}
                 </p>
               </div>
@@ -112,7 +112,7 @@ const WhyChooseUs = () => {
           <button
             type="button"
             onClick={() => openDemoModal()}
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 cursor-pointer active:scale-95"
           >
             <span>Experience It In A Free Demo Class</span>
             <ArrowRight size={17} />

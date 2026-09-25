@@ -126,11 +126,11 @@ const CoursesList = () => {
           <div className="min-w-0">
             <Link
               to={`/admin/courses/${row.id}`}
-              className="font-bold text-slate-900 hover:text-blue-600 transition-colors block truncate max-w-xs"
+              className="font-bold text-[13px]late-900 hover:text-blue-600 transition-colors block truncate max-w-xs"
             >
               {row.name}
             </Link>
-            <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+            <div className="flex items-center gap-2 text-[13px] text-[13px]late-400 mt-0.5">
               <span>{row.category?.name || "General"}</span>
               <span>•</span>
               <span className="font-mono">{row.duration || "6 Months"}</span>
@@ -144,7 +144,7 @@ const CoursesList = () => {
       header: "Program Fee",
       sortable: true,
       render: (row) => (
-        <span className="font-mono font-bold text-slate-900">
+        <span className="font-mono font-bold text-[13px]late-900">
           ₹{(row.fees || 0).toLocaleString()}
         </span>
       ),
@@ -162,7 +162,7 @@ const CoursesList = () => {
       key: "batches",
       header: "Batches",
       render: (row) => (
-        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">
+        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-[13px]late-700">
           {row.batches?.length || 0} Active
         </span>
       ),
@@ -181,14 +181,14 @@ const CoursesList = () => {
         <div className="flex items-center justify-end gap-1.5">
           <Link
             to={`/admin/courses/${row.id}`}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             title="Manage Curriculum & Batches"
           >
             <Eye size={15} />
           </Link>
           <Link
             to={`/admin/courses/${row.id}/edit`}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-slate-100 hover:text-[13px]late-700 transition-colors"
             title="Edit Program Details"
           >
             <Edit size={15} />
@@ -196,7 +196,7 @@ const CoursesList = () => {
           <button
             type="button"
             onClick={() => handleDuplicate(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-indigo-50 hover:text-indigo-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-indigo-50 hover:text-indigo-600 transition-colors cursor-pointer"
             title="Duplicate Program"
           >
             <Copy size={15} />
@@ -204,7 +204,7 @@ const CoursesList = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Course"
           >
             <Trash2 size={15} />
@@ -224,7 +224,7 @@ const CoursesList = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/courses/categories"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
             >
               <Tags size={15} />
               <span>Categories</span>
@@ -263,7 +263,7 @@ const CoursesList = () => {
 
       {loading ? (
         <div className="flex h-64 items-center justify-center rounded-2xl border border-slate-200 bg-white">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[13px]late-500">
             <Loader2 size={18} className="animate-spin text-blue-600" />
             <span>Loading courses from catalog...</span>
           </div>

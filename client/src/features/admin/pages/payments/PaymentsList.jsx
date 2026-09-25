@@ -32,7 +32,7 @@ const PaymentsList = () => {
           >
             {row.id}
           </Link>
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[13px] font-mono text-[13px]late-400">
             {row.invoiceId}
           </span>
         </div>
@@ -46,11 +46,11 @@ const PaymentsList = () => {
         <div>
           <Link
             to={`/admin/students/${row.studentId}`}
-            className="font-bold text-slate-900 hover:text-blue-600 block"
+            className="font-bold text-[13px]late-900 hover:text-blue-600 block"
           >
             {row.studentName}
           </Link>
-          <p className="text-[11px] text-slate-400 truncate max-w-[150px]">
+          <p className="text-[13px] text-[13px]late-400 truncate max-w-[150px]">
             {row.studentEmail}
           </p>
         </div>
@@ -61,7 +61,7 @@ const PaymentsList = () => {
       header: "Course Program",
       sortable: true,
       render: (row) => (
-        <span className="font-semibold text-slate-800 text-xs">{row.course}</span>
+        <span className="font-semibold text-[13px]late-800 text-xs">{row.course}</span>
       ),
     },
     {
@@ -69,7 +69,7 @@ const PaymentsList = () => {
       header: "Amount Paid",
       sortable: true,
       render: (row) => (
-        <span className="font-mono font-bold text-slate-900 text-xs">
+        <span className="font-mono font-bold text-[13px]late-900 text-xs">
           ₹{row.amount.toLocaleString()}
         </span>
       ),
@@ -79,7 +79,7 @@ const PaymentsList = () => {
       header: "Payment Method",
       sortable: true,
       render: (row) => (
-        <span className="text-slate-600 text-xs">{row.method}</span>
+        <span className="text-[13px]late-600 text-xs">{row.method}</span>
       ),
     },
     {
@@ -87,7 +87,7 @@ const PaymentsList = () => {
       header: "Date & Time",
       sortable: true,
       render: (row) => (
-        <span className="text-slate-400 font-mono text-[11px]">
+        <span className="text-[13px]late-400 font-mono text-[13px]">
           {row.date}
         </span>
       ),
@@ -105,7 +105,7 @@ const PaymentsList = () => {
       render: (row) => (
         <Link
           to={`/admin/payments/${row.id}`}
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1 text-[13px] font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
         >
           <Eye size={12} />
           <span>Receipt</span>
@@ -144,7 +144,7 @@ const PaymentsList = () => {
           <button
             type="button"
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors cursor-pointer"
           >
             <Download size={15} />
             <span>Export Transactions</span>

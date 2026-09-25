@@ -82,6 +82,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateProfile = async (profileData) => {
+    try {
+      const response = await api.put("/auth/profile", profileData);
+      if (response.data.success) {
+        setUser(response.data.data.user);
+        return {
+          success: true,
+          user: response.data.data.user,
+          message: response.data.message || "Profile updated successfully.",
+        };
+      }
+      return {
+        success: false,
+        message: response.data.message || "Failed to update profile.",
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: err.response?.data?.message || "Failed to update profile.",
+      };
+    }
+  };
+
   const changePassword = async (currentPassword, newPassword, confirmPassword) => {
     try {
       const response = await api.post("/auth/change-password", {
@@ -111,6 +134,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         refreshUser,
+        updateProfile,
         changePassword,
       }}
     >

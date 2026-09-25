@@ -36,7 +36,7 @@ const HolidayEmailForm = () => {
         actions={
           <Link
             to="/admin/holiday-emails"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
           >
             <ArrowLeft size={15} />
             <span>Back</span>
@@ -45,7 +45,7 @@ const HolidayEmailForm = () => {
       />
 
       <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-        <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+        <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
           <Mail size={18} className="text-blue-600" />
           <span>Email Campaign Details</span>
         </div>
@@ -98,7 +98,7 @@ const HolidayEmailForm = () => {
           <button
             type="button"
             onClick={() => handleSubmit("draft")}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 cursor-pointer"
           >
             <Save size={14} />
             <span>Save Draft</span>

@@ -126,7 +126,7 @@ const DataTable = ({
             <div className="relative flex-1 max-w-sm">
               <Search
                 size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400"
               />
               <input
                 type="text"
@@ -136,13 +136,13 @@ const DataTable = ({
                   setSearch(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2 pl-9 pr-8 text-xs text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2 pl-9 pr-8 text-xs text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
               />
               {search && (
                 <button
                   type="button"
                   onClick={() => setSearch("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
                 >
                   <X size={14} />
                 </button>
@@ -159,9 +159,9 @@ const DataTable = ({
                   typeof activeFilter === "object"
                     ? activeFilter.value === tabValue
                     : String(activeFilter).toLowerCase() ===
-                        String(tabValue).toLowerCase() ||
-                      String(activeFilter).toLowerCase() ===
-                        String(tabLabel).toLowerCase();
+                    String(tabValue).toLowerCase() ||
+                    String(activeFilter).toLowerCase() ===
+                    String(tabLabel).toLowerCase();
 
                 return (
                   <button
@@ -175,11 +175,10 @@ const DataTable = ({
                       setActiveFilter(tabValue);
                       setCurrentPage(1);
                     }}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
-                      isSelected
-                        ? "bg-blue-600 text-white shadow-2xs"
-                        : "bg-slate-100 text-slate-600 hover:bg-slate-200/80"
-                    }`}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${isSelected
+                      ? "bg-blue-600 text-white shadow-2xs"
+                      : "bg-slate-100 text-[13px]late-600 hover:bg-slate-200/80"
+                      }`}
                   >
                     {tabLabel}
                   </button>
@@ -193,7 +192,7 @@ const DataTable = ({
       {selectable && currentSelectedIds.length > 0 && (
         <div className="flex items-center justify-between bg-blue-50/90 px-4 py-2.5 border-b border-blue-100">
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-blue-600 text-[11px] font-bold text-white">
+            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-blue-600 text-[13px] font-bold text-white">
               {currentSelectedIds.length}
             </span>
             <span className="text-xs font-semibold text-blue-900">
@@ -223,7 +222,7 @@ const DataTable = ({
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-100 bg-slate-50/75 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+            <tr className="border-b border-slate-100 bg-slate-50/75 text-[13px] font-bold uppercase tracking-wider text-[13px]late-500">
               {selectable && (
                 <th className="px-4 py-3.5 w-10 text-center">
                   <input
@@ -240,27 +239,24 @@ const DataTable = ({
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`px-4 py-3.5 whitespace-nowrap ${
-                    col.sortable ? "cursor-pointer select-none hover:text-slate-800" : ""
-                  } ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
+                  className={`px-4 py-3.5 whitespace-nowrap ${col.sortable ? "cursor-pointer select-none hover:text-[13px]late-800" : ""
+                    } ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
                   onClick={() => col.sortable && handleSort(col.key)}
                 >
                   <div
-                    className={`inline-flex items-center gap-1.5 ${
-                      col.align === "right"
-                        ? "justify-end w-full"
-                        : col.align === "center"
+                    className={`inline-flex items-center gap-1.5 ${col.align === "right"
+                      ? "justify-end w-full"
+                      : col.align === "center"
                         ? "justify-center w-full"
                         : ""
-                    }`}
+                      }`}
                   >
                     <span>{col.header}</span>
                     {col.sortable && (
                       <ArrowUpDown
                         size={12}
-                        className={`text-slate-400 ${
-                          sortKey === col.key ? "text-blue-600" : ""
-                        }`}
+                        className={`text-[13px]late-400 ${sortKey === col.key ? "text-blue-600" : ""
+                          }`}
                       />
                     )}
                   </div>
@@ -275,9 +271,8 @@ const DataTable = ({
                 <tr
                   key={row.id || idx}
                   onClick={() => onRowClick && onRowClick(row)}
-                  className={`transition-colors hover:bg-slate-50/70 ${
-                    onRowClick ? "cursor-pointer" : ""
-                  }`}
+                  className={`transition-colors hover:bg-slate-50/70 ${onRowClick ? "cursor-pointer" : ""
+                    }`}
                 >
                   {selectable && (
                     <td
@@ -295,13 +290,12 @@ const DataTable = ({
                   {columns.map((col) => (
                     <td
                       key={col.key}
-                      className={`px-4 py-3.5 ${
-                        col.align === "right"
-                          ? "text-right"
-                          : col.align === "center"
+                      className={`px-4 py-3.5 ${col.align === "right"
+                        ? "text-right"
+                        : col.align === "center"
                           ? "text-center"
                           : "text-left"
-                      }`}
+                        }`}
                     >
                       {col.render ? col.render(row) : row[col.key]}
                     </td>
@@ -320,19 +314,19 @@ const DataTable = ({
       </div>
 
       {filteredData.length > 0 && (
-        <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between border-t border-slate-100 bg-white text-xs text-slate-500">
+        <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between border-t border-slate-100 bg-white text-xs text-[13px]late-500">
           <div className="flex flex-wrap items-center gap-4">
             <div>
               Showing{" "}
-              <span className="font-semibold text-slate-800">
+              <span className="font-semibold text-[13px]late-800">
                 {(currentPage - 1) * currentPageSize + 1}
               </span>{" "}
               to{" "}
-              <span className="font-semibold text-slate-800">
+              <span className="font-semibold text-[13px]late-800">
                 {Math.min(currentPage * currentPageSize, filteredData.length)}
               </span>{" "}
               of{" "}
-              <span className="font-semibold text-slate-800">
+              <span className="font-semibold text-[13px]late-800">
                 {filteredData.length}
               </span>{" "}
               results
@@ -347,7 +341,7 @@ const DataTable = ({
                     setCurrentPageSize(Number(e.target.value));
                     setCurrentPage(1);
                   }}
-                  className="rounded-lg border border-slate-200 bg-slate-50/50 px-2 py-1 text-xs font-semibold text-slate-700 focus:border-blue-600 focus:bg-white focus:outline-none transition-all cursor-pointer"
+                  className="rounded-lg border border-slate-200 bg-slate-50/50 px-2 py-1 text-xs font-semibold text-[13px]late-700 focus:border-blue-600 focus:bg-white focus:outline-none transition-all cursor-pointer"
                 >
                   {pageSizeOptions.map((opt) => (
                     <option key={opt} value={opt}>
@@ -378,11 +372,10 @@ const DataTable = ({
                     key={page}
                     type="button"
                     onClick={() => setCurrentPage(page)}
-                    className={`h-7 w-7 rounded-lg font-bold text-xs transition-colors cursor-pointer ${
-                      currentPage === page
-                        ? "bg-blue-600 text-white"
-                        : "hover:bg-slate-100 text-slate-700"
-                    }`}
+                    className={`h-7 w-7 rounded-lg font-bold text-xs transition-colors cursor-pointer ${currentPage === page
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-slate-100 text-[13px]late-700"
+                      }`}
                   >
                     {page}
                   </button>

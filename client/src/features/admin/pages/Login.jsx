@@ -117,7 +117,7 @@ const Login = () => {
               <span className="text-xl font-extrabold tracking-tight">
                 Apna Vidya
               </span>
-              <span className="block text-[11px] font-medium text-blue-300">
+              <span className="block text-[13px] font-medium text-blue-300">
                 Learn • Grow • Succeed
               </span>
             </div>
@@ -132,13 +132,13 @@ const Login = () => {
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight leading-tight sm:text-4xl">
             Empowering Learners & Educators Across India
           </h2>
-          <p className="mt-3 text-sm text-slate-300 leading-relaxed">
+          <p className="mt-3 text-[13px]m text-[13px]late-300 leading-relaxed">
             One single login gateway for enrolled students to access their live
             cohorts, curriculum, and certificates — and for faculty & staff to
             manage admissions, batches, and operations.
           </p>
 
-          <div className="mt-8 space-y-3 text-xs font-medium text-slate-200">
+          <div className="mt-8 space-y-3 text-xs font-medium text-[13px]late-200">
             <div className="flex items-center gap-2.5">
               <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
               <span>Learners: Live classes, curriculum notes, fees & ISO certificates</span>
@@ -154,7 +154,7 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="relative text-xs text-slate-400 flex items-center justify-between">
+        <div className="relative text-xs text-[13px]late-400 flex items-center justify-between">
           <span>© 2026 Apna Vidya Edutech Pvt. Ltd.</span>
           <span>Security Protocol TLS 1.3</span>
         </div>
@@ -168,15 +168,15 @@ const Login = () => {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-bold text-white">
                   AV
                 </div>
-                <span className="text-lg font-bold text-slate-900">
+                <span className="text-lg font-bold text-[13px]late-900">
                   Apna Vidya
                 </span>
               </Link>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-[13px]late-900 sm:text-3xl">
               Welcome back 👋
             </h1>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-[13px]m text-[13px]late-500">
               Sign in to access your student portal or admin workspace.
             </p>
           </div>
@@ -189,13 +189,13 @@ const Login = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
+              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                 Email Address
               </label>
               <div className="relative">
                 <Mail
                   size={16}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400"
                 />
                 <input
                   type="email"
@@ -203,14 +203,14 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@apnavidya.com"
-                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-2xs focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-[13px]m text-[13px]late-800 placeholder-slate-400 shadow-2xs focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
                   Password
                 </label>
                 <button
@@ -228,7 +228,7 @@ const Login = () => {
               <div className="relative">
                 <Lock
                   size={16}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400"
                 />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -236,12 +236,12 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-10 text-sm text-slate-800 placeholder-slate-400 shadow-2xs focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 shadow-2xs focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600 cursor-pointer"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -251,7 +251,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-98 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-3 text-[13px]m font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-98 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -269,7 +269,7 @@ const Login = () => {
 
           <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-100/70 p-4">
             <div className="flex items-center justify-between mb-2.5">
-              <span className="text-xs font-bold text-slate-700">
+              <span className="text-xs font-bold text-[13px]late-700">
                 One-Click Demo Credentials
               </span>
             </div>
@@ -279,11 +279,11 @@ const Login = () => {
                 onClick={handleFillAdmin}
                 className="flex flex-col items-start rounded-xl border border-slate-200 bg-white p-2.5 text-left hover:border-blue-500 hover:bg-blue-50/50 transition-all cursor-pointer group"
               >
-                <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 group-hover:text-blue-600">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[13px]late-800 group-hover:text-blue-600">
                   <ShieldCheck size={14} className="text-blue-600" />
                   <span>Super Admin</span>
                 </div>
-                <span className="text-[10px] text-slate-500 mt-1 font-mono">admin@apnavidya.com</span>
+                <span className="text-[12px] text-[13px]late-500 mt-1 font-mono">admin@apnavidya.com</span>
                 <span className="text-[9px] font-bold text-blue-600 mt-1">Admin Dashboard →</span>
               </button>
 
@@ -292,11 +292,11 @@ const Login = () => {
                 onClick={handleFillStudent}
                 className="flex flex-col items-start rounded-xl border border-slate-200 bg-white p-2.5 text-left hover:border-emerald-500 hover:bg-emerald-50/50 transition-all cursor-pointer group"
               >
-                <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 group-hover:text-emerald-600">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[13px]late-800 group-hover:text-emerald-600">
                   <GraduationCap size={14} className="text-emerald-600" />
                   <span>Student Learner</span>
                 </div>
-                <span className="text-[10px] text-slate-500 mt-1 font-mono">student@apnavidya.com</span>
+                <span className="text-[12px] text-[13px]late-500 mt-1 font-mono">student@apnavidya.com</span>
                 <span className="text-[9px] font-bold text-emerald-600 mt-1">Student Portal →</span>
               </button> */}
             </div>
@@ -308,13 +308,13 @@ const Login = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl border border-slate-200">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-base font-bold text-[13px]late-900">
                 Reset Account Password
               </h3>
               <button
                 type="button"
                 onClick={() => setForgotModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-slate-600 rounded-lg"
+                className="p-1 text-[13px]late-400 hover:text-[13px]late-600 rounded-lg"
               >
                 <X size={18} />
               </button>
@@ -335,12 +335,12 @@ const Login = () => {
               </div>
             ) : (
               <form onSubmit={handleForgotPassword} className="mt-4 space-y-4">
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[13px]late-500">
                   Enter your registered account email. A secure reset link will
                   be dispatched.
                 </p>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[13px]late-700 block mb-1">
                     Email Address
                   </label>
                   <input
@@ -348,7 +348,7 @@ const Login = () => {
                     required
                     value={forgotEmail}
                     onChange={(e) => setForgotEmail(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-600"
+                    className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-[13px]late-800 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-600"
                     placeholder="name@apnavidya.com"
                   />
                 </div>
@@ -357,7 +357,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setForgotModalOpen(false)}
-                    className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                    className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-600 hover:bg-slate-50"
                   >
                     Cancel
                   </button>

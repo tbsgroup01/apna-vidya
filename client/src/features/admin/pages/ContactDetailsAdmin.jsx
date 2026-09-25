@@ -54,7 +54,7 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         <form onSubmit={handleSubmit} className="space-y-6 lg:col-span-7">
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <PhoneCall size={18} className="text-blue-600" />
               <span>Helpline & Communication Channels</span>
             </div>
@@ -118,7 +118,7 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
           </div>
 
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <Share2 size={18} className="text-indigo-600" />
               <span>Official Social Media Profiles</span>
             </div>
@@ -159,49 +159,49 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
         </form>
 
         <div className="lg:col-span-5 space-y-4">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <p className="text-xs font-bold uppercase tracking-wider text-[13px]late-400">
             Live Website Preview Card
           </p>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-[13px]m">
                 AV
               </div>
               <div>
-                <h4 className="font-bold text-slate-900 text-sm">Apna Vidya Contact</h4>
-                <p className="text-[11px] text-slate-400">{data.workingHours}</p>
+                <h4 className="font-bold text-[13px]late-900 text-[13px]m">Apna Vidya Contact</h4>
+                <p className="text-[13px] text-[13px]late-400">{data.workingHours}</p>
               </div>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-600 border-t border-slate-100 pt-4">
+            <div className="space-y-3 text-xs text-[13px]late-600 border-t border-slate-100 pt-4">
               <div className="flex items-center gap-3">
                 <Phone size={15} className="text-blue-600 shrink-0" />
-                <span className="font-mono font-bold text-slate-900">{data.phone}</span>
+                <span className="font-mono font-bold text-[13px]late-900">{data.phone}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={15} className="text-blue-600 shrink-0" />
-                <span className="text-slate-800 truncate">{data.email}</span>
+                <span className="text-[13px]late-800 truncate">{data.email}</span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={15} className="text-blue-600 shrink-0 mt-0.5" />
-                <span className="text-slate-700 leading-snug">{data.address}</span>
+                <span className="text-[13px]late-700 leading-snug">{data.address}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Clock size={15} className="text-blue-600 shrink-0" />
-                <span className="text-slate-700">{data.workingHours}</span>
+                <span className="text-[13px]late-700">{data.workingHours}</span>
               </div>
             </div>
 
             <div className="border-t border-slate-100 pt-3">
-              <p className="text-[11px] font-bold text-slate-400 uppercase mb-2">
+              <p className="text-[13px] font-bold text-[13px]late-400 uppercase mb-2">
                 Connected Social Handles
               </p>
-              <div className="flex flex-wrap gap-2 text-[11px]">
-                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-slate-700">Facebook</span>
-                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-slate-700">Instagram</span>
-                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-slate-700">LinkedIn</span>
-                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-slate-700">YouTube</span>
+              <div className="flex flex-wrap gap-2 text-[13px]">
+                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[13px]late-700">Facebook</span>
+                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[13px]late-700">Instagram</span>
+                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[13px]late-700">LinkedIn</span>
+                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[13px]late-700">YouTube</span>
               </div>
             </div>
           </div>

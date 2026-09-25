@@ -20,13 +20,13 @@ const DemoCTA = () => {
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Experience Apna Vidya Live Before Enrolling
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-blue-100 sm:text-base">
+            <p className="mt-3 text-[13px]m leading-relaxed text-blue-100 sm:text-base">
               Attend a live class, interact with senior educators, experience
               our interactive coding platform, and get all your career doubts
               answered with no financial commitment.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-4 text-xs font-semibold text-blue-100 sm:text-sm">
+            <div className="mt-6 flex flex-wrap gap-4 text-xs font-semibold text-blue-100 sm:text-[13px]m">
               <div className="flex items-center gap-2">
                 <CheckCircle2 size={18} className="text-amber-300" />
                 <span>Zero Cost Trial</span>

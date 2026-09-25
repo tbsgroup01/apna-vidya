@@ -34,10 +34,10 @@ const DemoClass = () => {
             <PlayCircle size={15} />
             100% Free Live Trial
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[13px]late-900 sm:text-5xl">
             Book a Free <span className="text-blue-600">Demo Class</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Experience our interactive live classroom, code directly with senior
             mentors, and ask questions before deciding to enroll.
           </p>
@@ -46,7 +46,7 @@ const DemoClass = () => {
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5 space-y-6">
             <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-xl font-bold text-[13px]late-900">
                 What to Expect in Your Demo Class
               </h2>
               <div className="mt-6 space-y-4">
@@ -55,10 +55,10 @@ const DemoClass = () => {
                     <Video size={20} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-[13px]m font-bold text-[13px]late-900">
                       Live 1-on-1 Interactive Coding
                     </h3>
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-[13px]late-500">
                       Build a micro-project live with a senior developer who
                       explains every line of code.
                     </p>
@@ -70,10 +70,10 @@ const DemoClass = () => {
                     <Users size={20} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-[13px]m font-bold text-[13px]late-900">
                       Personal Career Guidance
                     </h3>
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-[13px]late-500">
                       Discuss your background, college year, or current role to
                       craft an ideal roadmap.
                     </p>
@@ -85,10 +85,10 @@ const DemoClass = () => {
                     <ShieldCheck size={20} />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-[13px]m font-bold text-[13px]late-900">
                       Zero Financial Obligation
                     </h3>
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-[13px]late-500">
                       No credit card or commitment required. The trial is 100% free.
                     </p>
                   </div>
@@ -109,17 +109,17 @@ const DemoClass = () => {
             <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-xl shadow-slate-200/50">
               {!isSubmitted ? (
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900">
+                  <h2 className="text-2xl font-bold text-[13px]late-900">
                     Reserve Your Demo Slot
                   </h2>
-                  <p className="mt-1 text-xs text-slate-500">
+                  <p className="mt-1 text-xs text-[13px]late-500">
                     Fill in your details and our team will send your private
                     session link via WhatsApp and email.
                   </p>
 
                   <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                         Student Full Name *
                       </label>
                       <input
@@ -130,13 +130,13 @@ const DemoClass = () => {
                           setFormData({ ...formData, name: e.target.value })
                         }
                         placeholder="e.g. Priyanshu Sharma"
-                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Phone / WhatsApp Number *
                         </label>
                         <input
@@ -147,11 +147,11 @@ const DemoClass = () => {
                             setFormData({ ...formData, phone: e.target.value })
                           }
                           placeholder="+91 98765 43210"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Email Address *
                         </label>
                         <input
@@ -162,13 +162,13 @@ const DemoClass = () => {
                             setFormData({ ...formData, email: e.target.value })
                           }
                           placeholder="student@example.com"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                         Target Course / Learning Path *
                       </label>
                       <select
@@ -176,7 +176,7 @@ const DemoClass = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, course: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                       >
                         {coursesData.map((c) => (
                           <option key={c.id} value={c.title}>
@@ -188,7 +188,7 @@ const DemoClass = () => {
 
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Preferred Date
                         </label>
                         <input
@@ -197,11 +197,11 @@ const DemoClass = () => {
                           onChange={(e) =>
                             setFormData({ ...formData, date: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
                           Preferred Time Slot
                         </label>
                         <select
@@ -209,7 +209,7 @@ const DemoClass = () => {
                           onChange={(e) =>
                             setFormData({ ...formData, slot: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         >
                           <option value="Morning (10:00 AM - 11:00 AM)">
                             Morning (10:00 AM - 11:00 AM)
@@ -229,12 +229,12 @@ const DemoClass = () => {
 
                     <button
                       type="submit"
-                      className="w-full rounded-xl bg-blue-600 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 transition-all cursor-pointer"
+                      className="w-full rounded-xl bg-blue-600 py-4 text-[13px]m font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 transition-all cursor-pointer"
                     >
                       Confirm Free Demo Class Booking
                     </button>
 
-                    <p className="text-center text-[11px] text-slate-400">
+                    <p className="text-center text-[13px] text-[13px]late-400">
                       🔒 Your details are 100% confidential. No spam guaranteed.
                     </p>
                   </form>
@@ -244,10 +244,10 @@ const DemoClass = () => {
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                     <CheckCircle2 size={36} />
                   </div>
-                  <h3 className="mt-4 text-2xl font-bold text-slate-900">
+                  <h3 className="mt-4 text-2xl font-bold text-[13px]late-900">
                     Demo Class Reserved!
                   </h3>
-                  <p className="mt-2 text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                  <p className="mt-2 text-[13px]m text-[13px]late-600 max-w-md mx-auto leading-relaxed">
                     Thank you, <span className="font-bold">{formData.name}</span>.
                     We have scheduled your demo class for &ldquo;
                     <span className="font-semibold text-blue-600">{formData.course}</span>

@@ -59,10 +59,10 @@ const CertificateVerification = () => {
             <ShieldCheck size={15} />
             Instant Authenticity Check
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[13px]late-900 sm:text-5xl">
             Certificate <span className="text-blue-600">Verification</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Employers, recruiters, and institutions can authenticate Apna Vidya
             course completion credentials by entering the unique Certificate ID.
           </p>
@@ -76,7 +76,7 @@ const CertificateVerification = () => {
             <div className="relative flex-1">
               <Search
                 size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-[13px]late-400"
               />
               <input
                 type="text"
@@ -84,18 +84,18 @@ const CertificateVerification = () => {
                 value={certId}
                 onChange={(e) => setCertId(e.target.value)}
                 placeholder="Enter Certificate ID (e.g. AV-2025-0842)"
-                className="w-full rounded-xl bg-slate-50 py-3.5 pl-11 pr-4 text-sm font-semibold uppercase text-slate-800 placeholder:normal-case placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-xl bg-slate-50 py-3.5 pl-11 pr-4 text-[13px]m font-semibold uppercase text-[13px]late-800 placeholder:normal-case placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100"
               />
             </div>
             <button
               type="submit"
-              className="rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white hover:bg-blue-700 transition-colors shadow-md cursor-pointer"
+              className="rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-bold text-white hover:bg-blue-700 transition-colors shadow-md cursor-pointer"
             >
               Verify Credential
             </button>
           </form>
 
-          <p className="mt-3 text-center text-xs text-slate-400">
+          <p className="mt-3 text-center text-xs text-[13px]late-400">
             Try sample IDs:{" "}
             <span
               onClick={() => {
@@ -143,7 +143,7 @@ const CertificateVerification = () => {
                   <CheckCircle2 size={26} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-extrabold text-slate-900">
+                  <h3 className="text-lg font-extrabold text-[13px]late-900">
                     Officially Verified Credential
                   </h3>
                   <p className="text-xs text-emerald-600 font-semibold">
@@ -156,49 +156,49 @@ const CertificateVerification = () => {
               </span>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 text-xs sm:text-sm">
+            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 text-xs sm:text-[13px]m">
               <div className="rounded-xl bg-slate-50 p-4">
-                <p className="text-slate-400 font-medium">Student Name</p>
-                <p className="mt-1 font-extrabold text-slate-900 text-base">
+                <p className="text-[13px]late-400 font-medium">Student Name</p>
+                <p className="mt-1 font-extrabold text-[13px]late-900 text-base">
                   {result.studentName}
                 </p>
               </div>
 
               <div className="rounded-xl bg-slate-50 p-4">
-                <p className="text-slate-400 font-medium">Course Program</p>
-                <p className="mt-1 font-extrabold text-slate-900 text-base">
+                <p className="text-[13px]late-400 font-medium">Course Program</p>
+                <p className="mt-1 font-extrabold text-[13px]late-900 text-base">
                   {result.course}
                 </p>
               </div>
 
               <div className="rounded-xl bg-slate-50 p-4">
-                <p className="text-slate-400 font-medium">Certificate ID</p>
+                <p className="text-[13px]late-400 font-medium">Certificate ID</p>
                 <p className="mt-1 font-mono font-bold text-blue-600">
                   {result.id}
                 </p>
               </div>
 
               <div className="rounded-xl bg-slate-50 p-4">
-                <p className="text-slate-400 font-medium">Issue Date</p>
-                <p className="mt-1 font-bold text-slate-800">
+                <p className="text-[13px]late-400 font-medium">Issue Date</p>
+                <p className="mt-1 font-bold text-[13px]late-800">
                   {result.issueDate}
                 </p>
               </div>
 
               <div className="rounded-xl bg-slate-50 p-4">
-                <p className="text-slate-400 font-medium">Performance Grade</p>
-                <p className="mt-1 font-bold text-slate-800">{result.grade}</p>
+                <p className="text-[13px]late-400 font-medium">Performance Grade</p>
+                <p className="mt-1 font-bold text-[13px]late-800">{result.grade}</p>
               </div>
 
               <div className="rounded-xl bg-slate-50 p-4">
-                <p className="text-slate-400 font-medium">Certified Mentor</p>
-                <p className="mt-1 font-bold text-slate-800">
+                <p className="text-[13px]late-400 font-medium">Certified Mentor</p>
+                <p className="mt-1 font-bold text-[13px]late-800">
                   {result.instructor}
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 border-t border-slate-100 pt-5 text-center text-xs text-slate-400">
+            <div className="mt-6 border-t border-slate-100 pt-5 text-center text-xs text-[13px]late-400">
               Issued under the authority of {result.verificationAuthority}.
             </div>
           </div>

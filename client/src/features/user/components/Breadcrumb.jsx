@@ -4,7 +4,7 @@ import { Home, ChevronRight, ArrowLeft } from "lucide-react";
 
 const BreadcrumbContext = createContext({
   customTitle: null,
-  setCustomTitle: () => {},
+  setCustomTitle: () => { },
 });
 
 export const BreadcrumbProvider = ({ children }) => {
@@ -87,7 +87,7 @@ const Breadcrumb = () => {
         <div className="flex items-center justify-between gap-4">
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-xs font-medium text-slate-500 overflow-x-auto py-0.5 no-scrollbar"
+            className="flex items-center gap-2 text-xs font-medium text-[13px]late-500 overflow-x-auto py-0.5 no-scrollbar"
           >
             <Link
               to="/"
@@ -95,17 +95,17 @@ const Breadcrumb = () => {
             >
               <Home
                 size={13}
-                className="text-slate-400 group-hover:text-blue-600 transition-colors"
+                className="text-[13px]late-400 group-hover:text-blue-600 transition-colors"
               />
               <span>Home</span>
             </Link>
 
             {crumbs.map((crumb, idx) => (
               <React.Fragment key={crumb.url || idx}>
-                <ChevronRight size={13} className="text-slate-300 shrink-0" />
+                <ChevronRight size={13} className="text-[13px]late-300 shrink-0" />
                 {crumb.isLast ? (
                   <span
-                    className="font-semibold text-slate-800 line-clamp-1 max-w-[200px] sm:max-w-md shrink-0"
+                    className="font-semibold text-[13px]late-800 line-clamp-1 max-w-[200px] sm:max-w-md shrink-0"
                     title={crumb.label}
                   >
                     {crumb.label}
@@ -125,7 +125,7 @@ const Breadcrumb = () => {
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors cursor-pointer shrink-0 ml-auto"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[13px]late-500 hover:text-[13px]late-800 transition-colors cursor-pointer shrink-0 ml-auto"
             title="Go to previous page"
           >
             <ArrowLeft size={13} />

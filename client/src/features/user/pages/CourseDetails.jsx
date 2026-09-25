@@ -53,8 +53,8 @@ const CourseDetails = () => {
           const parsedOutcomes = Array.isArray(c.learningOutcomes)
             ? c.learningOutcomes
             : typeof c.learningOutcomes === "string" && c.learningOutcomes.startsWith("[")
-            ? JSON.parse(c.learningOutcomes || "[]")
-            : fallback.features || [
+              ? JSON.parse(c.learningOutcomes || "[]")
+              : fallback.features || [
                 "Industry-standard project portfolio",
                 "1-on-1 weekly code review sessions",
                 "Live interactive query resolution",
@@ -64,8 +64,8 @@ const CourseDetails = () => {
           const parsedFaqs = Array.isArray(c.faqs)
             ? c.faqs
             : typeof c.faqs === "string" && c.faqs.startsWith("[")
-            ? JSON.parse(c.faqs || "[]")
-            : [
+              ? JSON.parse(c.faqs || "[]")
+              : [
                 {
                   question: "Is this course suitable for complete beginners?",
                   answer: "Yes, our modules start from fundamental core principles before transitioning into advanced industry-grade architectural patterns and project building.",
@@ -86,24 +86,24 @@ const CourseDetails = () => {
 
           const mappedModules = c.modules && c.modules.length > 0
             ? c.modules.map((m) => ({
-                id: m.id,
-                title: m.title,
-                duration: m.duration || "3 Weeks",
-                lessons: m.lessons && m.lessons.length > 0
-                  ? m.lessons
-                  : [
-                      { id: 1, title: "Core lecture and architectural breakdown", duration: "60 mins" },
-                      { id: 2, title: "Guided hands-on project implementation", duration: "90 mins" },
-                    ],
-                materials: m.materials || [],
-              }))
+              id: m.id,
+              title: m.title,
+              duration: m.duration || "3 Weeks",
+              lessons: m.lessons && m.lessons.length > 0
+                ? m.lessons
+                : [
+                  { id: 1, title: "Core lecture and architectural breakdown", duration: "60 mins" },
+                  { id: 2, title: "Guided hands-on project implementation", duration: "90 mins" },
+                ],
+              materials: m.materials || [],
+            }))
             : fallback.curriculum?.map((m, i) => ({
-                id: i + 1,
-                title: m.module,
-                duration: m.duration || "3 Weeks",
-                lessons: (m.topics || []).map((t, ti) => ({ id: ti + 1, title: t, duration: "45 mins" })),
-                materials: [],
-              })) || [];
+              id: i + 1,
+              title: m.module,
+              duration: m.duration || "3 Weeks",
+              lessons: (m.topics || []).map((t, ti) => ({ id: ti + 1, title: t, duration: "45 mins" })),
+              materials: [],
+            })) || [];
 
           const feesNum = Number(c.fees || 29999);
           const strikePriceNum = Number(c.strikePrice || Math.round(feesNum * 1.5));
@@ -174,20 +174,20 @@ const CourseDetails = () => {
             <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
               {course.title}
             </h1>
-            <p className="mt-4 text-base leading-relaxed text-slate-300">
+            <p className="mt-4 text-base leading-relaxed text-[13px]late-300">
               {course.description}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-6 text-xs sm:text-sm text-slate-300">
+            <div className="mt-6 flex flex-wrap items-center gap-6 text-xs sm:text-[13px]m text-[13px]late-300">
               <div className="flex items-center gap-1.5 text-amber-400 font-bold">
                 <Star size={16} className="fill-amber-400 text-amber-400" />
                 <span>{course.rating}</span>
-                <span className="text-slate-400 font-normal">
+                <span className="text-[13px]late-400 font-normal">
                   ({course.studentsCount} learners enrolled)
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Clock size={16} className="text-slate-400" />
+                <Clock size={16} className="text-[13px]late-400" />
                 <span>{course.duration}</span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -203,13 +203,13 @@ const CourseDetails = () => {
             <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
               <div className="flex items-center gap-2.5 mb-5">
                 <Sparkles size={22} className="text-blue-600" />
-                <h2 className="text-xl font-bold text-slate-900">
+                <h2 className="text-xl font-bold text-[13px]late-900">
                   What You Will Learn & Build
                 </h2>
               </div>
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 {course.learningOutcomes && course.learningOutcomes.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5 text-sm text-slate-700">
+                  <div key={i} className="flex items-start gap-2.5 text-[13px]m text-[13px]late-700">
                     <CheckCircle2
                       size={18}
                       className="mt-0.5 shrink-0 text-emerald-500"
@@ -224,12 +224,12 @@ const CourseDetails = () => {
               <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
                 <div className="flex items-center gap-2.5 mb-5">
                   <BookOpen size={22} className="text-blue-600" />
-                  <h2 className="text-xl font-bold text-slate-900">
+                  <h2 className="text-xl font-bold text-[13px]late-900">
                     Comprehensive Course Overview
                   </h2>
                 </div>
                 <div
-                  className="rich-text-content prose prose-slate max-w-none text-sm text-slate-600 leading-relaxed"
+                  className="rich-text-content prose prose-slate max-w-none text-[13px]m text-[13px]late-600 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: course.fullOverview }}
                 />
               </div>
@@ -240,11 +240,11 @@ const CourseDetails = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <Layers size={20} className="text-blue-600" />
-                    <h2 className="text-xl font-bold text-slate-900">
+                    <h2 className="text-xl font-bold text-[13px]late-900">
                       Curriculum & Module Breakdown
                     </h2>
                   </div>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-[13px]late-500">
                     Structured modular path with step-by-step topic breakdowns and milestone objectives.
                   </p>
                 </div>
@@ -275,38 +275,37 @@ const CourseDetails = () => {
                             {idx + 1}
                           </span>
                           <div>
-                            <p className="text-sm font-bold text-slate-900">
+                            <p className="text-[13px]m font-bold text-[13px]late-900">
                               {mod.title}
                             </p>
-                            <p className="text-xs text-slate-500 mt-0.5">
+                            <p className="text-xs text-[13px]late-500 mt-0.5">
                               Duration: {mod.duration} • {mod.lessons?.length || 0} Lessons
                             </p>
                           </div>
                         </div>
                         <ChevronDown
                           size={18}
-                          className={`text-slate-400 transition-transform ${
-                            isOpen ? "rotate-180 text-blue-600" : ""
-                          }`}
+                          className={`text-[13px]late-400 transition-transform ${isOpen ? "rotate-180 text-blue-600" : ""
+                            }`}
                         />
                       </button>
 
                       {isOpen && (
                         <div className="border-t border-slate-100 bg-slate-50/60 p-4 sm:p-6 space-y-3">
-                          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                          <p className="text-[13px] font-bold text-[13px]late-400 uppercase tracking-wider mb-1">
                             Module Topics & Lessons
                           </p>
                           <div className="space-y-2">
                             {mod.lessons && mod.lessons.map((lesson, li) => (
                               <div
                                 key={lesson.id || li}
-                                className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-100 text-xs text-slate-700"
+                                className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-100 text-xs text-[13px]late-700"
                               >
                                 <div className="flex items-center gap-2">
                                   <span className="h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
                                   <span className="font-medium">{lesson.title}</span>
                                 </div>
-                                <span className="text-[11px] text-slate-400 font-mono shrink-0">
+                                <span className="text-[13px] text-[13px]late-400 font-mono shrink-0">
                                   {lesson.duration}
                                 </span>
                               </div>
@@ -321,17 +320,17 @@ const CourseDetails = () => {
             </div>
 
             <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
-              <h2 className="text-xl font-bold text-slate-900 mb-6">
+              <h2 className="text-xl font-bold text-[13px]late-900 mb-6">
                 Prerequisites, Audience & Certification
               </h2>
-              <div className="space-y-5 text-sm text-slate-600">
+              <div className="space-y-5 text-[13px]m text-[13px]late-600">
                 <div className="flex items-start gap-3.5">
                   <div className="p-2 rounded-xl bg-blue-50 text-blue-600 shrink-0">
                     <HelpCircle size={20} />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900">Recommended Prerequisites</p>
-                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    <p className="font-bold text-[13px]late-900">Recommended Prerequisites</p>
+                    <p className="text-xs text-[13px]late-500 mt-1 leading-relaxed">
                       {course.prerequisites}
                     </p>
                   </div>
@@ -342,8 +341,8 @@ const CourseDetails = () => {
                     <Users size={20} />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900">Who This Program Is Designed For</p>
-                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    <p className="font-bold text-[13px]late-900">Who This Program Is Designed For</p>
+                    <p className="text-xs text-[13px]late-500 mt-1 leading-relaxed">
                       {course.targetAudience}
                     </p>
                   </div>
@@ -354,10 +353,10 @@ const CourseDetails = () => {
                     <Award size={20} />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900">
+                    <p className="font-bold text-[13px]late-900">
                       Verified ISO Credential Certificate Included
                     </p>
-                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    <p className="text-xs text-[13px]late-500 mt-1 leading-relaxed">
                       {course.certificateInfo}
                     </p>
                   </div>
@@ -369,7 +368,7 @@ const CourseDetails = () => {
               <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs">
                 <div className="flex items-center gap-2 mb-6">
                   <MessageSquareQuote size={22} className="text-blue-600" />
-                  <h2 className="text-xl font-bold text-slate-900">
+                  <h2 className="text-xl font-bold text-[13px]late-900">
                     Frequently Asked Questions
                   </h2>
                 </div>
@@ -386,18 +385,17 @@ const CourseDetails = () => {
                           onClick={() => toggleFaq(idx)}
                           className="flex w-full items-center justify-between p-4 sm:p-5 text-left transition-colors hover:bg-slate-50 cursor-pointer"
                         >
-                          <span className="text-sm font-bold text-slate-900 pr-4">
+                          <span className="text-[13px]m font-bold text-[13px]late-900 pr-4">
                             {faq.question}
                           </span>
                           <ChevronDown
                             size={18}
-                            className={`text-slate-400 shrink-0 transition-transform ${
-                              isOpen ? "rotate-180 text-blue-600" : ""
-                            }`}
+                            className={`text-[13px]late-400 shrink-0 transition-transform ${isOpen ? "rotate-180 text-blue-600" : ""
+                              }`}
                           />
                         </button>
                         {isOpen && (
-                          <div className="border-t border-slate-100 bg-slate-50/50 p-4 sm:p-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                          <div className="border-t border-slate-100 bg-slate-50/50 p-4 sm:p-5 text-xs sm:text-[13px]m text-[13px]late-600 leading-relaxed">
                             {faq.answer}
                           </div>
                         )}
@@ -417,16 +415,16 @@ const CourseDetails = () => {
                   alt={course.title}
                   className="h-44 w-full object-cover"
                 />
-                <span className="absolute top-3 right-3 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white">
+                <span className="absolute top-3 right-3 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-[13px] font-bold text-white">
                   {course.level}
                 </span>
               </div>
 
               <div className="mt-6 flex items-baseline gap-3">
-                <span className="text-3xl font-extrabold text-slate-900">
+                <span className="text-3xl font-extrabold text-[13px]late-900">
                   {course.price}
                 </span>
-                <span className="text-sm text-slate-400 line-through">
+                <span className="text-[13px]m text-[13px]late-400 line-through">
                   {course.originalPrice}
                 </span>
                 <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-bold text-emerald-700">
@@ -438,34 +436,34 @@ const CourseDetails = () => {
                 <button
                   type="button"
                   onClick={() => openDemoModal(course.title)}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-md hover:bg-blue-700 transition-colors cursor-pointer active:scale-95"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-[13px]m font-bold text-white shadow-md hover:bg-blue-700 transition-colors cursor-pointer active:scale-95"
                 >
                   <PlayCircle size={18} />
                   <span>Book a Free Demo Class</span>
                 </button>
                 <Link
                   to="/contact"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 py-3 text-[13px]m font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
                 >
                   <span>Talk to Academic Advisor</span>
                 </Link>
               </div>
 
-              <div className="mt-6 border-t border-slate-100 pt-6 space-y-3 text-xs text-slate-600">
+              <div className="mt-6 border-t border-slate-100 pt-6 space-y-3 text-xs text-[13px]late-600">
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Class Format</span>
-                  <span className="font-bold text-slate-900">{course.classFormat}</span>
+                  <span className="text-[13px]late-400">Class Format</span>
+                  <span className="font-bold text-[13px]late-900">{course.classFormat}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Batch Timing</span>
-                  <span className="font-bold text-slate-900">{course.batchTiming}</span>
+                  <span className="text-[13px]late-400">Batch Timing</span>
+                  <span className="font-bold text-[13px]late-900">{course.batchTiming}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">LMS Access</span>
-                  <span className="font-bold text-slate-900">{course.lmsAccess}</span>
+                  <span className="text-[13px]late-400">LMS Access</span>
+                  <span className="font-bold text-[13px]late-900">{course.lmsAccess}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Doubt Resolution</span>
+                  <span className="text-[13px]late-400">Doubt Resolution</span>
                   <span className="font-bold text-emerald-600">{course.doubtResolution}</span>
                 </div>
               </div>

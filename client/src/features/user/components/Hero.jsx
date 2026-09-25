@@ -91,8 +91,8 @@ const Hero = () => {
           onClick={() => openDemoModal()}
           className={
             isPrimary
-              ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 cursor-pointer"
-              : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 cursor-pointer"
+              ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 cursor-pointer"
+              : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-[13px]m font-semibold text-[13px]late-700 shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 cursor-pointer"
           }
         >
           {!isPrimary && (
@@ -117,8 +117,8 @@ const Hero = () => {
         to={url || "/courses"}
         className={
           isPrimary
-            ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30"
-            : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+            ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30"
+            : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-[13px]m font-semibold text-[13px]late-700 shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
         }
       >
         <span>{text}</span>
@@ -147,18 +147,18 @@ const Hero = () => {
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-medium text-blue-600 shadow-sm transition-all duration-300">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-[13px]m font-medium text-blue-600 shadow-sm transition-all duration-300">
               <Sparkles size={16} />
               <span className="font-semibold">
                 {activeSlide?.subtitle || "Learn Today. Lead Tomorrow."}
               </span>
             </div>
 
-            <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl min-h-[120px] transition-opacity duration-300">
+            <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-[13px]late-900 sm:text-5xl lg:text-6xl min-h-[120px] transition-opacity duration-300">
               {activeSlide?.title || "Build Your Future With Apna Vidya"}
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg min-h-[56px] transition-opacity duration-300">
+            <p className="mt-6 max-w-xl text-base leading-7 text-[13px]late-600 sm:text-lg min-h-[56px] transition-opacity duration-300">
               {activeSlide?.description ||
                 "Learn industry-relevant skills from experienced educators, explore practical courses, and take the next step toward building a successful career."}
             </p>
@@ -186,11 +186,10 @@ const Hero = () => {
                       key={idx}
                       type="button"
                       onClick={() => setCurrentIndex(idx)}
-                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                        currentIndex === idx
-                          ? "w-8 bg-blue-600"
-                          : "w-2.5 bg-slate-300 hover:bg-slate-400"
-                      }`}
+                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === idx
+                        ? "w-8 bg-blue-600"
+                        : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                        }`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
                   ))}
@@ -200,7 +199,7 @@ const Hero = () => {
                   <button
                     type="button"
                     onClick={handlePrev}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[13px]late-600 shadow-xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
                     aria-label="Previous slide"
                   >
                     <ChevronLeft size={16} />
@@ -208,29 +207,29 @@ const Hero = () => {
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[13px]late-600 shadow-xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
                     aria-label="Next slide"
                   >
                     <ChevronRight size={16} />
                   </button>
                 </div>
 
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-xs text-[13px]late-400 font-medium">
                   {currentIndex + 1} / {sliders.length}
                 </span>
               </div>
             )}
 
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+              <div className="flex items-center gap-2 text-[13px]m text-[13px]late-600">
                 <CheckCircle2 size={18} className="text-green-500" />
                 Practical Learning
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+              <div className="flex items-center gap-2 text-[13px]m text-[13px]late-600">
                 <CheckCircle2 size={18} className="text-green-500" />
                 Expert Mentors
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+              <div className="flex items-center gap-2 text-[13px]m text-[13px]late-600">
                 <CheckCircle2 size={18} className="text-green-500" />
                 Career Focused
               </div>
@@ -240,25 +239,25 @@ const Hero = () => {
               <div>
                 <div className="flex items-center gap-2">
                   <Users size={18} className="text-blue-600" />
-                  <p className="text-2xl font-bold text-slate-900">5K+</p>
+                  <p className="text-2xl font-bold text-[13px]late-900">5K+</p>
                 </div>
-                <p className="mt-1 text-xs text-slate-500 sm:text-sm">Students</p>
+                <p className="mt-1 text-xs text-[13px]late-500 sm:text-[13px]m">Students</p>
               </div>
 
               <div className="border-l border-slate-200 pl-5">
                 <div className="flex items-center gap-2">
                   <BookOpen size={18} className="text-blue-600" />
-                  <p className="text-2xl font-bold text-slate-900">25+</p>
+                  <p className="text-2xl font-bold text-[13px]late-900">25+</p>
                 </div>
-                <p className="mt-1 text-xs text-slate-500 sm:text-sm">Courses</p>
+                <p className="mt-1 text-xs text-[13px]late-500 sm:text-[13px]m">Courses</p>
               </div>
 
               <div className="border-l border-slate-200 pl-5">
                 <div className="flex items-center gap-2">
                   <Award size={18} className="text-blue-600" />
-                  <p className="text-2xl font-bold text-slate-900">95%</p>
+                  <p className="text-2xl font-bold text-[13px]late-900">95%</p>
                 </div>
-                <p className="mt-1 text-xs text-slate-500 sm:text-sm">Completion</p>
+                <p className="mt-1 text-xs text-[13px]late-500 sm:text-[13px]m">Completion</p>
               </div>
             </div>
           </div>
@@ -281,7 +280,7 @@ const Hero = () => {
                       <GraduationCap size={60} strokeWidth={1.4} />
                     </div>
                     <p className="text-2xl font-bold">Apna Vidya</p>
-                    <p className="mt-1 text-sm text-blue-100">
+                    <p className="mt-1 text-[13px]m text-blue-100">
                       Learn • Grow • Succeed
                     </p>
                   </div>
@@ -294,8 +293,8 @@ const Hero = () => {
                     <Users size={21} />
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-slate-900 leading-tight">5,000+</p>
-                    <p className="text-xs text-slate-500">Active Students</p>
+                    <p className="text-lg font-bold text-[13px]late-900 leading-tight">5,000+</p>
+                    <p className="text-xs text-[13px]late-500">Active Students</p>
                   </div>
                 </div>
               </div>
@@ -306,10 +305,10 @@ const Hero = () => {
                     <BookOpen size={21} />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-slate-900 leading-tight">25+ Courses</p>
+                    <p className="text-[13px]m font-bold text-[13px]late-900 leading-tight">25+ Courses</p>
                     <div className="mt-1 flex items-center gap-1">
                       <Star size={13} className="fill-yellow-400 text-yellow-400" />
-                      <span className="text-xs text-slate-500 font-medium">Industry Focused</span>
+                      <span className="text-xs text-[13px]late-500 font-medium">Industry Focused</span>
                     </div>
                   </div>
                 </div>
@@ -321,8 +320,8 @@ const Hero = () => {
                     <Award size={18} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-slate-900">Certified Learning</p>
-                    <p className="text-[10px] text-slate-500 font-medium">Build your credentials</p>
+                    <p className="text-xs font-bold text-[13px]late-900">Certified Learning</p>
+                    <p className="text-[12px] text-[13px]late-500 font-medium">Build your credentials</p>
                   </div>
                 </div>
               </div>

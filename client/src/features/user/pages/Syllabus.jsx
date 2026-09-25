@@ -43,12 +43,12 @@ const Syllabus = () => {
               duration: c.duration || "6 Months",
               curriculum: c.modules && c.modules.length > 0
                 ? c.modules.map((m) => ({
-                    module: m.title,
-                    duration: m.duration || "3 Weeks",
-                    topics: m.lessons && m.lessons.length > 0
-                      ? m.lessons.map((l) => `${l.title} (${l.duration || "45 mins"})`)
-                      : ["Key concepts and architecture", "Hands-on implementation"],
-                  }))
+                  module: m.title,
+                  duration: m.duration || "3 Weeks",
+                  topics: m.lessons && m.lessons.length > 0
+                    ? m.lessons.map((l) => `${l.title} (${l.duration || "45 mins"})`)
+                    : ["Key concepts and architecture", "Hands-on implementation"],
+                }))
                 : fb.curriculum,
             };
           });
@@ -91,17 +91,17 @@ const Syllabus = () => {
             <FileText size={14} />
             Academic Blueprints
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[13px]late-900 sm:text-5xl">
             Course <span className="text-blue-600">Syllabus & Roadmaps</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600">
+          <p className="mt-3 text-base text-[13px]late-600">
             Explore comprehensive week-by-week lesson plans, hands-on coding
             exercises, and download official PDF curriculum guides.
           </p>
         </div>
 
         {downloadSuccess && (
-          <div className="mx-auto mt-6 max-w-md rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-center text-sm font-semibold text-emerald-800 shadow-sm animate-in fade-in">
+          <div className="mx-auto mt-6 max-w-md rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-center text-[13px]m font-semibold text-emerald-800 shadow-sm animate-in fade-in">
             ✓ Syllabus for &ldquo;{currentCourse.title}&rdquo; downloaded successfully!
           </div>
         )}
@@ -112,11 +112,10 @@ const Syllabus = () => {
               key={course.id}
               type="button"
               onClick={() => setSelectedCourseSlug(course.slug)}
-              className={`rounded-xl px-4 py-2.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                selectedCourseSlug === course.slug
+              className={`rounded-xl px-4 py-2.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${selectedCourseSlug === course.slug
                   ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
-                  : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
-              }`}
+                  : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-100"
+                }`}
             >
               {course.title}
             </button>
@@ -129,10 +128,10 @@ const Syllabus = () => {
               <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
                 {currentCourse.category} • {currentCourse.duration}
               </span>
-              <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-slate-900">
+              <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-[13px]late-900">
                 {currentCourse.title}
               </h2>
-              <p className="mt-2 text-sm text-slate-600 max-w-2xl">
+              <p className="mt-2 text-[13px]m text-[13px]late-600 max-w-2xl">
                 {currentCourse.description}
               </p>
             </div>
@@ -148,7 +147,7 @@ const Syllabus = () => {
               </button>
               <Link
                 to={`/courses/${currentCourse.slug}`}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 px-5 py-3 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 px-5 py-3 text-xs font-bold text-[13px]late-700 hover:bg-slate-50 transition-colors"
               >
                 <span>View Full Course</span>
                 <ArrowRight size={14} />
@@ -157,7 +156,7 @@ const Syllabus = () => {
           </div>
 
           <div className="mt-10 space-y-6">
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-[13px]late-900">
               Week-by-Week Curriculum Roadmap
             </h3>
 
@@ -168,7 +167,7 @@ const Syllabus = () => {
                   className="rounded-2xl border border-slate-200/80 bg-slate-50/50 p-5 sm:p-6"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                    <h4 className="text-base font-bold text-slate-900">
+                    <h4 className="text-base font-bold text-[13px]late-900">
                       {mod.module}
                     </h4>
                     <span className="rounded-full bg-blue-100/70 px-3 py-1 text-xs font-semibold text-blue-700 w-fit">
@@ -180,7 +179,7 @@ const Syllabus = () => {
                     {mod.topics.map((topic, i) => (
                       <div
                         key={i}
-                        className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700"
+                        className="flex items-start gap-2.5 text-xs sm:text-[13px]m text-[13px]late-700"
                       >
                         <CheckCircle2
                           size={16}
@@ -198,7 +197,7 @@ const Syllabus = () => {
           <div className="mt-12 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
               <h4 className="text-xl font-bold">Have Questions on the Curriculum?</h4>
-              <p className="mt-1 text-xs sm:text-sm text-blue-100">
+              <p className="mt-1 text-xs sm:text-[13px]m text-blue-100">
                 Book a free 1-on-1 trial with a faculty mentor to test out our live teaching platform.
               </p>
             </div>

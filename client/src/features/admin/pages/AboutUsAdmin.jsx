@@ -314,7 +314,7 @@ const AboutUsAdmin = () => {
             <Link
               to="/about"
               target="_blank"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer"
             >
               <ExternalLink size={14} />
               <span>Preview Live Page</span>
@@ -323,7 +323,7 @@ const AboutUsAdmin = () => {
               type="button"
               onClick={fetchAboutContent}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-[13px]late-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer disabled:opacity-50"
               title="Reload from database"
             >
               <RefreshCw size={14} className={loading ? "animate-spin text-blue-600" : ""} />
@@ -343,11 +343,10 @@ const AboutUsAdmin = () => {
 
       {notification && (
         <div
-          className={`flex items-center justify-between rounded-xl p-3.5 text-xs font-medium border shadow-xs transition-all ${
-            notification.type === "error"
+          className={`flex items-center justify-between rounded-xl p-3.5 text-xs font-medium border shadow-xs transition-all ${notification.type === "error"
               ? "bg-rose-50 border-rose-200 text-rose-800"
               : "bg-emerald-50 border-emerald-200 text-emerald-800"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-2">
             <CheckCircle2 size={16} className="shrink-0" />
@@ -355,7 +354,7 @@ const AboutUsAdmin = () => {
           </div>
           <button
             onClick={() => setNotification(null)}
-            className="text-slate-400 hover:text-slate-600 font-bold ml-4"
+            className="text-[13px]late-400 hover:text-[13px]late-600 font-bold ml-4"
           >
             ✕
           </button>
@@ -371,11 +370,10 @@ const AboutUsAdmin = () => {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                isActive
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${isActive
                   ? "bg-blue-600 text-white shadow-xs"
-                  : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80"
-              }`}
+                  : "bg-white text-[13px]late-600 hover:bg-slate-100 border border-slate-200/80"
+                }`}
             >
               <Icon size={15} />
               <span>{tab.label}</span>
@@ -387,7 +385,7 @@ const AboutUsAdmin = () => {
       <form onSubmit={handleSave} className="space-y-6">
         {activeTab === "hero" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <Building2 size={18} className="text-blue-600" />
               <span>Top Hero Section</span>
             </div>
@@ -423,7 +421,7 @@ const AboutUsAdmin = () => {
         {activeTab === "story" && (
           <div className="space-y-6">
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                 <Compass size={18} className="text-blue-600" />
                 <span>Our Story Narrative</span>
               </div>
@@ -464,14 +462,14 @@ const AboutUsAdmin = () => {
             </div>
 
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
                 <Sparkles size={18} className="text-amber-500" />
                 <span>Highlight Statistics</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-3 rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                  <p className="text-xs font-bold text-slate-700">Statistic #1</p>
+                  <p className="text-xs font-bold text-[13px]late-700">Statistic #1</p>
                   <FormInput
                     label="Stat Value"
                     value={form.stat1Value}
@@ -487,7 +485,7 @@ const AboutUsAdmin = () => {
                 </div>
 
                 <div className="space-y-3 rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                  <p className="text-xs font-bold text-slate-700">Statistic #2</p>
+                  <p className="text-xs font-bold text-[13px]late-700">Statistic #2</p>
                   <FormInput
                     label="Stat Value"
                     value={form.stat2Value}
@@ -508,7 +506,7 @@ const AboutUsAdmin = () => {
 
         {activeTab === "mission" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-6">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <Target size={18} className="text-indigo-600" />
               <span>Institutional Mission & Long-Term Vision</span>
             </div>
@@ -550,7 +548,7 @@ const AboutUsAdmin = () => {
         {activeTab === "values" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
                 <Layers size={18} className="text-blue-600" />
                 <span>Core Values & Pillars</span>
               </div>
@@ -590,7 +588,7 @@ const AboutUsAdmin = () => {
                     <button
                       type="button"
                       onClick={() => handleRemoveValue(idx)}
-                      className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer"
+                      className="text-[13px]late-400 hover:text-rose-600 p-1 cursor-pointer"
                       title="Remove value"
                     >
                       <Trash2 size={15} />
@@ -607,13 +605,13 @@ const AboutUsAdmin = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      <label className="block text-xs font-semibold text-[13px]late-700 mb-1">
                         Icon Symbol
                       </label>
                       <select
                         value={val.icon || "Target"}
                         onChange={(e) => handleValueChange(idx, "icon", e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-[13px]late-800 focus:border-blue-500 focus:outline-none"
                       >
                         {ICON_OPTIONS.map((opt) => (
                           <option key={opt.value} value={opt.value}>
@@ -640,7 +638,7 @@ const AboutUsAdmin = () => {
         {activeTab === "team" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
+              <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
                 <Users size={18} className="text-indigo-600" />
                 <span>Mentors & Educators Team</span>
               </div>
@@ -686,11 +684,11 @@ const AboutUsAdmin = () => {
                   className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 space-y-3 relative"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-800">Mentor #{idx + 1}</span>
+                    <span className="text-xs font-bold text-[13px]late-800">Mentor #{idx + 1}</span>
                     <button
                       type="button"
                       onClick={() => handleRemoveMentor(idx)}
-                      className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer"
+                      className="text-[13px]late-400 hover:text-rose-600 p-1 cursor-pointer"
                       title="Remove mentor"
                     >
                       <Trash2 size={15} />
@@ -706,7 +704,7 @@ const AboutUsAdmin = () => {
                           className="h-full w-full object-cover"
                         />
                       ) : (
-                        <div className="h-full w-full flex items-center justify-center text-slate-400">
+                        <div className="h-full w-full flex items-center justify-center text-[13px]late-400">
                           <ImageIcon size={20} />
                         </div>
                       )}
@@ -750,7 +748,7 @@ const AboutUsAdmin = () => {
 
         {activeTab === "cta" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
               <ArrowRight size={18} className="text-blue-600" />
               <span>Bottom Conversion CTA Banner</span>
             </div>
@@ -794,7 +792,7 @@ const AboutUsAdmin = () => {
         )}
 
         <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-[13px]late-400">
             All updates save directly to the database and sync instantly across the user site.
           </p>
           <button

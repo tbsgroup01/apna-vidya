@@ -19,11 +19,12 @@ const heroSliderController = require("../controllers/heroSliderController");
 const aboutController = require("../controllers/aboutController");
 const settingController = require("../controllers/settingController");
 const uploadController = require("../controllers/uploadController");
+const authController = require("../controllers/authController");
 
 router.use(authenticate);
-
 router.post("/upload", upload.single("image"), uploadController.uploadImage);
-
+router.get("/profile", authController.getMe);
+router.put("/profile", authController.updateProfile);
 router.get("/dashboard/stats", dashboardController.getDashboardStats);
 
 router.get(
