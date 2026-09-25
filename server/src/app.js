@@ -35,7 +35,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Apna Vidya APIiii done");
+  res.send("Welcome to Apna Vidya APIi done");
 });
 
 app.use("/api/auth", authRoutes);
