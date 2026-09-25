@@ -393,9 +393,7 @@ const Dashboard = () => {
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-500" />
           <div className="flex items-center justify-between p-5 border-b border-slate-100">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
-                <Target size={16} />
-              </div>
+
               <div>
                 <h3 className="text-base font-bold text-[13px]late-900">Recent Inquiries</h3>
                 <p className="text-xs text-[13px]late-500">Latest website & demo inquiries</p>
@@ -428,11 +426,7 @@ const Dashboard = () => {
                     <tr key={lead.id} className="hover:bg-blue-50/30 transition-colors">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2.5">
-                          <span
-                            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${avatarGrad} font-black text-white text-xs shadow-xs`}
-                          >
-                            {lead.name?.charAt(0) || "L"}
-                          </span>
+
                           <div>
                             <p className="font-bold text-[13px]late-900">{lead.name}</p>
                             <p className="text-[13px] text-[13px]late-400 font-mono">{lead.phone}</p>
