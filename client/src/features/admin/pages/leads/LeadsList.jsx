@@ -11,12 +11,25 @@ import {
   UserCheck,
   Loader2,
   CheckCircle2,
+  PhoneCall,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
 import StatusBadge from "../../components/StatusBadge";
 import ConfirmModal from "../../components/ConfirmModal";
 import api from "../../../../services/api";
+
+const WhatsAppIcon = ({ size = 16, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.53c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.3z" />
+  </svg>
+);
 
 const LeadsList = () => {
   const navigate = useNavigate();
@@ -239,22 +252,24 @@ const LeadsList = () => {
         <div>
           <Link
             to={`/admin/leads/${row.id}`}
-            className="font-bold text-[13px]late-900 hover:text-blue-600 transition-colors"
+            className="font-bold text-slate-900 hover:text-blue-600 transition-colors"
           >
             {row.name}
           </Link>
-          <div className="flex items-center gap-2 text-[13px] text-[13px]late-400 mt-0.5">
-            <span className="flex items-center gap-1 font-mono">
-              <Phone size={10} />
-              {row.phone}
-            </span>
+          <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
+
+
             {row.email && (
               <>
-                <span>•</span>
-                <span className="flex items-center gap-1">
+                <a
+                  href={`mailto:${row.email}`}
+                  className="flex items-center gap-1 text-slate-500 hover:text-blue-600 transition-colors"
+                  title={`Email ${row.email}`}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Mail size={10} />
-                  {row.email}
-                </span>
+                  <span className="truncate max-w-[140px]">{row.email}</span>
+                </a>
               </>
             )}
           </div>
@@ -266,7 +281,7 @@ const LeadsList = () => {
       header: "Course Interested",
       sortable: true,
       render: (row) => (
-        <span className="font-semibold text-[13px]late-800">{row.course || "General"}</span>
+        <span className="font-semibold text-slate-800">{row.course || "General"}</span>
       ),
     },
     {
@@ -274,7 +289,7 @@ const LeadsList = () => {
       header: "Source",
       sortable: true,
       render: (row) => (
-        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-[13px]late-600">
+        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
           {row.source}
         </span>
       ),
@@ -293,13 +308,60 @@ const LeadsList = () => {
           <StatusBadge status={row.status} size="sm" />
         </button>
       ),
+
+    },
+    {
+      key: "quickConnect",
+      header: "Call / WhatsApp",
+      align: "center",
+      render: (row) => {
+        const rawPhone = row.phone || "";
+        if (!rawPhone) {
+          return <span className="text-slate-400 font-mono text-xs">—</span>;
+        }
+        const digits = rawPhone.replace(/\D/g, "");
+        const waNumber = digits.length === 10 ? `91${digits}` : digits;
+        const waUrl = digits
+          ? `https://wa.me/${waNumber}?text=${encodeURIComponent(
+            `Hello ${row.name || "there"}, greetings from Apna Vidya!`
+          )}`
+          : null;
+        const telUrl = `tel:${rawPhone.replace(/\s+/g, "")}`;
+
+        return (
+          <div
+            className="flex items-center justify-center gap-1.5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <a
+              href={telUrl}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white border border-blue-200/80 px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-95 group"
+              title={`Call ${row.name || "Lead"} (${rawPhone})`}
+            >
+              <PhoneCall size={14} className="shrink-0 text-blue-600 group-hover:text-white transition-colors" />
+              <span className="font-mono">{rawPhone}</span>
+            </a>
+            {waUrl && (
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-600 hover:text-white border border-emerald-200/80 shadow-2xs transition-all cursor-pointer active:scale-95"
+                title={`Chat on WhatsApp with ${row.name || "Lead"}`}
+              >
+                <WhatsAppIcon size={16} />
+              </a>
+            )}
+          </div>
+        );
+      },
     },
     {
       key: "createdAt",
       header: "Date",
       sortable: true,
       render: (row) => (
-        <span className="text-[13px]late-400 font-mono text-[13px]">
+        <span className="text-slate-400 font-mono text-xs">
           {new Date(row.createdAt).toLocaleDateString("en-IN", {
             day: "2-digit",
             month: "short",
@@ -318,7 +380,7 @@ const LeadsList = () => {
             <button
               type="button"
               onClick={() => handleOpenConvertModal(row)}
-              className="inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-2 py-1 text-[13px] font-bold text-emerald-700 hover:bg-emerald-100 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-2 py-1 text-xs font-bold text-emerald-700 hover:bg-emerald-100 transition-colors cursor-pointer"
               title="Convert Lead to Enrolled Student"
             >
               <UserCheck size={13} />
@@ -327,7 +389,7 @@ const LeadsList = () => {
           )}
           <Link
             to={`/admin/leads/${row.id}`}
-            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+            className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             title="View Lead Details"
           >
             <Eye size={15} />
@@ -335,7 +397,7 @@ const LeadsList = () => {
           <button
             type="button"
             onClick={() => handleOpenStatusModal(row)}
-            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-slate-100 hover:text-[13px]late-700 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors cursor-pointer"
             title="Update Status"
           >
             <Edit size={15} />
@@ -343,7 +405,7 @@ const LeadsList = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+            className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
             title="Delete Lead"
           >
             <Trash2 size={15} />

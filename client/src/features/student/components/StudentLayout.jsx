@@ -91,23 +91,28 @@ const StudentLayout = () => {
                 onClick={() => setProfileOpen(!profileOpen)}
                 className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white p-1.5 pr-3 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
               >
-                <img
-                  src={
-                    user?.profileImage ||
-                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                  }
-                  alt={user?.name || "Student"}
-                  className="h-8 w-8 rounded-lg object-cover ring-1 ring-slate-200"
+                <div
+                  className="h-8 w-8 rounded-lg bg-slate-100 bg-cover bg-no-repeat ring-1 ring-slate-200 shrink-0"
+                  style={{
+                    backgroundImage: `url("${
+                      user?.profileImage ||
+                      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+                    }")`,
+                    backgroundPosition: "top center",
+                    backgroundSize: "cover",
+                  }}
+                  role="img"
+                  aria-label={user?.name || "Student"}
                 />
                 <div className="hidden text-left sm:block">
-                  <p className="text-xs font-bold text-[13px]late-800 leading-tight">
+                  <p className="text-xs font-bold text-slate-800 leading-tight">
                     {user?.name || "Learner"}
                   </p>
-                  <p className="text-[12px] font-semibold text-blue-600 leading-tight">
+                  <p className="text-xs font-semibold text-blue-600 leading-tight">
                     {user?.role || "Student"}
                   </p>
                 </div>
-                <ChevronDown size={14} className="text-[13px]late-400" />
+                <ChevronDown size={14} className="text-slate-400" />
               </button>
 
               {profileOpen && (

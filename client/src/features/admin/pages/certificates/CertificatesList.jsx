@@ -239,7 +239,7 @@ const CertificatesList = () => {
     <div className="space-y-6">
       <PageHeader
         title="Awards & Accreditations Showcase"
-        description="Showcase Apna Vidya's institutional credentials, honors, and certifications in the database for website display."
+        description="Showcase Apna Vidya's institutional credentials, honors, and certifications."
         breadcrumbs={[{ label: "Awards Showcase" }]}
         actions={
           <button

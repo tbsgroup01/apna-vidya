@@ -14,6 +14,7 @@ import {
   UserPlus,
   Send,
   Loader2,
+  PhoneCall,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import StatusBadge from "../../components/StatusBadge";
@@ -122,16 +123,46 @@ const LeadDetails = () => {
           { label: `#${lead.id}` },
         ]}
         actions={
-          lead.status !== "Converted" && (
-            <button
-              type="button"
-              onClick={handleConvertToStudent}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-emerald-700 active:scale-95 transition-all cursor-pointer"
-            >
-              <UserPlus size={15} />
-              <span>Convert to Student</span>
-            </button>
-          )
+          <div className="flex items-center gap-2">
+            {lead.phone && (
+              <>
+                <a
+                  href={`tel:${lead.phone.replace(/\s+/g, "")}`}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-blue-200/90 bg-blue-50 px-3.5 py-2.5 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs"
+                  title={`Call ${lead.name} (${lead.phone})`}
+                >
+                  <PhoneCall size={14} />
+                  <span>Call Lead</span>
+                </a>
+                <a
+                  href={`https://wa.me/${
+                    lead.phone.replace(/\D/g, "").length === 10
+                      ? `91${lead.phone.replace(/\D/g, "")}`
+                      : lead.phone.replace(/\D/g, "")
+                  }?text=${encodeURIComponent(
+                    `Hello ${lead.name}, greetings from Apna Vidya!`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-200/90 bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all shadow-2xs"
+                  title={`Chat on WhatsApp with ${lead.name}`}
+                >
+                  <MessageSquare size={14} />
+                  <span>WhatsApp</span>
+                </a>
+              </>
+            )}
+            {lead.status !== "Converted" && (
+              <button
+                type="button"
+                onClick={handleConvertToStudent}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-emerald-700 active:scale-95 transition-all cursor-pointer"
+              >
+                <UserPlus size={15} />
+                <span>Convert to Student</span>
+              </button>
+            )}
+          </div>
         }
       />
 
@@ -139,37 +170,45 @@ const LeadDetails = () => {
         <div className="space-y-6 lg:col-span-1">
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <span className="font-mono text-xs font-bold text-[13px]late-400">
+              <span className="font-mono text-xs font-bold text-slate-400">
                 #{lead.id}
               </span>
               <StatusBadge status={lead.status} />
             </div>
 
             <div className="mt-4">
-              <h2 className="text-xl font-bold text-[13px]late-900">{lead.name}</h2>
+              <h2 className="text-xl font-bold text-slate-900">{lead.name}</h2>
               <p className="text-xs text-blue-600 font-semibold mt-0.5">
                 {lead.course || "General Inquiry"}
               </p>
             </div>
 
-            <div className="mt-6 space-y-3 text-xs text-[13px]late-600">
+            <div className="mt-6 space-y-3 text-xs text-slate-600">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-[13px]late-500">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
                   <Phone size={15} />
                 </div>
-                <span className="font-mono font-medium text-[13px]late-800">
+                <a
+                  href={`tel:${lead.phone?.replace(/\s+/g, "")}`}
+                  className="font-mono font-medium text-slate-800 hover:text-blue-600 transition-colors"
+                  title={`Call ${lead.name} (${lead.phone})`}
+                >
                   {lead.phone}
-                </span>
+                </a>
               </div>
 
               {lead.email && (
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-[13px]late-500">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
                     <Mail size={15} />
                   </div>
-                  <span className="font-medium text-[13px]late-800 truncate">
+                  <a
+                    href={`mailto:${lead.email}`}
+                    className="font-medium text-slate-800 hover:text-blue-600 transition-colors truncate"
+                    title={`Email ${lead.email}`}
+                  >
                     {lead.email}
-                  </span>
+                  </a>
                 </div>
               )}
 

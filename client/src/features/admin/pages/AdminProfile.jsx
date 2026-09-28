@@ -16,6 +16,8 @@ import {
   Briefcase,
   FileText,
 } from "lucide-react";
+
+
 import PageHeader from "../components/PageHeader";
 import { FormInput, FormTextarea } from "../components/FormControls";
 import { adminProfileData } from "../../../data/admin/settingsData";
@@ -28,6 +30,8 @@ const PRESET_AVATARS = [
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
   "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
 ];
+
+
 
 const AdminProfile = () => {
   const { user, updateProfile, changePassword, refreshUser } = useAuth();
@@ -54,7 +58,6 @@ const AdminProfile = () => {
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileSaved, setProfileSaved] = useState(false);
   const [profileError, setProfileError] = useState("");
-
   const [passwordSaved, setPasswordSaved] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
@@ -241,7 +244,7 @@ const AdminProfile = () => {
               <img
                 src={profile.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"}
                 alt={profile.name}
-                className="h-28 w-28 rounded-3xl object-cover ring-4 ring-blue-100 shadow-md"
+                className=" rounded-3xl object-cover ring-4 ring-blue-100 shadow-md"
               />
               <button
                 type="button"
@@ -321,6 +324,8 @@ const AdminProfile = () => {
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
                   <User size={18} strokeWidth={2.2} />
                 </div>
+
+
                 <div>
                   <h3 className="text-base font-bold text-slate-900">
                     Personal & Administrative Details
@@ -329,6 +334,8 @@ const AdminProfile = () => {
                     Live database records powering all portals and activity stamps
                   </p>
                 </div>
+
+
               </div>
             </div>
 
@@ -390,19 +397,13 @@ const AdminProfile = () => {
               />
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50/70 hover:bg-slate-50 transition-colors">
-                <div className="relative h-16 w-16 shrink-0 rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xs">
-                  <img
-                    src={profile.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"}
-                    alt="Preview"
-                    className="h-full w-full object-cover"
-                  />
+                <div className="relative h-16 w-16 shrink-0 rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xs" style={{ background: `url("${profile.avatar}")`, backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                   {uploading && (
                     <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center text-white">
                       <RefreshCw size={16} className="animate-spin" />
                     </div>
                   )}
                 </div>
-
                 <div className="flex-1 space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <button
@@ -435,26 +436,8 @@ const AdminProfile = () => {
                 <p className="text-xs font-semibold text-rose-600">{uploadError}</p>
               )}
 
-              <div className="pt-2">
-                <p className="text-[11px] font-bold text-slate-500 mb-2">Or pick from preset avatars:</p>
-                <div className="flex items-center gap-2.5">
-                  {PRESET_AVATARS.map((preset, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setProfile({ ...profile, avatar: preset })}
-                      className={`h-10 w-10 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
-                        profile.avatar === preset
-                          ? "border-blue-600 ring-2 ring-blue-200 scale-105"
-                          : "border-slate-200 hover:border-slate-400 opacity-80 hover:opacity-100"
-                      }`}
-                    >
-                      <img src={preset} alt={`Preset ${idx + 1}`} className="h-full w-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
+
 
             <div className="flex justify-end pt-3 border-t border-slate-100">
               <button
@@ -538,8 +521,8 @@ const AdminProfile = () => {
             </div>
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

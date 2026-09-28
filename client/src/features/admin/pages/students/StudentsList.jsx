@@ -166,13 +166,18 @@ const StudentsList = () => {
         return (
           <div className="flex items-center gap-3">
             <div className="relative shrink-0">
-              <img
-                src={
-                  row.profileImage ||
-                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                }
-                alt={row.name}
-                className="h-10 w-10 rounded-xl object-cover ring-2 ring-blue-500/20 shadow-xs"
+              <div
+                className="h-10 w-10 rounded-xl bg-slate-100 bg-cover bg-no-repeat ring-2 ring-blue-500/20 shadow-xs"
+                style={{
+                  backgroundImage: `url("${
+                    row.profileImage ||
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+                  }")`,
+                  backgroundPosition: "top center",
+                  backgroundSize: "cover",
+                }}
+                role="img"
+                aria-label={row.name}
               />
               <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-white">
                 <CheckCircle size={10} className="text-white" />
@@ -181,16 +186,16 @@ const StudentsList = () => {
             <div className="space-y-1">
               <Link
                 to={`/admin/students/${row.id}`}
-                className="font-bold text-[13px]late-900 hover:text-blue-600 transition-colors block text-[13px]m"
+                className="font-bold text-slate-900 hover:text-blue-600 transition-colors block text-sm"
               >
                 {row.name}
               </Link>
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200/80 px-2 py-0.5 text-[13px] font-mono font-bold text-violet-700 shadow-2xs">
+                <span className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200/80 px-2 py-0.5 text-xs font-mono font-bold text-violet-700 shadow-2xs">
                   <Hash size={11} className="text-violet-500" />
                   <span>{regNo}</span>
                 </span>
-                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[12px] font-semibold text-[13px]late-500">
+                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-slate-500">
                   {row.gender || "Student"}
                 </span>
                 <StatusBadge status={row.status || "Active"} size="xs" />

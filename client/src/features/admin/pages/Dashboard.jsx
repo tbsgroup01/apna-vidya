@@ -145,7 +145,7 @@ const Dashboard = () => {
       bg: "bg-blue-50/80",
       border: "border-blue-200/90 hover:border-blue-300",
       iconBg: "bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-blue-500/20",
-      textColor: "text-[13px]late-900",
+      textColor: "text-slate-900",
       subColor: "text-blue-700",
       hoverShadow: "hover:shadow-md",
     },
@@ -157,7 +157,7 @@ const Dashboard = () => {
       bg: "bg-indigo-50/80",
       border: "border-indigo-200/90 hover:border-indigo-300",
       iconBg: "bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-indigo-500/20",
-      textColor: "text-[13px]late-900",
+      textColor: "text-slate-900",
       subColor: "text-indigo-700",
       hoverShadow: "hover:shadow-md",
     },
@@ -169,7 +169,7 @@ const Dashboard = () => {
       bg: "bg-emerald-50/80",
       border: "border-emerald-200/90 hover:border-emerald-300",
       iconBg: "bg-gradient-to-br from-emerald-600 to-teal-600 text-white shadow-emerald-500/20",
-      textColor: "text-[13px]late-900",
+      textColor: "text-slate-900",
       subColor: "text-emerald-700",
       hoverShadow: "hover:shadow-md",
     },
@@ -181,7 +181,7 @@ const Dashboard = () => {
       bg: "bg-purple-50/80",
       border: "border-purple-200/90 hover:border-purple-300",
       iconBg: "bg-gradient-to-br from-purple-600 to-fuchsia-600 text-white shadow-purple-500/20",
-      textColor: "text-[13px]late-900",
+      textColor: "text-slate-900",
       subColor: "text-purple-700",
       hoverShadow: "hover:shadow-md",
     },
@@ -193,7 +193,7 @@ const Dashboard = () => {
       bg: "bg-cyan-50/80",
       border: "border-cyan-200/90 hover:border-cyan-300",
       iconBg: "bg-gradient-to-br from-cyan-600 to-blue-600 text-white shadow-cyan-500/20",
-      textColor: "text-[13px]late-900",
+      textColor: "text-slate-900",
       subColor: "text-cyan-700",
       hoverShadow: "hover:shadow-md",
     },
@@ -222,10 +222,10 @@ const Dashboard = () => {
               </span>
               <span>Live System Sync Active</span>
             </div>
-            <h1 className="text-2xl font-black tracking-tight text-[13px]late-900 sm:text-3xl">
+            <h1 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
               Live Administrative Dashboard
             </h1>
-            <p className="mt-1 text-xs sm:text-[13px]m text-[13px]late-500 max-w-2xl">
+            <p className="mt-1 text-xs sm:text-sm text-slate-500 max-w-2xl">
               Real-time student admissions, fees reconciliation, courses health, and institutional workflows for Apna Vidya.
             </p>
           </div>
@@ -256,11 +256,11 @@ const Dashboard = () => {
             <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
               <Sparkles size={14} />
             </div>
-            <p className="text-xs font-bold uppercase tracking-wider text-[13px]late-700">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-700">
               Quick Management Actions
             </p>
           </div>
-          <span className="text-[13px] font-semibold text-[13px]late-400">Instant shortcuts</span>
+          <span className="text-[13px] font-semibold text-slate-400">Instant shortcuts</span>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
@@ -306,10 +306,10 @@ const Dashboard = () => {
                 <Users size={18} strokeWidth={2.2} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-[13px]late-900">
+                <h3 className="text-base font-bold text-slate-900">
                   Student Enrollment Growth
                 </h3>
-                <p className="text-xs text-[13px]late-500">Monthly new registered learners</p>
+                <p className="text-xs text-slate-500">Monthly new registered learners</p>
               </div>
             </div>
             <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-1 text-xs font-bold text-white shadow-xs">
@@ -320,18 +320,18 @@ const Dashboard = () => {
           <EnrollmentLineChart data={enrollmentChartData} />
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-emerald-50/40 via-white to-teal-50/20 p-5 shadow-xs hover:border-emerald-300 transition-all">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-green-600" />
+        <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50/60 via-white to-indigo-50/30 p-5 shadow-xs hover:border-indigo-300 transition-all">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-600" />
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xs">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-emerald-500 to-purple-600 text-white shadow-xs">
                 <IndianRupee size={18} strokeWidth={2.2} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-[13px]late-900">
+                <h3 className="text-base font-bold text-slate-900">
                   Revenue Collection (in ₹ Lakhs)
                 </h3>
-                <p className="text-xs text-[13px]late-500">Gross fee collections across batches</p>
+                <p className="text-xs text-slate-500">Gross fee collections across batches • Color-coded by volume</p>
               </div>
             </div>
             <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 px-3 py-1 text-xs font-bold text-white shadow-xs">
@@ -352,10 +352,10 @@ const Dashboard = () => {
                 <BookOpen size={18} strokeWidth={2.2} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-[13px]late-900">
+                <h3 className="text-base font-bold text-slate-900">
                   Most Enrolled Programs
                 </h3>
-                <p className="text-xs text-[13px]late-500">
+                <p className="text-xs text-slate-500">
                   Course popularity and active student distribution
                 </p>
               </div>
@@ -378,10 +378,10 @@ const Dashboard = () => {
               <Target size={18} strokeWidth={2.2} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-[13px]late-900">
+              <h3 className="text-base font-bold text-slate-900">
                 Lead Conversion Ratio
               </h3>
-              <p className="text-xs text-[13px]late-500">Enquiry to paid admission funnel</p>
+              <p className="text-xs text-slate-500">Enquiry to paid admission funnel</p>
             </div>
           </div>
           <LeadConversionDonut data={leadConversionData} />
@@ -395,8 +395,8 @@ const Dashboard = () => {
             <div className="flex items-center gap-2.5">
 
               <div>
-                <h3 className="text-base font-bold text-[13px]late-900">Recent Inquiries</h3>
-                <p className="text-xs text-[13px]late-500">Latest website & demo inquiries</p>
+                <h3 className="text-base font-bold text-slate-900">Recent Inquiries</h3>
+                <p className="text-xs text-slate-500">Latest website & demo inquiries</p>
               </div>
             </div>
             <Link
@@ -410,7 +410,7 @@ const Dashboard = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/30 border-b border-blue-100/70 text-[13px] font-bold uppercase tracking-wider text-[13px]late-600">
+              <thead className="bg-gradient-to-r from-blue-50/70 via-slate-50 to-blue-50/30 border-b border-blue-100/70 text-[13px] font-bold uppercase tracking-wider text-slate-600">
                 <tr>
                   <th className="px-4 py-3">Lead</th>
                   <th className="px-4 py-3">Course</th>
@@ -428,16 +428,16 @@ const Dashboard = () => {
                         <div className="flex items-center gap-2.5">
 
                           <div>
-                            <p className="font-bold text-[13px]late-900">{lead.name}</p>
-                            <p className="text-[13px] text-[13px]late-400 font-mono">{lead.phone}</p>
+                            <p className="font-bold text-slate-900">{lead.name}</p>
+                            <p className="text-[13px] text-slate-400 font-mono">{lead.phone}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-[13px]late-700 font-medium">
+                      <td className="px-4 py-3 text-slate-700 font-medium">
                         {lead.course}
                       </td>
                       <td className="px-4 py-3">
-                        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-[13px]late-600 border border-slate-200/60">
+                        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-slate-600 border border-slate-200/60">
                           {lead.source}
                         </span>
                       </td>
@@ -469,8 +469,8 @@ const Dashboard = () => {
                 <GraduationCap size={16} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-[13px]late-900">Recent Students</h3>
-                <p className="text-xs text-[13px]late-500">Newly enrolled students</p>
+                <h3 className="text-base font-bold text-slate-900">Recent Students</h3>
+                <p className="text-xs text-slate-500">Newly enrolled students</p>
               </div>
             </div>
             <Link
@@ -484,7 +484,7 @@ const Dashboard = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-gradient-to-r from-purple-50/70 via-slate-50 to-purple-50/30 border-b border-purple-100/70 text-[13px] font-bold uppercase tracking-wider text-[13px]late-600">
+              <thead className="bg-gradient-to-r from-purple-50/70 via-slate-50 to-purple-50/30 border-b border-purple-100/70 text-[13px] font-bold uppercase tracking-wider text-slate-600">
                 <tr>
                   <th className="px-4 py-3">Student</th>
                   <th className="px-4 py-3">Course</th>
@@ -507,14 +507,14 @@ const Dashboard = () => {
                           className="h-8 w-8 rounded-xl object-cover ring-2 ring-purple-200"
                         />
                         <div>
-                          <p className="font-bold text-[13px]late-900">{stu.name}</p>
-                          <span className="rounded-md bg-slate-100 px-1.5 py-0.2 font-mono text-[12px] font-bold text-[13px]late-600">
+                          <p className="font-bold text-slate-900">{stu.name}</p>
+                          <span className="rounded-md bg-slate-100 px-1.5 py-0.2 font-mono text-[12px] font-bold text-slate-600">
                             STU-{stu.id}
                           </span>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-[13px]late-700 font-medium">
+                    <td className="px-4 py-3 text-slate-700 font-medium">
                       {stu.course}
                     </td>
                     <td className="px-4 py-3 font-mono font-bold text-emerald-700">
@@ -548,8 +548,8 @@ const Dashboard = () => {
               <CreditCard size={16} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-[13px]late-900">Recent Fee Transactions</h3>
-              <p className="text-xs text-[13px]late-500">Live payment audit entries and receipts</p>
+              <h3 className="text-base font-bold text-slate-900">Recent Fee Transactions</h3>
+              <p className="text-xs text-slate-500">Live payment audit entries and receipts</p>
             </div>
           </div>
           <Link
@@ -563,7 +563,7 @@ const Dashboard = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-gradient-to-r from-emerald-50/70 via-slate-50 to-emerald-50/30 border-b border-emerald-100/70 text-[13px] font-bold uppercase tracking-wider text-[13px]late-600">
+            <thead className="bg-gradient-to-r from-emerald-50/70 via-slate-50 to-emerald-50/30 border-b border-emerald-100/70 text-[13px] font-bold uppercase tracking-wider text-slate-600">
               <tr>
                 <th className="px-4 py-3">Receipt / ID</th>
                 <th className="px-4 py-3">Student</th>
@@ -583,18 +583,18 @@ const Dashboard = () => {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <p className="font-bold text-[13px]late-900">{pay.studentName}</p>
-                    <p className="text-[13px] text-[13px]late-400">{pay.course}</p>
+                    <p className="font-bold text-slate-900">{pay.studentName}</p>
+                    <p className="text-[13px] text-slate-400">{pay.course}</p>
                   </td>
-                  <td className="px-4 py-3 font-mono font-black text-emerald-700 text-[13px]m">
+                  <td className="px-4 py-3 font-mono font-black text-emerald-700 text-sm">
                     ₹{pay.amount.toLocaleString()}
                   </td>
                   <td className="px-4 py-3">
-                    <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-[13px]late-700 border border-slate-200/60">
+                    <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-slate-700 border border-slate-200/60">
                       {pay.method}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-[13px]late-500 font-mono text-[13px]">{pay.date}</td>
+                  <td className="px-4 py-3 text-slate-500 font-mono text-[13px]">{pay.date}</td>
                   <td className="px-4 py-3">
                     <StatusBadge status={pay.status} size="sm" />
                   </td>

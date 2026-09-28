@@ -18,6 +18,7 @@ import {
 import PageHeader from "../components/PageHeader";
 import StatusBadge from "../components/StatusBadge";
 import ConfirmModal from "../components/ConfirmModal";
+import StatCard from "../components/StatCard";
 import { FormInput, FormSelect, FormTextarea, ImageUploadPreview } from "../components/FormControls";
 import api from "../../../services/api";
 import { initialHeroSliders } from "../../../data/admin/heroSlidersData";
@@ -279,7 +280,7 @@ const HeroSliders = () => {
               type="button"
               onClick={fetchSliders}
               disabled={refreshing}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 shadow-xs hover:bg-slate-50 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
               title="Refresh sliders from database"
             >
               <RefreshCw size={14} className={refreshing ? "animate-spin text-blue-600" : ""} />
@@ -312,41 +313,61 @@ const HeroSliders = () => {
           </div>
           <button
             onClick={() => setNotification(null)}
-            className="text-[13px]late-400 hover:text-[13px]late-600 font-bold ml-4"
+            className="text-slate-400 hover:text-slate-600 font-bold ml-4"
           >
             ✕
           </button>
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs">
-          <p className="text-[13px] font-medium text-[13px]late-500 uppercase tracking-wider">Total Slides</p>
-          <p className="mt-1.5 text-2xl font-black text-[13px]late-900">{stats.total}</p>
-        </div>
-        <div className="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-4 shadow-xs">
-          <p className="text-[13px] font-medium text-emerald-700 uppercase tracking-wider">Active Live</p>
-          <p className="mt-1.5 text-2xl font-black text-emerald-800">{stats.active}</p>
-        </div>
-        <div className="rounded-2xl border border-amber-100 bg-amber-50/50 p-4 shadow-xs">
-          <p className="text-[13px] font-medium text-amber-700 uppercase tracking-wider">Draft Slides</p>
-          <p className="mt-1.5 text-2xl font-black text-amber-800">{stats.draft}</p>
-        </div>
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs">
-          <p className="text-[13px] font-medium text-[13px]late-500 uppercase tracking-wider">Inactive</p>
-          <p className="mt-1.5 text-2xl font-black text-[13px]late-700">{stats.inactive}</p>
-        </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          title="Total Slides"
+          value={stats.total.toString()}
+          change="Catalog Count"
+          isPositive={true}
+          comparison="Stored in Database"
+          icon="Sliders"
+          color="blue"
+        />
+        <StatCard
+          title="Active Live"
+          value={stats.active.toString()}
+          change="Publicly Accessible"
+          isPositive={true}
+          comparison="Live on Website"
+          icon="PlayCircle"
+          color="emerald"
+        />
+        <StatCard
+          title="Draft Slides"
+          value={stats.draft.toString()}
+          change="In Editorial Review"
+          isPositive={true}
+          comparison="Internal Pipeline"
+          icon="Edit"
+          color="amber"
+        />
+        <StatCard
+          title="Inactive"
+          value={stats.inactive.toString()}
+          change="Offline Slides"
+          isPositive={true}
+          comparison="Archived or Paused"
+          icon="Sparkles"
+          color="purple"
+        />
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-slate-200/80 bg-white p-3 shadow-xs">
         <div className="relative flex-1 max-w-md">
-          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400" />
+          <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             placeholder="Search banners by headline, subtitle or text..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-xl border border-slate-200 bg-slate-50/60 pl-9 pr-3.5 py-2 text-xs text-[13px]late-800 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:outline-none transition-colors"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50/60 pl-9 pr-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:outline-none transition-colors"
           />
         </div>
 
@@ -358,7 +379,7 @@ const HeroSliders = () => {
               onClick={() => setStatusFilter(tab)}
               className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${statusFilter === tab
                 ? "bg-slate-900 text-white shadow-xs"
-                : "bg-slate-100 text-[13px]late-600 hover:bg-slate-200"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 }`}
             >
               {tab}
@@ -383,8 +404,8 @@ const HeroSliders = () => {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mb-3">
             <Sliders size={24} />
           </div>
-          <h3 className="text-[13px]m font-bold text-[13px]late-900">No hero banners found</h3>
-          <p className="mt-1 text-xs text-[13px]late-500 max-w-sm mx-auto">
+          <h3 className="text-sm font-bold text-slate-900">No hero banners found</h3>
+          <p className="mt-1 text-xs text-slate-500 max-w-sm mx-auto">
             {searchQuery || statusFilter !== "All"
               ? "Try adjusting your search query or status filter."
               : "Get started by creating your first hero slider banner for the homepage."}
@@ -432,12 +453,12 @@ const HeroSliders = () => {
                     <p className="text-[13px] font-semibold text-blue-600 tracking-wide uppercase">
                       {slider.subtitle || "Featured Announcement"}
                     </p>
-                    <h4 className="mt-1 text-[13px]m font-bold text-[13px]late-900 line-clamp-2 leading-snug">
+                    <h4 className="mt-1 text-sm font-bold text-slate-900 line-clamp-2 leading-snug">
                       {slider.title}
                     </h4>
                   </div>
                   {slider.description && (
-                    <p className="text-xs text-[13px]late-500 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
                       {slider.description}
                     </p>
                   )}
@@ -447,13 +468,13 @@ const HeroSliders = () => {
                       Primary CTA: {slider.buttonText || "Explore"}
                     </span>
                     {slider.secondaryButtonText && (
-                      <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 font-medium text-[13px]late-700">
+                      <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 font-medium text-slate-700">
                         Sec CTA: {slider.secondaryButtonText}
                       </span>
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between text-[13px] text-[13px]late-400">
+                  <div className="flex items-center justify-between text-[13px] text-slate-400">
                     <span>Active: {slider.startDate || "Ongoing"}</span>
                     {slider.endDate && <span>Until: {slider.endDate}</span>}
                   </div>
@@ -474,7 +495,7 @@ const HeroSliders = () => {
                   <button
                     type="button"
                     onClick={() => handleOpenEdit(slider)}
-                    className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 cursor-pointer shadow-xs"
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer shadow-xs"
                   >
                     <Edit size={13} />
                     <span>Edit</span>
@@ -482,7 +503,7 @@ const HeroSliders = () => {
                   <button
                     type="button"
                     onClick={() => handleDelete(slider)}
-                    className="rounded-lg p-1.5 text-[13px]late-400 hover:bg-rose-50 hover:text-rose-600 cursor-pointer transition-colors"
+                    className="rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 cursor-pointer transition-colors"
                     title="Delete slide"
                   >
                     <Trash2 size={15} />
@@ -509,17 +530,17 @@ const HeroSliders = () => {
           <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
-                <h3 className="text-base font-bold text-[13px]late-900">
+                <h3 className="text-base font-bold text-slate-900">
                   {editingSlider ? "Edit Hero Banner Slide" : "Create Real-Time Hero Banner"}
                 </h3>
-                <p className="text-xs text-[13px]late-500">
+                <p className="text-xs text-slate-500">
                   Configure real-time headlines, actions, background images, and homepage positioning.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setModalOpen(false)}
-                className="rounded-lg p-1 text-[13px]late-400 hover:bg-slate-100 hover:text-[13px]late-600"
+                className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
               >
                 ✕
               </button>
@@ -616,7 +637,7 @@ const HeroSliders = () => {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 cursor-pointer"
+                  className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>

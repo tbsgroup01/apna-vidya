@@ -82,7 +82,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md sm:px-6">
+      <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md sm:px-6 print:hidden">
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -197,10 +197,15 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
               onClick={() => setProfileOpen(!profileOpen)}
               className="flex items-center gap-2 rounded-xl border border-slate-200 p-1 sm:px-2.5 sm:py-1 hover:bg-slate-50 transition-colors cursor-pointer"
             >
-              <img
-                src={user?.profileImage || adminProfileData.avatar}
-                alt={user?.name || adminProfileData.name}
-                className="h-7 w-7 rounded-lg object-cover ring-1 ring-blue-100"
+              <div
+                className="h-7 w-7 rounded-lg bg-slate-100 bg-cover bg-no-repeat ring-1 ring-blue-100 shrink-0"
+                style={{
+                  backgroundImage: `url("${user?.profileImage || adminProfileData.avatar}")`,
+                  backgroundPosition: "top center",
+                  backgroundSize: "cover",
+                }}
+                role="img"
+                aria-label={user?.name || adminProfileData.name}
               />
               <div className="hidden text-left sm:block">
                 <p className="text-xs font-bold text-slate-800 leading-tight">

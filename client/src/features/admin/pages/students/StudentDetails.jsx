@@ -187,17 +187,22 @@ const StudentDetails = () => {
       <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            <img
-              src={
-                student.profileImage ||
-                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-              }
-              alt={student.name}
-              className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl object-cover ring-2 ring-blue-500/20 shadow-xs"
+            <div
+              className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-slate-100 bg-cover bg-no-repeat ring-2 ring-blue-500/20 shadow-xs shrink-0"
+              style={{
+                backgroundImage: `url("${
+                  student.profileImage ||
+                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+                }")`,
+                backgroundPosition: "top center",
+                backgroundSize: "cover",
+              }}
+              role="img"
+              aria-label={student.name}
             />
             <div>
               <div className="flex items-center gap-2.5 flex-wrap">
-                <h2 className="text-xl sm:text-2xl font-bold text-[13px]late-900">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
                   {student.name}
                 </h2>
                 <span className="inline-flex items-center gap-1 rounded-lg bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200/90 px-2.5 py-0.5 text-xs font-mono font-bold text-violet-700 shadow-2xs">

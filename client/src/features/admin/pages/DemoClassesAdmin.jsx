@@ -14,6 +14,7 @@ import {
   Target,
   Sparkles,
   BookOpen,
+  PhoneCall,
 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import DataTable from "../components/DataTable";
@@ -21,6 +22,18 @@ import StatusBadge from "../components/StatusBadge";
 import StatCard from "../components/StatCard";
 import ConfirmModal from "../components/ConfirmModal";
 import api from "../../../services/api";
+
+const WhatsAppIcon = ({ size = 16, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.53c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.3z" />
+  </svg>
+);
 
 const DemoClassesAdmin = () => {
   const navigate = useNavigate();
@@ -134,23 +147,16 @@ const DemoClassesAdmin = () => {
         <div>
           <Link
             to={`/admin/leads/${row.id}`}
-            className="font-bold text-[13px]late-900 hover:text-blue-600 transition-colors block"
+            className="font-bold text-slate-900 hover:text-blue-600 transition-colors block"
           >
             {row.name}
           </Link>
-          <div className="flex items-center gap-2 text-[13px] text-[13px]late-400 mt-0.5">
-            <span className="flex items-center gap-1 font-mono text-[13px]late-600">
-              <Phone size={10} />
-              {row.phone}
-            </span>
+          <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
             {row.email && (
-              <>
-                <span>•</span>
-                <span className="flex items-center gap-1 truncate max-w-[160px]">
-                  <Mail size={10} />
-                  {row.email}
-                </span>
-              </>
+              <span className="flex items-center gap-1 truncate max-w-[160px]">
+                <Mail size={10} />
+                {row.email}
+              </span>
             )}
           </div>
         </div>
@@ -161,7 +167,7 @@ const DemoClassesAdmin = () => {
       header: "Target Course / Program",
       sortable: true,
       render: (row) => (
-        <span className="font-semibold text-[13px]late-800 text-xs">
+        <span className="font-semibold text-slate-800 text-xs">
           {row.course || "General Program"}
         </span>
       ),
@@ -170,31 +176,9 @@ const DemoClassesAdmin = () => {
       key: "source",
       header: "Booking Channel",
       render: (row) => (
-        <span className="rounded-md bg-blue-50 px-2 py-0.5 text-[13px] font-bold text-blue-700">
+        <span className="rounded-md bg-blue-50 px-2 py-0.5 text-xs font-bold text-blue-700">
           {row.source || "Demo Class"}
         </span>
-      ),
-    },
-    {
-      key: "createdAt",
-      header: "Registration Date",
-      sortable: true,
-      render: (row) => (
-        <div className="text-xs">
-          <p className="font-mono text-[13px]late-700">
-            {new Date(row.createdAt).toLocaleDateString("en-IN", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            })}
-          </p>
-          <p className="text-[12px] text-[13px]late-400">
-            {new Date(row.createdAt).toLocaleTimeString("en-IN", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </p>
-        </div>
       ),
     },
     {
@@ -213,6 +197,74 @@ const DemoClassesAdmin = () => {
       ),
     },
     {
+      key: "quickConnect",
+      header: "Call / WhatsApp",
+      align: "center",
+      render: (row) => {
+        const rawPhone = row.phone || "";
+        if (!rawPhone) {
+          return <span className="text-slate-400 font-mono text-xs">—</span>;
+        }
+        const digits = rawPhone.replace(/\D/g, "");
+        const waNumber = digits.length === 10 ? `91${digits}` : digits;
+        const waUrl = digits
+          ? `https://wa.me/${waNumber}?text=${encodeURIComponent(
+            `Hello ${row.name || "there"}, greetings from Apna Vidya regarding your Demo Class!`
+          )}`
+          : null;
+        const telUrl = `tel:${rawPhone.replace(/\s+/g, "")}`;
+
+        return (
+          <div
+            className="flex items-center justify-center gap-1.5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <a
+              href={telUrl}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white border border-blue-200/80 px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-95 group"
+              title={`Call ${row.name || "Student"} (${rawPhone})`}
+            >
+              <PhoneCall size={14} className="shrink-0 text-blue-600 group-hover:text-white transition-colors" />
+              <span className="font-mono">{rawPhone}</span>
+            </a>
+            {/* {waUrl && (
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-600 hover:text-white border border-emerald-200/80 shadow-2xs transition-all cursor-pointer active:scale-95"
+                title={`Chat on WhatsApp with ${row.name || "Student"}`}
+              >
+                <WhatsAppIcon size={16} />
+              </a>
+            )} */}
+          </div>
+        );
+      },
+    },
+    {
+      key: "createdAt",
+      header: "Registration Date",
+      sortable: true,
+      render: (row) => (
+        <div className="text-xs">
+          <p className="font-mono text-slate-700">
+            {new Date(row.createdAt).toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
+          <p className="text-[11px] text-slate-400">
+            {new Date(row.createdAt).toLocaleTimeString("en-IN", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+        </div>
+      ),
+    },
+    {
       key: "actions",
       header: "Actions",
       align: "right",
@@ -220,7 +272,7 @@ const DemoClassesAdmin = () => {
         <div className="flex items-center justify-end gap-1.5">
           <Link
             to={`/admin/leads/${row.id}`}
-            className="p-1.5 rounded-lg text-[13px]late-400 hover:text-blue-600 hover:bg-slate-100 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 transition-colors"
             title="View Details"
           >
             <ExternalLink size={14} />
@@ -228,7 +280,7 @@ const DemoClassesAdmin = () => {
           <button
             type="button"
             onClick={() => handleDelete(row)}
-            className="p-1.5 rounded-lg text-[13px]late-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
             title="Delete Record"
           >
             <Trash2 size={14} />

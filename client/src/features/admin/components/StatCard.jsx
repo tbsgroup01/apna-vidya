@@ -27,6 +27,8 @@ import {
   FileText,
   Bell,
   Eye,
+  Sliders,
+  Image as ImageIcon,
 } from "lucide-react";
 
 const iconMap = {
@@ -55,6 +57,8 @@ const iconMap = {
   FileText,
   Bell,
   Eye,
+  Sliders,
+  Image: ImageIcon,
   TrendingUp,
   TrendingDown,
 };
@@ -207,7 +211,7 @@ const StatCard = ({
           >
             {title}
           </p>
-          <h3 className="mt-2 text-2xl font-black tracking-tight text-[13px]late-900 sm:text-3xl">
+          <h3 className="mt-2 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
             {value}
           </h3>
         </div>
@@ -223,8 +227,8 @@ const StatCard = ({
           {displayChange && (
             <span
               className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-bold ${changePositive
-                  ? "bg-emerald-100 text-emerald-800 border border-emerald-200/60"
-                  : "bg-rose-100 text-rose-800 border border-rose-200/60"
+                ? "bg-emerald-100 text-emerald-800 border border-emerald-200/60"
+                : "bg-rose-100 text-rose-800 border border-rose-200/60"
                 }`}
             >
               {changePositive ? (
@@ -236,7 +240,7 @@ const StatCard = ({
             </span>
           )}
           {displayLabel && (
-            <span className="text-[13px]late-500 font-medium truncate">
+            <span className="text-slate-500 font-medium truncate">
               {displayLabel}
             </span>
           )}

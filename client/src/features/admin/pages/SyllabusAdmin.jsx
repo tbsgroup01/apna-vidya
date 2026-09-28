@@ -153,7 +153,7 @@ const SyllabusAdmin = () => {
     <div className="space-y-6 max-w-7xl mx-auto">
       <PageHeader
         title="Curriculum & Module Breakdown"
-        description="Structure courses into sequential learning modules, define week-by-week topic roadmaps, and preview public syllabi."
+        description="Structure courses into sequential learning modules, define week-by-week topic roadmaps, and preview public syllabus."
         breadcrumbs={[
           { label: "Courses", path: "/admin/courses" },
           { label: "Curriculum Breakdown" },

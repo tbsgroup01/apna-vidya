@@ -128,36 +128,104 @@ export const EnrollmentLineChart = ({ data = [] }) => {
   );
 };
 
+const COLLECTION_TIERS = [
+  {
+    key: "peak",
+    min: 6.5,
+    name: "Peak Collection",
+    label: "> ₹6.5L Peak",
+    from: "#a855f7",
+    to: "#6b21a8",
+    hoverFrom: "#c084fc",
+    hoverTo: "#581c87",
+    shadow: "#9333ea",
+    dot: "bg-purple-500 ring-purple-200",
+    pill: "bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100",
+    activePill: "bg-purple-600 text-white border-purple-600 shadow-xs",
+  },
+  {
+    key: "high",
+    min: 5.0,
+    name: "High Volume",
+    label: "₹5.0L - ₹6.5L High",
+    from: "#10b981",
+    to: "#047857",
+    hoverFrom: "#34d399",
+    hoverTo: "#065f46",
+    shadow: "#059669",
+    dot: "bg-emerald-500 ring-emerald-200",
+    pill: "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100",
+    activePill: "bg-emerald-600 text-white border-emerald-600 shadow-xs",
+  },
+  {
+    key: "growth",
+    min: 3.5,
+    name: "Steady Growth",
+    label: "₹3.5L - ₹5.0L Growth",
+    from: "#06b6d4",
+    to: "#0e7490",
+    hoverFrom: "#22d3ee",
+    hoverTo: "#155e75",
+    shadow: "#0891b2",
+    dot: "bg-cyan-500 ring-cyan-200",
+    pill: "bg-cyan-50 text-cyan-700 border-cyan-200 hover:bg-cyan-100",
+    activePill: "bg-cyan-600 text-white border-cyan-600 shadow-xs",
+  },
+  {
+    key: "base",
+    min: 0,
+    name: "Baseline Volume",
+    label: "< ₹3.5L Base",
+    from: "#3b82f6",
+    to: "#1d4ed8",
+    hoverFrom: "#60a5fa",
+    hoverTo: "#1e40af",
+    shadow: "#2563eb",
+    dot: "bg-blue-500 ring-blue-200",
+    pill: "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100",
+    activePill: "bg-blue-600 text-white border-blue-600 shadow-xs",
+  },
+];
+
 export const RevenueBarChart = ({ data = [] }) => {
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [selectedTierKey, setSelectedTierKey] = useState(null);
 
   if (!data || data.length === 0) return null;
 
-  const maxVal = Math.max(...data.map((d) => d.amount)) * 1.2;
+  const maxVal = Math.max(...data.map((d) => d.amount)) * 1.25;
   const width = 600;
-  const height = 220;
+  const height = 230;
   const paddingX = 40;
-  const paddingY = 30;
+  const paddingY = 32;
 
   const barWidth = 26;
   const chartAreaWidth = width - paddingX * 2;
 
+  const getTierForAmount = (amount) => {
+    return COLLECTION_TIERS.find((t) => amount >= t.min) || COLLECTION_TIERS[COLLECTION_TIERS.length - 1];
+  };
+
   return (
-    <div className="w-full">
+    <div className="w-full space-y-3">
       <div className="relative overflow-x-auto">
-        <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-48 sm:h-56">
+        <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-48 sm:h-56 select-none">
           <defs>
-            <linearGradient id="revenueBarGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#10b981" />
-              <stop offset="100%" stopColor="#059669" />
-            </linearGradient>
-            <linearGradient id="revenueBarHoverGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#34d399" />
-              <stop offset="100%" stopColor="#047857" />
-            </linearGradient>
-            <filter id="barShadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="3" stdDeviation="2" floodColor="#059669" floodOpacity="0.25" />
-            </filter>
+            {COLLECTION_TIERS.map((tier) => (
+              <React.Fragment key={tier.key}>
+                <linearGradient id={`revGrad-${tier.key}`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={tier.from} />
+                  <stop offset="100%" stopColor={tier.to} />
+                </linearGradient>
+                <linearGradient id={`revGradHover-${tier.key}`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={tier.hoverFrom} />
+                  <stop offset="100%" stopColor={tier.hoverTo} />
+                </linearGradient>
+                <filter id={`shadow-${tier.key}`} x="-30%" y="-20%" width="160%" height="150%">
+                  <feDropShadow dx="0" dy="4" stdDeviation="3" floodColor={tier.shadow} floodOpacity="0.32" />
+                </filter>
+              </React.Fragment>
+            ))}
           </defs>
 
           {[0, 0.33, 0.66, 1].map((ratio, idx) => {
@@ -177,6 +245,9 @@ export const RevenueBarChart = ({ data = [] }) => {
           })}
 
           {data.map((d, i) => {
+            const tier = getTierForAmount(d.amount);
+            const isHovered = hoveredIdx === i;
+            const isTierSelected = selectedTierKey === null || selectedTierKey === tier.key;
             const x = paddingX + (i / (data.length - 1)) * chartAreaWidth - barWidth / 2;
             const barHeight = (d.amount / maxVal) * (height - paddingY * 2);
             const y = height - paddingY - barHeight;
@@ -186,23 +257,43 @@ export const RevenueBarChart = ({ data = [] }) => {
                 key={i}
                 onMouseEnter={() => setHoveredIdx(i)}
                 onMouseLeave={() => setHoveredIdx(null)}
-                className="cursor-pointer"
+                className="cursor-pointer transition-opacity duration-200"
+                style={{ opacity: isTierSelected ? 1 : 0.25 }}
               >
+                {/* Bar Value Above */}
+                <text
+                  x={x + barWidth / 2}
+                  y={y - 6}
+                  textAnchor="middle"
+                  className={`text-[11px] font-bold transition-all duration-200 ${
+                    isHovered ? "fill-slate-900 font-extrabold" : "fill-slate-500"
+                  }`}
+                >
+                  ₹{d.amount}L
+                </text>
+
+                {/* Animated/Glowing Bar */}
                 <rect
                   x={x}
                   y={y}
                   width={barWidth}
                   height={barHeight}
-                  rx="6"
-                  fill={hoveredIdx === i ? "url(#revenueBarHoverGrad)" : "url(#revenueBarGrad)"}
-                  filter="url(#barShadow)"
+                  rx="7"
+                  fill={isHovered ? `url(#revGradHover-${tier.key})` : `url(#revGrad-${tier.key})`}
+                  filter={`url(#shadow-${tier.key})`}
                   className="transition-all duration-200"
+                  stroke={isHovered ? "#ffffff" : "transparent"}
+                  strokeWidth={isHovered ? "2" : "0"}
                 />
+
+                {/* Bottom Month Label */}
                 <text
                   x={x + barWidth / 2}
                   y={height - 10}
                   textAnchor="middle"
-                  className="fill-slate-500 text-[13px] font-semibold"
+                  className={`text-xs transition-colors duration-200 ${
+                    isHovered ? "fill-slate-900 font-black" : "fill-slate-500 font-semibold"
+                  }`}
                 >
                   {d.month}
                 </text>
@@ -210,31 +301,74 @@ export const RevenueBarChart = ({ data = [] }) => {
             );
           })}
 
-          {hoveredIdx !== null && (
-            <g
-              transform={`translate(${paddingX + (hoveredIdx / (data.length - 1)) * chartAreaWidth
-                }, ${height - paddingY - (data[hoveredIdx].amount / maxVal) * (height - paddingY * 2) - 25
-                })`}
-            >
-              <rect
-                x="-42"
-                y="-18"
-                width="84"
-                height="24"
-                rx="8"
-                className="fill-slate-900 shadow-xl"
-              />
-              <text
-                x="0"
-                y="-2"
-                textAnchor="middle"
-                className="fill-white text-[13px] font-black"
-              >
-                ₹{data[hoveredIdx].amount} Lakhs
-              </text>
-            </g>
-          )}
+          {hoveredIdx !== null && (() => {
+            const hoveredItem = data[hoveredIdx];
+            const tier = getTierForAmount(hoveredItem.amount);
+            const barHeight = (hoveredItem.amount / maxVal) * (height - paddingY * 2);
+            const posX = paddingX + (hoveredIdx / (data.length - 1)) * chartAreaWidth;
+            const posY = height - paddingY - barHeight - 26;
+
+            return (
+              <g transform={`translate(${posX}, ${posY})`} className="pointer-events-none transition-all duration-150">
+                <rect
+                  x="-54"
+                  y="-28"
+                  width="108"
+                  height="30"
+                  rx="8"
+                  className="fill-slate-900 shadow-2xl"
+                />
+                <polygon
+                  points="-6,2 6,2 0,7"
+                  className="fill-slate-900"
+                />
+                <text
+                  x="0"
+                  y="-15"
+                  textAnchor="middle"
+                  className="fill-white text-[11px] font-black tracking-tight"
+                >
+                  {hoveredItem.month}: ₹{hoveredItem.amount} Lakhs
+                </text>
+                <text
+                  x="0"
+                  y="-4"
+                  textAnchor="middle"
+                  fill={tier.hoverFrom}
+                  className="text-[9px] font-bold uppercase tracking-wider"
+                >
+                  ● {tier.name}
+                </text>
+              </g>
+            );
+          })()}
         </svg>
+      </div>
+
+      {/* Dynamic Collection Color Legend */}
+      <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100 text-xs">
+        <span className="font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+          Collection Range:
+        </span>
+        <div className="flex flex-wrap items-center gap-1.5">
+          {COLLECTION_TIERS.slice().reverse().map((tier) => {
+            const isSelected = selectedTierKey === tier.key;
+            return (
+              <button
+                key={tier.key}
+                type="button"
+                onClick={() => setSelectedTierKey(isSelected ? null : tier.key)}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all cursor-pointer ${
+                  isSelected ? tier.activePill : tier.pill
+                }`}
+                title={`Filter ${tier.name} (Click to toggle)`}
+              >
+                <span className={`h-2 w-2 rounded-full ${isSelected ? "bg-white" : tier.dot}`} />
+                <span>{tier.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -270,15 +404,15 @@ export const CoursePopularityBars = ({ data = [] }) => {
             <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
               <div className="flex items-center gap-2 truncate pr-2">
                 <span className={`h-2.5 w-2.5 rounded-full ring-2 shrink-0 ${dot}`} />
-                <span className="text-[13px]late-800 font-bold truncate group-hover:text-blue-600 transition-colors">
+                <span className="text-slate-800 font-bold truncate group-hover:text-blue-600 transition-colors">
                   {item.course}
                 </span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <span className="text-[13px]late-500 font-mono">
+                <span className="text-slate-500 font-mono">
                   {Number(item.count ?? item.enrolled ?? 0).toLocaleString()} learners
                 </span>
-                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[12px] font-bold text-[13px]late-700">
+                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[12px] font-bold text-slate-700">
                   {item.percentage ?? 0}%
                 </span>
               </div>
@@ -334,7 +468,7 @@ export const LeadConversionDonut = ({ data = [] }) => {
           })}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-2xl font-black text-[13px]late-900">
+          <span className="text-2xl font-black text-slate-900">
             {enrichedData[0]?.value || 42}%
           </span>
           <span className="text-[12px] uppercase font-bold text-emerald-600 tracking-wider">
@@ -354,7 +488,7 @@ export const LeadConversionDonut = ({ data = [] }) => {
                 className="h-2.5 w-2.5 rounded-full ring-2 ring-white shadow-xs"
                 style={{ backgroundColor: item.color }}
               />
-              <span className="font-semibold text-[13px]late-700">{item.label}</span>
+              <span className="font-semibold text-slate-700">{item.label}</span>
             </div>
             <span
               className="font-bold font-mono px-2 py-0.5 rounded-md text-[13px]"

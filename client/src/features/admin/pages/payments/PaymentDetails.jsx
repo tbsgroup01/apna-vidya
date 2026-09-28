@@ -1,21 +1,119 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Printer, CheckCircle2, ShieldCheck } from "lucide-react";
+import {
+  ArrowLeft,
+  Printer,
+  CheckCircle2,
+  Mail,
+} from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import StatusBadge from "../../components/StatusBadge";
 import { initialPayments } from "../../../../data/admin/paymentsData";
+import { initialStudents } from "../../../../data/admin/studentsData";
+import { initialAdminCourses } from "../../../../data/admin/coursesAdminData";
+import logo from "../../../../assets/apnavidya.png";
+
+const WhatsAppIcon = ({ size = 15, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.53c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.3z" />
+  </svg>
+);
 
 const PaymentDetails = () => {
   const { id } = useParams();
   const payment =
     initialPayments.find((p) => p.id === id) || initialPayments[0];
 
+  const matchedStudent = initialStudents.find(
+    (s) =>
+      s.id === payment.studentId ||
+      s.name.toLowerCase() === (payment.studentName || "").toLowerCase()
+  );
+
+  const matchedCourse = initialAdminCourses.find(
+    (c) => c.title.toLowerCase() === (payment.course || "").toLowerCase()
+  );
+
+  const rollNo =
+    payment.rollNo ||
+    matchedStudent?.id ||
+    payment.studentId ||
+    "STU-2026-001";
+
+  const batchName =
+    payment.batchName || matchedStudent?.batch || "FS-JUL-26 (Weekend Live)";
+
+  const courseDuration =
+    payment.courseDuration || matchedCourse?.duration || "6 Months (24 Weeks)";
+
+  const doj =
+    payment.doj || matchedStudent?.admissionDate || "2026-07-02";
+
+  const dojFormatted = doj
+    ? new Date(doj).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })
+    : "02 Jul 2026";
+
+  const remainingBalance =
+    payment.remainingBalance !== undefined
+      ? payment.remainingBalance
+      : matchedStudent?.pendingFees !== undefined
+        ? matchedStudent.pendingFees
+        : 0;
+
+  const nextDueDate =
+    payment.nextDueDate ||
+    (remainingBalance === 0 || (payment.status === "Paid" && matchedStudent?.pendingFees === 0)
+      ? "N/A (Fully Cleared)"
+      : "15th Oct 2026");
+
+  const lateFee = payment.lateFee || "₹0 (Nil)";
+
+  const studentPhone = matchedStudent?.phone || "";
+  const digits = studentPhone.replace(/\D/g, "");
+  const waNumber = digits.length === 10 ? `91${digits}` : digits;
+
+  const shareText =
+    `*Apna Vidya - Official Fee Receipt*\n\n` +
+    `Hello ${payment.studentName},\n` +
+    `Here are your payment voucher details:\n\n` +
+    `• *Receipt No:* ${payment.id}\n` +
+    `• *Roll No:* ${rollNo}\n` +
+    `• *Program:* ${payment.course}\n` +
+    `• *Batch Name:* ${batchName}\n` +
+    `• *Course Duration:* ${courseDuration}\n` +
+    `• *Date of Joining (DOJ):* ${dojFormatted}\n` +
+    `• *Amount Paid:* ₹${payment.amount.toLocaleString()}\n` +
+    `• *Remaining Balance:* ₹${remainingBalance.toLocaleString()}\n` +
+    `• *Next Due Date:* ${nextDueDate}\n` +
+    `• *Late Fee:* ${lateFee}\n` +
+    `• *Method:* ${payment.method}\n` +
+    `• *Transaction Ref:* ${payment.transactionRef}\n\n` +
+    `Thank you for choosing Apna Vidya!`;
+
+  const waShareUrl = waNumber
+    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(shareText)}`
+    : `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+
+  const emailShareUrl = `mailto:${payment.studentEmail || ""}?subject=${encodeURIComponent(
+    `Official Fee Receipt: ${payment.id} - Apna Vidya`
+  )}&body=${encodeURIComponent(shareText)}`;
+
   const handlePrint = () => {
     window.print();
   };
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto">
+    <div className="space-y-5 max-w-3xl mx-auto print:max-w-none print:w-full print:m-0 print:p-0 print:space-y-0">
       <div className="print:hidden">
         <PageHeader
           title={`Fee Receipt: ${payment.id}`}
@@ -25,18 +123,36 @@ const PaymentDetails = () => {
             { label: payment.id },
           ]}
           actions={
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Link
                 to="/admin/payments"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs"
               >
                 <ArrowLeft size={15} />
                 <span>Back</span>
               </Link>
+              <a
+                href={waShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-300 bg-emerald-50 px-3.5 py-2 text-xs font-bold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all shadow-2xs cursor-pointer active:scale-95"
+                title="Share Receipt via WhatsApp"
+              >
+                <WhatsAppIcon size={14} />
+                <span>Share WhatsApp</span>
+              </a>
+              <a
+                href={emailShareUrl}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-blue-300 bg-blue-50 px-3.5 py-2 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs cursor-pointer active:scale-95"
+                title="Share Receipt via Email"
+              >
+                <Mail size={14} />
+                <span>Share Email</span>
+              </a>
               <button
                 type="button"
                 onClick={handlePrint}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
               >
                 <Printer size={15} />
                 <span>Print Receipt</span>
@@ -46,27 +162,27 @@ const PaymentDetails = () => {
         />
       </div>
 
-      <div className="rounded-2xl border border-slate-200/90 bg-white p-8 shadow-xs space-y-6 print:border-none print:shadow-none print:p-0">
-        <div className="flex items-start justify-between border-b border-slate-100 pb-6">
+      <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs space-y-3.5 print:border print:border-slate-300 print:rounded-2xl print:shadow-none print:p-6 print:m-0 print:w-full print:space-y-3">
+        {/* Company Header with Official Logo, NO GSTIN line, compact gap */}
+        <div className="flex items-start justify-between border-b border-slate-100 pb-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 font-black text-white text-lg">
-              AV
-            </div>
+            <img
+              src={logo}
+              alt="Apna Vidya Logo"
+              className="h-11 sm:h-12 w-auto object-contain shrink-0"
+            />
             <div>
-              <h2 className="text-xl font-black tracking-tight text-[13px]late-900">
+              <h2 className="text-lg sm:text-xl font-black tracking-tight text-slate-900 leading-snug">
                 Apna Vidya Edutech Pvt. Ltd.
               </h2>
-              <p className="text-xs text-[13px]late-500">
+              <p className="text-xs text-slate-500">
                 Sector 62, Noida, Uttar Pradesh - 201301
-              </p>
-              <p className="text-[13px] font-mono text-[13px]late-400">
-                GSTIN: 09AAACA1234B1Z5 • ISO 9001:2015 Certified
               </p>
             </div>
           </div>
 
           <div className="text-right">
-            <span className="font-mono text-xs font-bold text-[13px]late-400 block">
+            <span className="font-mono text-xs font-bold text-slate-400 block">
               {payment.invoiceId}
             </span>
             <div className="mt-1">
@@ -75,42 +191,90 @@ const PaymentDetails = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 text-xs border-b border-slate-100 pb-6">
-          <div>
-            <p className="text-[13px] font-bold uppercase tracking-wider text-[13px]late-400 mb-1">
+        {/* Student & Voucher Details with Roll No, DOJ, Batch Name, Duration, Next Due Date, Late Fee, Remaining Balance */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs border-b border-slate-100 pb-4">
+          <div className="space-y-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
               Billed To Student
             </p>
-            <p className="text-[13px]m font-bold text-[13px]late-900">{payment.studentName}</p>
-            <p className="text-[13px]late-500">{payment.studentEmail}</p>
-            <p className="font-mono text-[13px]late-400 mt-0.5">ID: {payment.studentId}</p>
+            <p className="text-sm font-bold text-slate-900">{payment.studentName}</p>
+            <p className="text-slate-500">{payment.studentEmail}</p>
+            <p className="text-slate-700">
+              <span className="text-slate-400 font-medium">Roll No:</span>{" "}
+              <span className="font-mono font-bold text-slate-900">{rollNo}</span>
+            </p>
+            <div className="mt-2 pt-2 border-t border-slate-100/80 space-y-1">
+              <p className="text-slate-700">
+                <span className="text-slate-400 font-medium">DOJ:</span>{" "}
+                <span className="font-mono text-slate-800">{dojFormatted}</span>
+              </p>
+              <p className="text-slate-700">
+                <span className="text-slate-400 font-medium">Batch Name:</span>{" "}
+                <span className="font-semibold text-slate-800">{batchName}</span>
+              </p>
+              <p className="text-slate-700">
+                <span className="text-slate-400 font-medium">Course Duration:</span>{" "}
+                <span className="text-slate-800">{courseDuration}</span>
+              </p>
+            </div>
           </div>
 
-          <div className="text-right">
-            <p className="text-[13px] font-bold uppercase tracking-wider text-[13px]late-400 mb-1">
+          <div className="text-left sm:text-right space-y-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
               Payment Voucher Details
             </p>
-            <p className="font-mono text-[13px]late-700">Receipt No: <span className="font-bold text-[13px]late-900">{payment.id}</span></p>
-            <p className="text-[13px]late-500">Date: {payment.date}</p>
-            <p className="text-[13px]late-500">Method: {payment.method}</p>
-            <p className="font-mono text-[12px] text-[13px]late-400 truncate mt-0.5">Ref: {payment.transactionRef}</p>
+            <p className="font-mono text-slate-700">
+              Receipt No: <span className="font-bold text-slate-900">{payment.id}</span>
+            </p>
+            <p className="text-slate-500">Date: {payment.date}</p>
+            <p className="text-slate-500">Method: {payment.method}</p>
+            <p className="font-mono text-[11px] text-slate-400 truncate mt-0.5">
+              Ref: {payment.transactionRef}
+            </p>
+            <div className="mt-2 pt-2 border-t border-slate-100/80 space-y-1">
+              <p className="text-slate-700">
+                <span className="text-slate-400 font-medium">Next Due Date:</span>{" "}
+                <span className="font-semibold text-amber-700">{nextDueDate}</span>
+              </p>
+              <p className="text-slate-700">
+                <span className="text-slate-400 font-medium">Late Fee (if any):</span>{" "}
+                <span className="text-slate-700 font-mono">{lateFee}</span>
+              </p>
+              <p className="text-slate-700">
+                <span className="text-slate-400 font-medium">Remaining Balance:</span>{" "}
+                <span className="font-bold font-mono text-rose-600">
+                  ₹{remainingBalance.toLocaleString()}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
 
-        <div>
+        {/* Program / Fee Table */}
+        <div className="border border-slate-200/80 rounded-xl overflow-hidden">
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-slate-200 bg-slate-50/75 text-[13px] font-bold uppercase text-[13px]late-600">
+            <thead className="border-b border-slate-200 bg-slate-50/75 text-xs font-bold uppercase text-slate-600">
               <tr>
                 <th className="p-3">Description / Program</th>
-                <th className="p-3 text-right">Total Amount</th>
+                <th className="p-3 text-center">Batch & Duration</th>
+                <th className="p-3 text-right">Amount Paid</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               <tr>
                 <td className="p-3">
-                  <p className="font-bold text-[13px]late-900">{payment.course}</p>
-                  <p className="text-[13px] text-[13px]late-500">Tuition Installment • Live Mentorship & LMS Access</p>
+                  <p className="font-bold text-slate-900 text-sm">{payment.course}</p>
+                  <p className="text-xs text-slate-500">
+                    Tuition Installment • Live Mentorship & LMS Access
+                  </p>
                 </td>
-                <td className="p-3 text-right font-mono font-bold text-[13px]late-900">
+                <td className="p-3 text-center">
+                  <span className="inline-block rounded-md bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 text-xs">
+                    {batchName}
+                  </span>
+                  <p className="text-[11px] text-slate-400 mt-0.5">{courseDuration}</p>
+                </td>
+                <td className="p-3 text-right font-mono font-bold text-slate-900 text-sm">
                   ₹{payment.amount.toLocaleString()}
                 </td>
               </tr>
@@ -118,21 +282,50 @@ const PaymentDetails = () => {
           </table>
         </div>
 
-        <div className="border-t border-slate-100 pt-4 flex justify-between items-center text-xs">
-          <div className="flex items-center gap-2 text-emerald-600 font-semibold">
-            <CheckCircle2 size={16} />
-            <span>Digital Payment Verified & Recorded</span>
+        {/* Summary Breakdown */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center border-t border-slate-100 pt-3">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 text-emerald-600 font-semibold text-xs">
+              <CheckCircle2 size={16} />
+              <span>Digital Payment Verified & Recorded</span>
+            </div>
+            <p className="text-[11px] text-slate-400">
+              Transaction Mode: <span className="font-medium text-slate-700">{payment.method}</span>
+            </p>
           </div>
 
-          <div className="text-right">
-            <span className="text-[13px]late-500 text-xs mr-3">Total Paid Amount:</span>
-            <span className="text-xl font-bold font-mono text-[13px]late-900">
-              ₹{payment.amount.toLocaleString()}
-            </span>
+          <div className="bg-slate-50/80 rounded-xl p-3.5 border border-slate-100 text-xs space-y-1.5">
+            <div className="flex justify-between text-slate-600">
+              <span>Installment Amount Paid:</span>
+              <span className="font-mono font-bold text-slate-900">
+                ₹{payment.amount.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex justify-between text-slate-600">
+              <span>Late Fee (if any):</span>
+              <span className="font-mono text-slate-700">{lateFee}</span>
+            </div>
+            <div className="flex justify-between text-slate-600">
+              <span>Remaining Balance:</span>
+              <span className="font-mono font-bold text-rose-600">
+                ₹{remainingBalance.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex justify-between text-slate-600">
+              <span>Next Due Date:</span>
+              <span className="font-semibold text-amber-700">{nextDueDate}</span>
+            </div>
+            <div className="border-t border-slate-200 pt-1.5 flex justify-between items-center">
+              <span className="font-bold text-slate-800">Total Paid Amount:</span>
+              <span className="text-base font-black font-mono text-blue-600">
+                ₹{payment.amount.toLocaleString()}
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-xl bg-slate-50 p-4 text-[13px] text-[13px]late-500 text-center border border-slate-100">
+        {/* Official Footer Notice */}
+        <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-500 text-center border border-slate-100">
           This is an official computer-generated fee acknowledgement receipt and does not require a physical signature.
         </div>
       </div>
