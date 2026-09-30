@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { X, CheckCircle2, Download, FileText } from "lucide-react";
 import api from "../../../services/api";
+import { sendOtp, verifyOtp, isValidMobile } from "../../../services/otpService";
+import OtpVerificationStep from "./OtpVerificationStep";
 
 const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
   const isSyllabus = options?.mode === "syllabus" || Boolean(options?.syllabusUrl);
@@ -13,7 +15,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
     course: initialCourse || "",
   });
   const [coursesList, setCoursesList] = useState([]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [step, setStep] = useState("form"); // "form" | "otp" | "success"
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -57,13 +59,44 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (error) setError(null);
   };
 
+  // Step 1: Submit Form -> Validate Phone & Dispatch OTP via SMS
   const handleDemoSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+
+    if (!formData.name.trim()) {
+      setError("Please enter the student's name.");
+      return;
+    }
+
+    if (!isValidMobile(formData.phone)) {
+      setError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await sendOtp(formData.phone);
+      setStep("otp");
+    } catch (err) {
+      setError(err.message || "Failed to send verification SMS. Please check your mobile number.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Step 2: Verify Entered OTP -> Finalize Lead Booking
+  const handleVerifyOtp = async (code) => {
     setLoading(true);
     setError(null);
     try {
+      // Verify OTP code
+      await verifyOtp(formData.phone, code);
+
+      // Submit lead to backend
       await api.post("/public/leads/demo", {
         name: formData.name.trim(),
         phone: formData.phone.trim(),
@@ -71,10 +104,11 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
         course: formData.course || "General Program",
         source: isSyllabus ? "Syllabus Download" : "Demo Class",
         message: isSyllabus
-          ? `Requested and downloaded syllabus for ${formData.course || initialCourse}`
-          : "Booked free demo class trial via website popup modal",
+          ? `Requested and downloaded syllabus for ${formData.course || initialCourse} [Mobile OTP Verified]`
+          : "Booked free demo class trial via website popup modal [Mobile OTP Verified]",
       });
-      setIsSubmitted(true);
+
+      setStep("success");
 
       if (isSyllabus && syllabusUrl) {
         setTimeout(() => {
@@ -89,14 +123,24 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
         }, 400);
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to submit request. Please try again.");
+      setError(err.response?.data?.message || err.message || "Failed to verify OTP. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleResendOtp = async () => {
+    setError(null);
+    try {
+      await sendOtp(formData.phone);
+    } catch (err) {
+      setError(err.message || "Failed to resend OTP.");
+      throw err;
+    }
+  };
+
   const handleClose = () => {
-    setIsSubmitted(false);
+    setStep("form");
     setError(null);
     setFormData({ name: "", phone: "", email: "", course: initialCourse || (coursesList[0]?.name || "") });
     onClose();
@@ -120,7 +164,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
           <X size={20} />
         </button>
 
-        {!isSubmitted ? (
+        {step === "form" && (
           <>
             <div className="mb-6 text-center sm:text-left">
               <div className="flex items-center gap-2.5 mb-1.5 justify-center sm:justify-start">
@@ -230,8 +274,8 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
                   <span>
                     {loading
                       ? isSyllabus
-                        ? "Preparing Syllabus..."
-                        : "Registering Demo..."
+                        ? "Sending OTP..."
+                        : "Sending OTP..."
                       : isSyllabus
                       ? "Submit & Download Syllabus"
                       : "Confirm & Book Free Demo"}
@@ -244,7 +288,26 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
               </p>
             </form>
           </>
-        ) : (
+        )}
+
+        {step === "otp" && (
+          <OtpVerificationStep
+            phone={formData.phone}
+            onVerify={handleVerifyOtp}
+            onResend={handleResendOtp}
+            onBack={() => {
+              setStep("form");
+              setError(null);
+            }}
+            loading={loading}
+            error={error}
+            title={isSyllabus ? "Verify for Syllabus Access" : "Verify Mobile Number"}
+            subtitle="Enter the 4-digit SMS OTP to confirm your booking:"
+            submitLabel={isSyllabus ? "Verify & Download Syllabus" : "Verify & Book Free Demo"}
+          />
+        )}
+
+        {step === "success" && (
           <div className="py-6 text-center space-y-4">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
               <CheckCircle2 size={32} />
@@ -262,7 +325,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
                   </>
                 ) : (
                   <>
-                    Thank you, <span className="font-semibold text-gray-800">{formData.name}</span>! We have received your request for{" "}
+                    Thank you, <span className="font-semibold text-gray-800">{formData.name}</span>! We have verified your number and received your request for{" "}
                     <span className="font-semibold text-blue-600">{formData.course}</span>. Our academic counselor will contact you at{" "}
                     <span className="font-semibold text-gray-800">{formData.phone}</span> shortly.
                   </>

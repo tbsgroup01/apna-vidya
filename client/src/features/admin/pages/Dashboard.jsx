@@ -456,7 +456,7 @@ const Dashboard = () => {
               </div>
             </div>
             <Link
-              to="/admin/leads"
+              to="/admin/demo-classes"
               className="inline-flex items-center gap-1 rounded-xl bg-blue-50 border border-blue-200/60 px-2.5 py-1 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all"
             >
               <span>View All</span>

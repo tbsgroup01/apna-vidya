@@ -265,9 +265,8 @@ export const RevenueBarChart = ({ data = [] }) => {
                   x={x + barWidth / 2}
                   y={y - 6}
                   textAnchor="middle"
-                  className={`text-[11px] font-bold transition-all duration-200 ${
-                    isHovered ? "fill-slate-900 font-extrabold" : "fill-slate-500"
-                  }`}
+                  className={`text-[11px] font-bold transition-all duration-200 ${isHovered ? "fill-slate-900 font-extrabold" : "fill-slate-500"
+                    }`}
                 >
                   ₹{d.amount}L
                 </text>
@@ -291,9 +290,8 @@ export const RevenueBarChart = ({ data = [] }) => {
                   x={x + barWidth / 2}
                   y={height - 10}
                   textAnchor="middle"
-                  className={`text-xs transition-colors duration-200 ${
-                    isHovered ? "fill-slate-900 font-black" : "fill-slate-500 font-semibold"
-                  }`}
+                  className={`text-xs transition-colors duration-200 ${isHovered ? "fill-slate-900 font-black" : "fill-slate-500 font-semibold"
+                    }`}
                 >
                   {d.month}
                 </text>
@@ -358,9 +356,8 @@ export const RevenueBarChart = ({ data = [] }) => {
                 key={tier.key}
                 type="button"
                 onClick={() => setSelectedTierKey(isSelected ? null : tier.key)}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all cursor-pointer ${
-                  isSelected ? tier.activePill : tier.pill
-                }`}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[11px] font-bold transition-all cursor-pointer ${isSelected ? tier.activePill : tier.pill
+                  }`}
                 title={`Filter ${tier.name} (Click to toggle)`}
               >
                 <span className={`h-2 w-2 rounded-full ${isSelected ? "bg-white" : tier.dot}`} />
@@ -426,30 +423,7 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
           <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
           <span>Real-time Demo Requests</span>
         </span>
-        <div className="flex items-center bg-purple-100/70 p-0.5 rounded-lg border border-purple-200/80">
-          <button
-            type="button"
-            onClick={() => setViewMode("columns")}
-            className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition-all cursor-pointer ${
-              viewMode === "columns"
-                ? "bg-white text-purple-700 shadow-2xs"
-                : "text-slate-600 hover:text-purple-700"
-            }`}
-          >
-            Bar Chart
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode("horizontal")}
-            className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition-all cursor-pointer ${
-              viewMode === "horizontal"
-                ? "bg-white text-purple-700 shadow-2xs"
-                : "text-slate-600 hover:text-purple-700"
-            }`}
-          >
-            Horizontal Bars
-          </button>
-        </div>
+
       </div>
 
       {viewMode === "columns" ? (
@@ -561,9 +535,8 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
                     x={centerX}
                     y={height - 12}
                     textAnchor="middle"
-                    className={`text-xs font-bold transition-colors duration-200 ${
-                      isHovered ? "fill-purple-700 font-extrabold" : "fill-slate-700"
-                    }`}
+                    className={`text-xs font-bold transition-colors duration-200 ${isHovered ? "fill-purple-700 font-extrabold" : "fill-slate-700"
+                      }`}
                   >
                     {item.course.length > 22 ? item.course.slice(0, 20) + "…" : item.course}
                   </text>

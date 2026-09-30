@@ -17,6 +17,7 @@ import {
   BookOpen,
   Layers,
   Receipt,
+  IndianRupee,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
@@ -330,7 +331,7 @@ const StudentsList = () => {
             className="rounded-lg p-1.5 text-emerald-600 bg-emerald-50/80 hover:bg-emerald-600 hover:text-white transition-colors"
             title="View Official Fee Receipt"
           >
-            <Receipt size={15} />
+            <IndianRupee size={15} />
           </Link>
           <Link
             to={`/admin/students/${row.id}`}

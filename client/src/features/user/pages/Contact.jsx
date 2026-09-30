@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import api from "../../../services/api";
 import { useSettings } from "../../../context/SettingsContext";
+import { sendOtp, verifyOtp, isValidMobile } from "../../../services/otpService";
+import OtpVerificationStep from "../components/OtpVerificationStep";
 
 const Contact = () => {
   const { settings } = useSettings();
@@ -25,6 +27,7 @@ const Contact = () => {
     subject: "General Inquiry",
     message: "",
   });
+  const [step, setStep] = useState("form"); // "form" | "otp" | "success"
   const [isSent, setIsSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -45,22 +48,65 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+
+    if (!formData.name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+
+    if (!isValidMobile(formData.phone)) {
+      setError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    if (!formData.message.trim()) {
+      setError("Please enter your message.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await sendOtp(formData.phone);
+      setStep("otp");
+    } catch (err) {
+      setError(err.message || "Failed to send verification SMS. Please check your mobile number.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async (code) => {
     setLoading(true);
     setError(null);
     try {
+      await verifyOtp(formData.phone, code);
+
       await api.post("/public/leads/contact", {
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim(),
         course: formData.subject,
         source: "Contact Form",
-        message: formData.message.trim(),
+        message: `${formData.message.trim()} [Mobile OTP Verified]`,
       });
+
+      setStep("success");
       setIsSent(true);
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to send message. Please try again.");
+      setError(err.response?.data?.message || err.message || "Failed to verify OTP. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    setError(null);
+    try {
+      await sendOtp(formData.phone);
+    } catch (err) {
+      setError(err.message || "Failed to resend OTP.");
+      throw err;
     }
   };
 
@@ -189,12 +235,12 @@ const Contact = () => {
 
           <div className="lg:col-span-7">
             <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-10 shadow-xl shadow-slate-200/50">
-              {!isSent ? (
+              {step === "form" && (
                 <div>
-                  <h2 className="text-2xl font-bold text-[13px]late-900">
+                  <h2 className="text-2xl font-bold text-slate-900">
                     Send Us a Message
                   </h2>
-                  <p className="mt-1 text-xs text-[13px]late-500">
+                  <p className="mt-1 text-xs text-slate-500">
                     Our academic advisors will get back to you with personalized
                     guidance.
                   </p>
@@ -208,57 +254,60 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
                           Full Name *
                         </label>
                         <input
                           type="text"
                           required
                           value={formData.name}
-                          onChange={(e) =>
-                            setFormData({ ...formData, name: e.target.value })
-                          }
+                          onChange={(e) => {
+                            setFormData({ ...formData, name: e.target.value });
+                            if (error) setError(null);
+                          }}
                           placeholder="Your name"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
                           Phone Number *
                         </label>
                         <input
                           type="tel"
                           required
                           value={formData.phone}
-                          onChange={(e) =>
-                            setFormData({ ...formData, phone: e.target.value })
-                          }
+                          onChange={(e) => {
+                            setFormData({ ...formData, phone: e.target.value });
+                            if (error) setError(null);
+                          }}
                           placeholder="+91 98765 43210"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
                           Email Address *
                         </label>
                         <input
                           type="email"
                           required
                           value={formData.email}
-                          onChange={(e) =>
-                            setFormData({ ...formData, email: e.target.value })
-                          }
+                          onChange={(e) => {
+                            setFormData({ ...formData, email: e.target.value });
+                            if (error) setError(null);
+                          }}
                           placeholder="you@example.com"
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
                           Inquiry Type
                         </label>
                         <select
@@ -266,7 +315,7 @@ const Contact = () => {
                           onChange={(e) =>
                             setFormData({ ...formData, subject: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                          className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         >
                           <optgroup label="General Categories">
                             <option value="General Inquiry">General Inquiry</option>
@@ -288,49 +337,79 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[13px]late-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
                         Your Message *
                       </label>
                       <textarea
                         rows={4}
                         required
                         value={formData.message}
-                        onChange={(e) =>
-                          setFormData({ ...formData, message: e.target.value })
-                        }
+                        onChange={(e) => {
+                          setFormData({ ...formData, message: e.target.value });
+                          if (error) setError(null);
+                        }}
                         placeholder="Tell us about your learning goals or questions..."
-                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 resize-none"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={loading}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-[13px]m font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
                     >
                       <Send size={16} />
-                      <span>{loading ? "Sending..." : "Send Inquiry Message"}</span>
+                      <span>{loading ? "Sending OTP..." : "Send Inquiry Message"}</span>
                     </button>
                   </form>
                 </div>
-              ) : (
-                <div className="py-12 text-center">
+              )}
+
+              {step === "otp" && (
+                <OtpVerificationStep
+                  phone={formData.phone}
+                  onVerify={handleVerifyOtp}
+                  onResend={handleResendOtp}
+                  onBack={() => {
+                    setStep("form");
+                    setError(null);
+                  }}
+                  loading={loading}
+                  error={error}
+                  title="Verify Mobile Number"
+                  subtitle="Please enter the 4-digit SMS OTP to send your inquiry:"
+                  submitLabel="Verify & Send Message"
+                />
+              )}
+
+              {step === "success" && (
+                <div className="py-12 text-center animate-in fade-in zoom-in-95 duration-200">
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                     <CheckCircle2 size={36} />
                   </div>
-                  <h3 className="mt-4 text-2xl font-bold text-[13px]late-900">
+                  <h3 className="mt-4 text-2xl font-bold text-slate-900">
                     Message Sent Successfully!
                   </h3>
-                  <p className="mt-2 text-[13px]m text-[13px]late-600 max-w-sm mx-auto leading-relaxed">
+                  <p className="mt-2 text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
                     Thank you, <span className="font-bold">{formData.name}</span>.
-                    Our academic counselor will contact you at{" "}
+                    We have verified your phone number and our academic counselor will contact you at{" "}
                     <span className="font-bold">{formData.phone}</span> within 4
                     hours.
                   </p>
                   <button
                     type="button"
-                    onClick={() => setIsSent(false)}
-                    className="mt-6 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 cursor-pointer"
+                    onClick={() => {
+                      setStep("form");
+                      setIsSent(false);
+                      setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        subject: "General Inquiry",
+                        message: "",
+                      });
+                    }}
+                    className="mt-6 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 cursor-pointer transition-colors"
                   >
                     Send Another Inquiry
                   </button>

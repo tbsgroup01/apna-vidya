@@ -11,8 +11,12 @@ const settingController = require("../controllers/settingController");
 const videoSectionController = require("../controllers/videoSectionController");
 const upload = require("../middlewares/uploadMiddleware");
 const uploadController = require("../controllers/uploadController");
+const otpController = require("../controllers/otpController");
 
 router.post("/upload", upload.any(), uploadController.uploadImage);
+
+router.post("/otp/send", otpController.sendOtp);
+router.post("/otp/verify", otpController.verifyOtp);
 
 router.post("/leads", leadController.createPublicLead);
 router.post("/leads/demo", (req, res, next) => {
