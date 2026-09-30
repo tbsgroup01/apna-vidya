@@ -311,25 +311,66 @@ const registerAdmin = async (req, res) => {
       });
     }
 
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: "User with this email already exists.",
-      });
-    }
+    const roleName = (role || "Admin").trim();
 
-    const targetRole = await Role.findOne({
-      where: { name: role },
+    // 1. Find role flexibly across common casing and spacing
+    let targetRole = await Role.findOne({
+      where: {
+        [Op.or]: [
+          { name: roleName },
+          { name: roleName.toLowerCase() },
+          { name: roleName.toUpperCase() },
+          { name: roleName.replace(/\s+/g, "") },
+          { name: roleName.replace(/\s+/g, "_") },
+        ],
+      },
     });
 
     if (!targetRole) {
-      return res.status(400).json({
-        success: false,
-        message: `Role '${role}' not found. Available roles: Super Admin, Admin, Counsellor, Accountant, Content Manager, Student`,
+      const allRoles = await Role.findAll();
+      targetRole = allRoles.find(
+        (r) =>
+          r.name &&
+          (r.name.trim().toLowerCase() === roleName.toLowerCase() ||
+            r.name.replace(/[\s_-]/g, "").toLowerCase() ===
+              roleName.replace(/[\s_-]/g, "").toLowerCase())
+      );
+    }
+
+    // 2. If role is still not in DB, auto-create it so registration never blocks
+    if (!targetRole) {
+      targetRole = await Role.create({
+        name: roleName,
+        description: `${roleName} role`,
       });
     }
 
+    // 3. If user already exists, update their password & role so they can log in
+    let existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      existingUser.name = name;
+      existingUser.password = password; // hashed automatically by beforeUpdate hook
+      existingUser.roleId = targetRole.id;
+      existingUser.status = "Active";
+      if (phone) existingUser.phone = phone;
+      if (profileImage) existingUser.profileImage = profileImage;
+      await existingUser.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "Admin account updated successfully.",
+        data: {
+          id: existingUser.id,
+          name: existingUser.name,
+          email: existingUser.email,
+          phone: existingUser.phone,
+          role: targetRole.name,
+          status: existingUser.status,
+        },
+      });
+    }
+
+    // 4. Create new admin user
     const newUser = await User.create({
       name,
       email,
@@ -360,6 +401,45 @@ const registerAdmin = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ["password", "resetPasswordToken", "resetPasswordExpire"] },
+      include: [{ model: Role, as: "role", attributes: ["id", "name"] }],
+      order: [["createdAt", "DESC"]],
+    });
+    return res.status(200).json({
+      success: true,
+      data: { users },
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message || "Failed to fetch users",
+    });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (Number(id) === req.user?.id) {
+      return res.status(400).json({
+        success: false,
+        message: "You cannot delete your own admin account.",
+      });
+    }
+    const targetUser = await User.findByPk(id);
+    if (!targetUser) {
+      return res.status(404).json({ success: false, message: "User not found." });
+    }
+    await targetUser.destroy();
+    return res.status(200).json({ success: true, message: "User deleted successfully." });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 module.exports = {
   login,
   logout,
@@ -369,4 +449,6 @@ module.exports = {
   forgotPassword,
   resetPassword,
   registerAdmin,
+  getUsers,
+  deleteUser,
 };

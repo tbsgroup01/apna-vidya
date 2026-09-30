@@ -1,62 +1,108 @@
-import React, { useState } from "react";
-import { Plus, Edit, Trash2, Key, Shield, UserCheck } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Plus, Edit, Trash2, Key, Shield, UserCheck, Loader2 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import DataTable from "../components/DataTable";
 import StatusBadge from "../components/StatusBadge";
 import ConfirmModal from "../components/ConfirmModal";
 import { FormInput, FormSelect, ImageUploadPreview } from "../components/FormControls";
-import { initialAdminUsers } from "../../../data/admin/usersRolesData";
+import api from "../../../services/api";
 
 const UsersAdmin = () => {
-  const [users, setUsers] = useState(initialAdminUsers);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    role: "Counsellor",
+    password: "",
+    role: "Admin",
     status: "Active",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+    avatar: "",
   });
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get("/admin/users");
+      if (res.data?.data?.users) {
+        setUsers(
+          res.data.data.users.map((u) => ({
+            id: u.id,
+            displayId: `USR-${String(u.id).padStart(3, "0")}`,
+            name: u.name,
+            email: u.email,
+            phone: u.phone || "N/A",
+            role: u.role?.name || "Admin",
+            status: u.status || "Active",
+            avatar: u.profileImage || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+            lastLogin: u.lastLogin ? new Date(u.lastLogin).toLocaleDateString() : "Never",
+            createdAt: u.createdAt ? new Date(u.createdAt).toISOString().split("T")[0] : "Recent",
+          }))
+        );
+      }
+    } catch (err) {
+      console.error("Failed to fetch users:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const handleDelete = (user) => {
     setUserToDelete(user);
     setDeleteModalOpen(true);
   };
 
-  const confirmDelete = () => {
-    if (userToDelete) {
+  const confirmDelete = async () => {
+    if (!userToDelete) return;
+    try {
+      await api.delete(`/admin/users/${userToDelete.id}`);
       setUsers(users.filter((u) => u.id !== userToDelete.id));
       setUserToDelete(null);
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to delete user");
     }
   };
 
-  const handleCreate = (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
-    const newU = {
-      id: `USR-0${users.length + 1}`,
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      role: form.role,
-      status: form.status,
-      avatar: form.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-      lastLogin: "Never",
-      createdAt: new Date().toISOString().split("T")[0],
-    };
-    setUsers([newU, ...users]);
-    setModalOpen(false);
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      role: "Counsellor",
-      status: "Active",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-    });
+    try {
+      setSubmitting(true);
+      setError("");
+      await api.post("/admin/users", {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        password: form.password || "Admin@12345",
+        role: form.role,
+        status: form.status,
+        profileImage: form.avatar,
+      });
+      setModalOpen(false);
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        role: "Admin",
+        status: "Active",
+        avatar: "",
+      });
+      fetchUsers();
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to create staff account");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const columns = [
@@ -72,8 +118,8 @@ const UsersAdmin = () => {
             className="h-9 w-9 rounded-xl object-cover ring-1 ring-slate-200 shrink-0"
           />
           <div>
-            <span className="font-bold text-[13px]late-900 block">{row.name}</span>
-            <span className="text-[13px] text-[13px]late-400 font-mono">{row.email}</span>
+            <span className="font-bold text-slate-900 block">{row.name}</span>
+            <span className="text-xs text-slate-400 font-mono">{row.email}</span>
           </div>
         </div>
       ),
@@ -93,7 +139,7 @@ const UsersAdmin = () => {
       header: "Last Login",
       sortable: true,
       render: (row) => (
-        <span className="text-[13px]late-500 font-mono text-xs">{row.lastLogin}</span>
+        <span className="text-slate-500 font-mono text-xs">{row.lastLogin}</span>
       ),
     },
     {
@@ -111,7 +157,7 @@ const UsersAdmin = () => {
           <button
             type="button"
             onClick={() => alert(`Password reset link dispatched to ${row.email}`)}
-            className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-slate-100 hover:text-[13px]late-800"
+            className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
             title="Reset Password"
           >
             <Key size={14} />
@@ -120,7 +166,7 @@ const UsersAdmin = () => {
             <button
               type="button"
               onClick={() => handleDelete(row)}
-              className="rounded-lg p-1.5 text-[13px]late-400 hover:bg-rose-50 hover:text-rose-600"
+              className="rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600"
               title="Disable / Delete User"
             >
               <Trash2 size={14} />
@@ -171,10 +217,10 @@ const UsersAdmin = () => {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl border border-slate-100">
-            <h3 className="text-base font-bold text-[13px]late-900">
+            <h3 className="text-base font-bold text-slate-900">
               Invite Institutional User
             </h3>
-            <p className="mt-1 text-xs text-[13px]late-500">
+            <p className="mt-1 text-xs text-slate-500">
               Staff members will receive an activation email to establish their credentials.
             </p>
 

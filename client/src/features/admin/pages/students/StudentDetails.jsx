@@ -19,6 +19,7 @@ import {
   MessageSquare,
   Hash,
   Layers,
+  Receipt,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import StatusBadge from "../../components/StatusBadge";
@@ -152,10 +153,18 @@ const StudentDetails = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/students"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
             >
               <ArrowLeft size={15} />
               <span>Back</span>
+            </Link>
+            <Link
+              to={`/admin/payments/${student.id}`}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-200/90 bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all shadow-2xs"
+              title="View / Print Official Fee Receipt"
+            >
+              <Receipt size={14} />
+              <span>Fee Receipt</span>
             </Link>
             <a
               href={telUrl}
@@ -229,28 +238,33 @@ const StudentDetails = () => {
 
           <div className="grid grid-cols-2 gap-4 border-t border-slate-100 pt-4 sm:border-t-0 sm:pt-0 sm:border-l sm:pl-6 text-xs">
             <div>
-              <p className="text-[13px]late-400">Total Fees</p>
-              <p className="font-bold text-[13px]late-900 font-mono text-[13px]m">
+              <p className="text-slate-400">Total Fees</p>
+              <p className="font-bold text-slate-900 font-mono text-sm">
                 ₹{(student.totalFees || 0).toLocaleString()}
               </p>
             </div>
             <div>
-              <p className="text-[13px]late-400">Paid Fees</p>
-              <p className="font-bold text-emerald-600 font-mono text-[13px]m">
+              <p className="text-slate-400">Paid Fees</p>
+              <p className="font-bold text-emerald-600 font-mono text-sm">
                 ₹{(student.paidFees || 0).toLocaleString()}
               </p>
             </div>
             <div>
-              <p className="text-[13px]late-400">Pending Fees</p>
-              <p className="font-bold text-rose-600 font-mono text-[13px]m">
+              <p className="text-slate-400">Pending Fees</p>
+              <p className="font-bold text-rose-600 font-mono text-sm">
                 ₹{(student.pendingFees || 0).toLocaleString()}
               </p>
             </div>
             <div>
-              <p className="text-[13px]late-400">Attendance</p>
-              <p className="font-bold text-[13px]late-900 font-mono text-[13px]m">
-                {student.attendance || 94}%
-              </p>
+              <p className="text-slate-400">Receipt Voucher</p>
+              <Link
+                to={`/admin/payments/${student.id}`}
+                className="mt-0.5 inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-md hover:bg-emerald-100 transition-colors shadow-2xs"
+                title="View Official Fee Receipt"
+              >
+                <Receipt size={12} />
+                <span>View Receipt</span>
+              </Link>
             </div>
           </div>
         </div>

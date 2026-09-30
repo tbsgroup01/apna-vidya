@@ -5,15 +5,13 @@ import DataTable from "../components/DataTable";
 import StatusBadge from "../components/StatusBadge";
 import ConfirmModal from "../components/ConfirmModal";
 import { FormInput, FormSelect, FormTextarea } from "../components/FormControls";
-import { initialAdminNotifications } from "../../../data/admin/heroSlidersData";
-
 const NotificationsAdmin = () => {
   const [notifications, setNotifications] = useState(() => {
     try {
       const saved = localStorage.getItem("apna_admin_notifications");
-      return saved ? JSON.parse(saved) : initialAdminNotifications;
+      return saved ? JSON.parse(saved) : [];
     } catch {
-      return initialAdminNotifications;
+      return [];
     }
   });
 

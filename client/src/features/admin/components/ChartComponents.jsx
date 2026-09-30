@@ -374,61 +374,287 @@ export const RevenueBarChart = ({ data = [] }) => {
   );
 };
 
-export const CoursePopularityBars = ({ data = [] }) => {
+export const DemandingProgramsBarChart = ({ data = [] }) => {
+  const [viewMode, setViewMode] = useState("columns"); // "columns" | "horizontal"
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+
   const barGradients = [
-    "from-blue-500 via-indigo-500 to-indigo-600",
-    "from-emerald-500 via-teal-500 to-teal-600",
-    "from-purple-500 via-fuchsia-500 to-pink-600",
-    "from-amber-500 via-orange-500 to-orange-600",
-    "from-rose-500 via-pink-500 to-red-600",
-    "from-cyan-500 via-sky-500 to-blue-600",
+    { from: "#8b5cf6", to: "#6366f1", glow: "#7c3aed", label: "text-purple-600", dot: "bg-purple-500 ring-purple-200" },
+    { from: "#06b6d4", to: "#0284c7", glow: "#0891b2", label: "text-cyan-600", dot: "bg-cyan-500 ring-cyan-200" },
+    { from: "#10b981", to: "#059669", glow: "#059669", label: "text-emerald-600", dot: "bg-emerald-500 ring-emerald-200" },
+    { from: "#f59e0b", to: "#d97706", glow: "#d97706", label: "text-amber-600", dot: "bg-amber-500 ring-amber-200" },
+    { from: "#ec4899", to: "#db2777", glow: "#db2777", label: "text-pink-600", dot: "bg-pink-500 ring-pink-200" },
   ];
 
-  const dotGlows = [
-    "bg-blue-500 ring-blue-200",
-    "bg-emerald-500 ring-emerald-200",
-    "bg-purple-500 ring-purple-200",
-    "bg-amber-500 ring-amber-200",
-    "bg-rose-500 ring-rose-200",
-    "bg-cyan-500 ring-cyan-200",
-  ];
+  if (!data || data.length === 0) {
+    return (
+      <div className="py-8 text-center text-xs text-slate-400">
+        No demo class requests recorded yet.
+      </div>
+    );
+  }
+
+  // Calculate integer max and ticks
+  const counts = data.map((d) => Number(d.count ?? d.enrolled ?? 0));
+  const rawMax = Math.max(...counts, 1);
+  const maxVal = rawMax <= 2 ? rawMax + 1 : Math.ceil(rawMax * 1.25);
+
+  const tickStep = maxVal <= 4 ? 1 : Math.ceil(maxVal / 4);
+  const ticks = [];
+  for (let t = 0; t <= maxVal; t += tickStep) {
+    ticks.push(t);
+  }
+
+  // Chart dimensions
+  const width = 840;
+  const height = 230;
+  const paddingLeft = 50;
+  const paddingRight = 30;
+  const paddingTop = 34;
+  const paddingBottom = 36;
+  const chartAreaWidth = width - paddingLeft - paddingRight;
+  const chartAreaHeight = height - paddingTop - paddingBottom;
+  const n = data.length;
+  const slotWidth = chartAreaWidth / n;
+  const barWidth = Math.min(72, Math.max(42, slotWidth * 0.28));
 
   return (
-    <div className="space-y-4">
-      {data.map((item, idx) => {
-        const gradient = barGradients[idx % barGradients.length];
-        const dot = dotGlows[idx % dotGlows.length];
+    <div className="w-full">
+      {/* Header controls: chart title info and View Switcher */}
+      <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-purple-100/70 text-xs">
+        <span className="font-bold text-slate-600 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
+          <span>Real-time Demo Requests</span>
+        </span>
+        <div className="flex items-center bg-purple-100/70 p-0.5 rounded-lg border border-purple-200/80">
+          <button
+            type="button"
+            onClick={() => setViewMode("columns")}
+            className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition-all cursor-pointer ${
+              viewMode === "columns"
+                ? "bg-white text-purple-700 shadow-2xs"
+                : "text-slate-600 hover:text-purple-700"
+            }`}
+          >
+            Bar Chart
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewMode("horizontal")}
+            className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition-all cursor-pointer ${
+              viewMode === "horizontal"
+                ? "bg-white text-purple-700 shadow-2xs"
+                : "text-slate-600 hover:text-purple-700"
+            }`}
+          >
+            Horizontal Bars
+          </button>
+        </div>
+      </div>
 
-        return (
-          <div key={idx} className="group">
-            <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
-              <div className="flex items-center gap-2 truncate pr-2">
-                <span className={`h-2.5 w-2.5 rounded-full ring-2 shrink-0 ${dot}`} />
-                <span className="text-slate-800 font-bold truncate group-hover:text-blue-600 transition-colors">
-                  {item.course}
-                </span>
+      {viewMode === "columns" ? (
+        <div className="relative overflow-x-auto">
+          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-56 sm:h-64 select-none">
+            <defs>
+              {barGradients.map((g, idx) => (
+                <React.Fragment key={idx}>
+                  <linearGradient id={`demandBarGrad-${idx}`} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={g.from} />
+                    <stop offset="100%" stopColor={g.to} />
+                  </linearGradient>
+                  <filter id={`demandBarGlow-${idx}`} x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor={g.glow} floodOpacity="0.35" />
+                  </filter>
+                </React.Fragment>
+              ))}
+            </defs>
+
+            {/* Horizontal dashed grid lines & Y-axis labels */}
+            {ticks.map((t) => {
+              const y = height - paddingBottom - (t / maxVal) * chartAreaHeight;
+              return (
+                <g key={t}>
+                  <line
+                    x1={paddingLeft}
+                    y1={y}
+                    x2={width - paddingRight}
+                    y2={y}
+                    stroke="#e2e8f0"
+                    strokeDasharray="4 4"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x={paddingLeft - 10}
+                    y={y + 4}
+                    textAnchor="end"
+                    className="fill-slate-400 font-mono text-[11px] font-semibold"
+                  >
+                    {t}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* Y-axis label */}
+            <text
+              x={paddingLeft - 10}
+              y={paddingTop - 12}
+              textAnchor="end"
+              className="fill-slate-400 text-[10px] font-bold uppercase tracking-wider"
+            >
+              Requests
+            </text>
+
+            {/* Bars and Values */}
+            {data.map((item, i) => {
+              const count = Number(item.count ?? item.enrolled ?? 0);
+              const gradIdx = i % barGradients.length;
+              const isHovered = hoveredIdx === i;
+              const centerX = paddingLeft + (i + 0.5) * slotWidth;
+              const barX = centerX - barWidth / 2;
+              const barHeight = Math.max((count / maxVal) * chartAreaHeight, 6);
+              const barY = height - paddingBottom - barHeight;
+
+              return (
+                <g
+                  key={i}
+                  onMouseEnter={() => setHoveredIdx(i)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                  className="cursor-pointer transition-all duration-200"
+                >
+                  {/* Value badge directly above bar (NO PERCENTAGE!) */}
+                  <g className="transition-transform duration-200">
+                    <rect
+                      x={centerX - 46}
+                      y={barY - 24}
+                      width={92}
+                      height={19}
+                      rx={6}
+                      className={isHovered ? "fill-slate-900 shadow-md" : "fill-slate-800 shadow-xs"}
+                    />
+                    <text
+                      x={centerX}
+                      y={barY - 11}
+                      textAnchor="middle"
+                      className="fill-white font-mono text-[10px] font-bold"
+                    >
+                      {count} {count === 1 ? "Request" : "Requests"}
+                    </text>
+                  </g>
+
+                  {/* Vertical Bar */}
+                  <rect
+                    x={barX}
+                    y={barY}
+                    width={barWidth}
+                    height={barHeight}
+                    rx="8"
+                    fill={`url(#demandBarGrad-${gradIdx})`}
+                    filter={`url(#demandBarGlow-${gradIdx})`}
+                    className="transition-all duration-300"
+                    stroke={isHovered ? "#ffffff" : "transparent"}
+                    strokeWidth={isHovered ? "2.5" : "0"}
+                  />
+
+                  {/* Course Name on X-axis */}
+                  <text
+                    x={centerX}
+                    y={height - 12}
+                    textAnchor="middle"
+                    className={`text-xs font-bold transition-colors duration-200 ${
+                      isHovered ? "fill-purple-700 font-extrabold" : "fill-slate-700"
+                    }`}
+                  >
+                    {item.course.length > 22 ? item.course.slice(0, 20) + "…" : item.course}
+                  </text>
+                </g>
+              );
+            })}
+
+            {/* Interactive hover tooltip card */}
+            {hoveredIdx !== null && (() => {
+              const item = data[hoveredIdx];
+              const count = Number(item.count ?? item.enrolled ?? 0);
+              const centerX = paddingLeft + (hoveredIdx + 0.5) * slotWidth;
+              const barHeight = Math.max((count / maxVal) * chartAreaHeight, 6);
+              const barY = height - paddingBottom - barHeight;
+
+              return (
+                <g transform={`translate(${centerX}, ${Math.max(16, barY - 42)})`} className="pointer-events-none">
+                  <rect
+                    x="-75"
+                    y="-26"
+                    width="150"
+                    height="32"
+                    rx="8"
+                    className="fill-slate-900 shadow-2xl"
+                  />
+                  <polygon points="-6,6 6,6 0,11" className="fill-slate-900" />
+                  <text
+                    x="0"
+                    y="-13"
+                    textAnchor="middle"
+                    className="fill-white text-[11px] font-black"
+                  >
+                    {item.course}
+                  </text>
+                  <text
+                    x="0"
+                    y="-1"
+                    textAnchor="middle"
+                    className="fill-purple-300 text-[10px] font-bold"
+                  >
+                    ● {count} Demo Class {count === 1 ? "Request" : "Requests"}
+                  </text>
+                </g>
+              );
+            })()}
+          </svg>
+        </div>
+      ) : (
+        /* Horizontal Bars View - without any percentage */
+        <div className="space-y-4 py-2">
+          {data.map((item, idx) => {
+            const count = Number(item.count ?? item.enrolled ?? 0);
+            const unitLabel = count === 1 ? "demo request" : "demo requests";
+            const barWidthPercent = rawMax > 0 ? (count / rawMax) * 100 : 0;
+            const grad = barGradients[idx % barGradients.length];
+
+            return (
+              <div key={idx} className="group">
+                <div className="flex items-center justify-between text-xs font-semibold mb-1.5">
+                  <div className="flex items-center gap-2 truncate pr-2">
+                    <span className={`h-2.5 w-2.5 rounded-full ring-2 shrink-0 ${grad.dot}`} />
+                    <span className="text-slate-800 font-bold truncate group-hover:text-purple-600 transition-colors">
+                      {item.course}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <span className="inline-flex items-center gap-1 rounded-lg bg-purple-50 border border-purple-200/80 px-2.5 py-0.5 font-mono text-xs font-bold text-purple-700 shadow-2xs">
+                      {count.toLocaleString()} {unitLabel}
+                    </span>
+                  </div>
+                </div>
+                <div className="h-3 w-full rounded-full bg-slate-100 overflow-hidden p-0.5">
+                  <div
+                    className="h-full rounded-full shadow-xs transition-all duration-700"
+                    style={{
+                      width: `${Math.min(100, Math.max(8, barWidthPercent))}%`,
+                      backgroundImage: `linear-gradient(to right, ${grad.from}, ${grad.to})`,
+                    }}
+                  />
+                </div>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="text-slate-500 font-mono">
-                  {Number(item.count ?? item.enrolled ?? 0).toLocaleString()} learners
-                </span>
-                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[12px] font-bold text-slate-700">
-                  {item.percentage ?? 0}%
-                </span>
-              </div>
-            </div>
-            <div className="h-2.5 w-full rounded-full bg-slate-100 overflow-hidden p-0.5">
-              <div
-                className={`h-full rounded-full bg-gradient-to-r ${gradient} shadow-sm transition-all duration-700`}
-                style={{ width: `${item.percentage ?? 0}%` }}
-              />
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
+
+// Backwards-compatible export
+export const CoursePopularityBars = DemandingProgramsBarChart;
 
 export const LeadConversionDonut = ({ data = [] }) => {
   const vibrantColors = ["#10b981", "#3b82f6", "#8b5cf6", "#f59e0b"];

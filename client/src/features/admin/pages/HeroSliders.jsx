@@ -21,7 +21,6 @@ import ConfirmModal from "../components/ConfirmModal";
 import StatCard from "../components/StatCard";
 import { FormInput, FormSelect, FormTextarea, ImageUploadPreview } from "../components/FormControls";
 import api from "../../../services/api";
-import { initialHeroSliders } from "../../../data/admin/heroSlidersData";
 
 const PRESET_IMAGES = [
   {
@@ -96,7 +95,7 @@ const HeroSliders = () => {
         if (pubRes.data && pubRes.data.data && Array.isArray(pubRes.data.data.sliders)) {
           setSliders(pubRes.data.data.sliders);
         } else {
-          setSliders(initialHeroSliders);
+          setSliders([]);
         }
       }
     } catch (err) {
@@ -105,10 +104,10 @@ const HeroSliders = () => {
         if (pubRes.data && pubRes.data.data && Array.isArray(pubRes.data.data.sliders)) {
           setSliders(pubRes.data.data.sliders);
         } else {
-          setSliders(initialHeroSliders);
+          setSliders([]);
         }
       } catch {
-        setSliders(initialHeroSliders);
+        setSliders([]);
       }
     } finally {
       setLoading(false);
@@ -581,6 +580,8 @@ const HeroSliders = () => {
                 required={true}
               />
 
+
+              {/* 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <FormInput
                   label="Primary Button Text"
@@ -594,9 +595,9 @@ const HeroSliders = () => {
                   onChange={(e) => setForm({ ...form, buttonUrl: e.target.value })}
                   placeholder="e.g. /courses"
                 />
-              </div>
+              </div> */}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <FormInput
                   label="Secondary Button Text (Optional)"
                   value={form.secondaryButtonText}
@@ -609,9 +610,9 @@ const HeroSliders = () => {
                   onChange={(e) => setForm({ ...form, secondaryButtonUrl: e.target.value })}
                   placeholder="e.g. /demo-class"
                 />
-              </div>
+              </div> */}
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <FormInput
                   label="Display Order"
                   type="number"
@@ -631,7 +632,7 @@ const HeroSliders = () => {
                   value={form.startDate}
                   onChange={(e) => setForm({ ...form, startDate: e.target.value })}
                 />
-              </div>
+              </div> */}
 
               <div className="mt-6 flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
                 <button

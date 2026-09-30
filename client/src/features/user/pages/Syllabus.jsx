@@ -76,11 +76,10 @@ const Syllabus = () => {
   );
 
   const handleDownload = () => {
-    if (matchingSyllabus?.pdf) {
-      window.open(matchingSyllabus.pdf, "_blank");
-    }
-    setDownloadSuccess(true);
-    setTimeout(() => setDownloadSuccess(false), 3500);
+    openDemoModal(currentCourse.title, {
+      mode: "syllabus",
+      syllabusUrl: matchingSyllabus?.pdf || currentCourse.syllabusUrl || "",
+    });
   };
 
   return (

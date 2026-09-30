@@ -94,15 +94,6 @@
   text-decoration: underline !important;
 }
 
-.footer-logo-badge {
-  box-shadow: 0 0 22px rgba(255, 255, 255, 0.28), 0 4px 12px rgba(0, 0, 0, 0.18) !important;
-}
-
-.footer-logo-badge:hover,
-.group:hover .footer-logo-badge {
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.48), 0 6px 18px rgba(0, 0, 0, 0.22) !important;
-}
-
 /* Print optimization */
 @media print {
   @page {

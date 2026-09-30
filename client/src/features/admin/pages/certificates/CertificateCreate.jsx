@@ -150,7 +150,7 @@ const CertificateCreate = () => {
             </select>
           </div>
 
-          <div className="sm:col-span-2 space-y-1.5">
+          {/* <div className="sm:col-span-2 space-y-1.5">
             <label className="text-xs font-bold text-[13px]late-700">
               Official Verification URL
             </label>
@@ -163,7 +163,7 @@ const CertificateCreate = () => {
               placeholder="https://cert.registry.com/verify/..."
               className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
             />
-          </div>
+          </div> */}
 
           <div className="sm:col-span-2">
             <ImageUploadPreview

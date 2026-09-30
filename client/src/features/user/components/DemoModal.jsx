@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { X, CheckCircle2 } from "lucide-react";
+import { X, CheckCircle2, Download, FileText } from "lucide-react";
 import api from "../../../services/api";
 
-const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
+const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
+  const isSyllabus = options?.mode === "syllabus" || Boolean(options?.syllabusUrl);
+  const syllabusUrl = options?.syllabusUrl || "";
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -66,12 +69,27 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
         phone: formData.phone.trim(),
         email: formData.email.trim(),
         course: formData.course || "General Program",
-        source: "Demo Class",
-        message: "Booked free demo class trial via website popup modal",
+        source: isSyllabus ? "Syllabus Download" : "Demo Class",
+        message: isSyllabus
+          ? `Requested and downloaded syllabus for ${formData.course || initialCourse}`
+          : "Booked free demo class trial via website popup modal",
       });
       setIsSubmitted(true);
+
+      if (isSyllabus && syllabusUrl) {
+        setTimeout(() => {
+          const link = document.createElement("a");
+          link.href = syllabusUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.download = "";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, 400);
+      }
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to submit demo request. Please try again.");
+      setError(err.response?.data?.message || "Failed to submit request. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -105,11 +123,20 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
         {!isSubmitted ? (
           <>
             <div className="mb-6 text-center sm:text-left">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
-                Book a Free Demo Class
-              </h3>
-              <p className="mt-1 text-[13px]m text-gray-500">
-                Fill in your details below and our academic mentor will connect with you.
+              <div className="flex items-center gap-2.5 mb-1.5 justify-center sm:justify-start">
+                {isSyllabus ? (
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 shadow-2xs">
+                    <Download size={18} />
+                  </div>
+                ) : null}
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
+                  {isSyllabus ? "Download Course Syllabus" : "Book a Free Demo Class"}
+                </h3>
+              </div>
+              <p className="text-sm text-gray-500">
+                {isSyllabus
+                  ? "Please fill in your details below to instantly download the comprehensive curriculum syllabus."
+                  : "Fill in your details below and our academic mentor will connect with you."}
               </p>
             </div>
 
@@ -131,7 +158,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Enter student full name"
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
 
@@ -146,7 +173,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="e.g. +91 98765 43210"
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
 
@@ -161,20 +188,20 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="student@example.com"
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
-                  Interested Course / Class *
+                  Program / Course *
                 </label>
                 <select
                   name="course"
                   required
                   value={formData.course}
                   onChange={handleInputChange}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[13px]m text-gray-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all bg-white"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100 transition-all bg-white"
                 >
                   <option value="">Select a Course or Program *</option>
                   {coursesList && coursesList.length > 0 ? (
@@ -197,13 +224,22 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-blue-600 py-3 text-[13px]m font-semibold text-white shadow-md hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer active:scale-[0.99]"
+                  className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer active:scale-[0.99] flex items-center justify-center gap-2"
                 >
-                  {loading ? "Registering Demo..." : "Confirm & Book Free Demo"}
+                  {isSyllabus && <Download size={16} />}
+                  <span>
+                    {loading
+                      ? isSyllabus
+                        ? "Preparing Syllabus..."
+                        : "Registering Demo..."
+                      : isSyllabus
+                      ? "Submit & Download Syllabus"
+                      : "Confirm & Book Free Demo"}
+                  </span>
                 </button>
               </div>
 
-              <p className="text-center text-[13px] text-gray-400">
+              <p className="text-center text-xs text-gray-400">
                 🔒 Your personal information is secure and will never be shared.
               </p>
             </form>
@@ -215,19 +251,45 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "" }) => {
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900">
-                Demo Class Booked Successfully!
+                {isSyllabus ? "Syllabus Download Ready!" : "Demo Class Booked Successfully!"}
               </h3>
-              <p className="mt-2 text-[13px]m text-gray-600 max-w-sm mx-auto">
-                Thank you, <span className="font-semibold text-gray-800">{formData.name}</span>! We have received your request for <span className="font-semibold text-blue-600">{formData.course}</span>. Our academic counselor will contact you at <span className="font-semibold text-gray-800">{formData.phone}</span> shortly.
+              <p className="mt-2 text-sm text-gray-600 max-w-sm mx-auto leading-relaxed">
+                {isSyllabus ? (
+                  <>
+                    Thank you, <span className="font-semibold text-gray-800">{formData.name}</span>! Your curriculum syllabus for{" "}
+                    <span className="font-semibold text-blue-600">{formData.course}</span>{" "}
+                    {syllabusUrl ? "is downloading now." : "has been requested and will be sent to your email and phone shortly."}
+                  </>
+                ) : (
+                  <>
+                    Thank you, <span className="font-semibold text-gray-800">{formData.name}</span>! We have received your request for{" "}
+                    <span className="font-semibold text-blue-600">{formData.course}</span>. Our academic counselor will contact you at{" "}
+                    <span className="font-semibold text-gray-800">{formData.phone}</span> shortly.
+                  </>
+                )}
               </p>
             </div>
-            <button
-              type="button"
-              onClick={handleClose}
-              className="rounded-xl bg-blue-600 px-6 py-2.5 text-[13px]m font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer"
-            >
-              Got it, thanks!
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+              {isSyllabus && syllabusUrl && (
+                <a
+                  href={syllabusUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer shadow-xs"
+                >
+                  <Download size={16} />
+                  <span>Download Again</span>
+                </a>
+              )}
+              <button
+                type="button"
+                onClick={handleClose}
+                className="rounded-xl border border-gray-200 bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
           </div>
         )}
       </div>

@@ -17,6 +17,17 @@ const slugify = (text) => {
     .replace(/--+/g, "-");
 };
 
+const handleSequelizeError = (err, defaultMsg = "An error occurred") => {
+  if (err.name === "SequelizeUniqueConstraintError") {
+    const field = err.errors?.[0]?.path || "record";
+    return `A record with this ${field} already exists.`;
+  }
+  if (err.name === "SequelizeValidationError" && err.errors?.length > 0) {
+    return err.errors.map((e) => e.message).join(", ");
+  }
+  return err.message || defaultMsg;
+};
+
 const getCourses = async (req, res) => {
   try {
     const {
@@ -159,6 +170,7 @@ const createCourse = async (req, res) => {
       targetAudience,
       faqs,
       fullOverview,
+      syllabusUrl,
     } = req.body;
 
     if (!name) {
@@ -196,6 +208,7 @@ const createCourse = async (req, res) => {
       targetAudience: targetAudience || null,
       faqs: faqs !== undefined ? faqs : null,
       fullOverview: fullOverview || null,
+      syllabusUrl: syllabusUrl || null,
     });
 
     return res.status(201).json({
@@ -204,9 +217,10 @@ const createCourse = async (req, res) => {
       data: { course },
     });
   } catch (err) {
-    return res.status(500).json({
+    console.error("Error creating course:", err);
+    return res.status(400).json({
       success: false,
-      message: err.message || "Failed to create course",
+      message: handleSequelizeError(err, "Failed to create course"),
     });
   }
 };
@@ -244,6 +258,7 @@ const updateCourse = async (req, res) => {
       targetAudience,
       faqs,
       fullOverview,
+      syllabusUrl,
     } = req.body;
 
     let finalSlug = course.slug;
@@ -274,6 +289,7 @@ const updateCourse = async (req, res) => {
       targetAudience: targetAudience !== undefined ? targetAudience : course.targetAudience,
       faqs: faqs !== undefined ? faqs : course.faqs,
       fullOverview: fullOverview !== undefined ? fullOverview : course.fullOverview,
+      syllabusUrl: syllabusUrl !== undefined ? syllabusUrl : course.syllabusUrl,
     });
 
     const updated = await Course.findByPk(course.id, {
@@ -286,9 +302,10 @@ const updateCourse = async (req, res) => {
       data: { course: updated },
     });
   } catch (err) {
-    return res.status(500).json({
+    console.error("Error updating course:", err);
+    return res.status(400).json({
       success: false,
-      message: err.message || "Failed to update course",
+      message: handleSequelizeError(err, "Failed to update course"),
     });
   }
 };
@@ -366,18 +383,35 @@ const getCategories = async (req, res) => {
 const createCategory = async (req, res) => {
   try {
     const { name, slug, description, icon = "BookOpen" } = req.body;
-    if (!name) {
+    if (!name || !name.trim()) {
       return res.status(400).json({
         success: false,
         message: "Category name is required",
       });
     }
 
-    const catSlug = slug ? slugify(slug) : slugify(name);
+    const trimmedName = name.trim();
+    const catSlug = slug ? slugify(slug) : slugify(trimmedName);
+
+    // If category with this name or slug already exists, return existing cleanly
+    const existing = await CourseCategory.findOne({
+      where: {
+        [Op.or]: [{ name: trimmedName }, { slug: catSlug }],
+      },
+    });
+
+    if (existing) {
+      return res.status(200).json({
+        success: true,
+        message: "Category already exists",
+        data: { category: existing },
+      });
+    }
+
     const category = await CourseCategory.create({
-      name,
+      name: trimmedName,
       slug: catSlug,
-      description,
+      description: description || null,
       icon,
     });
 
@@ -387,9 +421,10 @@ const createCategory = async (req, res) => {
       data: { category },
     });
   } catch (err) {
-    return res.status(500).json({
+    console.error("Error creating category:", err);
+    return res.status(400).json({
       success: false,
-      message: err.message || "Failed to create category",
+      message: handleSequelizeError(err, "Failed to create category"),
     });
   }
 };
@@ -406,12 +441,32 @@ const updateCategory = async (req, res) => {
     }
 
     const { name, slug, description, icon } = req.body;
-    await category.update({
-      name: name !== undefined ? name : category.name,
-      slug: slug ? slugify(slug) : category.slug,
-      description: description !== undefined ? description : category.description,
-      icon: icon !== undefined ? icon : category.icon,
-    });
+    const updateData = {};
+    if (name !== undefined) updateData.name = name.trim();
+    if (slug !== undefined) updateData.slug = slugify(slug);
+    else if (name !== undefined) updateData.slug = slugify(name);
+    if (description !== undefined) updateData.description = description;
+    if (icon !== undefined) updateData.icon = icon;
+
+    if (updateData.name || updateData.slug) {
+      const duplicate = await CourseCategory.findOne({
+        where: {
+          id: { [Op.ne]: id },
+          [Op.or]: [
+            ...(updateData.name ? [{ name: updateData.name }] : []),
+            ...(updateData.slug ? [{ slug: updateData.slug }] : []),
+          ],
+        },
+      });
+      if (duplicate) {
+        return res.status(400).json({
+          success: false,
+          message: "Another category with this name or slug already exists",
+        });
+      }
+    }
+
+    await category.update(updateData);
 
     return res.status(200).json({
       success: true,
@@ -419,9 +474,10 @@ const updateCategory = async (req, res) => {
       data: { category },
     });
   } catch (err) {
-    return res.status(500).json({
+    console.error("Error updating category:", err);
+    return res.status(400).json({
       success: false,
-      message: err.message || "Failed to update category",
+      message: handleSequelizeError(err, "Failed to update category"),
     });
   }
 };
@@ -443,9 +499,10 @@ const deleteCategory = async (req, res) => {
       message: "Category deleted successfully",
     });
   } catch (err) {
-    return res.status(500).json({
+    console.error("Error deleting category:", err);
+    return res.status(400).json({
       success: false,
-      message: err.message || "Failed to delete category",
+      message: handleSequelizeError(err, "Failed to delete category"),
     });
   }
 };

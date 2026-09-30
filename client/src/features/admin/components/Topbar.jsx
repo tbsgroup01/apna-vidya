@@ -11,20 +11,45 @@ import {
   CheckCircle2,
   X,
 } from "lucide-react";
-import { quickNotifications } from "../../../data/admin/dashboardData";
 import { adminProfileData } from "../../../data/admin/settingsData";
 import { useAuth } from "../../../context/AuthContext";
+import api from "../../../services/api";
 
 const Topbar = ({ sidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
+  const [notifications, setNotifications] = useState([]);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const notifRef = useRef(null);
   const profileRef = useRef(null);
+
+  useEffect(() => {
+    const fetchRecentAlerts = async () => {
+      try {
+        const res = await api.get("/admin/leads?limit=5");
+        if (res.data?.data?.leads) {
+          setNotifications(
+            res.data.data.leads.map((l) => ({
+              id: l.id,
+              title: (l.source || "").toLowerCase().includes("demo")
+                ? "Demo Class Booking"
+                : "New Lead Inquiry",
+              description: `${l.name} (${l.course || "General Inquiry"})`,
+              time: new Date(l.createdAt).toLocaleDateString(),
+              unread: l.status === "New",
+            }))
+          );
+        }
+      } catch {
+        setNotifications([]);
+      }
+    };
+    fetchRecentAlerts();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -55,6 +80,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
     if (path.includes("/hero-sliders")) return "Hero Slider Banners";
     if (path.includes("/notifications")) return "Announcement Notifications";
     if (path.includes("/about-us")) return "About Us CMS";
+    if (path.includes("/video-section")) return "Home Video Section CMS";
     if (path.includes("/contact-details")) return "Contact Details CMS";
     if (path.includes("/holiday-emails")) return "Holiday Email Campaigns";
     if (path.includes("/users")) return "Admin Users";
@@ -87,12 +113,12 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
           <button
             type="button"
             onClick={toggleSidebar}
-            className="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[13px]late-600 hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-600 transition-all duration-200 cursor-pointer active:scale-90 shadow-2xs"
+            className="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-600 transition-all duration-200 cursor-pointer active:scale-90 shadow-2xs"
             aria-label="Toggle sidebar"
             title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
             <div
-              className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${sidebarOpen ? "rotate-90 text-[13px]late-700" : "rotate-0 text-[13px]late-600"
+              className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${sidebarOpen ? "rotate-90 text-slate-700" : "rotate-0 text-slate-600"
                 }`}
             >
               {sidebarOpen ? (
@@ -107,7 +133,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
             <span className="text-xs font-semibold text-blue-600 hidden sm:block">
               Apna Vidya Admin
             </span>
-            <h2 className="text-[13px]m sm:text-base font-bold text-[13px]late-900 leading-tight">
+            <h2 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
               {getPageTitle()}
             </h2>
           </div>
@@ -117,7 +143,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-[13px]late-400 hover:border-slate-300 hover:bg-white hover:text-[13px]late-600 transition-all cursor-pointer"
+            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-400 hover:border-slate-300 hover:bg-white hover:text-slate-600 transition-all cursor-pointer"
           >
             <Search size={14} />
             <span className="hidden md:inline">Quick search module...</span>
@@ -127,7 +153,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
           <Link
             to="/"
             target="_blank"
-            className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
+            className="hidden sm:flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
             title="View live public website"
           >
             <span>Live Site</span>
@@ -138,53 +164,61 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
             <button
               type="button"
               onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-[13px]late-600 hover:bg-slate-50 transition-colors cursor-pointer"
+              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
               aria-label="Notifications"
             >
               <Bell size={17} />
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-blue-600 ring-2 ring-white" />
+              {notifications.some((n) => n.unread) && (
+                <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-blue-600 ring-2 ring-white" />
+              )}
             </button>
 
             {notificationsOpen && (
               <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl z-50 animate-in fade-in zoom-in-95 duration-100">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[13px]late-800">
-                    Recent Notifications
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                    Recent Inquiries & Alerts
                   </h4>
                   <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[12px] font-bold text-blue-600">
-                    {quickNotifications.filter((n) => n.unread).length} New
+                    {notifications.filter((n) => n.unread).length} New
                   </span>
                 </div>
 
                 <div className="mt-2 divide-y divide-slate-50 max-h-72 overflow-y-auto">
-                  {quickNotifications.map((notif) => (
-                    <div
-                      key={notif.id}
-                      className={`py-2.5 px-2 rounded-xl transition-colors ${notif.unread ? "bg-blue-50/40" : "hover:bg-slate-50"
-                        }`}
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="text-xs font-bold text-[13px]late-900">
-                          {notif.title}
-                        </p>
-                        <span className="text-[12px] text-[13px]late-400 shrink-0">
-                          {notif.time}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-xs text-[13px]late-600 leading-snug">
-                        {notif.description}
-                      </p>
+                  {notifications.length === 0 ? (
+                    <div className="py-6 text-center text-xs text-slate-400">
+                      No new notifications
                     </div>
-                  ))}
+                  ) : (
+                    notifications.map((notif) => (
+                      <div
+                        key={notif.id}
+                        className={`py-2.5 px-2 rounded-xl transition-colors ${notif.unread ? "bg-blue-50/40" : "hover:bg-slate-50"
+                          }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="text-xs font-bold text-slate-900">
+                            {notif.title}
+                          </p>
+                          <span className="text-[12px] text-slate-400 shrink-0">
+                            {notif.time}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-xs text-slate-600 leading-snug">
+                          {notif.description}
+                        </p>
+                      </div>
+                    ))
+                  )}
                 </div>
 
                 <div className="pt-3 mt-2 border-t border-slate-100 text-center">
                   <Link
-                    to="/admin/notifications"
+                    to="/admin/leads"
                     onClick={() => setNotificationsOpen(false)}
                     className="text-xs font-semibold text-blue-600 hover:text-blue-700"
                   >
-                    View All Notifications
+                    View All Leads & Inquiries
                   </Link>
                 </div>
               </div>
@@ -278,7 +312,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
             <form onSubmit={handleSearchSubmit} className="relative">
               <Search
                 size={18}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[13px]late-400"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
               />
               <input
                 type="text"
@@ -286,18 +320,18 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search leads, students, courses, payments..."
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-10 text-[13px]m text-[13px]late-800 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-10 text-sm text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100"
               />
               <button
                 type="button"
                 onClick={() => setSearchOpen(false)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px]late-400 hover:text-[13px]late-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X size={18} />
               </button>
             </form>
-            <div className="mt-3 flex flex-wrap gap-2 text-xs text-[13px]late-500">
-              <span className="font-semibold text-[13px]late-400">Jump to:</span>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-500">
+              <span className="font-semibold text-slate-400">Jump to:</span>
               <button
                 type="button"
                 onClick={() => {

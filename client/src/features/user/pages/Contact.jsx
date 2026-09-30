@@ -165,17 +165,7 @@ const Contact = () => {
                     <p className="mt-0.5 text-[13px]m font-bold text-[13px]late-900 leading-snug">
                       {address}
                     </p>
-                    {googleMapsUrl && (
-                      <a
-                        href={googleMapsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 mt-2 text-xs font-bold text-blue-600 hover:text-blue-700 hover:underline"
-                      >
-                        <ExternalLink size={13} />
-                        View on Google Maps
-                      </a>
-                    )}
+
                   </div>
                 </div>
               </div>

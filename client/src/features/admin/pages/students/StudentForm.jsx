@@ -272,23 +272,7 @@ const StudentForm = () => {
               </select>
             </div>
 
-            <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[13px]late-700">
-                Assigned Batch
-              </label>
-              <select
-                value={formData.batchId}
-                onChange={(e) => handleChange("batchId", e.target.value)}
-                className="w-full rounded-xl border border-slate-200 p-2.5 text-xs text-[13px]late-800 bg-white"
-              >
-                <option value="">Select Batch (Optional)...</option>
-                {batches.map((b) => (
-                  <option key={b.id} value={b.id}>
-                    {b.name} ({b.trainer})
-                  </option>
-                ))}
-              </select>
-            </div>
+
 
             <FormInput
               label="Admission Date"

@@ -198,7 +198,7 @@ const DemoClassesAdmin = () => {
     },
     {
       key: "quickConnect",
-      header: "Call / WhatsApp",
+      header: "Contact",
       align: "center",
       render: (row) => {
         const rawPhone = row.phone || "";
@@ -244,7 +244,7 @@ const DemoClassesAdmin = () => {
     },
     {
       key: "createdAt",
-      header: "Registration Date",
+      header: "Date",
       sortable: true,
       render: (row) => (
         <div className="text-xs">

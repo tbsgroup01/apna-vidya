@@ -75,8 +75,8 @@ const HomeAbout = () => {
                 <ShieldCheck size={24} />
               </div>
               <div>
-                <p className="text-[13px]m font-bold text-[13px]late-900">ISO 9001:2015</p>
-                <p className="text-xs text-[13px]late-500">Certified Education Platform</p>
+                <p className="text-sm font-bold text-slate-900">ISO 9001:2015</p>
+                <p className="text-xs text-slate-500">Certified Education Platform</p>
               </div>
             </div>
           </div>
@@ -86,11 +86,11 @@ const HomeAbout = () => {
               <Compass size={14} />
               {aboutData?.heroBadge || "About Apna Vidya"}
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
               We Don&apos;t Just Teach Code, We{" "}
               <span className="text-blue-600">Build Careers</span>
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[13px]late-600">
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
               {aboutData?.storyParagraph2 ||
                 "Traditional classrooms focus on rote memorization. At Apna Vidya, we bridge the gap between theoretical textbooks and modern tech industry demands with hands-on labs, live code walkthroughs, and mentor-reviewed capstone projects."}
             </p>
@@ -98,19 +98,19 @@ const HomeAbout = () => {
             <div className="mt-6 space-y-3.5">
               <div className="flex items-start gap-3">
                 <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-emerald-500" />
-                <span className="text-[13px]m font-medium text-[13px]late-700">
+                <span className="text-sm font-medium text-slate-700">
                   Curriculum continuously updated for 2025 tech stack requirements.
                 </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-emerald-500" />
-                <span className="text-[13px]m font-medium text-[13px]late-700">
+                <span className="text-sm font-medium text-slate-700">
                   Direct live access to working software engineers and educators.
                 </span>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-emerald-500" />
-                <span className="text-[13px]m font-medium text-[13px]late-700">
+                <span className="text-sm font-medium text-slate-700">
                   Comprehensive mock interviews, resume refinement, and placement assistance.
                 </span>
               </div>
@@ -119,7 +119,7 @@ const HomeAbout = () => {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to="/about"
-                className="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3.5 text-[13px]m font-semibold text-white transition-all hover:bg-slate-800"
+                className="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-slate-800"
               >
                 <span>Read Our Full Story</span>
                 <ArrowRight
@@ -129,7 +129,7 @@ const HomeAbout = () => {
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-[13px]m font-semibold text-[13px]late-700 hover:bg-slate-50 transition-colors"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 <HeartHandshake size={18} className="text-blue-600" />
                 <span>Talk to a Counselor</span>

@@ -150,8 +150,8 @@ const createStudent = async (req, res) => {
       pendingFees === 0
         ? "Paid"
         : Number(paidFees) > 0
-        ? "Partial"
-        : "Pending";
+          ? "Partial"
+          : "Pending";
 
     const student = await Student.create({
       name,
@@ -256,8 +256,8 @@ const updateStudent = async (req, res) => {
       pendingFees === 0
         ? "Paid"
         : newPaid > 0
-        ? "Partial"
-        : "Pending";
+          ? "Partial"
+          : "Pending";
 
     await student.update({
       name: name !== undefined ? name : student.name,

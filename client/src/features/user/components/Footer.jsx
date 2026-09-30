@@ -69,7 +69,6 @@ const Footer = () => {
         { name: "Home", path: "/" },
         { name: "About Us", path: "/about" },
         { name: "Courses", path: "/courses" },
-        { name: "Syllabus", path: "/syllabus" },
         { name: "Blog", path: "/blog" },
         { name: "Contact Us", path: "/contact" },
     ];
@@ -99,43 +98,41 @@ const Footer = () => {
 
 
     return (
-        <footer className="bg-slate-950 text-white">
+        <footer className="w-full border-t border-gray-100 bg-white/95 text-slate-800 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
                     <div className="lg:col-span-1">
                         <Link
                             to="/"
-                            className="mb-6 inline-flex items-center gap-3 group focus:outline-none"
+                            className="mb-6 inline-flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-xl"
                             aria-label={`${siteName} Home`}
                         >
-                            <div className="footer-logo-badge inline-flex items-center rounded-2xl py-2  ">
-                                <img
-                                    src={logoSrc}
-                                    alt={`${siteName} Logo`}
-                                    onError={(e) => {
-                                        if (e.currentTarget.src !== logo) {
-                                            e.currentTarget.src = logo;
-                                        }
-                                    }}
-                                    className="h-14 sm:h-16 md:h-18 w-auto max-h-20 max-w-[260px] object-contain"
-                                />
-                            </div>
+                            <img
+                                src={logoSrc}
+                                alt={`${siteName} Logo`}
+                                onError={(e) => {
+                                    if (e.currentTarget.src !== logo) {
+                                        e.currentTarget.src = logo;
+                                    }
+                                }}
+                                className="h-13 sm:h-14 md:h-16 w-auto max-h-16 max-w-[210px] sm:max-w-[250px] object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                            />
                         </Link>
 
-                        <p className="max-w-sm text-[13px]m leading-7 text-[13px]late-400">
+                        <p className="max-w-sm text-sm leading-relaxed text-slate-600">
                             Empowering students with quality education, practical
                             skills, and industry-focused learning programs to build
                             a successful career.
                         </p>
 
-                        <div className="mt-6 flex items-center gap-3">
+                        <div className="mt-6 flex items-center gap-2.5">
                             {social.facebook && (
                                 <a
                                     href={social.facebook}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Facebook"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-blue-600 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-600 transition-all hover:border-blue-600 hover:bg-blue-600 hover:text-white shadow-2xs hover:shadow-xs active:scale-95"
                                 >
                                     <FacebookIcon size={18} />
                                 </a>
@@ -147,7 +144,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Instagram"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-pink-600 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-600 transition-all hover:border-pink-600 hover:bg-pink-600 hover:text-white shadow-2xs hover:shadow-xs active:scale-95"
                                 >
                                     <InstagramIcon size={18} />
                                 </a>
@@ -159,7 +156,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="LinkedIn"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-blue-700 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-600 transition-all hover:border-blue-700 hover:bg-blue-700 hover:text-white shadow-2xs hover:shadow-xs active:scale-95"
                                 >
                                     <LinkedinIcon size={18} />
                                 </a>
@@ -171,7 +168,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="YouTube"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-red-600 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-600 transition-all hover:border-red-600 hover:bg-red-600 hover:text-white shadow-2xs hover:shadow-xs active:scale-95"
                                 >
                                     <YoutubeIcon size={18} />
                                 </a>
@@ -183,7 +180,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Twitter"
-                                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-[13px]late-400 transition-all hover:bg-sky-500 hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-600 transition-all hover:border-slate-900 hover:bg-slate-900 hover:text-white shadow-2xs hover:shadow-xs active:scale-95"
                                 >
                                     <TwitterIcon size={18} />
                                 </a>
@@ -192,7 +189,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-6 text-[13px]m font-semibold uppercase tracking-wider text-white">
+                        <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-slate-900">
                             Quick Links
                         </h3>
 
@@ -201,11 +198,11 @@ const Footer = () => {
                                 <li key={link.name}>
                                     <Link
                                         to={link.path}
-                                        className="group flex items-center gap-2 text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
+                                        className="group flex items-center gap-2 text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
                                     >
                                         <ArrowRight
                                             size={14}
-                                            className="opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+                                            className="opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100 text-blue-600"
                                         />
                                         <span className="transition-transform group-hover:translate-x-1">
                                             {link.name}
@@ -217,7 +214,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-6 text-[13px]m font-semibold uppercase tracking-wider text-white">
+                        <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-slate-900">
                             Popular Courses
                         </h3>
 
@@ -226,11 +223,11 @@ const Footer = () => {
                                 <li key={course.name}>
                                     <Link
                                         to={course.path}
-                                        className="group flex items-center gap-2 text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
+                                        className="group flex items-center gap-2 text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
                                     >
                                         <ArrowRight
                                             size={14}
-                                            className="opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+                                            className="opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100 text-blue-600"
                                         />
                                         <span className="transition-transform group-hover:translate-x-1">
                                             {course.name}
@@ -238,10 +235,10 @@ const Footer = () => {
                                     </Link>
                                 </li>
                             ))}
-                            <li className="pt-1.5">
+                            <li className="pt-2">
                                 <Link
                                     to="/courses"
-                                    className="group inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                                    className="group inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
                                 >
                                     <span>Browse All Courses</span>
                                     <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
@@ -251,36 +248,36 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-6 text-[13px]m font-semibold uppercase tracking-wider text-white">
+                        <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-slate-900">
                             Get In Touch
                         </h3>
 
                         <div className="space-y-5">
                             <div className="flex items-start gap-3">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600/10 text-blue-400">
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-200/80 text-blue-600 shadow-2xs">
                                     <MapPin size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-[13px]late-500">
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
                                         Address
                                     </p>
-                                    <p className="mt-1 text-[13px]m leading-6 text-[13px]late-400">
+                                    <p className="mt-1 text-sm leading-snug text-slate-700">
                                         {address}
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-3">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600/10 text-blue-400">
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-200/80 text-blue-600 shadow-2xs">
                                     <Phone size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-[13px]late-500">
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
                                         Phone
                                     </p>
                                     <a
                                         href={`tel:${phone.replace(/\s+/g, "")}`}
-                                        className="mt-1 block text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
+                                        className="mt-1 block text-sm font-semibold text-slate-800 transition-colors hover:text-blue-600"
                                     >
                                         {phone}
                                     </a>
@@ -288,16 +285,16 @@ const Footer = () => {
                             </div>
 
                             <div className="flex items-start gap-3">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600/10 text-blue-400">
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-200/80 text-blue-600 shadow-2xs">
                                     <Mail size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-[13px]late-500">
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
                                         Email
                                     </p>
                                     <a
                                         href={`mailto:${email}`}
-                                        className="mt-1 block text-[13px]m text-[13px]late-400 transition-colors hover:text-blue-400"
+                                        className="mt-1 block text-sm font-semibold text-slate-800 transition-colors hover:text-blue-600"
                                     >
                                         {email}
                                     </a>
@@ -305,14 +302,14 @@ const Footer = () => {
                             </div>
 
                             <div className="flex items-start gap-3">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600/10 text-blue-400">
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 border border-blue-200/80 text-blue-600 shadow-2xs">
                                     <Clock size={18} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-[13px]late-500">
+                                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
                                         Working Hours
                                     </p>
-                                    <p className="mt-1 text-[13px]m text-[13px]late-400">
+                                    <p className="mt-1 text-sm text-slate-700">
                                         {workingHours}
                                     </p>
                                 </div>
@@ -322,28 +319,28 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="border-t border-slate-800">
+            <div className="border-t border-slate-200/80 bg-slate-50/60">
                 <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-                    <p className="text-center text-[13px]m text-[13px]late-500 md:text-left">
+                    <p className="text-center text-xs font-medium text-slate-500 md:text-left">
                         © {currentYear} {siteName}. All rights reserved.
                     </p>
 
-                    <div className="flex flex-wrap items-center justify-center gap-5 text-[13px]m text-[13px]late-500">
+                    <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-medium text-slate-500">
                         <Link
                             to="/privacy-policy"
-                            className="transition-colors hover:text-blue-400"
+                            className="transition-colors hover:text-blue-600"
                         >
                             Privacy Policy
                         </Link>
                         <Link
                             to="/terms"
-                            className="transition-colors hover:text-blue-400"
+                            className="transition-colors hover:text-blue-600"
                         >
                             Terms & Conditions
                         </Link>
                         <Link
                             to="/refund-policy"
-                            className="transition-colors hover:text-blue-400"
+                            className="transition-colors hover:text-blue-600"
                         >
                             Refund Policy
                         </Link>

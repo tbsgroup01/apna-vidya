@@ -10,6 +10,7 @@ import Testimonials from "../components/Testimonials";
 import LatestBlogs from "../components/LatestBlogs";
 import FAQ from "../components/FAQ";
 import FinalCTA from "../components/FinalCTA";
+import VideoSection from "../components/VideoSection";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <PopularCourses />
       <WhyChooseUs />
       <CertificateShowcase />
+      <VideoSection />
       <HomeAbout />
       <HowItWorks />
       <DemoCTA />

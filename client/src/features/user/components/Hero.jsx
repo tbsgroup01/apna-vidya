@@ -91,8 +91,8 @@ const Hero = () => {
           onClick={() => openDemoModal()}
           className={
             isPrimary
-              ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 cursor-pointer"
-              : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-[13px]m font-semibold text-[13px]late-700 shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 cursor-pointer"
+              ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95 cursor-pointer"
+              : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-xs transition-all hover:border-blue-200 hover:bg-blue-50/50 hover:text-blue-600 active:scale-95 cursor-pointer"
           }
         >
           {!isPrimary && (
@@ -117,8 +117,8 @@ const Hero = () => {
         to={url || "/courses"}
         className={
           isPrimary
-            ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30"
-            : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-[13px]m font-semibold text-[13px]late-700 shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+            ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95"
+            : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-xs transition-all hover:border-blue-200 hover:bg-blue-50/50 hover:text-blue-600 active:scale-95"
         }
       >
         <span>{text}</span>
@@ -136,34 +136,53 @@ const Hero = () => {
     <section
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative overflow-hidden bg-slate-50 transition-colors duration-700"
+      className="relative min-h-[85vh] lg:min-h-[88vh] flex items-center overflow-hidden bg-slate-50 transition-colors duration-700"
     >
-      <div className="pointer-events-none absolute inset-0">
+      {/* 1. Mobile Ambient Background Orbs (Restored original soft look for mobile) */}
+      <div className="pointer-events-none absolute inset-0 lg:hidden overflow-hidden">
         <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-100/60 blur-3xl" />
         <div className="absolute -right-32 top-20 h-96 w-96 rounded-full bg-indigo-100/60 blur-3xl" />
         <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-100/40 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-[13px]m font-medium text-blue-600 shadow-sm transition-all duration-300">
-              <Sparkles size={16} />
-              <span className="font-semibold">
-                {activeSlide?.subtitle || "Learn Today. Lead Tomorrow."}
-              </span>
+      {/* 2. Desktop Full-Screen Background Image (Hidden on mobile) */}
+      <div className="hidden lg:block absolute inset-0 z-0 overflow-hidden">
+        {activeSlide?.image ? (
+          <img
+            key={activeSlide.image}
+            src={activeSlide.image}
+            alt={activeSlide.title || "Apna Vidya"}
+            className="h-full w-full object-cover object-center transition-all duration-700 ease-out"
+          />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-blue-50 to-indigo-100" />
+        )}
+      </div>
+
+      {/* 3. Text Content & Floating Widgets Layer On Top */}
+      <div className="relative z-10 w-full mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* Content Panel */}
+          <div className="lg:col-span-8 max-w-2xl py-2 sm:py-4 lg:p-6">
+            {/* Subtitle Badge */}
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-blue-700 shadow-2xs">
+              <Sparkles size={15} className="text-blue-600" />
+              <span>{activeSlide?.subtitle || "Learn Today. Lead Tomorrow."}</span>
             </div>
 
-            <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-[13px]late-900 sm:text-5xl lg:text-6xl min-h-[120px] transition-opacity duration-300">
+            {/* Headline Title */}
+            <h1 className="text-3xl font-extrabold leading-[1.15] tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               {activeSlide?.title || "Build Your Future With Apna Vidya"}
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-7 text-[13px]late-600 sm:text-lg min-h-[56px] transition-opacity duration-300">
+            {/* Description */}
+            <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
               {activeSlide?.description ||
                 "Learn industry-relevant skills from experienced educators, explore practical courses, and take the next step toward building a successful career."}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            {/* Action Buttons */}
+            <div className="mt-6 flex flex-col gap-3.5 sm:flex-row sm:items-center">
               {renderButton(
                 activeSlide?.buttonText || "Explore Courses",
                 activeSlide?.buttonUrl || "/courses",
@@ -178,6 +197,7 @@ const Hero = () => {
                 )}
             </div>
 
+            {/* Slider Dots & Controls (if multiple slides) */}
             {sliders.length > 1 && (
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
@@ -186,9 +206,9 @@ const Hero = () => {
                       key={idx}
                       type="button"
                       onClick={() => setCurrentIndex(idx)}
-                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === idx
-                        ? "w-8 bg-blue-600"
-                        : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === idx
+                        ? "w-7 bg-blue-600"
+                        : "w-2 bg-slate-300 hover:bg-slate-400"
                         }`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
@@ -199,138 +219,76 @@ const Hero = () => {
                   <button
                     type="button"
                     onClick={handlePrev}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[13px]late-600 shadow-xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
+                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-2xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
                     aria-label="Previous slide"
                   >
-                    <ChevronLeft size={16} />
+                    <ChevronLeft size={15} />
                   </button>
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[13px]late-600 shadow-xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
+                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-2xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
                     aria-label="Next slide"
                   >
-                    <ChevronRight size={16} />
+                    <ChevronRight size={15} />
                   </button>
                 </div>
 
-                <span className="text-xs text-[13px]late-400 font-medium">
+                <span className="text-xs text-slate-400 font-medium ml-1">
                   {currentIndex + 1} / {sliders.length}
                 </span>
               </div>
             )}
 
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-              <div className="flex items-center gap-2 text-[13px]m text-[13px]late-600">
-                <CheckCircle2 size={18} className="text-green-500" />
-                Practical Learning
+            {/* Feature Checkpoints */}
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-200/80 pt-5">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                <span>Practical Learning</span>
               </div>
-              <div className="flex items-center gap-2 text-[13px]m text-[13px]late-600">
-                <CheckCircle2 size={18} className="text-green-500" />
-                Expert Mentors
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                <span>Expert Mentors</span>
               </div>
-              <div className="flex items-center gap-2 text-[13px]m text-[13px]late-600">
-                <CheckCircle2 size={18} className="text-green-500" />
-                Career Focused
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                <span>Career Focused</span>
               </div>
             </div>
 
-            <div className="mt-10 grid max-w-xl grid-cols-3 border-t border-slate-200 pt-7">
+            {/* Statistics Row */}
+            <div className="mt-6 grid grid-cols-3 border-t border-slate-200/80 pt-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <Users size={18} className="text-blue-600" />
-                  <p className="text-2xl font-bold text-[13px]late-900">5K+</p>
+                  <Users size={17} className="text-blue-600" />
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900">5K+</p>
                 </div>
-                <p className="mt-1 text-xs text-[13px]late-500 sm:text-[13px]m">Students</p>
+                <p className="mt-0.5 text-xs text-slate-500">Students</p>
               </div>
 
-              <div className="border-l border-slate-200 pl-5">
+              <div className="border-l border-slate-200/80 pl-4 sm:pl-5">
                 <div className="flex items-center gap-2">
-                  <BookOpen size={18} className="text-blue-600" />
-                  <p className="text-2xl font-bold text-[13px]late-900">25+</p>
+                  <BookOpen size={17} className="text-blue-600" />
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900">25+</p>
                 </div>
-                <p className="mt-1 text-xs text-[13px]late-500 sm:text-[13px]m">Courses</p>
+                <p className="mt-0.5 text-xs text-slate-500">Courses</p>
               </div>
 
-              <div className="border-l border-slate-200 pl-5">
+              <div className="border-l border-slate-200/80 pl-4 sm:pl-5">
                 <div className="flex items-center gap-2">
-                  <Award size={18} className="text-blue-600" />
-                  <p className="text-2xl font-bold text-[13px]late-900">95%</p>
+                  <Award size={17} className="text-blue-600" />
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900">95%</p>
                 </div>
-                <p className="mt-1 text-xs text-[13px]late-500 sm:text-[13px]m">Completion</p>
+                <p className="mt-0.5 text-xs text-slate-500">Completion</p>
               </div>
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-            <div className="relative mx-auto max-w-[540px]">
-              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-blue-100/70 via-indigo-50/50 to-cyan-100/60 blur-xl" />
 
-              <div className="relative overflow-hidden rounded-3xl border-4 border-white bg-slate-900 shadow-2xl shadow-blue-900/15 aspect-[4/3] sm:aspect-[14/11]">
-                {activeSlide?.image ? (
-                  <img
-                    key={activeSlide.image}
-                    src={activeSlide.image}
-                    alt={activeSlide.title || "Apna Vidya"}
-                    className="h-full w-full object-cover transition-all duration-700 ease-in-out hover:scale-105"
-                  />
-                ) : (
-                  <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
-                    <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-white/10 backdrop-blur-sm">
-                      <GraduationCap size={60} strokeWidth={1.4} />
-                    </div>
-                    <p className="text-2xl font-bold">Apna Vidya</p>
-                    <p className="mt-1 text-[13px]m text-blue-100">
-                      Learn • Grow • Succeed
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              <div className="absolute -left-4 top-10 rounded-2xl border border-white/90 bg-white/95 p-3.5 shadow-xl backdrop-blur-xs sm:-left-6">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-green-50 text-green-600 shadow-xs">
-                    <Users size={21} />
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-[13px]late-900 leading-tight">5,000+</p>
-                    <p className="text-xs text-[13px]late-500">Active Students</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-3 bottom-6 rounded-2xl border border-white/90 bg-white/95 p-3.5 shadow-xl backdrop-blur-xs sm:-right-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 shadow-xs">
-                    <BookOpen size={21} />
-                  </div>
-                  <div>
-                    <p className="text-[13px]m font-bold text-[13px]late-900 leading-tight">25+ Courses</p>
-                    <div className="mt-1 flex items-center gap-1">
-                      <Star size={13} className="fill-yellow-400 text-yellow-400" />
-                      <span className="text-xs text-[13px]late-500 font-medium">Industry Focused</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute right-6 -top-5 hidden rounded-2xl border border-white/90 bg-white/95 p-2.5 shadow-xl backdrop-blur-xs sm:block">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-50 text-yellow-600 shadow-xs">
-                    <Award size={18} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-[13px]late-900">Certified Learning</p>
-                    <p className="text-[12px] text-[13px]late-500 font-medium">Build your credentials</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-6 bg-white [clip-path:ellipse(55%_100%_at_50%_100%)]" />
+      <div className="absolute bottom-0 left-0 right-0 h-6 bg-white [clip-path:ellipse(55%_100%_at_50%_100%)] pointer-events-none z-10" />
     </section>
   );
 };

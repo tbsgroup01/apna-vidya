@@ -17,15 +17,21 @@ const awardController = require("../controllers/awardController");
 const blogController = require("../controllers/blogController");
 const heroSliderController = require("../controllers/heroSliderController");
 const aboutController = require("../controllers/aboutController");
+const videoSectionController = require("../controllers/videoSectionController");
 const settingController = require("../controllers/settingController");
 const uploadController = require("../controllers/uploadController");
 const authController = require("../controllers/authController");
+const holidayEmailController = require("../controllers/holidayEmailController");
 
 router.use(authenticate);
-router.post("/upload", upload.single("image"), uploadController.uploadImage);
+router.post("/upload", upload.any(), uploadController.uploadImage);
 router.get("/profile", authController.getMe);
 router.put("/profile", authController.updateProfile);
 router.get("/dashboard/stats", dashboardController.getDashboardStats);
+router.get("/users", authorizePermission("users.manage"), authController.getUsers);
+router.post("/users", authorizePermission("users.manage"), authController.registerAdmin);
+router.delete("/users/:id", authorizePermission("users.manage"), authController.deleteUser);
+
 
 router.get(
   "/leads",
@@ -373,6 +379,20 @@ router.put(
 );
 
 router.get(
+  "/video-section",
+  videoSectionController.getVideoSection
+);
+router.put(
+  "/video-section",
+  videoSectionController.updateVideoSection
+);
+router.post(
+  "/video-section/upload",
+  upload.single("video"),
+  videoSectionController.uploadVideo
+);
+
+router.get(
   "/settings",
   settingController.getSettings
 );
@@ -388,5 +408,13 @@ router.put(
   "/settings/change-password",
   settingController.changePassword
 );
+
+router.get("/holiday-emails", holidayEmailController.getHolidayEmails);
+router.get("/holiday-emails/audience-stats", holidayEmailController.getAudienceStats);
+router.get("/holiday-emails/:id", holidayEmailController.getHolidayEmailById);
+router.post("/holiday-emails", holidayEmailController.createHolidayEmail);
+router.post("/holiday-emails/:id/send", holidayEmailController.sendHolidayEmailNow);
+router.delete("/holiday-emails/:id", holidayEmailController.deleteHolidayEmail);
+router.post("/holiday-emails/bulk-delete", holidayEmailController.bulkDeleteHolidayEmails);
 
 module.exports = router;

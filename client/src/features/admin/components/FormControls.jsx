@@ -9,6 +9,8 @@ import {
   ExternalLink,
   RefreshCw,
   Sparkles,
+  FileText,
+  Download,
 } from "lucide-react";
 import api from "../../../services/api";
 
@@ -436,9 +438,206 @@ export const ImageUploadPreview = ({
           )}
 
           {helperText && (
-            <p className="text-[13px] text-[13px]late-400">{helperText}</p>
+            <p className="text-xs text-slate-400">{helperText}</p>
           )}
         </div>
+      )}
+    </div>
+  );
+};
+
+export const DocumentUpload = ({
+  label = "Course Syllabus (PDF / Document)",
+  value = "",
+  onChange,
+  maxSizeMB = 50,
+  helperText = "Upload PDF or document syllabus that students can download from the course page.",
+  required = false,
+}) => {
+  const [mode, setMode] = useState("file");
+  const [uploading, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const fileInputRef = useRef(null);
+
+  const handleProcessFile = async (file) => {
+    if (!file) return;
+
+    if (file.size > maxSizeMB * 1024 * 1024) {
+      setUploadError(`File must be smaller than ${maxSizeMB}MB.`);
+      return;
+    }
+
+    setUploadError("");
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      let res;
+      try {
+        res = await api.post("/admin/upload", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } catch (errAdmin) {
+        res = await api.post("/public/upload", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
+
+      const uploadedUrl = res.data?.url || res.data?.data?.url;
+      if (uploadedUrl) {
+        onChange(uploadedUrl);
+      }
+    } catch (err) {
+      setUploadError(err.response?.data?.message || "Failed to upload document");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleProcessFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  return (
+    <div className="w-full">
+      <div className="flex items-center justify-between mb-1.5">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700">
+          {label} {required && <span className="text-rose-500">*</span>}
+        </label>
+        <div className="flex items-center rounded-lg border border-slate-200 bg-slate-50 p-0.5 text-[11px] font-semibold">
+          <button
+            type="button"
+            onClick={() => setMode("file")}
+            className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+              mode === "file"
+                ? "bg-white text-blue-600 shadow-2xs font-bold"
+                : "text-slate-500 hover:text-slate-800"
+            }`}
+          >
+            Upload File
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode("url")}
+            className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+              mode === "url"
+                ? "bg-white text-blue-600 shadow-2xs font-bold"
+                : "text-slate-500 hover:text-slate-800"
+            }`}
+          >
+            Direct URL
+          </button>
+        </div>
+      </div>
+
+      {value ? (
+        <div className="rounded-xl border border-blue-100 bg-blue-50/40 p-4 transition-all">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-xs">
+                <FileText size={20} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-slate-800 truncate">
+                  {value.split("/").pop() || "Syllabus Document"}
+                </p>
+                <p className="text-[11px] text-slate-500 truncate">{value}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href={value}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-lg border border-blue-200 bg-white px-3 py-1.5 text-xs font-bold text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
+              >
+                <ExternalLink size={13} />
+                <span>View</span>
+              </a>
+              <button
+                type="button"
+                onClick={() => onChange("")}
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                title="Remove syllabus"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {mode === "file" ? (
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragOver(true);
+              }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+              className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition-all cursor-pointer ${
+                dragOver
+                  ? "border-blue-500 bg-blue-50/50"
+                  : "border-slate-200 bg-slate-50/60 hover:border-blue-400 hover:bg-slate-50"
+              }`}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx,.zip,.rar"
+                onChange={(e) => handleProcessFile(e.target.files[0])}
+                className="hidden"
+              />
+              {uploading ? (
+                <div className="flex flex-col items-center gap-2 text-blue-600">
+                  <Loader2 size={24} className="animate-spin" />
+                  <p className="text-xs font-bold">Uploading syllabus document...</p>
+                  <p className="text-[11px] text-slate-400">Storing file on server</p>
+                </div>
+              ) : (
+                <>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 shadow-xs mb-2">
+                    <Upload size={20} />
+                  </div>
+                  <p className="text-xs font-bold text-slate-800">
+                    Click to browse or drag & drop syllabus document
+                  </p>
+                  <p className="mt-1 text-[11px] text-slate-400">
+                    Supports PDF, DOC, DOCX (Max {maxSizeMB}MB)
+                  </p>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="relative">
+              <input
+                type="url"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="Paste direct PDF or Google Drive download link (https://...)"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </div>
+          )}
+        </div>
+      )}
+
+      {uploadError && (
+        <p className="mt-1.5 text-xs font-medium text-rose-500">{uploadError}</p>
+      )}
+      {helperText && (
+        <p className="mt-1.5 text-[11px] text-slate-400">{helperText}</p>
       )}
     </div>
   );

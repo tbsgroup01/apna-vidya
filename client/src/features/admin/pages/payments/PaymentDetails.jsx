@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   Printer,
   CheckCircle2,
   Mail,
+  Loader2,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import StatusBadge from "../../components/StatusBadge";
-import { initialPayments } from "../../../../data/admin/paymentsData";
-import { initialStudents } from "../../../../data/admin/studentsData";
-import { initialAdminCourses } from "../../../../data/admin/coursesAdminData";
 import logo from "../../../../assets/apnavidya.png";
+import api from "../../../../services/api";
 
 const WhatsAppIcon = ({ size = 15, className = "" }) => (
   <svg
@@ -27,60 +26,93 @@ const WhatsAppIcon = ({ size = 15, className = "" }) => (
 
 const PaymentDetails = () => {
   const { id } = useParams();
-  const payment =
-    initialPayments.find((p) => p.id === id) || initialPayments[0];
+  const [payment, setPayment] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const matchedStudent = initialStudents.find(
-    (s) =>
-      s.id === payment.studentId ||
-      s.name.toLowerCase() === (payment.studentName || "").toLowerCase()
-  );
+  useEffect(() => {
+    const fetchPaymentDetails = async () => {
+      try {
+        setLoading(true);
+        const stuId = id ? id.replace(/\D/g, "") : null;
+        if (stuId) {
+          const res = await api.get(`/admin/students/${stuId}`);
+          if (res.data?.data?.student) {
+            const s = res.data.data.student;
+            const paid = Number(s.paidFees || 0);
+            const total = Number(s.totalFees || 0);
+            const pending = Number(s.pendingFees || 0);
+            setPayment({
+              id: `PAY-${String(s.id).padStart(4, "0")}`,
+              invoiceId: `INV-2026-${String(s.id).padStart(4, "0")}`,
+              studentId: s.id,
+              studentName: s.name,
+              studentEmail: s.email,
+              studentPhone: s.phone,
+              studentAddress: s.address || "New Delhi, India",
+              course: s.enrolledCourses?.[0]?.name || "Standard Curriculum",
+              batch: s.enrolledBatches?.[0]?.name || "Regular Batch",
+              batchName: s.enrolledBatches?.[0]?.name || "Regular Live Batch",
+              courseDuration: s.enrolledCourses?.[0]?.duration || "6 Months",
+              amount: paid,
+              totalFees: total,
+              pendingFees: pending,
+              remainingBalance: pending,
+              method: "Online / Bank Transfer",
+              date: s.admissionDate || (s.createdAt ? new Date(s.createdAt).toISOString().split("T")[0] : "Recent"),
+              doj: s.admissionDate || (s.createdAt ? new Date(s.createdAt).toISOString().split("T")[0] : "Recent"),
+              status: s.paymentStatus || (pending === 0 && paid > 0 ? "Paid" : "Pending"),
+              rollNo: s.registrationNumber || `AV-STU-${String(s.id).padStart(4, "0")}`,
+              nextDueDate: pending === 0 ? "N/A (Fully Cleared)" : "Upcoming Cycle",
+              lateFee: "₹0 (Nil)",
+            });
+            return;
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch payment details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPaymentDetails();
+  }, [id]);
 
-  const matchedCourse = initialAdminCourses.find(
-    (c) => c.title.toLowerCase() === (payment.course || "").toLowerCase()
-  );
+  if (loading) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+      </div>
+    );
+  }
 
-  const rollNo =
-    payment.rollNo ||
-    matchedStudent?.id ||
-    payment.studentId ||
-    "STU-2026-001";
+  if (!payment) {
+    return (
+      <div className="py-12 text-center">
+        <h3 className="text-base font-bold text-slate-800">Receipt Not Found</h3>
+        <p className="mt-1 text-xs text-slate-400">The requested fee payment or invoice record does not exist.</p>
+        <Link
+          to="/admin/payments"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700"
+        >
+          <ArrowLeft size={14} />
+          <span>Back to Payments</span>
+        </Link>
+      </div>
+    );
+  }
 
-  const batchName =
-    payment.batchName || matchedStudent?.batch || "FS-JUL-26 (Weekend Live)";
+  const rollNo = payment.rollNo;
+  const batchName = payment.batchName;
+  const courseDuration = payment.courseDuration;
+  const dojFormatted = payment.doj;
+  const remainingBalance = payment.remainingBalance;
+  const nextDueDate = payment.nextDueDate;
+  const lateFee = payment.lateFee;
 
-  const courseDuration =
-    payment.courseDuration || matchedCourse?.duration || "6 Months (24 Weeks)";
-
-  const doj =
-    payment.doj || matchedStudent?.admissionDate || "2026-07-02";
-
-  const dojFormatted = doj
-    ? new Date(doj).toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    })
-    : "02 Jul 2026";
-
-  const remainingBalance =
-    payment.remainingBalance !== undefined
-      ? payment.remainingBalance
-      : matchedStudent?.pendingFees !== undefined
-        ? matchedStudent.pendingFees
-        : 0;
-
-  const nextDueDate =
-    payment.nextDueDate ||
-    (remainingBalance === 0 || (payment.status === "Paid" && matchedStudent?.pendingFees === 0)
-      ? "N/A (Fully Cleared)"
-      : "15th Oct 2026");
-
-  const lateFee = payment.lateFee || "₹0 (Nil)";
-
-  const studentPhone = matchedStudent?.phone || "";
+  const studentPhone = payment.studentPhone || "";
   const digits = studentPhone.replace(/\D/g, "");
   const waNumber = digits.length === 10 ? `91${digits}` : digits;
+  const publicReceiptUrl = `${window.location.origin}/apna-vidya/receipt/${payment.id}`;
 
   const shareText =
     `*Apna Vidya - Official Fee Receipt*\n\n` +
@@ -89,14 +121,11 @@ const PaymentDetails = () => {
     `• *Receipt No:* ${payment.id}\n` +
     `• *Roll No:* ${rollNo}\n` +
     `• *Program:* ${payment.course}\n` +
-    `• *Batch Name:* ${batchName}\n` +
     `• *Course Duration:* ${courseDuration}\n` +
     `• *Date of Joining (DOJ):* ${dojFormatted}\n` +
     `• *Amount Paid:* ₹${payment.amount.toLocaleString()}\n` +
     `• *Remaining Balance:* ₹${remainingBalance.toLocaleString()}\n` +
-    `• *Next Due Date:* ${nextDueDate}\n` +
     `• *Late Fee:* ${lateFee}\n` +
-    `• *Method:* ${payment.method}\n` +
     `• *Transaction Ref:* ${payment.transactionRef}\n\n` +
     `Thank you for choosing Apna Vidya!`;
 
@@ -125,12 +154,14 @@ const PaymentDetails = () => {
           actions={
             <div className="flex flex-wrap items-center gap-2">
               <Link
-                to="/admin/payments"
+                to="/admin/students"
                 className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs"
               >
                 <ArrowLeft size={15} />
                 <span>Back</span>
               </Link>
+
+
               <a
                 href={waShareUrl}
                 target="_blank"
@@ -141,14 +172,8 @@ const PaymentDetails = () => {
                 <WhatsAppIcon size={14} />
                 <span>Share WhatsApp</span>
               </a>
-              <a
-                href={emailShareUrl}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-blue-300 bg-blue-50 px-3.5 py-2 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs cursor-pointer active:scale-95"
-                title="Share Receipt via Email"
-              >
-                <Mail size={14} />
-                <span>Share Email</span>
-              </a>
+
+
               <button
                 type="button"
                 onClick={handlePrint}
@@ -171,14 +196,7 @@ const PaymentDetails = () => {
               alt="Apna Vidya Logo"
               className="h-11 sm:h-12 w-auto object-contain shrink-0"
             />
-            <div>
-              <h2 className="text-lg sm:text-xl font-black tracking-tight text-slate-900 leading-snug">
-                Apna Vidya Edutech Pvt. Ltd.
-              </h2>
-              <p className="text-xs text-slate-500">
-                Sector 62, Noida, Uttar Pradesh - 201301
-              </p>
-            </div>
+
           </div>
 
           <div className="text-right">
@@ -219,7 +237,7 @@ const PaymentDetails = () => {
             </div>
           </div>
 
-          <div className="text-left sm:text-right space-y-1">
+          {/* <div className="text-left sm:text-right space-y-1">
             <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
               Payment Voucher Details
             </p>
@@ -247,7 +265,7 @@ const PaymentDetails = () => {
                 </span>
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Program / Fee Table */}
@@ -286,12 +304,10 @@ const PaymentDetails = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center border-t border-slate-100 pt-3">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-emerald-600 font-semibold text-xs">
-              <CheckCircle2 size={16} />
-              <span>Digital Payment Verified & Recorded</span>
+              <CheckCircle2 size={25} />
+              <span className="text-emerald-700 font-bold text-xl">Paid</span>
             </div>
-            <p className="text-[11px] text-slate-400">
-              Transaction Mode: <span className="font-medium text-slate-700">{payment.method}</span>
-            </p>
+
           </div>
 
           <div className="bg-slate-50/80 rounded-xl p-3.5 border border-slate-100 text-xs space-y-1.5">
@@ -301,20 +317,14 @@ const PaymentDetails = () => {
                 ₹{payment.amount.toLocaleString()}
               </span>
             </div>
-            <div className="flex justify-between text-slate-600">
-              <span>Late Fee (if any):</span>
-              <span className="font-mono text-slate-700">{lateFee}</span>
-            </div>
+
             <div className="flex justify-between text-slate-600">
               <span>Remaining Balance:</span>
               <span className="font-mono font-bold text-rose-600">
                 ₹{remainingBalance.toLocaleString()}
               </span>
             </div>
-            <div className="flex justify-between text-slate-600">
-              <span>Next Due Date:</span>
-              <span className="font-semibold text-amber-700">{nextDueDate}</span>
-            </div>
+
             <div className="border-t border-slate-200 pt-1.5 flex justify-between items-center">
               <span className="font-bold text-slate-800">Total Paid Amount:</span>
               <span className="text-base font-black font-mono text-blue-600">

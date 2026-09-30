@@ -701,7 +701,8 @@ const AboutUsAdmin = () => {
                         <img
                           src={member.image}
                           alt={member.name}
-                          className="h-full w-full object-cover"
+                          className="h-full w-full object-cover object-top"
+                          style={{ objectPosition: "top center" }}
                         />
                       ) : (
                         <div className="h-full w-full flex items-center justify-center text-[13px]late-400">

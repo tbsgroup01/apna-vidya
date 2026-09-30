@@ -53,6 +53,7 @@ import BlogCategories from "./features/admin/pages/blogs/BlogCategories";
 import HeroSliders from "./features/admin/pages/HeroSliders";
 import NotificationsAdmin from "./features/admin/pages/NotificationsAdmin";
 import AboutUsAdmin from "./features/admin/pages/AboutUsAdmin";
+import VideoSectionAdmin from "./features/admin/pages/VideoSectionAdmin";
 import ContactDetailsAdmin from "./features/admin/pages/ContactDetailsAdmin";
 import HolidayEmailsList from "./features/admin/pages/holidayEmails/HolidayEmailsList";
 import HolidayEmailForm from "./features/admin/pages/holidayEmails/HolidayEmailForm";
@@ -152,6 +153,7 @@ function AppContent() {
             <Route path="hero-sliders/create" element={<HeroSliders />} />
             <Route path="notifications" element={<NotificationsAdmin />} />
             <Route path="about-us" element={<AboutUsAdmin />} />
+            <Route path="video-section" element={<VideoSectionAdmin />} />
             <Route path="contact-details" element={<ContactDetailsAdmin />} />
             <Route path="holiday-emails" element={<HolidayEmailsList />} />
             <Route path="holiday-emails/create" element={<HolidayEmailForm />} />

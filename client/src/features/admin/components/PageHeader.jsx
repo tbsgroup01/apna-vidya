@@ -35,14 +35,14 @@ const PageHeader = ({ title, description, breadcrumbs = [], actions = null }) =>
           </nav>
         )}
 
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
           {title}
         </h1>
-        {description && (
+        {/* {description && (
           <p className="mt-1 text-sm text-slate-500 max-w-3xl leading-relaxed">
             {description}
           </p>
-        )}
+        )} */}
       </div>
 
       {actions && (

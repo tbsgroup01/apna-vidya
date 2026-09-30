@@ -5,10 +5,8 @@ import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
 import StatusBadge from "../../components/StatusBadge";
 import ConfirmModal from "../../components/ConfirmModal";
-import { initialBlogCategories } from "../../../../data/admin/blogsAdminData";
-
 const BlogCategories = () => {
-  const [categories, setCategories] = useState(initialBlogCategories);
+  const [categories, setCategories] = useState([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [catToDelete, setCatToDelete] = useState(null);
   const [addModalOpen, setAddModalOpen] = useState(false);

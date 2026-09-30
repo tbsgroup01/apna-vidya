@@ -6,15 +6,18 @@ const DemoModalContext = createContext(null);
 export const DemoModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("");
+  const [modalOptions, setModalOptions] = useState({});
 
-  const openDemoModal = (courseName = "") => {
+  const openDemoModal = (courseName = "", options = {}) => {
     setSelectedCourse(courseName);
+    setModalOptions(typeof options === "object" && options !== null ? options : {});
     setIsOpen(true);
   };
 
   const closeDemoModal = () => {
     setIsOpen(false);
     setSelectedCourse("");
+    setModalOptions({});
   };
 
   return (
@@ -30,6 +33,7 @@ export const DemoModalProvider = ({ children }) => {
         isOpen={isOpen}
         onClose={closeDemoModal}
         initialCourse={selectedCourse}
+        options={modalOptions}
       />
     </DemoModalContext.Provider>
   );

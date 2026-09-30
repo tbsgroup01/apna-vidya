@@ -21,29 +21,64 @@ import {
 import StatCard from "../components/StatCard";
 import StatusBadge from "../components/StatusBadge";
 import {
-  dashboardStats as defaultStats,
-  enrollmentChartData,
-  revenueChartData,
-  coursePopularityData as defaultPopularity,
-  leadConversionData,
-} from "../../../data/admin/dashboardData";
-import {
-  EnrollmentLineChart,
-  RevenueBarChart,
+  DemandingProgramsBarChart,
   CoursePopularityBars,
   LeadConversionDonut,
 } from "../components/ChartComponents";
-import { initialLeads } from "../../../data/admin/leadsData";
-import { initialStudents } from "../../../data/admin/studentsData";
-import { initialPayments } from "../../../data/admin/paymentsData";
 import api from "../../../services/api";
 
+const leadAvatarColors = [
+  "from-blue-500 to-indigo-500",
+  "from-emerald-500 to-teal-500",
+  "from-purple-500 to-pink-500",
+  "from-amber-500 to-orange-500",
+  "from-rose-500 to-red-500",
+];
+
 const Dashboard = () => {
-  const [stats, setStats] = useState(defaultStats);
-  const [recentLeads, setRecentLeads] = useState(initialLeads.slice(0, 5));
-  const [recentStudents, setRecentStudents] = useState(initialStudents.slice(0, 5));
-  const [coursePopularity, setCoursePopularity] = useState(defaultPopularity);
-  const [recentPayments] = useState(initialPayments.slice(0, 5));
+  const [stats, setStats] = useState([
+    {
+      id: "stat-1",
+      title: "Total Registered Learners",
+      value: "0",
+      trend: 0,
+      trendLabel: "Live database records",
+      icon: Users,
+      color: "blue",
+    },
+    {
+      id: "stat-2",
+      title: "Active Course Programs",
+      value: "0",
+      trend: 0,
+      trendLabel: "Published on portal",
+      icon: BookOpen,
+      color: "indigo",
+    },
+    {
+      id: "stat-3",
+      title: "Live Classroom Batches",
+      value: "0",
+      trend: 0,
+      trendLabel: "Conducted by mentors",
+      icon: Calendar,
+      color: "purple",
+    },
+    {
+      id: "stat-4",
+      title: "Gross Fee Collection",
+      value: "₹0",
+      trend: 0,
+      trendLabel: "Reconciled tuition",
+      icon: IndianRupee,
+      color: "emerald",
+    },
+  ]);
+  const [recentLeads, setRecentLeads] = useState([]);
+  const [recentStudents, setRecentStudents] = useState([]);
+  const [mostDemandingPrograms, setMostDemandingPrograms] = useState([]);
+  const [recentPayments, setRecentPayments] = useState([]);
+  const [leadConversionData, setLeadConversionData] = useState([]);
 
   useEffect(() => {
     const fetchDashboardStats = async () => {
@@ -54,7 +89,9 @@ const Dashboard = () => {
             stats: liveStats,
             recentLeads: liveLeads,
             recentStudents: liveStudents,
+            mostDemandingPrograms: liveDemanding,
             coursePopularity: livePop,
+            leadConversion,
           } = res.data.data;
 
           if (liveStats) {
@@ -62,8 +99,8 @@ const Dashboard = () => {
               {
                 id: "stat-1",
                 title: "Total Registered Learners",
-                value: liveStats.totalStudents.toLocaleString(),
-                trend: 12,
+                value: (liveStats.totalStudents || 0).toLocaleString(),
+                trend: liveStats.totalStudents > 0 ? 12 : 0,
                 trendLabel: "Live database records",
                 icon: Users,
                 color: "blue",
@@ -71,8 +108,8 @@ const Dashboard = () => {
               {
                 id: "stat-2",
                 title: "Active Course Programs",
-                value: liveStats.activeCourses.toLocaleString(),
-                trend: 8,
+                value: (liveStats.activeCourses || 0).toLocaleString(),
+                trend: liveStats.activeCourses > 0 ? 8 : 0,
                 trendLabel: "Published on portal",
                 icon: BookOpen,
                 color: "indigo",
@@ -80,8 +117,8 @@ const Dashboard = () => {
               {
                 id: "stat-3",
                 title: "Live Classroom Batches",
-                value: liveStats.activeBatches.toLocaleString(),
-                trend: 15,
+                value: (liveStats.activeBatches || 0).toLocaleString(),
+                trend: liveStats.activeBatches > 0 ? 15 : 0,
                 trendLabel: "Conducted by mentors",
                 icon: Calendar,
                 color: "purple",
@@ -89,8 +126,8 @@ const Dashboard = () => {
               {
                 id: "stat-4",
                 title: "Gross Fee Collection",
-                value: `₹${Math.round(liveStats.totalRevenue).toLocaleString()}`,
-                trend: 18,
+                value: `₹${Math.round(liveStats.totalRevenue || 0).toLocaleString()}`,
+                trend: liveStats.totalRevenue > 0 ? 18 : 0,
                 trendLabel: "Reconciled tuition",
                 icon: IndianRupee,
                 color: "emerald",
@@ -98,42 +135,105 @@ const Dashboard = () => {
             ]);
           }
 
-          if (liveLeads && liveLeads.length > 0) {
-            setRecentLeads(liveLeads);
-          }
+          setRecentLeads(liveLeads || []);
 
-          if (liveStudents && liveStudents.length > 0) {
+          if (liveStudents) {
             setRecentStudents(
               liveStudents.map((s) => ({
                 id: s.id,
                 name: s.name,
-                course: s.enrolledCourses?.[0]?.name || "Full Stack Web Development",
+                course: s.enrolledCourses?.[0]?.name || "N/A",
                 paidFees: s.paidFees || 0,
-                paymentStatus: s.paymentStatus || "Paid",
+                paymentStatus: s.paymentStatus || "Active",
                 avatar:
                   s.profileImage ||
                   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
               }))
             );
-          }
 
-          if (livePop && livePop.length > 0) {
-            setCoursePopularity(
-              livePop.map((c) => ({
-                course: c.name,
-                count: c.studentsCount || 0,
-                enrolled: c.studentsCount || 0,
-                percentage: Math.min(100, (c.studentsCount + 1) * 15),
+            const paidStudents = liveStudents.filter((s) => Number(s.paidFees || 0) > 0);
+            setRecentPayments(
+              paidStudents.map((s) => ({
+                id: `PAY-${String(s.id).padStart(4, "0")}`,
+                studentName: s.name,
+                course: s.enrolledCourses?.[0]?.name || "Course Program",
+                amount: Number(s.paidFees || 0),
+                method: "Online / UPI",
+                date: s.admissionDate || new Date().toISOString().split("T")[0],
+                status: s.paymentStatus === "Paid" ? "Success" : "Partial",
               }))
             );
+          } else {
+            setRecentStudents([]);
+            setRecentPayments([]);
+          }
+
+          const demandingSource = liveDemanding || livePop || [];
+          if (demandingSource && demandingSource.length > 0) {
+            // Exactly top 2 courses with positive count
+            const top2 = demandingSource.filter((c) => (c.count ?? c.enrolled ?? 0) > 0).slice(0, 2);
+            if (top2.length > 0) {
+              setMostDemandingPrograms(
+                top2.map((c) => {
+                  const count = c.count ?? c.enrolled ?? 0;
+                  return {
+                    course: c.course || c.name,
+                    count,
+                    unit: count === 1 ? "demo request" : "demo requests",
+                  };
+                })
+              );
+            } else {
+              setMostDemandingPrograms([]);
+            }
+          } else {
+            setMostDemandingPrograms([]);
+          }
+
+          if (leadConversion && Array.isArray(leadConversion)) {
+            setLeadConversionData(leadConversion);
+          } else {
+            setLeadConversionData([]);
           }
         }
       } catch (err) {
-        console.error(err);
+        console.error("Dashboard stats error, fetching live demo leads directly:", err);
+        try {
+          const leadsRes = await api.get("/admin/leads?limit=150");
+          if (leadsRes.data?.data?.leads) {
+            const allFetchedLeads = leadsRes.data.data.leads;
+            setRecentLeads(allFetchedLeads.slice(0, 5));
+            const demoLeads = allFetchedLeads.filter(
+              (l) =>
+                (l.source && l.source.toLowerCase().includes("demo")) ||
+                (l.message && l.message.toLowerCase().includes("demo"))
+            );
+            const counts = {};
+            demoLeads.forEach((l) => {
+              const cName = (l.course || "").trim();
+              if (cName) counts[cName] = (counts[cName] || 0) + 1;
+            });
+            const sorted = Object.entries(counts)
+              .map(([course, count]) => ({ course, count }))
+              .sort((a, b) => b.count - a.count)
+              .slice(0, 2);
+            setMostDemandingPrograms(
+              sorted.map((item) => ({
+                course: item.course,
+                count: item.count,
+                unit: item.count === 1 ? "demo request" : "demo requests",
+              }))
+            );
+          }
+        } catch (fallbackErr) {
+          console.error("Direct demo leads fallback error:", fallbackErr);
+        }
       }
     };
 
     fetchDashboardStats();
+    const interval = setInterval(fetchDashboardStats, 15000); // 15-second real-time poll
+    return () => clearInterval(interval);
   }, []);
 
   const quickActions = [
@@ -297,95 +397,52 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="relative overflow-hidden rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/40 via-white to-sky-50/20 p-5 shadow-xs hover:border-blue-300 transition-all">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-sky-500 to-indigo-600" />
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xs">
-                <Users size={18} strokeWidth={2.2} />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900">
-                  Student Enrollment Growth
-                </h3>
-                <p className="text-xs text-slate-500">Monthly new registered learners</p>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-1 text-xs font-bold text-white shadow-xs">
-              <TrendingUp size={12} />
-              <span>2026 Trend</span>
-            </span>
-          </div>
-          <EnrollmentLineChart data={enrollmentChartData} />
-        </div>
 
-        <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50/60 via-white to-indigo-50/30 p-5 shadow-xs hover:border-indigo-300 transition-all">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-600" />
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-emerald-500 to-purple-600 text-white shadow-xs">
-                <IndianRupee size={18} strokeWidth={2.2} />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900">
-                  Revenue Collection (in ₹ Lakhs)
-                </h3>
-                <p className="text-xs text-slate-500">Gross fee collections across batches • Color-coded by volume</p>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 px-3 py-1 text-xs font-bold text-white shadow-xs">
-              <TrendingUp size={12} />
-              <span>+14.8% MoM</span>
-            </span>
-          </div>
-          <RevenueBarChart data={revenueChartData} />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="relative overflow-hidden rounded-2xl border border-purple-200/80 bg-gradient-to-br from-purple-50/40 via-white to-fuchsia-50/20 p-5 shadow-xs hover:border-purple-300 transition-all lg:col-span-2">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600" />
-          <div className="flex items-center justify-between mb-5">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white shadow-xs">
-                <BookOpen size={18} strokeWidth={2.2} />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900">
-                  Most Enrolled Programs
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Course popularity and active student distribution
-                </p>
-              </div>
-            </div>
-            <Link
-              to="/admin/courses"
-              className="inline-flex items-center gap-1 rounded-xl bg-purple-100/90 border border-purple-200/60 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-600 hover:text-white transition-all shadow-2xs"
-            >
-              <span>View Courses</span>
-              <ArrowRight size={12} />
-            </Link>
-          </div>
-          <CoursePopularityBars data={coursePopularity} />
-        </div>
-
-        <div className="relative overflow-hidden rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/40 via-white to-orange-50/20 p-5 shadow-xs hover:border-amber-300 transition-all">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-600" />
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xs">
-              <Target size={18} strokeWidth={2.2} />
+      {/* Most Demanding Programs (Full Width) */}
+      <div className="relative overflow-hidden rounded-2xl border border-purple-200/80 bg-gradient-to-br from-purple-50/40 via-white to-fuchsia-50/20 p-5 shadow-xs hover:border-purple-300 transition-all w-full">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600" />
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white shadow-xs">
+              <BookOpen size={18} strokeWidth={2.2} />
             </div>
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                Lead Conversion Ratio
+                Most Demanding Programs
               </h3>
-              <p className="text-xs text-slate-500">Enquiry to paid admission funnel</p>
+              <p className="text-xs text-slate-500">
+                Real-time ranking based on live demo class requests
+              </p>
             </div>
           </div>
-          <LeadConversionDonut data={leadConversionData} />
+          <Link
+            to="/admin/demo-classes"
+            className="inline-flex items-center gap-1 rounded-xl bg-purple-100/90 border border-purple-200/60 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-600 hover:text-white transition-all shadow-2xs"
+          >
+            <span>View Demo Classes</span>
+            <ArrowRight size={12} />
+          </Link>
         </div>
+        {mostDemandingPrograms.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-100 text-purple-600 mb-3">
+              <BookOpen size={24} />
+            </div>
+            <p className="text-sm font-bold text-slate-800">No demo class requests recorded yet</p>
+            <p className="text-xs text-slate-400 mt-1 max-w-sm">
+              Real-time course demand rankings will appear here automatically when visitors book demo classes.
+            </p>
+            <Link
+              to="/admin/demo-classes"
+              className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-purple-50 border border-purple-200 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-100 transition-colors"
+            >
+              <span>Check Demo Classes</span>
+              <ArrowRight size={12} />
+            </Link>
+          </div>
+        ) : (
+          <DemandingProgramsBarChart data={mostDemandingPrograms} />
+        )}
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
@@ -393,7 +450,6 @@ const Dashboard = () => {
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-500" />
           <div className="flex items-center justify-between p-5 border-b border-slate-100">
             <div className="flex items-center gap-2.5">
-
               <div>
                 <h3 className="text-base font-bold text-slate-900">Recent Inquiries</h3>
                 <p className="text-xs text-slate-500">Latest website & demo inquiries</p>
@@ -420,17 +476,26 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {recentLeads.map((lead, idx) => {
-                  const avatarGrad = leadAvatarColors[idx % leadAvatarColors.length];
-                  return (
+                {recentLeads.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="px-4 py-12 text-center">
+                      <p className="text-sm font-bold text-slate-800">No inquiries recorded yet</p>
+                      <p className="text-xs text-slate-400 mt-1">Live inquiries submitted through the website will appear here.</p>
+                      <Link
+                        to="/admin/leads"
+                        className="mt-3 inline-block rounded-xl bg-blue-50 border border-blue-200 px-3 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors"
+                      >
+                        Open Leads Management
+                      </Link>
+                    </td>
+                  </tr>
+                ) : (
+                  recentLeads.map((lead) => (
                     <tr key={lead.id} className="hover:bg-blue-50/30 transition-colors">
                       <td className="px-4 py-3">
-                        <div className="flex items-center gap-2.5">
-
-                          <div>
-                            <p className="font-bold text-slate-900">{lead.name}</p>
-                            <p className="text-[13px] text-slate-400 font-mono">{lead.phone}</p>
-                          </div>
+                        <div>
+                          <p className="font-bold text-slate-900">{lead.name}</p>
+                          <p className="text-[13px] text-slate-400 font-mono">{lead.phone}</p>
                         </div>
                       </td>
                       <td className="px-4 py-3 text-slate-700 font-medium">
@@ -454,8 +519,8 @@ const Dashboard = () => {
                         </Link>
                       </td>
                     </tr>
-                  );
-                })}
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -494,125 +559,68 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {recentStudents.map((stu) => (
-                  <tr key={stu.id} className="hover:bg-purple-50/30 transition-colors">
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2.5">
-                        <img
-                          src={
-                            stu.avatar ||
-                            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-                          }
-                          alt={stu.name}
-                          className="h-8 w-8 rounded-xl object-cover ring-2 ring-purple-200"
-                        />
-                        <div>
-                          <p className="font-bold text-slate-900">{stu.name}</p>
-                          <span className="rounded-md bg-slate-100 px-1.5 py-0.2 font-mono text-[12px] font-bold text-slate-600">
-                            STU-{stu.id}
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-slate-700 font-medium">
-                      {stu.course}
-                    </td>
-                    <td className="px-4 py-3 font-mono font-bold text-emerald-700">
-                      ₹{Number(stu.paidFees || 0).toLocaleString()}
-                    </td>
-                    <td className="px-4 py-3">
-                      <StatusBadge status={stu.paymentStatus || "Active"} size="sm" />
-                    </td>
-                    <td className="px-4 py-3 text-right">
+                {recentStudents.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="px-4 py-12 text-center">
+                      <p className="text-sm font-bold text-slate-800">No enrolled students yet</p>
+                      <p className="text-xs text-slate-400 mt-1">Enrolled learner profiles will appear here.</p>
                       <Link
-                        to={`/admin/students/${stu.id}`}
-                        className="inline-flex items-center gap-1 rounded-lg border border-purple-200/80 bg-purple-50/60 px-2.5 py-1 text-[13px] font-bold text-purple-700 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all"
+                        to="/admin/students/create"
+                        className="mt-3 inline-block rounded-xl bg-purple-50 border border-purple-200 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-100 transition-colors"
                       >
-                        <Eye size={12} />
-                        <span>Profile</span>
+                        + Enroll New Student
                       </Link>
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  recentStudents.map((stu) => (
+                    <tr key={stu.id} className="hover:bg-purple-50/30 transition-colors">
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-2.5">
+                          <img
+                            src={
+                              stu.avatar ||
+                              "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+                            }
+                            alt={stu.name}
+                            className="h-8 w-8 rounded-xl object-cover ring-2 ring-purple-200"
+                          />
+                          <div>
+                            <p className="font-bold text-slate-900">{stu.name}</p>
+                            <span className="rounded-md bg-slate-100 px-1.5 py-0.2 font-mono text-[12px] font-bold text-slate-600">
+                              STU-{stu.id}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-slate-700 font-medium">
+                        {stu.course}
+                      </td>
+                      <td className="px-4 py-3 font-mono font-bold text-emerald-700">
+                        ₹{Number(stu.paidFees || 0).toLocaleString()}
+                      </td>
+                      <td className="px-4 py-3">
+                        <StatusBadge status={stu.paymentStatus || "Active"} size="sm" />
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        <Link
+                          to={`/admin/students/${stu.id}`}
+                          className="inline-flex items-center gap-1 rounded-lg border border-purple-200/80 bg-purple-50/60 px-2.5 py-1 text-[13px] font-bold text-purple-700 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all"
+                        >
+                          <Eye size={12} />
+                          <span>Profile</span>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-2xl border border-emerald-200/80 bg-white shadow-xs">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500" />
-        <div className="flex items-center justify-between p-5 border-b border-slate-100">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
-              <CreditCard size={16} />
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-slate-900">Recent Fee Transactions</h3>
-              <p className="text-xs text-slate-500">Live payment audit entries and receipts</p>
-            </div>
-          </div>
-          <Link
-            to="/admin/payments"
-            className="inline-flex items-center gap-1 rounded-xl bg-emerald-50 border border-emerald-200/60 px-3 py-1.5 text-xs font-bold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all"
-          >
-            <span>All Payments</span>
-            <ArrowRight size={12} />
-          </Link>
-        </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-gradient-to-r from-emerald-50/70 via-slate-50 to-emerald-50/30 border-b border-emerald-100/70 text-[13px] font-bold uppercase tracking-wider text-slate-600">
-              <tr>
-                <th className="px-4 py-3">Receipt / ID</th>
-                <th className="px-4 py-3">Student</th>
-                <th className="px-4 py-3">Amount</th>
-                <th className="px-4 py-3">Payment Method</th>
-                <th className="px-4 py-3">Date</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3 text-right">Invoice</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {recentPayments.map((pay) => (
-                <tr key={pay.id} className="hover:bg-emerald-50/30 transition-colors">
-                  <td className="px-4 py-3">
-                    <span className="rounded-md bg-blue-50 border border-blue-200/60 px-2 py-0.5 font-mono font-bold text-blue-700 text-[13px]">
-                      {pay.id}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <p className="font-bold text-slate-900">{pay.studentName}</p>
-                    <p className="text-[13px] text-slate-400">{pay.course}</p>
-                  </td>
-                  <td className="px-4 py-3 font-mono font-black text-emerald-700 text-sm">
-                    ₹{pay.amount.toLocaleString()}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[13px] font-medium text-slate-700 border border-slate-200/60">
-                      {pay.method}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-slate-500 font-mono text-[13px]">{pay.date}</td>
-                  <td className="px-4 py-3">
-                    <StatusBadge status={pay.status} size="sm" />
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <Link
-                      to={`/admin/payments/${pay.id}`}
-                      className="inline-flex items-center gap-1 rounded-lg border border-emerald-200/80 bg-emerald-50/60 px-2.5 py-1 text-[13px] font-bold text-emerald-700 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all"
-                    >
-                      <Eye size={12} />
-                      <span>Receipt</span>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 };

@@ -15,6 +15,7 @@ import {
   Sliders,
   Bell,
   Building2,
+  Video,
   Mail,
   Settings,
   UserCircle,
@@ -41,7 +42,7 @@ const navSections = [
       { label: "Leads", path: "/admin/leads", icon: Target, badge: "New" },
       { label: "Students", path: "/admin/students", icon: GraduationCap },
       { label: "Courses", path: "/admin/courses", icon: BookOpen },
-      { label: "Curriculum", path: "/admin/syllabus", icon: Layers },
+      // { label: "Curriculum", path: "/admin/syllabus", icon: Layers },
       { label: "Demo Classes", path: "/admin/demo-classes", icon: PlayCircle },
       { label: "Awards & Showcase", path: "/admin/certificates", icon: Award },
     ],
@@ -51,7 +52,8 @@ const navSections = [
     items: [
       { label: "Blogs", path: "/admin/blogs", icon: Newspaper },
       { label: "Hero Sliders", path: "/admin/hero-sliders", icon: Sliders },
-      { label: "Notifications", path: "/admin/notifications", icon: Bell },
+      { label: "Video Section", path: "/admin/video-section", icon: Video },
+      // { label: "Notifications", path: "/admin/notifications", icon: Bell },
       { label: "About Us", path: "/admin/about-us", icon: Building2 },
     ],
   },
@@ -84,16 +86,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
   return (
     <>
       <div
-        className={`fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs lg:hidden transition-opacity duration-300 print:hidden ${
-          sidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs lg:hidden transition-opacity duration-300 print:hidden ${sidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => setSidebarOpen(false)}
       />
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-slate-200/90 bg-white shadow-xl lg:shadow-xs transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] print:hidden ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-slate-200/90 bg-white shadow-xl lg:shadow-xs transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] print:hidden ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="relative flex h-20 shrink-0 items-center justify-between border-b border-slate-100 px-4">
           <Link
@@ -118,7 +118,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
           {navSections.map((section, sIdx) => (
             <div key={sIdx} className="space-y-1">
               {section.title && (
-                <p className="px-3 text-[12px] font-bold uppercase tracking-wider text-[13px]late-400">
+                <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                   {section.title}
                 </p>
               )}
@@ -137,7 +137,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
                     className={({ isActive }) =>
                       `group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all duration-150 ${isActive
                         ? "bg-blue-600 text-white shadow-sm shadow-blue-600/25"
-                        : "text-[13px]late-600 hover:bg-slate-100 hover:text-[13px]late-900"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                       }`
                     }
                   >
@@ -147,7 +147,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
                           size={18}
                           className={`shrink-0 transition-transform group-hover:scale-110 ${isActive
                             ? "text-white"
-                            : "text-[13px]late-500 group-hover:text-blue-600"
+                            : "text-slate-500 group-hover:text-blue-600"
                             }`}
                         />
                         <span className="truncate flex-1">{item.label}</span>

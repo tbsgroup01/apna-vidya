@@ -16,6 +16,7 @@ import {
   Hash,
   BookOpen,
   Layers,
+  Receipt,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import DataTable from "../../components/DataTable";
@@ -169,10 +170,9 @@ const StudentsList = () => {
               <div
                 className="h-10 w-10 rounded-xl bg-slate-100 bg-cover bg-no-repeat ring-2 ring-blue-500/20 shadow-xs"
                 style={{
-                  backgroundImage: `url("${
-                    row.profileImage ||
+                  backgroundImage: `url("${row.profileImage ||
                     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                  }")`,
+                    }")`,
                   backgroundPosition: "top center",
                   backgroundSize: "cover",
                 }}
@@ -240,41 +240,43 @@ const StudentsList = () => {
               <span className="truncate max-w-[190px]">{courseName}</span>
             </div>
 
-            <div className="flex items-center gap-1.5">
-              <span
-                className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[12px] font-semibold border ${style.batchBg}`}
-              >
-                <Layers size={10} />
-                <span>{batchName}</span>
-              </span>
-            </div>
           </div>
         );
       },
     },
+
+
     {
       key: "fees",
       header: "Fee Status",
       sortable: true,
       render: (row) => (
-        <div>
+        <div className="space-y-1.5">
           <div className="flex items-center gap-1.5">
-            <span className="font-mono font-bold text-[13px]late-900">
+            <span className="font-mono font-bold text-slate-900">
               ₹{(row.paidFees || 0).toLocaleString()}
             </span>
-            <span className="text-[12px] text-[13px]late-400">
+            <span className="text-[12px] text-slate-400">
               / ₹{(row.totalFees || 0).toLocaleString()}
             </span>
           </div>
-          <div className="mt-1">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <StatusBadge status={row.paymentStatus || "Pending"} size="sm" />
+            <Link
+              to={`/admin/payments/${row.id}`}
+              className="inline-flex items-center gap-1 rounded-md bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white border border-emerald-200/90 px-2 py-0.5 text-[11px] font-bold shadow-2xs transition-all cursor-pointer"
+              title="View / Print Official Fee Receipt"
+            >
+              <Receipt size={12} />
+              <span>Receipt</span>
+            </Link>
           </div>
         </div>
       ),
     },
     {
       key: "quickConnect",
-      header: "Call / WhatsApp",
+      header: "Contact",
       align: "center",
       render: (row) => {
         const rawPhone = row.phone || "";
@@ -312,7 +314,7 @@ const StudentsList = () => {
       header: "Joined Date",
       sortable: true,
       render: (row) => (
-        <span className="text-[13px]late-500 font-mono text-[13px] font-medium">
+        <span className="text-slate-500 font-mono text-[13px] font-medium">
           {row.admissionDate || "N/A"}
         </span>
       ),
@@ -324,6 +326,13 @@ const StudentsList = () => {
       render: (row) => (
         <div className="flex items-center justify-end gap-1.5">
           <Link
+            to={`/admin/payments/${row.id}`}
+            className="rounded-lg p-1.5 text-emerald-600 bg-emerald-50/80 hover:bg-emerald-600 hover:text-white transition-colors"
+            title="View Official Fee Receipt"
+          >
+            <Receipt size={15} />
+          </Link>
+          <Link
             to={`/admin/students/${row.id}`}
             className="rounded-lg p-1.5 text-blue-600 bg-blue-50/70 hover:bg-blue-600 hover:text-white transition-colors"
             title="View Student Profile"
@@ -332,7 +341,7 @@ const StudentsList = () => {
           </Link>
           <Link
             to={`/admin/students/${row.id}/edit`}
-            className="rounded-lg p-1.5 text-[13px]late-600 bg-slate-100 hover:bg-slate-700 hover:text-white transition-colors"
+            className="rounded-lg p-1.5 text-slate-600 bg-slate-100 hover:bg-slate-700 hover:text-white transition-colors"
             title="Edit Details"
           >
             <Edit size={15} />

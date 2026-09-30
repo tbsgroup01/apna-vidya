@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { History, Shield, Laptop, Calendar, User } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import DataTable from "../components/DataTable";
-import { initialActivityLogs } from "../../../data/admin/usersRolesData";
 
 const ActivityLogs = () => {
-  const [logs] = useState(initialActivityLogs);
+  const [logs] = useState([]);
 
   const columns = [
     {
@@ -14,8 +13,8 @@ const ActivityLogs = () => {
       sortable: true,
       render: (row) => (
         <div>
-          <span className="font-bold text-[13px]late-900 block">{row.admin}</span>
-          <span className="text-[13px] font-mono text-[13px]late-400">{row.ip}</span>
+          <span className="font-bold text-slate-900 block">{row.admin}</span>
+          <span className="text-xs font-mono text-slate-400">{row.ip}</span>
         </div>
       ),
     },
@@ -32,7 +31,7 @@ const ActivityLogs = () => {
       header: "Module",
       sortable: true,
       render: (row) => (
-        <span className="rounded-md bg-slate-100 px-2.5 py-1 text-[13px] font-semibold text-[13px]late-700">
+        <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">
           {row.module}
         </span>
       ),
@@ -41,17 +40,18 @@ const ActivityLogs = () => {
       key: "description",
       header: "Event Description",
       render: (row) => (
-        <span className="text-xs text-[13px]late-600">{row.description}</span>
+        <span className="text-xs text-slate-600">{row.description}</span>
       ),
+
     },
     {
       key: "timestamp",
       header: "Date & Time",
       sortable: true,
       render: (row) => (
-        <div className="text-[13px] font-mono text-[13px]late-500">
+        <div className="text-xs font-mono text-slate-500">
           <p>{row.date}</p>
-          <p className="text-[13px]late-400">{row.time}</p>
+          <p className="text-slate-400">{row.time}</p>
         </div>
       ),
     },

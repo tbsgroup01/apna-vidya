@@ -239,11 +239,7 @@ const StatCard = ({
               <span>{displayChange}</span>
             </span>
           )}
-          {displayLabel && (
-            <span className="text-slate-500 font-medium truncate">
-              {displayLabel}
-            </span>
-          )}
+
         </div>
       ) : (
         <div className="relative z-10 mt-3.5 flex items-center">

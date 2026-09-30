@@ -96,14 +96,7 @@ const CertificateShowcase = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
 
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      {award.featured && (
-                        <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/95 px-2 py-0.5 text-[12px] font-bold text-white backdrop-blur-xs shadow-xs">
-                          <Sparkles size={10} />
-                          Featured
-                        </span>
-                      )}
-                    </div>
+
 
                     <button
                       type="button"
@@ -114,16 +107,13 @@ const CertificateShowcase = () => {
                       <Eye size={14} />
                     </button>
 
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[13px] font-semibold">
+                    {/* <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[13px] font-semibold">
                       <span className="inline-flex items-center gap-1 text-[13px]late-200">
                         <Calendar size={12} className="text-amber-400" />
                         {award.year}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-emerald-300">
-                        <ShieldCheck size={12} />
-                        Verified
-                      </span>
-                    </div>
+
+                    </div> */}
                   </div>
 
                   <div className="p-4 space-y-2">
@@ -141,29 +131,15 @@ const CertificateShowcase = () => {
 
                 <div className="p-4 pt-0">
                   <div className="border-t border-slate-100 pt-3 flex items-center justify-between">
-                    {award.verificationUrl ? (
-                      <a
-                        href={award.verificationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-700 hover:underline"
-                      >
-                        <span>Official Registry</span>
-                        <ExternalLink size={12} />
-                      </a>
-                    ) : (
-                      <span className="text-[13px] font-medium text-[13px]late-400">
-                        Verified Record
-                      </span>
-                    )}
+
 
                     <button
                       type="button"
                       onClick={() => setPreviewAward(award)}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-[13px]late-500 hover:text-blue-600 transition-colors cursor-pointer"
                     >
-                      <span>Details</span>
-                      <ChevronRight size={13} />
+                      <span className="text-[#155DFC] font-bold text-[13px]">Details</span>
+                      <ChevronRight size={20} color="#155DFC" />
                     </button>
                   </div>
                 </div>

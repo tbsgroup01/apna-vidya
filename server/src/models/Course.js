@@ -31,8 +31,8 @@ const Course = sequelize.define(
       defaultValue: "6 Months",
     },
     level: {
-      type: DataTypes.ENUM("Beginner", "Intermediate", "Advanced", "All Levels"),
-      defaultValue: "All Levels",
+      type: DataTypes.STRING(50),
+      defaultValue: "Beginner to Advanced",
     },
     fees: {
       type: DataTypes.INTEGER,
@@ -88,6 +88,10 @@ const Course = sequelize.define(
     },
     fullOverview: {
       type: DataTypes.TEXT("long"),
+      allowNull: true,
+    },
+    syllabusUrl: {
+      type: DataTypes.TEXT,
       allowNull: true,
     },
   },

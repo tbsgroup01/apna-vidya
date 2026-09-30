@@ -82,7 +82,7 @@ const formatSettings = (setting) => {
   };
 };
 
-const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, text, html }) => {
+const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, text, html, attachments }) => {
   return new Promise((resolve, reject) => {
     const cleanPass = (pass || "").replace(/\s+/g, "");
     if (!cleanPass) {
@@ -160,7 +160,6 @@ const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, tex
         step = 8;
         const senderHeader = fromName ? `"${fromName}" <${from || user}>` : `<${from || user}>`;
         const mailSubject = subject || "Apna Vidya - SMTP Configuration Test Verified";
-        const contentType = html ? "text/html; charset=UTF-8" : "text/plain; charset=UTF-8";
         const defaultBody = [
           `Congratulations!`,
           ``,
@@ -177,19 +176,57 @@ const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, tex
         ].join("\r\n");
 
         const bodyContent = html || text || defaultBody;
+        let emailContent = "";
 
-        const emailContent = [
-          `From: ${senderHeader}`,
-          `To: <${to}>`,
-          `Subject: ${mailSubject}`,
-          `Date: ${new Date().toUTCString()}`,
-          `MIME-Version: 1.0`,
-          `Content-Type: ${contentType}`,
-          ``,
-          bodyContent,
-          `.`,
-          ``,
-        ].join("\r\n");
+        if (attachments && attachments.length > 0) {
+          const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+          const parts = [
+            `From: ${senderHeader}`,
+            `To: <${to}>`,
+            `Subject: ${mailSubject}`,
+            `Date: ${new Date().toUTCString()}`,
+            `MIME-Version: 1.0`,
+            `Content-Type: multipart/related; boundary="${boundary}"`,
+            ``,
+            `--${boundary}`,
+            `Content-Type: text/html; charset=UTF-8`,
+            `Content-Transfer-Encoding: 8bit`,
+            ``,
+            bodyContent,
+            ``,
+          ];
+
+          for (const att of attachments) {
+            parts.push(`--${boundary}`);
+            parts.push(`Content-Type: ${att.contentType || "image/png"}; name="${att.filename || "image.png"}"`);
+            parts.push(`Content-Transfer-Encoding: base64`);
+            parts.push(`Content-ID: <${att.cid}>`);
+            parts.push(`Content-Disposition: inline; filename="${att.filename || "image.png"}"`);
+            parts.push(``);
+            parts.push(att.content);
+            parts.push(``);
+          }
+
+          parts.push(`--${boundary}--`);
+          parts.push(`.`);
+          parts.push(``);
+          emailContent = parts.join("\r\n");
+        } else {
+          const contentType = html ? "text/html; charset=UTF-8" : "text/plain; charset=UTF-8";
+          emailContent = [
+            `From: ${senderHeader}`,
+            `To: <${to}>`,
+            `Subject: ${mailSubject}`,
+            `Date: ${new Date().toUTCString()}`,
+            `MIME-Version: 1.0`,
+            `Content-Type: ${contentType}`,
+            ``,
+            bodyContent,
+            `.`,
+            ``,
+          ].join("\r\n");
+        }
+
         socket.write(emailContent);
       } else if (step === 8 && code === 250) {
         step = 9;
