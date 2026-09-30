@@ -10,6 +10,7 @@ const publicRoutes = require("./routes/publicRoutes");
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1);
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;

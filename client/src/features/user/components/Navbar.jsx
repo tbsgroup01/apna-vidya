@@ -20,7 +20,7 @@ import {
 
 import { useDemoModal } from "../../../context/DemoModalContext";
 import { useAuth } from "../../../context/AuthContext";
-import { useSettings } from "../../../context/SettingsContext";
+import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
 import logo from "../../../assets/apnavidya.png";
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
     const { isAuthenticated, user, logout } = useAuth();
     const { settings } = useSettings();
 
-    const logoSrc = settings.general?.logoUrl || logo;
+    const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, logo);
     const siteName = settings.general?.siteName || "Apna Vidya";
 
     const dashboardPath = user?.role === "Student" ? "/student/dashboard" : "/admin/dashboard";

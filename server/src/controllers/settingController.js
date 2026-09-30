@@ -65,11 +65,26 @@ const formatSettings = (setting) => {
   const social = sanitizeObject(contact?.social, DEFAULT_SETTINGS.contact.social);
   const customTags = Array.isArray(raw.customTags) ? raw.customTags : DEFAULT_SETTINGS.customTags;
 
+  const enforceHttps = (url) => {
+    if (!url || typeof url !== "string") return url;
+    if (url.startsWith("http://apna-vidya.towsindia.com") || url.startsWith("http://towsindia.com")) {
+      return url.replace(/^http:\/\//i, "https://");
+    }
+    return url;
+  };
+
+  const genSettings = { ...DEFAULT_SETTINGS.general, ...general };
+  if (genSettings.faviconUrl) genSettings.faviconUrl = enforceHttps(genSettings.faviconUrl);
+  if (genSettings.logoUrl) genSettings.logoUrl = enforceHttps(genSettings.logoUrl);
+
+  const seoSettings = { ...DEFAULT_SETTINGS.seo, ...seo };
+  if (seoSettings.ogImage) seoSettings.ogImage = enforceHttps(seoSettings.ogImage);
+
   return {
     id: raw.id,
     key: raw.key || "platform_settings",
-    general: { ...DEFAULT_SETTINGS.general, ...general },
-    seo: { ...DEFAULT_SETTINGS.seo, ...seo },
+    general: genSettings,
+    seo: seoSettings,
     customTags: customTags,
     contact: {
       ...DEFAULT_SETTINGS.contact,

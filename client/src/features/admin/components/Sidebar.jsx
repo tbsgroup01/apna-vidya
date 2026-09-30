@@ -26,7 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
-import { useSettings } from "../../../context/SettingsContext";
+import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
 import logo from "../../../assets/apnavidya.png";
 
 const navSections = [
@@ -76,7 +76,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const { settings } = useSettings();
-  const logoSrc = settings.general?.logoUrl || logo;
+  const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, logo);
 
   const handleSignOut = async () => {
     await logout();

@@ -1,12 +1,29 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import api from "../services/api";
+import defaultLogo from "../assets/apnavidya.png";
+
+export const sanitizeAssetUrl = (url, fallback = "") => {
+  if (!url || typeof url !== "string") return fallback;
+  const trimmed = url.trim();
+  if (trimmed === "/images/logo.png" || trimmed === "/favicon.ico") {
+    return fallback;
+  }
+  // Automatically upgrade http:// to https:// to prevent mixed-content blocks
+  if (
+    (typeof window !== "undefined" && window.location.protocol === "https:" && trimmed.startsWith("http://")) ||
+    trimmed.includes("towsindia.com")
+  ) {
+    return trimmed.replace(/^http:\/\//i, "https://");
+  }
+  return trimmed;
+};
 
 const DEFAULT_SETTINGS = {
   general: {
     siteName: "Apna Vidya",
     tagline: "Learn • Grow • Succeed",
-    logoUrl: "/images/logo.png",
-    faviconUrl: "/favicon.ico",
+    logoUrl: defaultLogo,
+    faviconUrl: defaultLogo,
   },
   seo: {
     metaTitle: "Apna Vidya - Learn • Grow • Succeed | Leading Tech Education",
@@ -52,9 +69,19 @@ export const SettingsProvider = ({ children }) => {
       const res = await api.get("/public/settings");
       if (res.data?.success && res.data?.data) {
         const d = res.data.data;
+        const gen = d.general || {};
         setSettings({
-          general: { ...DEFAULT_SETTINGS.general, ...(d.general || {}) },
-          seo: { ...DEFAULT_SETTINGS.seo, ...(d.seo || {}) },
+          general: {
+            ...DEFAULT_SETTINGS.general,
+            ...gen,
+            logoUrl: sanitizeAssetUrl(gen.logoUrl, defaultLogo),
+            faviconUrl: sanitizeAssetUrl(gen.faviconUrl, defaultLogo),
+          },
+          seo: {
+            ...DEFAULT_SETTINGS.seo,
+            ...(d.seo || {}),
+            ogImage: sanitizeAssetUrl(d.seo?.ogImage, DEFAULT_SETTINGS.seo.ogImage),
+          },
           customTags: Array.isArray(d.customTags) ? d.customTags : [],
           contact: {
             ...DEFAULT_SETTINGS.contact,
@@ -76,9 +103,19 @@ export const SettingsProvider = ({ children }) => {
     const handleSettingsUpdated = (e) => {
       if (e.detail) {
         const d = e.detail;
+        const gen = d.general || {};
         setSettings((prev) => ({
-          general: { ...prev.general, ...(d.general || {}) },
-          seo: { ...prev.seo, ...(d.seo || {}) },
+          general: {
+            ...prev.general,
+            ...gen,
+            logoUrl: sanitizeAssetUrl(gen.logoUrl, prev.general?.logoUrl || defaultLogo),
+            faviconUrl: sanitizeAssetUrl(gen.faviconUrl, prev.general?.faviconUrl || defaultLogo),
+          },
+          seo: {
+            ...prev.seo,
+            ...(d.seo || {}),
+            ogImage: sanitizeAssetUrl(d.seo?.ogImage, prev.seo?.ogImage),
+          },
           customTags: Array.isArray(d.customTags) ? d.customTags : prev.customTags,
           contact: {
             ...prev.contact,
@@ -130,17 +167,18 @@ export const SettingsProvider = ({ children }) => {
     setOrCreateMeta("name", "keywords", null, null, settings.seo?.keywords);
     setOrCreateMeta(null, null, "property", "og:title", settings.seo?.metaTitle || settings.general?.siteName);
     setOrCreateMeta(null, null, "property", "og:description", settings.seo?.metaDescription);
-    setOrCreateMeta(null, null, "property", "og:image", settings.seo?.ogImage);
+    setOrCreateMeta(null, null, "property", "og:image", sanitizeAssetUrl(settings.seo?.ogImage, ""));
     setOrCreateMeta(null, null, "property", "og:site_name", settings.general?.siteName);
 
-    if (settings.general?.faviconUrl) {
+    const activeFavicon = sanitizeAssetUrl(settings.general?.faviconUrl, defaultLogo);
+    if (activeFavicon) {
       let iconLink = document.querySelector("link[rel*='icon']");
       if (!iconLink) {
         iconLink = document.createElement("link");
         iconLink.setAttribute("rel", "icon");
         document.head.appendChild(iconLink);
       }
-      iconLink.setAttribute("href", settings.general.faviconUrl);
+      iconLink.setAttribute("href", activeFavicon);
     }
 
     document.querySelectorAll("[data-apna-injected='true']").forEach((el) => el.remove());

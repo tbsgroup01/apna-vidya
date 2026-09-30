@@ -7,7 +7,7 @@ import {
     Clock,
     ArrowRight,
 } from "lucide-react";
-import { useSettings } from "../../../context/SettingsContext";
+import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
 import api from "../../../services/api";
 import { coursesData } from "../../../data/coursesData";
 import logo from "../../../assets/apnavidya.png";
@@ -54,7 +54,7 @@ const Footer = () => {
     const { settings } = useSettings();
     const [courseLinks, setCourseLinks] = useState(defaultCourseLinks);
 
-    const logoSrc = settings.general?.logoUrl || logo;
+    const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, logo);
     const siteName = settings.general?.siteName || "Apna Vidya";
     const tagline = settings.general?.tagline || "Learn • Grow • Succeed";
     const contact = settings.contact || {};

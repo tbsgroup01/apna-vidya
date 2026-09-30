@@ -8,7 +8,10 @@ const uploadImage = async (req, res) => {
       });
     }
 
-    const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${file.filename}`;
+    const host = req.get("host") || "";
+    const isHttps = req.secure || req.headers["x-forwarded-proto"] === "https" || host.includes("towsindia.com");
+    const protocol = isHttps ? "https" : req.protocol;
+    const fileUrl = `${protocol}://${host}/uploads/${file.filename}`;
 
     return res.status(200).json({
       success: true,
