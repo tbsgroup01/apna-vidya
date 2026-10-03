@@ -92,7 +92,7 @@ const PaymentDetails = () => {
         <p className="mt-1 text-xs text-slate-400">The requested fee payment or invoice record does not exist.</p>
         <Link
           to="/admin/payments"
-          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700"
         >
           <ArrowLeft size={14} />
           <span>Back to Payments</span>
@@ -115,7 +115,7 @@ const PaymentDetails = () => {
   const publicReceiptUrl = `${window.location.origin}/apna-vidya/receipt/${payment.id}`;
 
   const shareText =
-    `*Apna Vidya - Official Fee Receipt*\n\n` +
+    `*ApnaVidya - Official Fee Receipt*\n\n` +
     `Hello ${payment.studentName},\n` +
     `Here are your payment voucher details:\n\n` +
     `• *Receipt No:* ${payment.id}\n` +
@@ -127,14 +127,14 @@ const PaymentDetails = () => {
     `• *Remaining Balance:* ₹${remainingBalance.toLocaleString()}\n` +
     `• *Late Fee:* ${lateFee}\n` +
     `• *Transaction Ref:* ${payment.transactionRef}\n\n` +
-    `Thank you for choosing Apna Vidya!`;
+    `Thank you for choosing ApnaVidya!`;
 
   const waShareUrl = waNumber
     ? `https://wa.me/${waNumber}?text=${encodeURIComponent(shareText)}`
     : `https://wa.me/?text=${encodeURIComponent(shareText)}`;
 
   const emailShareUrl = `mailto:${payment.studentEmail || ""}?subject=${encodeURIComponent(
-    `Official Fee Receipt: ${payment.id} - Apna Vidya`
+    `Official Fee Receipt: ${payment.id} - ApnaVidya`
   )}&body=${encodeURIComponent(shareText)}`;
 
   const handlePrint = () => {
@@ -177,7 +177,7 @@ const PaymentDetails = () => {
               <button
                 type="button"
                 onClick={handlePrint}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
               >
                 <Printer size={15} />
                 <span>Print Receipt</span>
@@ -193,7 +193,7 @@ const PaymentDetails = () => {
           <div className="flex items-center gap-3">
             <img
               src={logo}
-              alt="Apna Vidya Logo"
+              alt="ApnaVidya Logo"
               className="h-11 sm:h-12 w-auto object-contain shrink-0"
             />
 

@@ -45,7 +45,7 @@ const StudentLayout = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-black tracking-tight text-[13px]late-900 leading-tight">
-                  Apna Vidya
+                  ApnaVidya
                 </span>
                 <span className="inline-flex items-center gap-1 text-[12px] font-bold uppercase tracking-wider text-blue-600">
                   <Sparkles size={10} />
@@ -94,10 +94,9 @@ const StudentLayout = () => {
                 <div
                   className="h-8 w-8 rounded-lg bg-slate-100 bg-cover bg-no-repeat ring-1 ring-slate-200 shrink-0"
                   style={{
-                    backgroundImage: `url("${
-                      user?.profileImage ||
+                    backgroundImage: `url("${user?.profileImage ||
                       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                    }")`,
+                      }")`,
                     backgroundPosition: "top center",
                     backgroundSize: "cover",
                   }}
@@ -204,7 +203,7 @@ const StudentLayout = () => {
 
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-[13px]late-500">
         <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>© 2026 Apna Vidya Edutech. All rights reserved.</p>
+          <p>© 2026 ApnaVidya Edutech. All rights reserved.</p>
           <div className="flex items-center gap-4 text-xs font-medium text-[13px]late-600">
             <a href="mailto:support@apnavidya.com" className="hover:text-blue-600 transition-colors">
               Student Helpdesk

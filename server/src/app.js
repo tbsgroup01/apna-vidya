@@ -38,12 +38,16 @@ app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Apna Vidya API");
+  res.send("Welcome to ApnaVidya API V2");
 });
+
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/public", publicRoutes);
+
+
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;

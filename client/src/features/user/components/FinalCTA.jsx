@@ -15,10 +15,10 @@ const FinalCTA = () => {
           Start Your Transformation Today
         </div>
 
-        <h2 className="mt-6 text-3xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+        <h2 className="mt-6 text-3xl font-black tracking-tight sm:text-5xl lg:text-4xl">
           Ready to Build Your Future with{" "}
           <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-            Apna Vidya?
+            ApnaVidya?
           </span>
         </h2>
 
@@ -31,7 +31,7 @@ const FinalCTA = () => {
           <button
             type="button"
             onClick={() => openDemoModal()}
-            className="group flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-[13px]m font-bold text-white shadow-xl shadow-blue-600/30 transition-all hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/40 active:scale-95 sm:text-base cursor-pointer"
+            className="group flex items-center gap-2 rounded-xl bg-[#FD8006] px-8 py-4 text-[13px]m font-bold text-white shadow-xl shadow-blue-600/30 transition-all hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/40 active:scale-95 sm:text-base cursor-pointer"
           >
             <PlayCircle size={18} />
             <span>Book a Free Demo Class</span>

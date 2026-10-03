@@ -35,17 +35,17 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="relative overflow-hidden bg-slate-900 py-16 text-white sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
+    <section className="relative overflow-hidden bg-slate-900 py-16 text-white sm:py-20 lg:py-7">
+      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#FD8006]/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-indigo-600/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <span className="inline-block rounded-full bg-blue-500/10 px-3.5 py-1 text-xs font-semibold text-blue-400 border border-blue-500/20">
             Simple 4-Step Process
           </span>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            How Apna Vidya{" "}
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-3xl">
+            How ApnaVidya{" "}
             <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
               Transforms Your Career
             </span>
@@ -65,10 +65,10 @@ const HowItWorks = () => {
                 className="group relative rounded-2xl border border-slate-800 bg-slate-950/60 p-6 backdrop-blur-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-500/40 hover:bg-slate-900"
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/10 text-blue-400 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white transition-colors group-hover:bg-[#FD8006] group-hover:text-white">
                     <Icon size={22} strokeWidth={2} />
                   </div>
-                  <span className="font-mono text-2xl font-black text-[13px]late-700 transition-colors group-hover:text-blue-400">
+                  <span className="font-mono text-2xl font-black text-slate-700 transition-colors group-hover:text-blue-400">
                     {item.step}
                   </span>
                 </div>
@@ -85,10 +85,10 @@ const HowItWorks = () => {
 
         <div className="mt-12 text-center">
           <Link
-            to="/syllabus"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-700"
+            to="/courses"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-3.5 text-[13px]m font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-700"
           >
-            <span>Explore Complete Curriculum Roadmaps</span>
+            <span>Explore Courses</span>
             <ArrowRight size={17} />
           </Link>
         </div>

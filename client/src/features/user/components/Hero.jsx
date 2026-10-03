@@ -17,7 +17,7 @@ import { useDemoModal } from "../../../context/DemoModalContext";
 import api from "../../../services/api";
 
 const DEFAULT_SLIDER = {
-  title: "Build Your Future With Apna Vidya",
+  title: "Build Your Future With ApnaVidya",
   subtitle: "Learn Today. Lead Tomorrow.",
   description:
     "Learn industry-relevant skills from experienced educators, explore practical courses, and take the next step toward building a successful career.",
@@ -91,7 +91,7 @@ const Hero = () => {
           onClick={() => openDemoModal()}
           className={
             isPrimary
-              ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95 cursor-pointer"
+              ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-[#FD8006] px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95 cursor-pointer"
               : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-xs transition-all hover:border-blue-200 hover:bg-blue-50/50 hover:text-blue-600 active:scale-95 cursor-pointer"
           }
         >
@@ -117,7 +117,7 @@ const Hero = () => {
         to={url || "/courses"}
         className={
           isPrimary
-            ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95"
+            ? "group inline-flex items-center justify-center gap-2 rounded-xl bg-[#FD8006] px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-700 hover:shadow-lg active:scale-95"
             : "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-xs transition-all hover:border-blue-200 hover:bg-blue-50/50 hover:text-blue-600 active:scale-95"
         }
       >
@@ -151,7 +151,7 @@ const Hero = () => {
           <img
             key={activeSlide.image}
             src={activeSlide.image}
-            alt={activeSlide.title || "Apna Vidya"}
+            alt={activeSlide.title || "ApnaVidya"}
             className="h-full w-full object-cover object-center transition-all duration-700 ease-out"
           />
         ) : (
@@ -159,29 +159,25 @@ const Hero = () => {
         )}
       </div>
 
-      {/* 3. Text Content & Floating Widgets Layer On Top */}
-      <div className="relative z-10 w-full mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <div className="relative z-10 w-full mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-5 lg:px-8 lg:py-5">
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Content Panel */}
+
           <div className="lg:col-span-8 max-w-2xl py-2 sm:py-4 lg:p-6">
-            {/* Subtitle Badge */}
+
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-blue-700 shadow-2xs">
               <Sparkles size={15} className="text-blue-600" />
               <span>{activeSlide?.subtitle || "Learn Today. Lead Tomorrow."}</span>
             </div>
 
-            {/* Headline Title */}
             <h1 className="text-3xl font-extrabold leading-[1.15] tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              {activeSlide?.title || "Build Your Future With Apna Vidya"}
+              {activeSlide?.title || "Build Your Future With ApnaVidya"}
             </h1>
 
-            {/* Description */}
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
               {activeSlide?.description ||
                 "Learn industry-relevant skills from experienced educators, explore practical courses, and take the next step toward building a successful career."}
             </p>
 
-            {/* Action Buttons */}
             <div className="mt-6 flex flex-col gap-3.5 sm:flex-row sm:items-center">
               {renderButton(
                 activeSlide?.buttonText || "Explore Courses",
@@ -197,7 +193,6 @@ const Hero = () => {
                 )}
             </div>
 
-            {/* Slider Dots & Controls (if multiple slides) */}
             {sliders.length > 1 && (
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex items-center gap-1.5">
@@ -207,7 +202,7 @@ const Hero = () => {
                       type="button"
                       onClick={() => setCurrentIndex(idx)}
                       className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === idx
-                        ? "w-7 bg-blue-600"
+                        ? "w-7 bg-[#FD8006]"
                         : "w-2 bg-slate-300 hover:bg-slate-400"
                         }`}
                       aria-label={`Go to slide ${idx + 1}`}

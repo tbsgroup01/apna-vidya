@@ -11,7 +11,7 @@ const StudentProtectedRoute = ({ children }) => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
         <div className="flex flex-col items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white font-black text-lg shadow-lg shadow-blue-500/30">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FD8006] text-white font-black text-lg shadow-lg shadow-blue-500/30">
             AV
           </div>
           <div className="flex items-center gap-2.5 text-[13px]late-500 text-xs font-semibold">

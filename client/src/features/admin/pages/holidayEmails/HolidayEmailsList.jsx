@@ -109,7 +109,7 @@ const HolidayEmailsList = () => {
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          "Failed to dispatch real-time emails. Please verify your SMTP credentials in Settings > Email Configuration."
+        "Failed to dispatch real-time emails. Please verify your SMTP credentials in Settings > Email Configuration."
       );
     } finally {
       setSendingId(null);
@@ -191,10 +191,10 @@ const HolidayEmailsList = () => {
         <span className="text-slate-600 font-mono text-xs font-medium">
           {row.date
             ? new Date(row.date).toLocaleDateString("en-IN", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })
             : "—"}
         </span>
       ),
@@ -280,7 +280,7 @@ const HolidayEmailsList = () => {
 
             <Link
               to="/admin/holiday-emails/create"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
             >
               <Plus size={16} />
               <span>Compose Email</span>
@@ -292,7 +292,7 @@ const HolidayEmailsList = () => {
       {/* Real-time SMTP Integration Info Banner */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-white p-4 shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-xs">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FD8006] text-white shadow-xs">
             <Mail size={18} />
           </div>
           <div>
@@ -301,11 +301,10 @@ const HolidayEmailsList = () => {
                 Real-Time Gmail SMTP Delivery Pipeline
               </h4>
               <span
-                className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                  smtpConfigured
-                    ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                    : "bg-amber-100 text-amber-800 border border-amber-200"
-                }`}
+                className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${smtpConfigured
+                  ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                  : "bg-amber-100 text-amber-800 border border-amber-200"
+                  }`}
               >
                 {smtpConfigured ? "SMTP Configured" : "SMTP Setup Required"}
               </span>
@@ -427,7 +426,7 @@ const HolidayEmailsList = () => {
                   <div className="mx-auto flex items-center justify-center">
                     <img
                       src={logoSrc}
-                      alt="Apna Vidya Logo"
+                      alt="ApnaVidya Logo"
                       className="h-12 sm:h-14 w-auto max-h-16 max-w-[260px] object-contain"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
@@ -448,11 +447,11 @@ const HolidayEmailsList = () => {
                   <p className="font-bold text-slate-800">
                     {previewEmail.date
                       ? new Date(previewEmail.date).toLocaleDateString("en-IN", {
-                          weekday: "long",
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
                       : "—"}
                   </p>
                 </div>
@@ -523,7 +522,7 @@ const HolidayEmailsList = () => {
                   handleSendNow(target);
                 }}
                 disabled={sendingId === previewEmail.id}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 shadow-sm cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 shadow-sm cursor-pointer disabled:opacity-50"
               >
                 <Send size={13} />
                 <span>{previewEmail.status === "Sent" ? "Resend Broadcast" : "Send Now"}</span>

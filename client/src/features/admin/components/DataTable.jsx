@@ -176,7 +176,7 @@ const DataTable = ({
                       setCurrentPage(1);
                     }}
                     className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${isSelected
-                      ? "bg-blue-600 text-white shadow-2xs"
+                      ? "bg-[#FD8006] text-white shadow-2xs"
                       : "bg-slate-100 text-[13px]late-600 hover:bg-slate-200/80"
                       }`}
                   >
@@ -192,7 +192,7 @@ const DataTable = ({
       {selectable && currentSelectedIds.length > 0 && (
         <div className="flex items-center justify-between bg-blue-50/90 px-4 py-2.5 border-b border-blue-100">
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-blue-600 text-[13px] font-bold text-white">
+            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-[#FD8006] text-[13px] font-bold text-white">
               {currentSelectedIds.length}
             </span>
             <span className="text-xs font-semibold text-blue-900">
@@ -373,7 +373,7 @@ const DataTable = ({
                     type="button"
                     onClick={() => setCurrentPage(page)}
                     className={`h-7 w-7 rounded-lg font-bold text-xs transition-colors cursor-pointer ${currentPage === page
-                      ? "bg-blue-600 text-white"
+                      ? "bg-[#FD8006] text-white"
                       : "hover:bg-slate-100 text-[13px]late-700"
                       }`}
                   >

@@ -101,7 +101,7 @@ const createBlog = async (req, res) => {
       title,
       slug: customSlug,
       category = "Technology",
-      author = "Apna Vidya Editorial",
+      author = "ApnaVidya Editorial",
       authorRole = "Senior Mentor",
       publishedDate,
       readTime = "5 min read",
@@ -144,16 +144,23 @@ const createBlog = async (req, res) => {
         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80";
     }
 
+    const cleanExcerpt =
+      excerpt && excerpt.trim()
+        ? excerpt.trim()
+        : content
+          ? content.replace(/<[^>]*>?/gm, " ").replace(/\s+/g, " ").trim().slice(0, 240) + "..."
+          : null;
+
     const blog = await Blog.create({
       title: title.trim(),
       slug,
       category: category ? category.trim() : "Technology",
-      author: author ? author.trim() : "Apna Vidya Editorial",
+      author: author ? author.trim() : "ApnaVidya Editorial",
       authorRole: authorRole ? authorRole.trim() : "Senior Mentor",
       publishedDate: publishedDate || new Date().toISOString().split("T")[0],
       readTime: readTime ? readTime.trim() : "5 min read",
       featuredImage: imageUrl,
-      excerpt: excerpt ? excerpt.trim() : null,
+      excerpt: cleanExcerpt,
       content,
       tags: tags ? (Array.isArray(tags) ? tags.join(", ") : String(tags).trim()) : null,
       status,
@@ -231,7 +238,14 @@ const updateBlog = async (req, res) => {
       publishedDate: publishedDate !== undefined ? publishedDate : blog.publishedDate,
       readTime: readTime !== undefined ? readTime.trim() : blog.readTime,
       featuredImage: imageUrl,
-      excerpt: excerpt !== undefined ? (excerpt ? excerpt.trim() : null) : blog.excerpt,
+      excerpt:
+        excerpt !== undefined
+          ? excerpt && excerpt.trim()
+            ? excerpt.trim()
+            : content
+              ? content.replace(/<[^>]*>?/gm, " ").replace(/\s+/g, " ").trim().slice(0, 240) + "..."
+              : null
+          : blog.excerpt,
       content: content !== undefined ? content : blog.content,
       tags: tags !== undefined ? (Array.isArray(tags) ? tags.join(", ") : String(tags).trim()) : blog.tags,
       status: status !== undefined ? status : blog.status,

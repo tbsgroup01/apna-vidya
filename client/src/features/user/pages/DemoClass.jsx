@@ -299,7 +299,7 @@ const DemoClass = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full rounded-xl bg-blue-600 py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer"
+                      className="w-full rounded-xl bg-[#FD8006] py-4 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer"
                     >
                       {loading ? "Sending Verification OTP..." : "Confirm Free Demo Class Booking"}
                     </button>
@@ -350,7 +350,7 @@ const DemoClass = () => {
                       setStep("form");
                       setIsSubmitted(false);
                     }}
-                    className="mt-6 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 cursor-pointer transition-colors"
+                    className="mt-6 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 cursor-pointer transition-colors"
                   >
                     Book Another Session
                   </button>

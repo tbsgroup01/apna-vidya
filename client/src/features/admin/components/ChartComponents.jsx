@@ -183,7 +183,7 @@ const COLLECTION_TIERS = [
     shadow: "#2563eb",
     dot: "bg-blue-500 ring-blue-200",
     pill: "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100",
-    activePill: "bg-blue-600 text-white border-blue-600 shadow-xs",
+    activePill: "bg-[#FD8006] text-white border-blue-600 shadow-xs",
   },
 ];
 
@@ -381,6 +381,9 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
     { from: "#10b981", to: "#059669", glow: "#059669", label: "text-emerald-600", dot: "bg-emerald-500 ring-emerald-200" },
     { from: "#f59e0b", to: "#d97706", glow: "#d97706", label: "text-amber-600", dot: "bg-amber-500 ring-amber-200" },
     { from: "#ec4899", to: "#db2777", glow: "#db2777", label: "text-pink-600", dot: "bg-pink-500 ring-pink-200" },
+    { from: "#3b82f6", to: "#1d4ed8", glow: "#2563eb", label: "text-blue-600", dot: "bg-blue-500 ring-blue-200" },
+    { from: "#14b8a6", to: "#0f766e", glow: "#0d9488", label: "text-teal-600", dot: "bg-teal-500 ring-teal-200" },
+    { from: "#f43f5e", to: "#be123c", glow: "#e11d48", label: "text-rose-600", dot: "bg-rose-500 ring-rose-200" },
   ];
 
   if (!data || data.length === 0) {
@@ -404,16 +407,17 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
 
   // Chart dimensions
   const width = 840;
-  const height = 230;
+  const height = 240;
   const paddingLeft = 50;
   const paddingRight = 30;
-  const paddingTop = 34;
-  const paddingBottom = 36;
+  const paddingTop = 36;
+  const paddingBottom = 40;
   const chartAreaWidth = width - paddingLeft - paddingRight;
   const chartAreaHeight = height - paddingTop - paddingBottom;
   const n = data.length;
-  const slotWidth = chartAreaWidth / n;
-  const barWidth = Math.min(72, Math.max(42, slotWidth * 0.28));
+  const slotWidth = chartAreaWidth / Math.max(n, 1);
+  const barWidth = Math.min(64, Math.max(24, slotWidth * 0.42));
+  const badgeWidth = Math.min(84, Math.max(46, slotWidth * 0.76));
 
   return (
     <div className="w-full">
@@ -423,7 +427,6 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
           <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
           <span>Real-time Demo Requests</span>
         </span>
-
       </div>
 
       {viewMode === "columns" ? (
@@ -488,6 +491,12 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
               const barX = centerX - barWidth / 2;
               const barHeight = Math.max((count / maxVal) * chartAreaHeight, 6);
               const barY = height - paddingBottom - barHeight;
+              const courseTitle = String(item.course || item.name || "Program");
+              const maxLabelLength = n > 6 ? 11 : n > 4 ? 14 : 20;
+              const displayLabel =
+                courseTitle.length > maxLabelLength
+                  ? courseTitle.slice(0, maxLabelLength - 1) + "…"
+                  : courseTitle;
 
               return (
                 <g
@@ -496,12 +505,12 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
                   onMouseLeave={() => setHoveredIdx(null)}
                   className="cursor-pointer transition-all duration-200"
                 >
-                  {/* Value badge directly above bar (NO PERCENTAGE!) */}
+                  {/* Value badge directly above bar */}
                   <g className="transition-transform duration-200">
                     <rect
-                      x={centerX - 46}
+                      x={centerX - badgeWidth / 2}
                       y={barY - 24}
-                      width={92}
+                      width={badgeWidth}
                       height={19}
                       rx={6}
                       className={isHovered ? "fill-slate-900 shadow-md" : "fill-slate-800 shadow-xs"}
@@ -512,7 +521,7 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
                       textAnchor="middle"
                       className="fill-white font-mono text-[10px] font-bold"
                     >
-                      {count} {count === 1 ? "Request" : "Requests"}
+                      {badgeWidth < 66 ? `${count}` : `${count} ${count === 1 ? "Req" : "Reqs"}`}
                     </text>
                   </g>
 
@@ -533,12 +542,12 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
                   {/* Course Name on X-axis */}
                   <text
                     x={centerX}
-                    y={height - 12}
+                    y={height - 14}
                     textAnchor="middle"
                     className={`text-xs font-bold transition-colors duration-200 ${isHovered ? "fill-purple-700 font-extrabold" : "fill-slate-700"
                       }`}
                   >
-                    {item.course.length > 22 ? item.course.slice(0, 20) + "…" : item.course}
+                    {displayLabel}
                   </text>
                 </g>
               );
@@ -547,29 +556,31 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
             {/* Interactive hover tooltip card */}
             {hoveredIdx !== null && (() => {
               const item = data[hoveredIdx];
+              if (!item) return null;
               const count = Number(item.count ?? item.enrolled ?? 0);
               const centerX = paddingLeft + (hoveredIdx + 0.5) * slotWidth;
               const barHeight = Math.max((count / maxVal) * chartAreaHeight, 6);
               const barY = height - paddingBottom - barHeight;
+              const courseTitle = String(item.course || item.name || "Program");
 
               return (
-                <g transform={`translate(${centerX}, ${Math.max(16, barY - 42)})`} className="pointer-events-none">
+                <g transform={`translate(${centerX}, ${Math.max(22, barY - 44)})`} className="pointer-events-none">
                   <rect
-                    x="-75"
-                    y="-26"
-                    width="150"
-                    height="32"
+                    x="-90"
+                    y="-28"
+                    width="180"
+                    height="34"
                     rx="8"
                     className="fill-slate-900 shadow-2xl"
                   />
                   <polygon points="-6,6 6,6 0,11" className="fill-slate-900" />
                   <text
                     x="0"
-                    y="-13"
+                    y="-14"
                     textAnchor="middle"
                     className="fill-white text-[11px] font-black"
                   >
-                    {item.course}
+                    {courseTitle.length > 24 ? courseTitle.slice(0, 22) + "…" : courseTitle}
                   </text>
                   <text
                     x="0"
@@ -592,6 +603,7 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
             const unitLabel = count === 1 ? "demo request" : "demo requests";
             const barWidthPercent = rawMax > 0 ? (count / rawMax) * 100 : 0;
             const grad = barGradients[idx % barGradients.length];
+            const courseTitle = String(item.course || item.name || "General Program");
 
             return (
               <div key={idx} className="group">
@@ -599,7 +611,7 @@ export const DemandingProgramsBarChart = ({ data = [] }) => {
                   <div className="flex items-center gap-2 truncate pr-2">
                     <span className={`h-2.5 w-2.5 rounded-full ring-2 shrink-0 ${grad.dot}`} />
                     <span className="text-slate-800 font-bold truncate group-hover:text-purple-600 transition-colors">
-                      {item.course}
+                      {courseTitle}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">

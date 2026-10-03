@@ -29,16 +29,16 @@ const ICON_MAP = {
 };
 
 const DEFAULT_ABOUT = {
-  heroBadge: "About Apna Vidya",
+  heroBadge: "About ApnaVidya",
   heroTitle: "Empowering the Next Generation of India's Builders",
   heroDescription:
-    "Apna Vidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
+    "ApnaVidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
   storyTag: "Our Story",
   storyTitle: "Bridging the Gap Between College Degrees and Industry Careers",
   storyParagraph1:
     "Over 1.5 million engineering and computer science students graduate in India every year, yet less than 15% possess the skills required to build modern software applications.",
   storyParagraph2:
-    "Apna Vidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
+    "ApnaVidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
   stat1Value: "50,000+",
   stat1Label: "Graduated Students",
   stat2Value: "120+",
@@ -70,11 +70,11 @@ const DEFAULT_ABOUT = {
     {
       icon: "Award",
       title: "Verifiable Excellence",
-      desc: "Every credential earned through Apna Vidya is backed by ISO 9001:2015 standards and independent digital verification.",
+      desc: "Every credential earned through ApnaVidya is backed by ISO 9001:2015 standards and independent digital verification.",
     },
   ],
   teamTag: "Experienced Educators",
-  teamTitle: "Meet the Mentors Behind Apna Vidya",
+  teamTitle: "Meet the Mentors Behind ApnaVidya",
   teamSubtitle:
     "Learn from engineers who have shipped software at scale and trained thousands of successful graduates.",
   team: [
@@ -103,7 +103,7 @@ const DEFAULT_ABOUT = {
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
     },
   ],
-  ctaTitle: "Experience the Apna Vidya Way of Learning",
+  ctaTitle: "Experience the ApnaVidya Way of Learning",
   ctaDescription:
     "Join a live session, speak with our instructors, and explore how our curriculum can help you achieve your career aspirations.",
   ctaPrimaryText: "Book a Free Demo Class",
@@ -181,15 +181,15 @@ const About = () => {
   return (
     <div className="bg-white">
       <section className="relative overflow-hidden bg-slate-900 py-20 text-white sm:py-28">
-        <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl" />
+        <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-[#FD8006]/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold text-blue-300">
             <Compass size={14} />
-            {data?.heroBadge || "About Apna Vidya"}
+            {data?.heroBadge || "About ApnaVidya"}
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-4xl">
             {data?.heroTitle || "Empowering the Next Generation of India's Builders"}
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
@@ -198,14 +198,14 @@ const About = () => {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 lg:py-24">
+      <section className="py-16 sm:py-20 lg:py-7">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
               <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">
                 {data?.storyTag || "Our Story"}
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+              <h2 className="mt-3 font-extrabold text-slate-900 ">
                 {data?.storyTitle}
               </h2>
               {data?.storyParagraph1 && (
@@ -242,7 +242,7 @@ const About = () => {
             <div className="space-y-4">
               <div className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FD8006] text-white">
                     <Target size={20} />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900">
@@ -273,7 +273,7 @@ const About = () => {
       </section>
 
       {valuesList.length > 0 && (
-        <section className="bg-slate-50 py-16 sm:py-20 lg:py-24">
+        <section className="bg-slate-50 py-16 sm:py-20 lg:py-7">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
@@ -310,14 +310,14 @@ const About = () => {
       )}
 
       {teamList.length > 0 && (
-        <section className="py-16 sm:py-20 lg:py-24">
+        <section className="py-16 sm:py-20 lg:py-7">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
                 {data?.teamTag || "Experienced Educators"}
               </span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                {data?.teamTitle || "Meet the Mentors Behind Apna Vidya"}
+                {data?.teamTitle || "Meet the Mentors Behind ApnaVidya"}
               </h2>
               {data?.teamSubtitle && (
                 <p className="mt-3 text-sm text-slate-500 sm:text-base">
@@ -358,10 +358,10 @@ const About = () => {
         </section>
       )}
 
-      <section className="bg-blue-600 py-16 text-white">
+      <section className="bg-[#FD8006] py-16 text-white">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold sm:text-4xl">
-            {data?.ctaTitle || "Experience the Apna Vidya Way of Learning"}
+            {data?.ctaTitle || "Experience the ApnaVidya Way of Learning"}
           </h2>
           {data?.ctaDescription && (
             <p className="mx-auto mt-4 max-w-2xl text-base text-blue-100">

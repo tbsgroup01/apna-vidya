@@ -323,7 +323,7 @@ const LeadsList = () => {
         const waNumber = digits.length === 10 ? `91${digits}` : digits;
         const waUrl = digits
           ? `https://wa.me/${waNumber}?text=${encodeURIComponent(
-            `Hello ${row.name || "there"}, greetings from Apna Vidya!`
+            `Hello ${row.name || "there"}, greetings from ApnaVidya!`
           )}`
           : null;
         const telUrl = `tel:${rawPhone.replace(/\s+/g, "")}`;
@@ -335,7 +335,7 @@ const LeadsList = () => {
           >
             <a
               href={telUrl}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white border border-blue-200/80 px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-95 group"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 hover:bg-[#FD8006] text-blue-600 hover:text-white border border-blue-200/80 px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-95 group"
               title={`Call ${row.name || "Lead"} (${rawPhone})`}
             >
               <PhoneCall size={14} className="shrink-0 text-blue-600 group-hover:text-white transition-colors" />
@@ -434,7 +434,7 @@ const LeadsList = () => {
             <button
               type="button"
               onClick={() => setNewLeadModalOpen(true)}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
             >
               <Plus size={16} />
               <span>Add Lead</span>
@@ -540,7 +540,7 @@ const LeadsList = () => {
               <button
                 type="button"
                 onClick={confirmStatusUpdate}
-                className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer active:scale-95"
+                className="rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer active:scale-95"
               >
                 Save Status
               </button>
@@ -668,7 +668,7 @@ const LeadsList = () => {
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer active:scale-95 shadow-sm"
+                  className="rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer active:scale-95 shadow-sm"
                 >
                   Create Lead
                 </button>

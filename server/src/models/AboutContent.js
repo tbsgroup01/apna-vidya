@@ -17,7 +17,7 @@ const AboutContent = sequelize.define(
     },
     heroBadge: {
       type: DataTypes.STRING(255),
-      defaultValue: "About Apna Vidya",
+      defaultValue: "About ApnaVidya",
     },
     heroTitle: {
       type: DataTypes.STRING(255),
@@ -93,7 +93,7 @@ const AboutContent = sequelize.define(
     },
     teamTitle: {
       type: DataTypes.STRING(255),
-      defaultValue: "Meet the Mentors Behind Apna Vidya",
+      defaultValue: "Meet the Mentors Behind ApnaVidya",
     },
     teamSubtitle: {
       type: DataTypes.TEXT,
@@ -105,7 +105,7 @@ const AboutContent = sequelize.define(
     },
     ctaTitle: {
       type: DataTypes.STRING(255),
-      defaultValue: "Experience the Apna Vidya Way of Learning",
+      defaultValue: "Experience the ApnaVidya Way of Learning",
     },
     ctaDescription: {
       type: DataTypes.TEXT,

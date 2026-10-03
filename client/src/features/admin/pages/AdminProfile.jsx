@@ -85,8 +85,8 @@ const AdminProfile = () => {
       return;
     }
 
-    if (file.size > 8 * 1024 * 1024) {
-      setUploadError("Image size must be smaller than 8MB.");
+    if (file.size > 1 * 1024 * 1024) {
+      setUploadError("Image size must be less than 1MB.");
       return;
     }
 
@@ -381,7 +381,7 @@ const AdminProfile = () => {
 
             <div className="space-y-3 pt-1">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                Profile Avatar Photo
+                Profile Avatar Photo <span className="text-[11px] font-normal text-slate-500 normal-case">(less than 1MB)</span>
               </label>
 
               <input
@@ -410,7 +410,7 @@ const AdminProfile = () => {
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
                       disabled={uploading}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-blue-700 active:scale-95 shadow-xs transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-3.5 py-1.5 text-xs font-bold text-white hover:bg-blue-700 active:scale-95 shadow-xs transition-all cursor-pointer"
                     >
                       <Upload size={13} />
                       <span>{uploading ? "Uploading..." : "Browse Photo"}</span>
@@ -427,7 +427,7 @@ const AdminProfile = () => {
                     )}
                   </div>
                   <p className="text-[11px] text-slate-400">
-                    Upload PNG, JPG, or WebP up to 8MB. Updates your profile across the portal immediately.
+                    Upload PNG, JPG, or WebP (less than 1MB). Updates your profile across the portal immediately.
                   </p>
                 </div>
               </div>

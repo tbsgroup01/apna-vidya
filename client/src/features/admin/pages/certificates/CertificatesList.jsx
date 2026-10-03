@@ -15,6 +15,7 @@ import {
   X,
   AlertCircle,
   Check,
+  Eye,
 } from "lucide-react";
 import PageHeader from "../../components/PageHeader";
 import StatCard from "../../components/StatCard";
@@ -78,6 +79,7 @@ const CertificatesList = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [awardToDelete, setAwardToDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const fetchAwards = async () => {
     try {
@@ -239,13 +241,13 @@ const CertificatesList = () => {
     <div className="space-y-6">
       <PageHeader
         title="Awards & Accreditations Showcase"
-        description="Showcase Apna Vidya's institutional credentials, honors, and certifications."
+        description="Showcase ApnaVidya's institutional credentials, honors, and certifications."
         breadcrumbs={[{ label: "Awards Showcase" }]}
         actions={
           <button
             type="button"
             onClick={handleOpenAddModal}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
           >
             <Plus size={16} />
             <span>Add New Award</span>
@@ -370,7 +372,7 @@ const CertificatesList = () => {
       {selectedAwardIds.length > 0 && (
         <div className="flex items-center justify-between rounded-xl bg-blue-50/90 px-4 py-2.5 border border-blue-100 shadow-xs">
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-blue-600 text-[13px] font-bold text-white">
+            <span className="inline-flex items-center justify-center h-5 px-2 rounded-full bg-[#FD8006] text-[13px] font-bold text-white">
               {selectedAwardIds.length}
             </span>
             <span className="text-xs font-semibold text-blue-900">
@@ -424,7 +426,7 @@ const CertificatesList = () => {
           <button
             type="button"
             onClick={handleOpenAddModal}
-            className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 transition-all cursor-pointer"
+            className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 transition-all cursor-pointer"
           >
             <Plus size={15} />
             <span>Add First Award</span>
@@ -438,67 +440,79 @@ const CertificatesList = () => {
               className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/5"
             >
               <div>
-                <div className="relative h-48 w-full overflow-hidden bg-slate-100">
-                  <img
-                    src={
-                      award.image ||
-                      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80"
-                    }
-                    alt={award.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
-
-                  <div className="absolute top-3 left-3 flex items-center gap-2 z-10">
+                {/* Card Top Toolbar with Status & Actions */}
+                <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-4 py-2.5">
+                  <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={selectedAwardIds.includes(award.id)}
                       onChange={() => handleSelectOne(award.id)}
-                      className="h-4 w-4 rounded border-white/60 bg-black/40 text-blue-600 focus:ring-blue-500 cursor-pointer shadow-md"
+                      className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer shadow-xs"
                     />
                     {award.featured && (
-                      <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/90 px-2 py-0.5 text-[12px] font-bold text-white backdrop-blur-xs shadow-xs">
+                      <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 text-amber-700 px-2 py-0.5 text-[11px] font-bold border border-amber-200">
                         <Sparkles size={11} />
                         Featured
                       </span>
                     )}
                   </div>
 
-                  <div className="absolute top-3 right-3">
+                  <div className="flex items-center gap-2">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[12px] font-bold shadow-xs backdrop-blur-xs ${award.status === "Active"
-                        ? "bg-emerald-500/90 text-white"
+                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold border ${award.status === "Active"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                         : award.status === "Draft"
-                          ? "bg-amber-500/90 text-white"
-                          : "bg-slate-700/90 text-white"
+                          ? "bg-amber-50 text-amber-700 border-amber-200"
+                          : "bg-slate-100 text-slate-700 border-slate-200"
                         }`}
                     >
                       {award.status}
                     </span>
                   </div>
+                </div>
 
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[13px]late-200">
-                      <Calendar size={13} />
-                      {award.year}
+                {/* Certificate Image Frame - 100% Uncropped Full View */}
+                <div
+                  onClick={() => setPreviewImage({ url: award.image, title: award.title })}
+                  className="relative h-56 w-full overflow-hidden bg-slate-50 flex items-center justify-center p-3 border-b border-slate-100 cursor-pointer group/img"
+                  title="Click to view full certificate"
+                >
+                  <img
+                    src={
+                      award.image ||
+                      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80"
+                    }
+                    alt={award.title}
+                    className="max-h-full max-w-full object-contain rounded shadow-xs transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute inset-0 bg-slate-900/0 group-hover/img:bg-slate-900/10 transition-colors flex items-center justify-center pointer-events-none">
+                    <span className="opacity-0 group-hover/img:opacity-100 transition-opacity rounded-lg bg-slate-900/80 text-white px-3 py-1.5 text-xs font-semibold backdrop-blur-xs flex items-center gap-1.5 shadow-md">
+                      <Eye size={13} /> View Full
                     </span>
                   </div>
                 </div>
 
-                <div className="p-5 space-y-2">
-                  <h4 className="text-[13px]m font-bold text-[13px]late-900 leading-snug line-clamp-2">
+                <div className="p-4 space-y-2">
+                  <div className="flex items-center justify-between text-xs text-slate-500">
+                    <span className="inline-flex items-center gap-1.5 font-medium text-slate-600">
+                      <Calendar size={13} className="text-blue-600" />
+                      {award.year}
+                    </span>
+                  </div>
+
+                  <h4 className="text-sm font-bold text-slate-900 leading-snug line-clamp-2" title={award.title}>
                     {award.title}
                   </h4>
 
                   {award.description && (
-                    <p className="text-xs text-[13px]late-500 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed" title={award.description}>
                       {award.description}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="border-t border-slate-100 bg-slate-50/50 px-5 py-3 flex items-center justify-between gap-2">
+              <div className="border-t border-slate-100 bg-slate-50/50 px-4 py-2.5 flex items-center justify-between gap-2">
                 {award.verificationUrl ? (
                   <a
                     href={award.verificationUrl}
@@ -510,7 +524,7 @@ const CertificatesList = () => {
                     <ExternalLink size={12} />
                   </a>
                 ) : (
-                  <span className="text-[13px] font-medium text-[13px]late-400">
+                  <span className="text-xs font-medium text-slate-400">
                     Institutional Record
                   </span>
                 )}
@@ -519,7 +533,7 @@ const CertificatesList = () => {
                   <button
                     type="button"
                     onClick={() => handleOpenEditModal(award)}
-                    className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer"
                     title="Edit Award"
                   >
                     <Edit3 size={15} />
@@ -527,7 +541,7 @@ const CertificatesList = () => {
                   <button
                     type="button"
                     onClick={() => handleOpenDelete(award)}
-                    className="rounded-lg p-1.5 text-[13px]late-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
                     title="Delete Award"
                   >
                     <Trash2 size={15} />
@@ -718,7 +732,7 @@ const CertificatesList = () => {
                     type="button"
                     onClick={() => setCurrentPage(page)}
                     className={`h-7 w-7 rounded-lg font-bold text-xs transition-colors cursor-pointer ${currentPage === page
-                      ? "bg-blue-600 text-white"
+                      ? "bg-[#FD8006] text-white"
                       : "hover:bg-slate-100 text-[13px]late-700"
                       }`}
                   >
@@ -905,7 +919,7 @@ const CertificatesList = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
                 >
                   {submitting ? (
                     <span>Saving...</span>
@@ -943,6 +957,39 @@ const CertificatesList = () => {
         type="danger"
         loading={bulkDeleting}
       />
+
+      {previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setPreviewImage(null)}
+        >
+          <div
+            className="relative max-w-4xl max-h-[90vh] w-full overflow-hidden rounded-2xl bg-white p-2 shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3">
+              <h3 className="text-sm font-bold text-slate-900 truncate pr-4">
+                {previewImage.title || "Certificate Preview"}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setPreviewImage(null)}
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors cursor-pointer"
+                title="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="flex items-center justify-center p-4 bg-slate-50 max-h-[78vh] overflow-auto">
+              <img
+                src={previewImage.url}
+                alt={previewImage.title || "Certificate"}
+                className="max-h-[72vh] max-w-full object-contain rounded-md shadow-md"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

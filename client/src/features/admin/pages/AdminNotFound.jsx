@@ -17,7 +17,7 @@ const AdminNotFound = () => {
       <div className="mt-6">
         <Link
           to="/admin/dashboard"
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 shadow-sm"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 shadow-sm"
         >
           <Home size={15} />
           <span>Back to Dashboard</span>

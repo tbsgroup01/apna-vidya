@@ -139,7 +139,7 @@ const CourseForm = () => {
                 ],
               image: c.image || "",
               syllabusUrl: c.syllabusUrl || "",
-              seoTitle: c.name ? `${c.name} | Apna Vidya` : "",
+              seoTitle: c.name ? `${c.name} | ApnaVidya` : "",
               seoDescription: c.description || "",
             });
           }
@@ -298,7 +298,7 @@ const CourseForm = () => {
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
             >
               <Save size={16} />
               <span>{loading ? "Saving CMS..." : isEdit ? "Save Changes" : "Publish Program"}</span>
@@ -323,7 +323,7 @@ const CourseForm = () => {
               type="button"
               onClick={() => setActiveTab(tab.id)}
               className={`inline-flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${isActive
-                ? "bg-blue-600 text-white shadow-sm"
+                ? "bg-[#FD8006] text-white shadow-sm"
                 : "bg-white text-slate-600 border border-slate-200/80 hover:bg-slate-50"
                 }`}
             >
@@ -562,7 +562,7 @@ const CourseForm = () => {
               <button
                 type="button"
                 onClick={handleAddOutcome}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer"
               >
                 <Plus size={14} />
                 <span>Add Outcome</span>
@@ -686,7 +686,7 @@ const CourseForm = () => {
               label="Meta Title"
               value={formData.seoTitle}
               onChange={(e) => handleChange("seoTitle", e.target.value)}
-              placeholder="e.g. Best Ethical Hacking Masterclass 2026 | Apna Vidya"
+              placeholder="e.g. Best Ethical Hacking Masterclass 2026 | ApnaVidya"
             />
             <FormTextarea
               label="Meta Description"
@@ -708,7 +708,7 @@ const CourseForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
           >
             <Save size={16} />
             <span>{loading ? "Saving..." : isEdit ? "Update Course CMS" : "Publish Course CMS"}</span>
@@ -759,7 +759,7 @@ const CourseForm = () => {
                 <button
                   type="submit"
                   disabled={!newCatName.trim()}
-                  className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                  className="rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
                 >
                   Add & Select
                 </button>

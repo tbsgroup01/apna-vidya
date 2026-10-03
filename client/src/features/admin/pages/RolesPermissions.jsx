@@ -120,7 +120,7 @@ const RolesPermissions = () => {
                 <button
                   type="button"
                   onClick={handleSave}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 shadow-sm cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 shadow-sm cursor-pointer"
                 >
                   <Save size={14} />
                   <span>Save Matrix</span>

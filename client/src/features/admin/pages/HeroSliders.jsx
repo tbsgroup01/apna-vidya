@@ -288,7 +288,7 @@ const HeroSliders = () => {
             <button
               type="button"
               onClick={handleOpenCreate}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
             >
               <Plus size={16} />
               <span>Create Banner</span>
@@ -412,7 +412,7 @@ const HeroSliders = () => {
           <button
             type="button"
             onClick={handleOpenCreate}
-            className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 cursor-pointer"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 cursor-pointer"
           >
             <Plus size={14} />
             <span>Create First Banner</span>
@@ -645,7 +645,7 @@ const HeroSliders = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 cursor-pointer disabled:opacity-50 transition-all"
+                  className="rounded-xl bg-[#FD8006] px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 cursor-pointer disabled:opacity-50 transition-all"
                 >
                   {submitting ? "Saving Banner..." : editingSlider ? "Update Banner" : "Create & Publish"}
                 </button>

@@ -315,6 +315,11 @@ const initDb = async () => {
     try {
       await sequelize.query("ALTER TABLE home_video_sections ADD COLUMN videos JSON NULL");
     } catch (e) {}
+    try {
+      await sequelize.query(
+        "UPDATE blogs SET excerpt = SUBSTRING(REPLACE(REPLACE(content, '<p>', ''), '</p>', ' '), 1, 240) WHERE excerpt IS NULL OR excerpt = ''"
+      );
+    } catch (e) {}
     console.log("Database models synchronized successfully.");
     await seedDatabase();
     console.log("Database seeded successfully.");

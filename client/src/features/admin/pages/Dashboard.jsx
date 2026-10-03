@@ -83,16 +83,48 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
-        const res = await api.get("/admin/dashboard/stats");
-        if (res.data?.data) {
+        const [statsRes, leadsRes] = await Promise.allSettled([
+          api.get("/admin/dashboard/stats"),
+          api.get("/admin/leads?limit=250"),
+        ]);
+
+        let liveDemanding = [];
+
+        // 1. Process leads directly from /admin/leads to guarantee 100% sync with /admin/demo-classes
+        if (leadsRes.status === "fulfilled" && leadsRes.value.data?.data?.leads) {
+          const allFetchedLeads = leadsRes.value.data.data.leads;
+          const demoLeads = allFetchedLeads.filter(
+            (l) =>
+              (l.source && l.source.toLowerCase().includes("demo")) ||
+              (l.message && l.message.toLowerCase().includes("demo")) ||
+              (l.notes && Array.isArray(l.notes) && l.notes.some((n) => (n.text || "").toLowerCase().includes("demo")))
+          );
+
+          const counts = {};
+          demoLeads.forEach((l) => {
+            const cName = (l.course && l.course.trim()) ? l.course.trim() : "General Program";
+            counts[cName] = (counts[cName] || 0) + 1;
+          });
+
+          liveDemanding = Object.entries(counts)
+            .map(([course, count]) => ({
+              course,
+              count,
+              unit: count === 1 ? "demo request" : "demo requests",
+            }))
+            .sort((a, b) => b.count - a.count);
+        }
+
+        // 2. Process /admin/dashboard/stats for overall dashboard metrics
+        if (statsRes.status === "fulfilled" && statsRes.value.data?.data) {
           const {
             stats: liveStats,
             recentLeads: liveLeads,
             recentStudents: liveStudents,
-            mostDemandingPrograms: liveDemanding,
+            mostDemandingPrograms: backendDemanding,
             coursePopularity: livePop,
             leadConversion,
-          } = res.data.data;
+          } = statsRes.value.data.data;
 
           if (liveStats) {
             setStats([
@@ -168,72 +200,46 @@ const Dashboard = () => {
             setRecentPayments([]);
           }
 
-          const demandingSource = liveDemanding || livePop || [];
-          if (demandingSource && demandingSource.length > 0) {
-            // Exactly top 2 courses with positive count
-            const top2 = demandingSource.filter((c) => (c.count ?? c.enrolled ?? 0) > 0).slice(0, 2);
-            if (top2.length > 0) {
-              setMostDemandingPrograms(
-                top2.map((c) => {
-                  const count = c.count ?? c.enrolled ?? 0;
-                  return {
-                    course: c.course || c.name,
-                    count,
-                    unit: count === 1 ? "demo request" : "demo requests",
-                  };
-                })
-              );
-            } else {
-              setMostDemandingPrograms([]);
-            }
-          } else {
-            setMostDemandingPrograms([]);
-          }
-
           if (leadConversion && Array.isArray(leadConversion)) {
             setLeadConversionData(leadConversion);
           } else {
             setLeadConversionData([]);
           }
-        }
-      } catch (err) {
-        console.error("Dashboard stats error, fetching live demo leads directly:", err);
-        try {
-          const leadsRes = await api.get("/admin/leads?limit=150");
-          if (leadsRes.data?.data?.leads) {
-            const allFetchedLeads = leadsRes.data.data.leads;
-            setRecentLeads(allFetchedLeads.slice(0, 5));
-            const demoLeads = allFetchedLeads.filter(
-              (l) =>
-                (l.source && l.source.toLowerCase().includes("demo")) ||
-                (l.message && l.message.toLowerCase().includes("demo"))
-            );
-            const counts = {};
-            demoLeads.forEach((l) => {
-              const cName = (l.course || "").trim();
-              if (cName) counts[cName] = (counts[cName] || 0) + 1;
-            });
-            const sorted = Object.entries(counts)
-              .map(([course, count]) => ({ course, count }))
-              .sort((a, b) => b.count - a.count)
-              .slice(0, 2);
-            setMostDemandingPrograms(
-              sorted.map((item) => ({
-                course: item.course,
-                count: item.count,
-                unit: item.count === 1 ? "demo request" : "demo requests",
-              }))
-            );
+
+          // If liveDemanding from direct leads was empty, fall back to backendDemanding or livePop
+          if (liveDemanding.length === 0) {
+            const fallbackDemanding = backendDemanding || livePop || [];
+            if (fallbackDemanding && fallbackDemanding.length > 0) {
+              liveDemanding = fallbackDemanding
+                .filter((c) => (c.count ?? c.enrolled ?? 0) > 0)
+                .map((c) => ({
+                  course: c.course || c.name || "General Program",
+                  count: c.count ?? c.enrolled ?? 0,
+                  unit: (c.count ?? c.enrolled ?? 0) === 1 ? "demo request" : "demo requests",
+                }));
+            }
           }
-        } catch (fallbackErr) {
-          console.error("Direct demo leads fallback error:", fallbackErr);
         }
+
+        setMostDemandingPrograms(liveDemanding);
+      } catch (err) {
+        console.error("Dashboard stats error:", err);
       }
     };
 
     fetchDashboardStats();
-    const interval = setInterval(fetchDashboardStats, 15000); // 15-second real-time poll
-    return () => clearInterval(interval);
+    const interval = setInterval(fetchDashboardStats, 10000); // 10-second real-time poll
+    const handleFocus = () => fetchDashboardStats();
+    const handleDemoUpdate = () => fetchDashboardStats();
+
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("demo-classes-updated", handleDemoUpdate);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("demo-classes-updated", handleDemoUpdate);
+    };
   }, []);
 
   const quickActions = [
@@ -326,7 +332,7 @@ const Dashboard = () => {
               Live Administrative Dashboard
             </h1>
             <p className="mt-1 text-xs sm:text-sm text-slate-500 max-w-2xl">
-              Real-time student admissions, fees reconciliation, courses health, and institutional workflows for Apna Vidya.
+              Real-time student admissions, fees reconciliation, courses health, and institutional workflows for ApnaVidya.
             </p>
           </div>
 
@@ -407,9 +413,15 @@ const Dashboard = () => {
               <BookOpen size={18} strokeWidth={2.2} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900">
-                Most Demanding Programs
-              </h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-slate-900">
+                  Most Demanding Programs
+                </h3>
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/90 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Live Sync
+                </span>
+              </div>
               <p className="text-xs text-slate-500">
                 Real-time ranking based on live demo class requests
               </p>
@@ -457,7 +469,7 @@ const Dashboard = () => {
             </div>
             <Link
               to="/admin/demo-classes"
-              className="inline-flex items-center gap-1 rounded-xl bg-blue-50 border border-blue-200/60 px-2.5 py-1 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all"
+              className="inline-flex items-center gap-1 rounded-xl bg-blue-50 border border-blue-200/60 px-2.5 py-1 text-xs font-bold text-blue-700 hover:bg-[#FD8006] hover:text-white transition-all"
             >
               <span>View All</span>
               <ArrowRight size={12} />
@@ -512,7 +524,7 @@ const Dashboard = () => {
                       <td className="px-4 py-3 text-right">
                         <Link
                           to={`/admin/leads/${lead.id}`}
-                          className="inline-flex items-center gap-1 rounded-lg border border-blue-200/80 bg-blue-50/60 px-2.5 py-1 text-[13px] font-bold text-blue-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all"
+                          className="inline-flex items-center gap-1 rounded-lg border border-blue-200/80 bg-blue-50/60 px-2.5 py-1 text-[13px] font-bold text-blue-700 hover:bg-[#FD8006] hover:text-white hover:border-blue-600 transition-all"
                         >
                           <Eye size={12} />
                           <span>View</span>

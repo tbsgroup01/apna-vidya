@@ -255,7 +255,7 @@ const BatchForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
           >
             <Save size={16} />
             <span>{loading ? "Saving..." : isEdit ? "Update Batch" : "Create Batch Schedule"}</span>

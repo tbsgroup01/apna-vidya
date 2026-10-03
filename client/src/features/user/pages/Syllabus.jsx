@@ -112,8 +112,8 @@ const Syllabus = () => {
               type="button"
               onClick={() => setSelectedCourseSlug(course.slug)}
               className={`rounded-xl px-4 py-2.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${selectedCourseSlug === course.slug
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
-                  : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-100"
+                ? "bg-[#FD8006] text-white shadow-md shadow-blue-500/20"
+                : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-100"
                 }`}
             >
               {course.title}

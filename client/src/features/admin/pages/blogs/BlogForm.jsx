@@ -61,7 +61,7 @@ const BlogForm = () => {
     title: "",
     slug: "",
     category: "Technology",
-    author: "Apna Vidya Editorial",
+    author: "ApnaVidya Editorial",
     authorRole: "Senior Mentor",
     publishedDate: new Date().toISOString().split("T")[0],
     readTime: "5 min read",
@@ -92,7 +92,7 @@ const BlogForm = () => {
               title: b.title || "",
               slug: b.slug || "",
               category: b.category || "Technology",
-              author: b.author || "Apna Vidya Editorial",
+              author: b.author || "ApnaVidya Editorial",
               authorRole: b.authorRole || "Senior Mentor",
               publishedDate: b.publishedDate || new Date().toISOString().split("T")[0],
               readTime: b.readTime || "5 min read",
@@ -198,7 +198,7 @@ const BlogForm = () => {
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 active:scale-95 transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{submitting ? "Publishing..." : isEdit ? "Update Article" : "Publish Article"}</span>
@@ -397,7 +397,7 @@ const BlogForm = () => {
                 type="text"
                 value={formData.seoTitle}
                 onChange={(e) => handleChange("seoTitle", e.target.value)}
-                placeholder="e.g. Top 10 Web Development Trends in 2026 | Apna Vidya"
+                placeholder="e.g. Top 10 Web Development Trends in 2026 | ApnaVidya"
                 className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
               />
             </div>
@@ -440,7 +440,7 @@ const BlogForm = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 active:scale-95 transition-all cursor-pointer"
           >
             <Save size={15} />
             <span>{submitting ? "Publishing..." : isEdit ? "Update Article" : "Publish Article"}</span>

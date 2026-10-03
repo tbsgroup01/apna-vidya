@@ -52,12 +52,13 @@ const DemoClassesAdmin = () => {
   const fetchDemos = async () => {
     try {
       setLoading(true);
-      const res = await api.get("/admin/leads?limit=150");
+      const res = await api.get("/admin/leads?limit=250");
       if (res.data?.data?.leads) {
         const demoLeads = res.data.data.leads.filter(
           (l) =>
             (l.source && l.source.toLowerCase().includes("demo")) ||
-            (l.message && l.message.toLowerCase().includes("demo"))
+            (l.message && l.message.toLowerCase().includes("demo")) ||
+            (l.notes && Array.isArray(l.notes) && l.notes.some((n) => (n.text || "").toLowerCase().includes("demo")))
         );
         setDemos(demoLeads);
       }
@@ -90,6 +91,7 @@ const DemoClassesAdmin = () => {
       );
       setStatusModalOpen(false);
       setDemoToUpdate(null);
+      window.dispatchEvent(new CustomEvent("demo-classes-updated"));
     } catch (err) {
       alert(err.response?.data?.message || "Failed to update demo class status");
     } finally {
@@ -109,6 +111,7 @@ const DemoClassesAdmin = () => {
       setDemos((prev) => prev.filter((d) => d.id !== demoToDelete.id));
       setDeleteModalOpen(false);
       setDemoToDelete(null);
+      window.dispatchEvent(new CustomEvent("demo-classes-updated"));
     } catch (err) {
       alert(err.response?.data?.message || "Failed to delete demo record");
     }
@@ -127,6 +130,7 @@ const DemoClassesAdmin = () => {
         setDemos((prev) => prev.filter((d) => !selectedDemoIds.includes(d.id)));
         setBulkDeleteModalOpen(false);
         setSelectedDemoIds([]);
+        window.dispatchEvent(new CustomEvent("demo-classes-updated"));
       }
     } catch (err) {
       alert(err.response?.data?.message || "Failed to bulk delete demo class records");
@@ -209,7 +213,7 @@ const DemoClassesAdmin = () => {
         const waNumber = digits.length === 10 ? `91${digits}` : digits;
         const waUrl = digits
           ? `https://wa.me/${waNumber}?text=${encodeURIComponent(
-            `Hello ${row.name || "there"}, greetings from Apna Vidya regarding your Demo Class!`
+            `Hello ${row.name || "there"}, greetings from ApnaVidya regarding your Demo Class!`
           )}`
           : null;
         const telUrl = `tel:${rawPhone.replace(/\s+/g, "")}`;
@@ -221,7 +225,7 @@ const DemoClassesAdmin = () => {
           >
             <a
               href={telUrl}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white border border-blue-200/80 px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-95 group"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 hover:bg-[#FD8006] text-blue-600 hover:text-white border border-blue-200/80 px-2.5 py-1.5 text-xs font-semibold shadow-2xs transition-all cursor-pointer active:scale-95 group"
               title={`Call ${row.name || "Student"} (${rawPhone})`}
             >
               <PhoneCall size={14} className="shrink-0 text-blue-600 group-hover:text-white transition-colors" />
@@ -398,7 +402,7 @@ const DemoClassesAdmin = () => {
                 type="button"
                 disabled={statusUpdating}
                 onClick={confirmStatusUpdate}
-                className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 disabled:opacity-50 cursor-pointer"
+                className="rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 disabled:opacity-50 cursor-pointer"
               >
                 {statusUpdating ? "Saving..." : "Save Status"}
               </button>

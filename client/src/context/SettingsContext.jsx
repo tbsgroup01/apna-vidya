@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import api from "../services/api";
 import defaultLogo from "../assets/apnavidya.png";
+import defaultFavicon from "../assets/favicon.png";
 
 export const sanitizeAssetUrl = (url, fallback = "") => {
   if (!url || typeof url !== "string") return fallback;
@@ -20,15 +21,15 @@ export const sanitizeAssetUrl = (url, fallback = "") => {
 
 const DEFAULT_SETTINGS = {
   general: {
-    siteName: "Apna Vidya",
+    siteName: "ApnaVidya",
     tagline: "Learn • Grow • Succeed",
     logoUrl: defaultLogo,
-    faviconUrl: defaultLogo,
+    faviconUrl: defaultFavicon,
   },
   seo: {
-    metaTitle: "Apna Vidya - Learn • Grow • Succeed | Leading Tech Education",
+    metaTitle: "ApnaVidya - Learn • Grow • Succeed | Leading Tech Education",
     metaDescription: "Master Full Stack Development, Data Science, Python, and DSA with live 1-on-1 mentoring, verified certifications, and guaranteed career support.",
-    keywords: "coding bootcamp, web development, data science, apna vidya, full stack course, learn react, python dsa",
+    keywords: "coding bootcamp, web development, data science, ApnaVidya, full stack course, learn react, python dsa",
     ogImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   },
   customTags: [],
@@ -38,7 +39,7 @@ const DEFAULT_SETTINGS = {
     email: "admissions@apnavidya.com",
     supportEmail: "support@apnavidya.com",
     whatsapp: "+91 98765 43210",
-    address: "Apna Vidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
+    address: "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
     workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
     googleMapsUrl: "https://maps.google.com/?q=Noida+Sector+62",
     social: {
@@ -55,7 +56,7 @@ const SettingsContext = createContext({
   settings: DEFAULT_SETTINGS,
   loading: true,
   error: null,
-  refreshSettings: () => {},
+  refreshSettings: () => { },
 });
 
 export const SettingsProvider = ({ children }) => {
@@ -75,7 +76,7 @@ export const SettingsProvider = ({ children }) => {
             ...DEFAULT_SETTINGS.general,
             ...gen,
             logoUrl: sanitizeAssetUrl(gen.logoUrl, defaultLogo),
-            faviconUrl: sanitizeAssetUrl(gen.faviconUrl, defaultLogo),
+            faviconUrl: sanitizeAssetUrl(gen.faviconUrl, defaultFavicon),
           },
           seo: {
             ...DEFAULT_SETTINGS.seo,
@@ -109,7 +110,7 @@ export const SettingsProvider = ({ children }) => {
             ...prev.general,
             ...gen,
             logoUrl: sanitizeAssetUrl(gen.logoUrl, prev.general?.logoUrl || defaultLogo),
-            faviconUrl: sanitizeAssetUrl(gen.faviconUrl, prev.general?.faviconUrl || defaultLogo),
+            faviconUrl: sanitizeAssetUrl(gen.faviconUrl, prev.general?.faviconUrl || defaultFavicon),
           },
           seo: {
             ...prev.seo,
@@ -170,7 +171,7 @@ export const SettingsProvider = ({ children }) => {
     setOrCreateMeta(null, null, "property", "og:image", sanitizeAssetUrl(settings.seo?.ogImage, ""));
     setOrCreateMeta(null, null, "property", "og:site_name", settings.general?.siteName);
 
-    const activeFavicon = sanitizeAssetUrl(settings.general?.faviconUrl, defaultLogo);
+    const activeFavicon = sanitizeAssetUrl(settings.general?.faviconUrl, defaultFavicon);
     if (activeFavicon) {
       let iconLink = document.querySelector("link[rel*='icon']");
       if (!iconLink) {
@@ -202,7 +203,7 @@ export const SettingsProvider = ({ children }) => {
             newEl.setAttribute("data-tag-id", tag.id || "");
             targetContainer.appendChild(newEl);
           });
-        } catch {}
+        } catch { }
       });
     }
   }, [settings]);

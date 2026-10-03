@@ -64,16 +64,16 @@ const MENTOR_PRESET_IMAGES = [
 ];
 
 const INITIAL_FORM = {
-  heroBadge: "About Apna Vidya",
+  heroBadge: "About ApnaVidya",
   heroTitle: "Empowering the Next Generation of India's Builders",
   heroDescription:
-    "Apna Vidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
+    "ApnaVidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
   storyTag: "Our Story",
   storyTitle: "Bridging the Gap Between College Degrees and Industry Careers",
   storyParagraph1:
     "Over 1.5 million engineering and computer science students graduate in India every year, yet less than 15% possess the skills required to build modern software applications.",
   storyParagraph2:
-    "Apna Vidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
+    "ApnaVidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
   stat1Value: "50,000+",
   stat1Label: "Graduated Students",
   stat2Value: "120+",
@@ -105,11 +105,11 @@ const INITIAL_FORM = {
     {
       icon: "Award",
       title: "Verifiable Excellence",
-      desc: "Every credential earned through Apna Vidya is backed by ISO 9001:2015 standards and independent digital verification.",
+      desc: "Every credential earned through ApnaVidya is backed by ISO 9001:2015 standards and independent digital verification.",
     },
   ],
   teamTag: "Experienced Educators",
-  teamTitle: "Meet the Mentors Behind Apna Vidya",
+  teamTitle: "Meet the Mentors Behind ApnaVidya",
   teamSubtitle:
     "Learn from engineers who have shipped software at scale and trained thousands of successful graduates.",
   team: [
@@ -138,7 +138,7 @@ const INITIAL_FORM = {
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
     },
   ],
-  ctaTitle: "Experience the Apna Vidya Way of Learning",
+  ctaTitle: "Experience the ApnaVidya Way of Learning",
   ctaDescription:
     "Join a live session, speak with our instructors, and explore how our curriculum can help you achieve your career aspirations.",
   ctaPrimaryText: "Book a Free Demo Class",
@@ -314,7 +314,7 @@ const AboutUsAdmin = () => {
             <Link
               to="/about"
               target="_blank"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-[13px]late-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer"
             >
               <ExternalLink size={14} />
               <span>Preview Live Page</span>
@@ -323,7 +323,7 @@ const AboutUsAdmin = () => {
               type="button"
               onClick={fetchAboutContent}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-[13px]late-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-slate-700 shadow-xs hover:bg-slate-50 transition-all cursor-pointer disabled:opacity-50"
               title="Reload from database"
             >
               <RefreshCw size={14} className={loading ? "animate-spin text-blue-600" : ""} />
@@ -332,7 +332,7 @@ const AboutUsAdmin = () => {
               type="button"
               onClick={handleSave}
               disabled={saving}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
             >
               <Save size={15} />
               <span>{saving ? "Saving Changes..." : "Save All Changes"}</span>
@@ -344,8 +344,8 @@ const AboutUsAdmin = () => {
       {notification && (
         <div
           className={`flex items-center justify-between rounded-xl p-3.5 text-xs font-medium border shadow-xs transition-all ${notification.type === "error"
-              ? "bg-rose-50 border-rose-200 text-rose-800"
-              : "bg-emerald-50 border-emerald-200 text-emerald-800"
+            ? "bg-rose-50 border-rose-200 text-rose-800"
+            : "bg-emerald-50 border-emerald-200 text-emerald-800"
             }`}
         >
           <div className="flex items-center gap-2">
@@ -354,7 +354,7 @@ const AboutUsAdmin = () => {
           </div>
           <button
             onClick={() => setNotification(null)}
-            className="text-[13px]late-400 hover:text-[13px]late-600 font-bold ml-4"
+            className="text-slate-400 hover:text-slate-600 font-bold ml-4"
           >
             ✕
           </button>
@@ -371,8 +371,8 @@ const AboutUsAdmin = () => {
               type="button"
               onClick={() => setActiveTab(tab.id)}
               className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${isActive
-                  ? "bg-blue-600 text-white shadow-xs"
-                  : "bg-white text-[13px]late-600 hover:bg-slate-100 border border-slate-200/80"
+                ? "bg-[#FD8006] text-white shadow-xs"
+                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80"
                 }`}
             >
               <Icon size={15} />
@@ -385,7 +385,7 @@ const AboutUsAdmin = () => {
       <form onSubmit={handleSave} className="space-y-6">
         {activeTab === "hero" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
               <Building2 size={18} className="text-blue-600" />
               <span>Top Hero Section</span>
             </div>
@@ -396,7 +396,7 @@ const AboutUsAdmin = () => {
                 required
                 value={form.heroBadge}
                 onChange={(e) => setForm({ ...form, heroBadge: e.target.value })}
-                placeholder="e.g. About Apna Vidya"
+                placeholder="e.g. About ApnaVidya"
               />
               <FormInput
                 label="Main Heading Headline *"
@@ -413,7 +413,7 @@ const AboutUsAdmin = () => {
               required
               value={form.heroDescription}
               onChange={(e) => setForm({ ...form, heroDescription: e.target.value })}
-              placeholder="Lead introduction describing Apna Vidya's mission and purpose..."
+              placeholder="Lead introduction describing ApnaVidya's mission and purpose..."
             />
           </div>
         )}
@@ -421,7 +421,7 @@ const AboutUsAdmin = () => {
         {activeTab === "story" && (
           <div className="space-y-6">
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
                 <Compass size={18} className="text-blue-600" />
                 <span>Our Story Narrative</span>
               </div>
@@ -457,19 +457,19 @@ const AboutUsAdmin = () => {
                 rows={3}
                 value={form.storyParagraph2}
                 onChange={(e) => setForm({ ...form, storyParagraph2: e.target.value })}
-                placeholder="How Apna Vidya addresses this reality through practical projects..."
+                placeholder="How ApnaVidya addresses this reality through practical projects..."
               />
             </div>
 
             <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
                 <Sparkles size={18} className="text-amber-500" />
                 <span>Highlight Statistics</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-3 rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                  <p className="text-xs font-bold text-[13px]late-700">Statistic #1</p>
+                  <p className="text-xs font-bold text-slate-700">Statistic #1</p>
                   <FormInput
                     label="Stat Value"
                     value={form.stat1Value}
@@ -485,7 +485,7 @@ const AboutUsAdmin = () => {
                 </div>
 
                 <div className="space-y-3 rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                  <p className="text-xs font-bold text-[13px]late-700">Statistic #2</p>
+                  <p className="text-xs font-bold text-slate-700">Statistic #2</p>
                   <FormInput
                     label="Stat Value"
                     value={form.stat2Value}
@@ -506,7 +506,7 @@ const AboutUsAdmin = () => {
 
         {activeTab === "mission" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-6">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
               <Target size={18} className="text-indigo-600" />
               <span>Institutional Mission & Long-Term Vision</span>
             </div>
@@ -523,7 +523,7 @@ const AboutUsAdmin = () => {
                 rows={3}
                 value={form.missionDescription}
                 onChange={(e) => setForm({ ...form, missionDescription: e.target.value })}
-                placeholder="Actionable statement about what Apna Vidya provides..."
+                placeholder="Actionable statement about what ApnaVidya provides..."
               />
             </div>
 
@@ -548,14 +548,14 @@ const AboutUsAdmin = () => {
         {activeTab === "values" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
                 <Layers size={18} className="text-blue-600" />
                 <span>Core Values & Pillars</span>
               </div>
               <button
                 type="button"
                 onClick={handleAddValue}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer"
               >
                 <Plus size={14} />
                 <span>Add Value Card</span>
@@ -588,7 +588,7 @@ const AboutUsAdmin = () => {
                     <button
                       type="button"
                       onClick={() => handleRemoveValue(idx)}
-                      className="text-[13px]late-400 hover:text-rose-600 p-1 cursor-pointer"
+                      className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer"
                       title="Remove value"
                     >
                       <Trash2 size={15} />
@@ -605,13 +605,13 @@ const AboutUsAdmin = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[13px]late-700 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Icon Symbol
                       </label>
                       <select
                         value={val.icon || "Target"}
                         onChange={(e) => handleValueChange(idx, "icon", e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-[13px]late-800 focus:border-blue-500 focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-blue-500 focus:outline-none"
                       >
                         {ICON_OPTIONS.map((opt) => (
                           <option key={opt.value} value={opt.value}>
@@ -638,14 +638,14 @@ const AboutUsAdmin = () => {
         {activeTab === "team" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-2.5 text-[13px]late-900 font-bold text-[13px]m">
+              <div className="flex items-center gap-2.5 text-slate-900 font-bold text-sm">
                 <Users size={18} className="text-indigo-600" />
                 <span>Mentors & Educators Team</span>
               </div>
               <button
                 type="button"
                 onClick={handleAddMentor}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer"
               >
                 <Plus size={14} />
                 <span>Add Mentor Profile</span>
@@ -664,7 +664,7 @@ const AboutUsAdmin = () => {
                   label="Section Title"
                   value={form.teamTitle}
                   onChange={(e) => setForm({ ...form, teamTitle: e.target.value })}
-                  placeholder="e.g. Meet the Mentors Behind Apna Vidya"
+                  placeholder="e.g. Meet the Mentors Behind ApnaVidya"
                 />
               </div>
             </div>
@@ -677,40 +677,27 @@ const AboutUsAdmin = () => {
               placeholder="Description of mentor backgrounds and industry expertise..."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <div className="space-y-4 pt-2">
               {(form.team || []).map((member, idx) => (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 space-y-3 relative"
+                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 relative shadow-2xs"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[13px]late-800">Mentor #{idx + 1}</span>
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-200/70">
+                    <span className="text-xs font-bold text-slate-800">Mentor #{idx + 1}</span>
                     <button
                       type="button"
                       onClick={() => handleRemoveMentor(idx)}
-                      className="text-[13px]late-400 hover:text-rose-600 p-1 cursor-pointer"
+                      className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer transition-colors"
                       title="Remove mentor"
                     >
-                      <Trash2 size={15} />
+                      <Trash2 size={16} />
                     </button>
                   </div>
 
-                  <div className="flex gap-3 items-start">
-                    <div className="h-16 w-16 shrink-0 rounded-xl overflow-hidden border border-slate-200 bg-slate-200">
-                      {member.image ? (
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="h-full w-full object-cover object-top"
-                          style={{ objectPosition: "top center" }}
-                        />
-                      ) : (
-                        <div className="h-full w-full flex items-center justify-center text-[13px]late-400">
-                          <ImageIcon size={20} />
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1 space-y-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+                    {/* Left 50%: Inputs */}
+                    <div className="space-y-3">
                       <FormInput
                         label="Full Name"
                         value={member.name}
@@ -723,24 +710,26 @@ const AboutUsAdmin = () => {
                         onChange={(e) => handleMentorChange(idx, "role", e.target.value)}
                         placeholder="e.g. Academic Director"
                       />
+                      <FormInput
+                        label="Credentials / Background Highlights"
+                        value={member.credentials}
+                        onChange={(e) => handleMentorChange(idx, "credentials", e.target.value)}
+                        placeholder="e.g. Ex-Professor IIT, 18+ Years Experience"
+                      />
+                    </div>
+
+                    {/* Right 50%: Image Preview & Upload */}
+                    <div>
+                      <ImageUploadPreview
+                        label="Mentor Profile Photo"
+                        value={member.image}
+                        onChange={(url) => handleMentorChange(idx, "image", url)}
+                        aspect="square"
+                        presets={MENTOR_PRESET_IMAGES}
+                        helperText="Upload instructor photo or pick a sample avatar"
+                      />
                     </div>
                   </div>
-
-                  <FormInput
-                    label="Credentials / Background Highlights"
-                    value={member.credentials}
-                    onChange={(e) => handleMentorChange(idx, "credentials", e.target.value)}
-                    placeholder="e.g. Ex-Professor IIT, 18+ Years Experience"
-                  />
-
-                  <ImageUploadPreview
-                    label="Mentor Profile Photo"
-                    value={member.image}
-                    onChange={(url) => handleMentorChange(idx, "image", url)}
-                    aspect="square"
-                    presets={MENTOR_PRESET_IMAGES}
-                    helperText="Upload instructor photo or pick a sample avatar"
-                  />
                 </div>
               ))}
             </div>
@@ -749,7 +738,7 @@ const AboutUsAdmin = () => {
 
         {activeTab === "cta" && (
           <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-[13px]late-900 font-bold text-[13px]m">
+            <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 text-slate-900 font-bold text-sm">
               <ArrowRight size={18} className="text-blue-600" />
               <span>Bottom Conversion CTA Banner</span>
             </div>
@@ -758,7 +747,7 @@ const AboutUsAdmin = () => {
               label="Banner Headline *"
               value={form.ctaTitle}
               onChange={(e) => setForm({ ...form, ctaTitle: e.target.value })}
-              placeholder="Experience the Apna Vidya Way of Learning"
+              placeholder="Experience the ApnaVidya Way of Learning"
             />
 
             <FormTextarea
@@ -793,13 +782,13 @@ const AboutUsAdmin = () => {
         )}
 
         <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-          <p className="text-xs text-[13px]late-400">
+          <p className="text-xs text-slate-400">
             All updates save directly to the database and sync instantly across the user site.
           </p>
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
           >
             <Save size={16} />
             <span>{saving ? "Saving Changes..." : "Save All Changes"}</span>

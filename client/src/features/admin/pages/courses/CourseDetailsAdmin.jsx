@@ -244,7 +244,7 @@ const CourseDetailsAdmin = () => {
             </Link>
             <Link
               to={`/admin/courses/${course.id}/edit`}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all"
             >
               <Edit size={15} />
               <span>Edit CMS Details</span>
@@ -345,7 +345,7 @@ const CourseDetailsAdmin = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddModule(true)}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition-all shadow-sm cursor-pointer shrink-0"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition-all shadow-sm cursor-pointer shrink-0"
                 >
                   <Plus size={15} />
                   <span>Add Course Module</span>
@@ -406,7 +406,7 @@ const CourseDetailsAdmin = () => {
                     </button>
                     <button
                       type="submit"
-                      className="rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm"
+                      className="rounded-xl bg-[#FD8006] px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm"
                     >
                       Save Module
                     </button>
@@ -423,7 +423,7 @@ const CourseDetailsAdmin = () => {
                     >
                       <div className="bg-slate-50/70 p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
-                          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white font-mono text-xs font-bold shadow-xs">
+                          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#FD8006] text-white font-mono text-xs font-bold shadow-xs">
                             {modIdx + 1}
                           </span>
                           <div>
@@ -468,7 +468,7 @@ const CourseDetailsAdmin = () => {
                               setActiveLessonModId(null);
                             }}
                             className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${activeMaterialModId === mod.id
-                              ? "bg-blue-600 text-white border-blue-600"
+                              ? "bg-[#FD8006] text-white border-blue-600"
                               : "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100"
                               }`}
                           >
@@ -651,7 +651,7 @@ const CourseDetailsAdmin = () => {
                               type="button"
                               disabled={uploadingMaterial}
                               onClick={() => handleUploadMaterial(mod.id)}
-                              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm disabled:opacity-50"
+                              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm disabled:opacity-50"
                             >
                               <Upload size={14} />
                               <span>{uploadingMaterial ? "Uploading..." : "Save Module Material"}</span>
@@ -787,7 +787,7 @@ const CourseDetailsAdmin = () => {
                     <button
                       type="button"
                       onClick={() => setShowAddModule(true)}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm"
                     >
                       <Plus size={14} />
                       <span>Create First Module</span>
@@ -851,7 +851,7 @@ const CourseDetailsAdmin = () => {
                     </div>
                     <div>
                       <span className="text-[13px]late-400 font-bold block">Certificate Credential:</span>
-                      <span className="text-[13px]late-700">{course.certificateInfo || "Apna Vidya Industry Professional Credential"}</span>
+                      <span className="text-[13px]late-700">{course.certificateInfo || "ApnaVidya Industry Professional Credential"}</span>
                     </div>
                     <div>
                       <span className="text-[13px]late-400 font-bold block">Target Audience:</span>

@@ -65,7 +65,7 @@ export const getEmbedVideoInfo = (url = "") => {
 const DEFAULT_VIDEOS = [
   {
     id: 1,
-    title: "Why Learn With Apna Vidya",
+    title: "Why Learn With ApnaVidya",
     videoSourceType: "url",
     videoUrl: "https://www.youtube.com/watch?v=rfscVS0vtbw",
     thumbnailUrl:
@@ -285,6 +285,12 @@ const VideoSectionAdmin = () => {
 
   const handlePosterUpload = async (index, file) => {
     if (!file) return;
+
+    if (file.size > 1 * 1024 * 1024) {
+      showToast("Thumbnail image must be less than 1MB.", "error");
+      return;
+    }
+
     setUploadingPosterIndex(index);
     try {
       const formData = new FormData();
@@ -320,8 +326,8 @@ const VideoSectionAdmin = () => {
       {notification && (
         <div
           className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl px-5 py-3.5 shadow-xl transition-all ${notification.type === "error"
-              ? "bg-rose-600 text-white"
-              : "bg-emerald-600 text-white"
+            ? "bg-rose-600 text-white"
+            : "bg-emerald-600 text-white"
             }`}
         >
           {notification.type === "error" ? (
@@ -358,7 +364,7 @@ const VideoSectionAdmin = () => {
                 type="button"
                 onClick={handleSave}
                 disabled={saving || loading}
-                className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-xs hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white shadow-xs hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 cursor-pointer"
               >
                 {saving ? (
                   <>
@@ -383,7 +389,7 @@ const VideoSectionAdmin = () => {
           <div>
             <div className="flex items-center gap-2.5">
               <h2 className="text-sm font-bold text-slate-900">
-                Why Apna Vidya - Video Showcase Carousel
+                Why ApnaVidya - Video Showcase Carousel
               </h2>
               <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-bold text-blue-700">
                 {videos.length} / 5 Videos
@@ -405,7 +411,7 @@ const VideoSectionAdmin = () => {
                   checked={isActive}
                   onChange={(e) => setIsActive(e.target.checked)}
                 />
-                <div className="peer h-6 w-11 rounded-full bg-slate-200 peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                <div className="peer h-6 w-11 rounded-full bg-slate-200 peer-checked:bg-[#FD8006] peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
               </label>
             </div>
 
@@ -455,7 +461,7 @@ const VideoSectionAdmin = () => {
                   {/* Card Header */}
                   <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-5 py-3">
                     <div className="flex items-center gap-2.5">
-                      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-600 text-xs font-bold text-white shadow-2xs">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#FD8006] text-xs font-bold text-white shadow-2xs">
                         {index + 1}
                       </span>
                       <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
@@ -503,7 +509,7 @@ const VideoSectionAdmin = () => {
                           onChange={(e) =>
                             handleUpdateVideo(index, "title", e.target.value)
                           }
-                          placeholder="e.g. Why Learn With Apna Vidya"
+                          placeholder="e.g. Why Learn With ApnaVidya"
                           className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>
@@ -521,8 +527,8 @@ const VideoSectionAdmin = () => {
                                 handleUpdateVideo(index, "videoSourceType", "url")
                               }
                               className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all ${vid.videoSourceType !== "upload"
-                                  ? "bg-white text-blue-600 shadow-2xs"
-                                  : "text-slate-600 hover:text-slate-900"
+                                ? "bg-white text-blue-600 shadow-2xs"
+                                : "text-slate-600 hover:text-slate-900"
                                 }`}
                             >
                               <Link2 size={12} />
@@ -534,8 +540,8 @@ const VideoSectionAdmin = () => {
                                 handleUpdateVideo(index, "videoSourceType", "upload")
                               }
                               className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all ${vid.videoSourceType === "upload"
-                                  ? "bg-white text-blue-600 shadow-2xs"
-                                  : "text-slate-600 hover:text-slate-900"
+                                ? "bg-white text-blue-600 shadow-2xs"
+                                : "text-slate-600 hover:text-slate-900"
                                 }`}
                             >
                               <Upload size={12} />
@@ -662,7 +668,7 @@ const VideoSectionAdmin = () => {
                           >
                             <ImageIcon size={12} />
                             <span>
-                              {isUploadingThisPoster ? "Uploading..." : "Upload Image"}
+                              {isUploadingThisPoster ? "Uploading..." : "Upload Image (less than 1MB)"}
                             </span>
                           </button>
                         </div>
@@ -686,6 +692,7 @@ const VideoSectionAdmin = () => {
                           placeholder="Paste image URL or upload above"
                           className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
+                        <p className="text-[11px] text-slate-400 mt-1">Image size must be less than 1MB</p>
                       </div>
                     </div>
 
@@ -748,7 +755,7 @@ const VideoSectionAdmin = () => {
                 type="button"
                 onClick={handleSave}
                 disabled={saving || loading}
-                className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-3 text-xs font-bold text-white shadow-md hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-7 py-3 text-xs font-bold text-white shadow-md hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
               >
                 {saving ? (
                   <>

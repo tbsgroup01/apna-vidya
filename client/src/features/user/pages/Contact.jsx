@@ -17,7 +17,7 @@ import OtpVerificationStep from "../components/OtpVerificationStep";
 const Contact = () => {
   const { settings } = useSettings();
   const contact = settings.contact || {};
-  const siteName = settings.general?.siteName || "Apna Vidya";
+  const siteName = settings.general?.siteName || "ApnaVidya";
 
   const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
@@ -114,14 +114,14 @@ const Contact = () => {
   const alternatePhone = contact.alternatePhone;
   const primaryEmail = contact.email || "admissions@apnavidya.com";
   const supportEmail = contact.supportEmail || "support@apnavidya.com";
-  const address = contact.address || "Apna Vidya Tower, 4th Floor, Sector 62, Noida, UP - 201301";
+  const address = contact.address || "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301";
   const workingHours = contact.workingHours || "Mon - Sat: 9:00 AM - 7:00 PM";
   const googleMapsUrl = contact.googleMapsUrl;
 
   return (
     <div className="bg-slate-50 min-h-screen py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-6xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
             <Headphones size={15} />
             We&apos;re Here to Help
@@ -356,7 +356,7 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#FD8006] py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/25 hover:bg-blue-700 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
                     >
                       <Send size={16} />
                       <span>{loading ? "Sending OTP..." : "Send Inquiry Message"}</span>
@@ -409,7 +409,7 @@ const Contact = () => {
                         message: "",
                       });
                     }}
-                    className="mt-6 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 cursor-pointer transition-colors"
+                    className="mt-6 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-bold text-white hover:bg-blue-700 cursor-pointer transition-colors"
                   >
                     Send Another Inquiry
                   </button>

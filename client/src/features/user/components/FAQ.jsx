@@ -3,7 +3,7 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
-    q: "Who can enroll in Apna Vidya courses?",
+    q: "Who can enroll in ApnaVidya courses?",
     a: "Anyone with an enthusiasm to learn! Whether you are a school student in Classes 8-12 preparing for boards, a college student aiming for your first tech job, or a working professional looking to upskill into Full Stack or AI, our roadmaps are tailored for all backgrounds.",
   },
   {
@@ -36,7 +36,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-7">
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">

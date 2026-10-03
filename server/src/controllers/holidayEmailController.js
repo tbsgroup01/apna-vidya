@@ -47,14 +47,14 @@ const sanitizeObject = (obj, fallback = {}) => {
 
 // Generate attractive, responsive HTML email template for students (Header has ONLY LOGO - NO TEXT)
 const buildHolidayEmailHtml = ({ holidayName, date, subject, content, studentName, fromName, generalSettings }) => {
-  const institutionName = fromName || generalSettings?.siteName || "Apna Vidya Academy";
+  const institutionName = fromName || generalSettings?.siteName || "ApnaVidya Academy";
   const formattedDate = date
     ? new Date(date).toLocaleDateString("en-IN", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : "Upcoming Holiday";
 
   const safeContent = (content || "")
@@ -75,7 +75,7 @@ const buildHolidayEmailHtml = ({ holidayName, date, subject, content, studentNam
     
     <!-- Top Header - CLEAN WHITE, NO BLUE, LARGER LOGO -->
     <div style="background-color: #ffffff; padding: 32px 24px 20px 24px; text-align: center; border-bottom: 1px solid #e2e8f0;">
-      <img src="cid:apnavidya-logo" alt="Apna Vidya" style="height: 68px; width: auto; max-width: 320px; object-fit: contain; display: block; margin: 0 auto;" />
+      <img src="cid:apnavidya-logo" alt="ApnaVidya" style="height: 68px; width: auto; max-width: 320px; object-fit: contain; display: block; margin: 0 auto;" />
     </div>
 
     <!-- Main Content Area -->
@@ -160,7 +160,7 @@ const executeHolidayBroadcast = async (campaign, students) => {
 
   const smtpHost = emailConf.smtpHost || "smtp.gmail.com";
   const smtpPort = Number(emailConf.smtpPort) || 465;
-  const fromName = emailConf.fromName || generalConf?.siteName || "Apna Vidya Academy";
+  const fromName = emailConf.fromName || generalConf?.siteName || "ApnaVidya Academy";
 
   // Filter students with valid emails
   const validStudents = (students || []).filter(

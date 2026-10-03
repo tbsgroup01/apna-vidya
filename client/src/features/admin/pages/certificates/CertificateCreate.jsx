@@ -9,9 +9,13 @@ import {
   AlertCircle,
   Check,
 } from "lucide-react";
+
+
 import PageHeader from "../../components/PageHeader";
 import { ImageUploadPreview } from "../../components/FormControls";
 import api from "../../../../services/api";
+
+
 
 const PRESET_IMAGES = [
   {
@@ -150,29 +154,16 @@ const CertificateCreate = () => {
             </select>
           </div>
 
-          {/* <div className="sm:col-span-2 space-y-1.5">
-            <label className="text-xs font-bold text-[13px]late-700">
-              Official Verification URL
-            </label>
-            <input
-              type="url"
-              value={formData.verificationUrl}
-              onChange={(e) =>
-                setFormData({ ...formData, verificationUrl: e.target.value })
-              }
-              placeholder="https://cert.registry.com/verify/..."
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs text-[13px]late-900 placeholder:text-[13px]late-400 focus:border-blue-500 focus:outline-hidden"
-            />
-          </div> */}
+
 
           <div className="sm:col-span-2">
             <ImageUploadPreview
-              label="Badge / Certificate Image"
+              label="Badge / Certificate Image (less than 1MB)"
               value={formData.image}
               onChange={(url) => setFormData({ ...formData, image: url })}
               aspect="video"
               presets={PRESET_IMAGES}
-              helperText="Upload certificate graphic / badge or pick a verified preset"
+              helperText="Upload certificate graphic / badge or pick a verified preset (max 1MB)"
             />
           </div>
 
@@ -232,10 +223,12 @@ const CertificateCreate = () => {
           >
             Cancel
           </Link>
+
+
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 cursor-pointer transition-all active:scale-95"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 disabled:opacity-50 cursor-pointer transition-all active:scale-95"
           >
             {loading ? (
               <span>Saving to Database...</span>

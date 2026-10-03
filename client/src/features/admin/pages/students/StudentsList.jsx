@@ -224,7 +224,7 @@ const StudentsList = () => {
     },
     {
       key: "course",
-      header: "Course Programs",
+      header: "Course",
       sortable: true,
       render: (row) => {
         const courseName =
@@ -284,7 +284,7 @@ const StudentsList = () => {
         const digits = rawPhone.replace(/\D/g, "");
         const waNumber = digits.length === 10 ? `91${digits}` : digits;
         const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(
-          `Hello ${row.name}, greetings from Apna Vidya!`
+          `Hello ${row.name}, greetings from ApnaVidya!`
         )}`;
         const telUrl = `tel:${rawPhone}`;
 
@@ -292,7 +292,7 @@ const StudentsList = () => {
           <div className="flex items-center justify-center gap-2">
             <a
               href={telUrl}
-              className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white border border-blue-200/80 shadow-2xs transition-all cursor-pointer active:scale-95"
+              className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 hover:bg-[#FD8006] text-blue-600 hover:text-white border border-blue-200/80 shadow-2xs transition-all cursor-pointer active:scale-95"
               title={`Call ${row.name} (${rawPhone})`}
             >
               <PhoneCall size={15} />
@@ -335,7 +335,7 @@ const StudentsList = () => {
           </Link>
           <Link
             to={`/admin/students/${row.id}`}
-            className="rounded-lg p-1.5 text-blue-600 bg-blue-50/70 hover:bg-blue-600 hover:text-white transition-colors"
+            className="rounded-lg p-1.5 text-blue-600 bg-blue-50/70 hover:bg-[#FD8006] hover:text-white transition-colors"
             title="View Student Profile"
           >
             <Eye size={15} />
@@ -385,7 +385,7 @@ const StudentsList = () => {
           <button
             type="button"
             onClick={() => navigate("/admin/students/create")}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
           >
             <Plus size={16} />
             <span>Enroll Student</span>

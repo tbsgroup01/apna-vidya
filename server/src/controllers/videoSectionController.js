@@ -3,7 +3,7 @@ const HomeVideoSection = require("../models/HomeVideoSection");
 const DEFAULT_VIDEOS = [
   {
     id: 1,
-    title: "Why Learn With Apna Vidya",
+    title: "Why Learn With ApnaVidya",
     videoSourceType: "url",
     videoUrl: "https://www.youtube.com/watch?v=rfscVS0vtbw",
     thumbnailUrl:
@@ -45,10 +45,10 @@ const DEFAULT_VIDEOS = [
 
 const DEFAULT_VIDEO_SECTION = {
   key: "main",
-  badge: "Why Apna Vidya ?",
-  title: "Why Apna Vidya ?",
+  badge: "Why ApnaVidya ?",
+  title: "Why ApnaVidya ?",
   subtitle:
-    "Discover the Apna Vidya Difference - Premium Education with Flexible Learning and Expert Guidance.",
+    "Discover the ApnaVidya Difference - Premium Education with Flexible Learning and Expert Guidance.",
   videos: DEFAULT_VIDEOS,
   isActive: true,
 };
@@ -76,10 +76,10 @@ const formatVideoSection = (record) => {
   return {
     id: raw.id,
     key: raw.key || "main",
-    badge: "Why Apna Vidya ?",
-    title: "Why Apna Vidya ?",
+    badge: "Why ApnaVidya ?",
+    title: "Why ApnaVidya ?",
     subtitle:
-      "Discover the Apna Vidya Difference - Premium Education with Flexible Learning and Expert Guidance.",
+      "Discover the ApnaVidya Difference - Premium Education with Flexible Learning and Expert Guidance.",
     videos,
     isActive: typeof raw.isActive === "boolean" ? raw.isActive : true,
     updatedAt: raw.updatedAt,

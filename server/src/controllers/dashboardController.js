@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const Student = require("../models/Student");
 const Lead = require("../models/Lead");
+const LeadNote = require("../models/LeadNote");
 const Course = require("../models/Course");
 const Batch = require("../models/Batch");
 
@@ -36,7 +37,15 @@ const getDashboardStats = async (req, res) => {
         include: [{ model: Course, as: "enrolledCourses", attributes: ["id", "name"] }],
       }),
       Lead.findAll({
-        attributes: ["id", "course", "source"],
+        attributes: ["id", "course", "source", "status", "createdAt"],
+        include: [
+          {
+            model: LeadNote,
+            as: "notes",
+            attributes: ["id", "text"],
+            required: false,
+          },
+        ],
       }),
       Course.findAll({
         attributes: ["id", "name", "fees"],
@@ -51,49 +60,29 @@ const getDashboardStats = async (req, res) => {
     // Filter leads for demo class requests (matching /admin/demo-classes criteria)
     const demoLeads = (allLeads || []).filter((l) => {
       const source = (l.source || "").toLowerCase();
-      return source.includes("demo");
+      const hasDemoNote = (l.notes || []).some((n) => (n.text || "").toLowerCase().includes("demo"));
+      return source.includes("demo") || hasDemoNote;
     });
 
     // Aggregate demo request counts per course
     const courseDemoCounts = {};
     demoLeads.forEach((lead) => {
-      const courseName = (lead.course || "").trim();
-      if (courseName) {
-        courseDemoCounts[courseName] = (courseDemoCounts[courseName] || 0) + 1;
-      }
+      const courseName = (lead.course && lead.course.trim()) ? lead.course.trim() : "General Program";
+      courseDemoCounts[courseName] = (courseDemoCounts[courseName] || 0) + 1;
     });
 
     // Collate courses with their demo counts
-    const demandingMap = new Map();
-    Object.entries(courseDemoCounts).forEach(([name, count]) => {
-      demandingMap.set(name.toLowerCase(), {
+    const sortedDemanding = Object.entries(courseDemoCounts)
+      .map(([name, count]) => ({
         name,
         count,
-      });
-    });
-
-    // Add active courses if not yet in map
-    (allCourses || []).forEach((c) => {
-      const key = (c.name || "").trim().toLowerCase();
-      if (key && !demandingMap.has(key)) {
-        demandingMap.set(key, {
-          name: c.name,
-          count: 0,
-        });
-      }
-    });
-
-    // Filter courses with actual demo requests and sort descending
-    const sortedDemanding = Array.from(demandingMap.values())
-      .filter((item) => item.count > 0)
+      }))
       .sort((a, b) => b.count - a.count);
 
-    // Exactly top 2 courses at a time ("ed time pe 2 course dikhe")
-    const top2Demanding = sortedDemanding.slice(0, 2);
-
-    // Dynamic percentage relative to top course with no fixed ceiling ("max kuch nhi hoga")
-    const topCount = top2Demanding[0]?.count || 0;
-    const mostDemandingPrograms = top2Demanding.map((item) => ({
+    // Return all courses with active demo requests (up to top 10)
+    const topDemanding = sortedDemanding.slice(0, 10);
+    const topCount = topDemanding[0]?.count || 0;
+    const mostDemandingPrograms = topDemanding.map((item) => ({
       course: item.name,
       count: item.count,
       unit: item.count === 1 ? "demo request" : "demo requests",

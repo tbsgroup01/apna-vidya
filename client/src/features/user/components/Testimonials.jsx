@@ -9,7 +9,7 @@ const testimonials = [
     rating: 5,
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
     review:
-      "Coming from a non-CS background, I was terrified of learning React and Node.js. Apna Vidya's daily doubt clearance and mentor code reviews gave me the exact confidence I needed. Cracked a 9 LPA package within 5 months!",
+      "Coming from a non-CS background, I was terrified of learning React and Node.js. ApnaVidya's daily doubt clearance and mentor code reviews gave me the exact confidence I needed. Cracked a 9 LPA package within 5 months!",
   },
   {
     name: "Ananya Deshmukh",
@@ -42,7 +42,7 @@ const hiringPartners = [
 
 const Testimonials = () => {
   return (
-    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-7">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1.5 text-xs font-semibold text-blue-600">

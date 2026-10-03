@@ -90,7 +90,7 @@ const Courses = () => {
   return (
     <div className="bg-slate-50 min-h-screen py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-4xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
             <GraduationCap size={15} />
             Skill-Building Programs
@@ -127,8 +127,8 @@ const Courses = () => {
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
                 className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${selectedCategory === cat
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white text-[13px]late-600 border border-slate-200 hover:bg-slate-100"
+                  ? "bg-[#FD8006] text-white shadow-sm"
+                  : "bg-white text-[13px]late-600 border border-slate-200 hover:bg-slate-100"
                   }`}
               >
                 {cat}
@@ -211,7 +211,7 @@ const Courses = () => {
                   </div>
                   <Link
                     to={`/courses/${course.slug}`}
-                    className="inline-flex items-center gap-1 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-blue-700 transition-colors"
+                    className="inline-flex items-center gap-1 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-blue-700 transition-colors"
                   >
                     <span>View Details</span>
                     <ArrowRight size={14} />
@@ -233,7 +233,7 @@ const Courses = () => {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
-              className="mt-4 rounded-xl bg-blue-600 px-5 py-2.5 text-[13px]m font-semibold text-white hover:bg-blue-700"
+              className="mt-4 rounded-xl bg-[#FD8006] px-5 py-2.5 text-[13px]m font-semibold text-white hover:bg-blue-700"
             >
               Reset Filters
             </button>

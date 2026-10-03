@@ -103,7 +103,7 @@ const LeadDetails = () => {
         <p className="mt-1 text-xs text-[13px]late-500">This lead may have been deleted or archived.</p>
         <Link
           to="/admin/leads"
-          className="mt-4 inline-block rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white"
+          className="mt-4 inline-block rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white"
         >
           Return to Leads
         </Link>
@@ -128,20 +128,19 @@ const LeadDetails = () => {
               <>
                 <a
                   href={`tel:${lead.phone.replace(/\s+/g, "")}`}
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-blue-200/90 bg-blue-50 px-3.5 py-2.5 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-blue-200/90 bg-blue-50 px-3.5 py-2.5 text-xs font-bold text-blue-700 hover:bg-[#FD8006] hover:text-white transition-all shadow-2xs"
                   title={`Call ${lead.name} (${lead.phone})`}
                 >
                   <PhoneCall size={14} />
                   <span>Call Lead</span>
                 </a>
                 <a
-                  href={`https://wa.me/${
-                    lead.phone.replace(/\D/g, "").length === 10
-                      ? `91${lead.phone.replace(/\D/g, "")}`
-                      : lead.phone.replace(/\D/g, "")
-                  }?text=${encodeURIComponent(
-                    `Hello ${lead.name}, greetings from Apna Vidya!`
-                  )}`}
+                  href={`https://wa.me/${lead.phone.replace(/\D/g, "").length === 10
+                    ? `91${lead.phone.replace(/\D/g, "")}`
+                    : lead.phone.replace(/\D/g, "")
+                    }?text=${encodeURIComponent(
+                      `Hello ${lead.name}, greetings from ApnaVidya!`
+                    )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-200/90 bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all shadow-2xs"
@@ -277,7 +276,7 @@ const LeadDetails = () => {
                 <button
                   type="submit"
                   disabled={submittingNote}
-                  className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer disabled:opacity-60 shadow-sm"
+                  className="flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer disabled:opacity-60 shadow-sm"
                 >
                   <Send size={13} />
                   <span>{submittingNote ? "Adding..." : "Log Note"}</span>
@@ -319,7 +318,7 @@ const LeadDetails = () => {
               {lead.timeline && lead.timeline.length > 0 ? (
                 lead.timeline.map((act) => (
                   <div key={act.id} className="relative">
-                    <div className="absolute -left-6 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 ring-4 ring-white" />
+                    <div className="absolute -left-6 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#FD8006] ring-4 ring-white" />
                     <p className="text-xs font-bold text-[13px]late-900">{act.action}</p>
                     <p className="text-[13px] text-[13px]late-600 mt-0.5">{act.detail}</p>
                     <p className="text-[12px] font-mono text-[13px]late-400 mt-1">

@@ -268,7 +268,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer active:scale-[0.99] flex items-center justify-center gap-2"
+                  className="w-full rounded-xl bg-[#FD8006] py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 disabled:opacity-50 transition-all cursor-pointer active:scale-[0.99] flex items-center justify-center gap-2"
                 >
                   {isSyllabus && <Download size={16} />}
                   <span>
@@ -277,8 +277,8 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
                         ? "Sending OTP..."
                         : "Sending OTP..."
                       : isSyllabus
-                      ? "Submit & Download Syllabus"
-                      : "Confirm & Book Free Demo"}
+                        ? "Submit & Download Syllabus"
+                        : "Confirm & Book Free Demo"}
                   </span>
                 </button>
               </div>
@@ -339,7 +339,7 @@ const DemoModal = ({ isOpen, onClose, initialCourse = "", options = {} }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   download
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer shadow-xs"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition-colors cursor-pointer shadow-xs"
                 >
                   <Download size={16} />
                   <span>Download Again</span>

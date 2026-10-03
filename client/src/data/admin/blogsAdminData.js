@@ -27,7 +27,7 @@ export const initialBlogs = [
     featuredImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
     excerpt: "A comprehensive guide on learning frontend, backend, databases, and DevOps with high market demand.",
     content: "The software engineering industry in 2026 prioritizes developers who can build and deploy end-to-end applications...",
-    seoTitle: "Full Stack Developer Roadmap 2026 | Apna Vidya Blog",
+    seoTitle: "Full Stack Developer Roadmap 2026 | ApnaVidya Blog",
     seoDescription: "Step-by-step roadmap to become a high-earning full stack developer in 2026."
   },
   {
@@ -44,7 +44,7 @@ export const initialBlogs = [
     featuredImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
     excerpt: "Discover the top programming languages and frameworks driving placement packages in tier 1 tech hubs.",
     content: "With the rise of generative AI and cloud microservices, developer demand has shifted drastically...",
-    seoTitle: "High-Paying Tech Skills in India 2026 | Apna Vidya",
+    seoTitle: "High-Paying Tech Skills in India 2026 | ApnaVidya",
     seoDescription: "Learn which software skills command the highest packages in the Indian IT sector."
   },
   {
@@ -61,7 +61,7 @@ export const initialBlogs = [
     featuredImage: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=80",
     excerpt: "The exact pattern-based approach to solve dynamic programming, graphs, and tree questions with ease.",
     content: "Memorizing code never works in a live Google or Amazon technical interview. You need pattern recognition...",
-    seoTitle: "Master DSA Coding Rounds for Product Companies | Apna Vidya",
+    seoTitle: "Master DSA Coding Rounds for Product Companies | ApnaVidya",
     seoDescription: "A proven guide to cracking technical interviews with pattern-based problem solving."
   },
   {
@@ -78,7 +78,7 @@ export const initialBlogs = [
     featuredImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
     excerpt: "Moving beyond basic OpenAI API calls to building production Retrieval-Augmented Generation (RAG) systems.",
     content: "Enterprise software teams are embedding conversational intelligence into every workflow...",
-    seoTitle: "Building Production LLM Applications | Apna Vidya Blog",
+    seoTitle: "Building Production LLM Applications | ApnaVidya Blog",
     seoDescription: "Complete guide on vector embeddings, LangChain, and RAG pipelines."
   },
   {
@@ -95,7 +95,7 @@ export const initialBlogs = [
     featuredImage: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
     excerpt: "Get up to speed with the latest CSS engine improvements and utility-first best practices.",
     content: "Tailwind CSS v4 brings massive speed improvements and simplifies theme configuration...",
-    seoTitle: "Tailwind CSS v4 Complete Guide | Apna Vidya",
+    seoTitle: "Tailwind CSS v4 Complete Guide | ApnaVidya",
     seoDescription: "Learn everything new in Tailwind CSS v4 with practical examples."
   }
 ];

@@ -89,91 +89,148 @@ const PopularCourses = () => {
 
     return (
         <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
-            <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-blue-100/40 blur-3xl" />
-            <div className="pointer-events-none absolute -right-32 bottom-0 h-72 w-72 rounded-full bg-purple-100/40 blur-3xl" />
+            {/* Background Decor: Side Dot Grids and Corner Waves */}
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+                {/* Top Left Peach / Orange Flowing Gradient Curve */}
+                <div className="absolute -top-12 -left-12 h-80 w-80 rounded-full bg-gradient-to-br from-orange-300/40 via-amber-200/20 to-transparent blur-3xl" />
 
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                {/* Left Side Orange Dotted Grid */}
+                <div
+                    className="absolute left-4 sm:left-10 top-1/3 h-28 w-28 opacity-45 hidden sm:block"
+                    style={{
+                        backgroundImage: "radial-gradient(#f97316 1.8px, transparent 1.8px)",
+                        backgroundSize: "16px 16px",
+                    }}
+                />
+
+                {/* Bottom Left Flowing Light-Blue Curves */}
+                <div className="absolute -bottom-14 -left-14 h-80 w-80 rounded-full bg-gradient-to-tr from-sky-300/35 via-blue-200/15 to-transparent blur-3xl" />
+                <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-gradient-to-tr from-blue-400/25 via-sky-300/10 to-transparent blur-3xl" />
+
+                {/* Right Side Blue Dotted Grid */}
+                <div
+                    className="absolute right-4 sm:right-10 bottom-1/3 h-28 w-28 opacity-45 hidden sm:block"
+                    style={{
+                        backgroundImage: "radial-gradient(#3b82f6 1.8px, transparent 1.8px)",
+                        backgroundSize: "16px 16px",
+                    }}
+                />
+
+                {/* Bottom Right Flowing Light-Blue Curves */}
+                <div className="absolute -bottom-14 -right-14 h-80 w-80 rounded-full bg-gradient-to-tl from-blue-400/35 via-sky-300/15 to-transparent blur-3xl" />
+                <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-gradient-to-tl from-sky-400/25 via-blue-200/10 to-transparent blur-3xl" />
+            </div>
+
+            <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="mb-12 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                     <div className="max-w-2xl">
-                        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600">
-                            <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-100 px-3.5 py-1 text-xs font-bold text-blue-600">
+                            <span className="h-2 w-2 rounded-full bg-[#FD8006]" />
                             Our Courses
                         </div>
 
-                        <h2 className="text-3xl font-bold tracking-tight text-[13px]late-900 sm:text-4xl">
+                        <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
                             Our Popular{" "}
-                            <span className="text-blue-600">
+                            <span className="relative inline-block text-[#FD8006]">
                                 Courses
+                                {/* Curved underline swoosh */}
+                                <svg
+                                    className="absolute -bottom-2 left-0 w-full h-2.5 text-[#FD8006]"
+                                    viewBox="0 0 100 12"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M3 6 C30 11, 70 11, 97 6"
+                                        stroke="currentColor"
+                                        strokeWidth="2.5"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
                             </span>
                         </h2>
 
-                        <p className="mt-3 text-[13px]m leading-6 text-[13px]late-500 sm:text-base">
-                            Choose from industry-focused training programs and start
-                            your learning journey with Apna Vidya.
+                        <p className="mt-3 text-sm leading-relaxed text-slate-500 sm:text-base font-normal">
+                            Choose from industry-focused learning programs and start
+                            your journey with ApnaVidya.
                         </p>
                     </div>
 
                     <Link
                         to="/courses"
-                        className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-[13px]m font-semibold text-blue-600 transition-all hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                        className="group inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-blue-200 bg-white px-6 py-2.5 text-sm font-bold text-blue-600 shadow-xs transition-all hover:border-blue-300 hover:bg-blue-50 active:scale-95"
                     >
-                        View All Courses
+                        <span>View All Courses</span>
                         <ArrowRight
-                            size={17}
+                            size={16}
+                            strokeWidth={2.5}
                             className="transition-transform group-hover:translate-x-1"
                         />
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4"
+
+                >
                     {courses.map((course) => (
                         <div
                             key={course.id}
-                            className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-200/60"
+                            className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-200/60 h-full"
+                            style={{ boxShadow: "rgba(5, 5, 5, 0.69) 0px 19px 23px -12px", borderRadius: "10px" }}
                         >
-                            <div className="relative h-48 overflow-hidden">
-                                <img
-                                    src={course.image}
-                                    alt={course.title}
-                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                                <div className="absolute bottom-3 left-3">
-                                    <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-blue-600 shadow-sm">
-                                        Popular Course
-                                    </span>
+                            <div>
+                                <div className="relative h-48 overflow-hidden">
+                                    <img
+                                        src={course.image}
+                                        alt={course.title}
+                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                                    <div className="absolute bottom-3 left-3">
+                                        <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-blue-600 shadow-sm">
+                                            Popular Course
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="p-5 pb-0">
+                                    <h3
+                                        className="text-lg font-bold leading-6 text-slate-900 line-clamp-1"
+                                        title={course.title}
+                                    >
+                                        {course.title}
+                                    </h3>
+
+                                    <p
+                                        className="mt-2 h-[60px] text-sm leading-5 text-slate-500 line-clamp-3 overflow-hidden"
+                                        title={course.description}
+                                    >
+                                        {course.description}
+                                    </p>
+
+                                    <ul className="mt-4 space-y-2.5">
+                                        {course.features.map((feature) => (
+                                            <li
+                                                key={feature}
+                                                className="flex items-start gap-2 text-xs font-medium text-slate-600"
+                                            >
+                                                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                                                    <Check
+                                                        size={10}
+                                                        strokeWidth={3}
+                                                    />
+                                                </span>
+                                                <span className="truncate">{feature}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             </div>
 
-                            <div className="p-5">
-                                <h3 className="text-lg font-bold leading-6 text-[13px]late-900">
-                                    {course.title}
-                                </h3>
-
-                                <p className="mt-2 min-h-[60px] text-[13px]m leading-5 text-[13px]late-500">
-                                    {course.description}
-                                </p>
-
-                                <ul className="mt-4 space-y-2.5">
-                                    {course.features.map((feature) => (
-                                        <li
-                                            key={feature}
-                                            className="flex items-start gap-2 text-xs font-medium text-[13px]late-600"
-                                        >
-                                            <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
-                                                <Check
-                                                    size={10}
-                                                    strokeWidth={3}
-                                                />
-                                            </span>
-                                            <span>{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
+                            <div className="p-5 pt-4">
                                 <Link
                                     to={course.path}
-                                    className="group/button mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-[13px]m font-semibold text-blue-600 transition-all hover:bg-blue-600 hover:text-white"
+                                    className="group/button flex w-full items-center justify-center gap-2 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-sm font-semibold text-blue-600 transition-all hover:bg-[#FD8006] hover:text-white"
                                 >
                                     View Course
                                     <ArrowRight

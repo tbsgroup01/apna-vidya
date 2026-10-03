@@ -115,7 +115,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
             onClick={toggleSidebar}
             className="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-blue-50/50 hover:text-blue-600 transition-all duration-200 cursor-pointer active:scale-90 shadow-2xs"
             aria-label="Toggle sidebar"
-            title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+            title={sidebarOpen ? "Collapse sidebar (icons only)" : "Expand sidebar (full text)"}
           >
             <div
               className={`transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${sidebarOpen ? "rotate-90 text-slate-700" : "rotate-0 text-slate-600"
@@ -131,7 +131,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
 
           <div className="flex flex-col">
             <span className="text-xs font-semibold text-blue-600 hidden sm:block">
-              Apna Vidya Admin
+              ApnaVidya Admin
             </span>
             <h2 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
               {getPageTitle()}
@@ -169,7 +169,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
             >
               <Bell size={17} />
               {notifications.some((n) => n.unread) && (
-                <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-blue-600 ring-2 ring-white" />
+                <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[#FD8006] ring-2 ring-white" />
               )}
             </button>
 

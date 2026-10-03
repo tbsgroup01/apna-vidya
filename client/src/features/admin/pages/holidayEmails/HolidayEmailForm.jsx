@@ -27,10 +27,10 @@ const HolidayEmailForm = () => {
   const [formData, setFormData] = useState({
     holidayName: "Diwali Festivities & Holidays",
     date: new Date().toISOString().split("T")[0],
-    subject: "Happy Diwali from Apna Vidya! Important Holiday & Class Schedule Update",
+    subject: "Happy Diwali from ApnaVidya! Important Holiday & Class Schedule Update",
     recipients: "All Active Students",
     content:
-      "Dear Students,\n\nWishing you and your loved ones a very Happy, Prosperous and Joyous Diwali!\n\nPlease note that all live interactive sessions will remain suspended during the holiday. Self-paced LMS learning videos, assignments, and coding challenges will continue to be accessible 24x7.\n\nRegular live classes and mentor office hours will resume as scheduled.\n\nWarm regards,\nAcademic Operations Team\nApna Vidya Academy",
+      "Dear Students,\n\nWishing you and your loved ones a very Happy, Prosperous and Joyous Diwali!\n\nPlease note that all live interactive sessions will remain suspended during the holiday. Self-paced LMS learning videos, assignments, and coding challenges will continue to be accessible 24x7.\n\nRegular live classes and mentor office hours will resume as scheduled.\n\nWarm regards,\nAcademic Operations Team\nApnaVidya Academy",
   });
 
   const [audienceCounts, setAudienceCounts] = useState({
@@ -73,7 +73,7 @@ const HolidayEmailForm = () => {
         setSmtpStatus({
           configured: hasPass && hasEmail,
           fromEmail: emailConf.fromEmail || "",
-          fromName: emailConf.fromName || "Apna Vidya Academy",
+          fromName: emailConf.fromName || "ApnaVidya Academy",
         });
       }
     } catch (_) {
@@ -279,7 +279,7 @@ const HolidayEmailForm = () => {
             required
             value={formData.subject}
             onChange={(e) => handleChange("subject", e.target.value)}
-            placeholder="e.g. Warm Holiday Greetings from Apna Vidya!"
+            placeholder="e.g. Warm Holiday Greetings from ApnaVidya!"
           />
 
           <FormTextarea
@@ -300,7 +300,7 @@ const HolidayEmailForm = () => {
               type="button"
               disabled={loading}
               onClick={() => handleSubmit("send")}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 shadow-sm cursor-pointer disabled:opacity-50 transition-all"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 active:scale-95 shadow-sm cursor-pointer disabled:opacity-50 transition-all"
             >
               {submittingAction === "send" ? (
                 <>
@@ -337,7 +337,7 @@ const HolidayEmailForm = () => {
                   <div className="mx-auto flex items-center justify-center">
                     <img
                       src={logoSrc}
-                      alt="Apna Vidya Logo"
+                      alt="ApnaVidya Logo"
                       className="h-14 sm:h-16 w-auto max-h-20 max-w-[280px] object-contain"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
@@ -385,7 +385,7 @@ const HolidayEmailForm = () => {
                 {/* Email Footer */}
                 <div className="border-t border-slate-100 bg-slate-50 p-3 text-center text-[10px] text-slate-400">
                   <p className="font-semibold text-slate-600">
-                    {smtpStatus.fromName || "Apna Vidya Academy"}
+                    {smtpStatus.fromName || "ApnaVidya Academy"}
                   </p>
                   <p className="mt-0.5">Transmitted in real-time to enrolled students.</p>
                 </div>

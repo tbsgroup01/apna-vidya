@@ -144,7 +144,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "Anyone interested in building websites. No coding background required.",
-    certificate: "Apna Vidya Certified Frontend Specialist Certificate.",
+    certificate: "ApnaVidya Certified Frontend Specialist Certificate.",
   },
   {
     id: 3,
@@ -210,7 +210,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "High school mathematics and willingness to practice problem solving.",
-    certificate: "Apna Vidya Certificate of Excellence in Problem Solving & DSA.",
+    certificate: "ApnaVidya Certificate of Excellence in Problem Solving & DSA.",
   },
   {
     id: 4,
@@ -275,7 +275,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "Basic understanding of JavaScript and React concepts is recommended.",
-    certificate: "Apna Vidya Certified Mobile Application Developer Certificate.",
+    certificate: "ApnaVidya Certified Mobile Application Developer Certificate.",
   },
   {
     id: 5,
@@ -341,7 +341,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "High school math foundation. Basic coding familiarity is helpful but taught from scratch.",
-    certificate: "Apna Vidya Data Science & Artificial Intelligence Professional Certificate.",
+    certificate: "ApnaVidya Data Science & Artificial Intelligence Professional Certificate.",
   },
   {
     id: 6,
@@ -396,6 +396,6 @@ export const coursesData = [
       },
     ],
     prerequisites: "Enrolled in Class 8th, 9th, 10th, 11th, or 12th.",
-    certificate: "Apna Vidya Academic Excellence Certificate.",
+    certificate: "ApnaVidya Academic Excellence Certificate.",
   },
 ];

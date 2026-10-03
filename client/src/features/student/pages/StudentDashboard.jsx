@@ -188,9 +188,9 @@ const StudentDashboard = () => {
               href="#live-class"
               onClick={(e) => {
                 e.preventDefault();
-                alert("Joining Apna Vidya Live Classroom. Loading stream...");
+                alert("Joining ApnaVidya Live Classroom. Loading stream...");
               }}
-              className="flex items-center justify-center gap-2.5 rounded-2xl bg-blue-600 px-6 py-3.5 text-[13px]m font-bold text-white shadow-lg shadow-blue-500/40 hover:bg-blue-500 hover:shadow-blue-500/60 active:scale-95 transition-all cursor-pointer"
+              className="flex items-center justify-center gap-2.5 rounded-2xl bg-[#FD8006] px-6 py-3.5 text-[13px]m font-bold text-white shadow-lg shadow-blue-500/40 hover:bg-blue-500 hover:shadow-blue-500/60 active:scale-95 transition-all cursor-pointer"
             >
               <Video size={18} />
               <span>Join Today's Live Class</span>
@@ -215,7 +215,7 @@ const StudentDashboard = () => {
           <p className="text-2xl font-black text-[13px]late-900">{studentInfo.progressPercent}%</p>
           <div className="mt-3 w-full bg-slate-100 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+              className="bg-[#FD8006] h-2 rounded-full transition-all duration-500"
               style={{ width: `${studentInfo.progressPercent}%` }}
             />
           </div>
@@ -275,7 +275,7 @@ const StudentDashboard = () => {
           type="button"
           onClick={() => setActiveTab("curriculum")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${activeTab === "curriculum"
-            ? "bg-blue-600 text-white shadow-sm"
+            ? "bg-[#FD8006] text-white shadow-sm"
             : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-50"
             }`}
         >
@@ -287,7 +287,7 @@ const StudentDashboard = () => {
           type="button"
           onClick={() => setActiveTab("schedule")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${activeTab === "schedule"
-            ? "bg-blue-600 text-white shadow-sm"
+            ? "bg-[#FD8006] text-white shadow-sm"
             : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-50"
             }`}
         >
@@ -299,7 +299,7 @@ const StudentDashboard = () => {
           type="button"
           onClick={() => setActiveTab("materials")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${activeTab === "materials"
-            ? "bg-blue-600 text-white shadow-sm"
+            ? "bg-[#FD8006] text-white shadow-sm"
             : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-50"
             }`}
         >
@@ -311,7 +311,7 @@ const StudentDashboard = () => {
           type="button"
           onClick={() => setActiveTab("ledger")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${activeTab === "ledger"
-            ? "bg-blue-600 text-white shadow-sm"
+            ? "bg-[#FD8006] text-white shadow-sm"
             : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-50"
             }`}
         >
@@ -323,7 +323,7 @@ const StudentDashboard = () => {
           type="button"
           onClick={() => setActiveTab("certificates")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${activeTab === "certificates"
-            ? "bg-blue-600 text-white shadow-sm"
+            ? "bg-[#FD8006] text-white shadow-sm"
             : "bg-white text-[13px]late-700 border border-slate-200 hover:bg-slate-50"
             }`}
         >
@@ -407,7 +407,7 @@ const StudentDashboard = () => {
                 <button
                   type="button"
                   onClick={() => alert(`Launching live session: ${item.topic}`)}
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-2.5 text-xs font-bold text-white hover:bg-blue-700 active:scale-98 transition-all cursor-pointer"
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#FD8006] py-2.5 text-xs font-bold text-white hover:bg-blue-700 active:scale-98 transition-all cursor-pointer"
                 >
                   <Video size={16} />
                   <span>Join Live Classroom</span>
@@ -499,7 +499,7 @@ const StudentDashboard = () => {
           <div className="rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/50 p-6 sm:p-8">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-500/30">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FD8006] text-white shadow-lg shadow-blue-500/30">
                   <Award size={28} />
                 </div>
                 <div>
@@ -515,7 +515,7 @@ const StudentDashboard = () => {
                     <span className="font-mono font-bold text-blue-700">AV-2025-0842</span>
                   </p>
                   <p className="text-[13px] text-[13px]late-500 mt-1">
-                    Graduation Date: 30 August 2026 • Issued by Apna Vidya Council
+                    Graduation Date: 30 August 2026 • Issued by ApnaVidya Council
                   </p>
                 </div>
               </div>
@@ -524,7 +524,7 @@ const StudentDashboard = () => {
                 <button
                   type="button"
                   onClick={() => handleDownload("ApnaVidya_Certificate_AV-2025-0842.pdf")}
-                  className="flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-blue-700 cursor-pointer"
+                  className="flex items-center gap-2 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-blue-700 cursor-pointer"
                 >
                   <Download size={15} />
                   <span>Download PDF</span>

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.font-handwriting {
+  font-family: 'Caveat', 'Dancing Script', cursive, sans-serif;
+}
+
 .rich-editor-content ul,
 .rich-text-content ul,
 .prose ul {

@@ -31,15 +31,15 @@ import api from "../../../services/api";
 
 const DEFAULT_SETTINGS = {
   general: {
-    siteName: "Apna Vidya",
+    siteName: "ApnaVidya",
     tagline: "Learn • Grow • Succeed",
     logoUrl: "/images/logo.png",
     faviconUrl: "/favicon.ico",
   },
   seo: {
-    metaTitle: "Apna Vidya - Learn • Grow • Succeed | Leading Tech Education",
+    metaTitle: "ApnaVidya - Learn • Grow • Succeed | Leading Tech Education",
     metaDescription: "Master Full Stack Development, Data Science, Python, and DSA with live 1-on-1 mentoring, verified certifications, and guaranteed career support.",
-    keywords: "coding bootcamp, web development, data science, apna vidya, full stack course, learn react, python dsa",
+    keywords: "coding bootcamp, web development, data science, ApnaVidya, full stack course, learn react, python dsa",
     ogImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   },
   customTags: [],
@@ -49,7 +49,7 @@ const DEFAULT_SETTINGS = {
     email: "admissions@apnavidya.com",
     supportEmail: "support@apnavidya.com",
     whatsapp: "+91 98765 43210",
-    address: "Apna Vidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
+    address: "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
     workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
     googleMapsUrl: "https://maps.google.com/?q=Noida+Sector+62",
     social: {
@@ -65,7 +65,7 @@ const DEFAULT_SETTINGS = {
     smtpPort: 465,
     encryption: "SSL",
     fromEmail: "notifications@apnavidya.com",
-    fromName: "Apna Vidya Academy",
+    fromName: "ApnaVidya Academy",
     gmailAppPassword: "",
   },
 };
@@ -471,7 +471,7 @@ const SettingsAdmin = () => {
               label="Global Keywords (Comma-separated)"
               value={settings.seo.keywords}
               onChange={(e) => handleNestedChange("seo", "keywords", e.target.value)}
-              placeholder="coding bootcamp, web development, apna vidya, full stack course"
+              placeholder="coding bootcamp, web development, ApnaVidya, full stack course"
             />
 
             <ImageUploadPreview
@@ -634,7 +634,7 @@ const SettingsAdmin = () => {
               type="button"
               disabled={saving}
               onClick={handleSaveSettings}
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
             >
               <Save size={16} />
               <span>{saving ? "Saving Changes..." : "Save General Settings"}</span>
@@ -764,7 +764,7 @@ const SettingsAdmin = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
                 >
                   <Save size={16} />
                   <span>{saving ? "Saving..." : "Save Contact Details"}</span>
@@ -779,7 +779,7 @@ const SettingsAdmin = () => {
 
               <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-[13px]m shadow-sm">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FD8006] text-white font-black text-[13px]m shadow-sm">
                     AV
                   </div>
                   <div>
@@ -862,7 +862,7 @@ const SettingsAdmin = () => {
                 <ol className="list-decimal list-inside space-y-1 text-amber-800 text-[12px] pl-1">
                   <li>Ensure <strong>2-Step Verification</strong> is enabled in your Google Account.</li>
                   <li>Visit <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="underline font-bold text-amber-950 inline-flex items-center gap-1">Google App Passwords <ExternalLink size={11} /></a>.</li>
-                  <li>Type an App name (e.g. <em>Apna Vidya Portal</em>) and click <strong>Create</strong>.</li>
+                  <li>Type an App name (e.g. <em>ApnaVidya Portal</em>) and click <strong>Create</strong>.</li>
                   <li>Copy the 16-character password (e.g. <span className="font-mono bg-amber-100 px-1.5 py-0.5 rounded text-amber-950 font-bold">abcd efgh ijkl mnop</span>) and paste it below.</li>
                 </ol>
               </div>
@@ -913,7 +913,7 @@ const SettingsAdmin = () => {
                   required
                   value={settings.email.fromName}
                   onChange={(e) => handleNestedChange("email", "fromName", e.target.value)}
-                  placeholder="Apna Vidya Academy"
+                  placeholder="ApnaVidya Academy"
                 />
               </div>
 
@@ -946,7 +946,7 @@ const SettingsAdmin = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
                 >
                   <Save size={16} />
                   <span>{saving ? "Saving..." : "Save SMTP Settings"}</span>
@@ -957,7 +957,7 @@ const SettingsAdmin = () => {
 
           <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-white p-6 shadow-xs space-y-4">
             <div className="flex items-center gap-2.5 border-b border-blue-100 pb-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-xs">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FD8006] text-white shadow-xs">
                 <Send size={16} />
               </div>
               <div>

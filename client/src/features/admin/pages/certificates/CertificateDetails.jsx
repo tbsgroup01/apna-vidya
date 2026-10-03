@@ -63,7 +63,7 @@ const CertificateDetails = () => {
         <p className="text-xs text-[13px]late-500">The requested institutional award could not be located in the database.</p>
         <Link
           to="/admin/certificates"
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white"
         >
           <ArrowLeft size={14} />
           <span>Back to Showcase</span>
@@ -95,7 +95,7 @@ const CertificateDetails = () => {
                 href={award.verificationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all"
               >
                 <ExternalLink size={15} />
                 <span>Verify Credential</span>
@@ -200,7 +200,7 @@ const CertificateDetails = () => {
                 href={award.verificationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 shrink-0 self-start sm:self-auto"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 shrink-0 self-start sm:self-auto"
               >
                 <span>Visit Official Registry</span>
                 <ExternalLink size={13} />

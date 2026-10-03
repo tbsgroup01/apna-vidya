@@ -19,7 +19,7 @@ const DEFAULT_VALUES = [
   {
     icon: "Award",
     title: "Verifiable Excellence",
-    desc: "Every credential earned through Apna Vidya is backed by ISO 9001:2015 standards and independent digital verification.",
+    desc: "Every credential earned through ApnaVidya is backed by ISO 9001:2015 standards and independent digital verification.",
   },
 ];
 
@@ -52,16 +52,16 @@ const DEFAULT_TEAM = [
 
 const DEFAULT_ABOUT = {
   key: "main",
-  heroBadge: "About Apna Vidya",
+  heroBadge: "About ApnaVidya",
   heroTitle: "Empowering the Next Generation of India's Builders",
   heroDescription:
-    "Apna Vidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
+    "ApnaVidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
   storyTag: "Our Story",
   storyTitle: "Bridging the Gap Between College Degrees and Industry Careers",
   storyParagraph1:
     "Over 1.5 million engineering and computer science students graduate in India every year, yet less than 15% possess the skills required to build modern software applications.",
   storyParagraph2:
-    "Apna Vidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
+    "ApnaVidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
   stat1Value: "50,000+",
   stat1Label: "Graduated Students",
   stat2Value: "120+",
@@ -76,11 +76,11 @@ const DEFAULT_ABOUT = {
   valuesTitle: "Values That Drive Everything We Do",
   values: DEFAULT_VALUES,
   teamTag: "Experienced Educators",
-  teamTitle: "Meet the Mentors Behind Apna Vidya",
+  teamTitle: "Meet the Mentors Behind ApnaVidya",
   teamSubtitle:
     "Learn from engineers who have shipped software at scale and trained thousands of successful graduates.",
   team: DEFAULT_TEAM,
-  ctaTitle: "Experience the Apna Vidya Way of Learning",
+  ctaTitle: "Experience the ApnaVidya Way of Learning",
   ctaDescription:
     "Join a live session, speak with our instructors, and explore how our curriculum can help you achieve your career aspirations.",
   ctaPrimaryText: "Book a Free Demo Class",

@@ -46,8 +46,8 @@ const ConfirmModal = ({
         <div className="flex items-start gap-4">
           <div
             className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${isDanger
-                ? "bg-rose-50 text-rose-600 border border-rose-100"
-                : "bg-blue-50 text-blue-600 border border-blue-100"
+              ? "bg-rose-50 text-rose-600 border border-rose-100"
+              : "bg-blue-50 text-blue-600 border border-blue-100"
               }`}
           >
             {isDanger ? <AlertTriangle size={22} /> : <Info size={22} />}
@@ -76,8 +76,8 @@ const ConfirmModal = ({
               onClose();
             }}
             className={`rounded-xl px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition-all cursor-pointer active:scale-95 ${isDanger
-                ? "bg-rose-600 hover:bg-rose-700"
-                : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-rose-600 hover:bg-rose-700"
+              : "bg-[#FD8006] hover:bg-blue-700"
               }`}
           >
             {confirmText}

@@ -206,11 +206,10 @@ const OtpVerificationStep = ({
                 disabled={loading}
                 onChange={(e) => handleDigitChange(idx, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(idx, e)}
-                className={`h-14 w-12 sm:h-16 sm:w-14 rounded-2xl border-2 text-center text-2xl font-extrabold text-gray-900 transition-all focus:outline-none ${
-                  digit
+                className={`h-14 w-12 sm:h-16 sm:w-14 rounded-2xl border-2 text-center text-2xl font-extrabold text-gray-900 transition-all focus:outline-none ${digit
                     ? "border-blue-600 bg-blue-50/40 shadow-xs ring-2 ring-blue-100"
                     : "border-gray-200 bg-white hover:border-gray-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                } ${error ? "border-rose-400 bg-rose-50/20" : ""}`}
+                  } ${error ? "border-rose-400 bg-rose-50/20" : ""}`}
               />
             ))}
           </div>
@@ -220,7 +219,7 @@ const OtpVerificationStep = ({
         <div className="text-center text-xs text-gray-500">
           {resendCooldown > 0 ? (
             <span className="inline-flex items-center gap-1.5 text-gray-500 font-medium">
-              <span className="inline-block h-2 w-2 rounded-full bg-blue-600 animate-ping" />
+              <span className="inline-block h-2 w-2 rounded-full bg-[#FD8006] animate-ping" />
               Resend OTP in <strong className="text-gray-800">00:{resendCooldown < 10 ? `0${resendCooldown}` : resendCooldown}</strong>
             </span>
           ) : (
@@ -244,7 +243,7 @@ const OtpVerificationStep = ({
           <button
             type="submit"
             disabled={!isComplete || loading}
-            className="w-full rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-md shadow-blue-500/25 hover:bg-blue-700 active:scale-[0.99] disabled:opacity-50 transition-all cursor-pointer flex items-center justify-center gap-2"
+            className="w-full rounded-xl bg-[#FD8006] py-3.5 text-sm font-bold text-white shadow-md shadow-blue-500/25 hover:bg-blue-700 active:scale-[0.99] disabled:opacity-50 transition-all cursor-pointer flex items-center justify-center gap-2"
           >
             {loading ? (
               <>

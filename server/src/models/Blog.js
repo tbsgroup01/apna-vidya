@@ -24,7 +24,7 @@ const Blog = sequelize.define(
     },
     author: {
       type: DataTypes.STRING(150),
-      defaultValue: "Apna Vidya Editorial",
+      defaultValue: "ApnaVidya Editorial",
     },
     authorRole: {
       type: DataTypes.STRING(150),

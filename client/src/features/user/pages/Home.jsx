@@ -16,11 +16,11 @@ const Home = () => {
   return (
     <main>
       <Hero />
+      <HomeAbout />
       <PopularCourses />
       <WhyChooseUs />
-      <CertificateShowcase />
       <VideoSection />
-      <HomeAbout />
+      <CertificateShowcase />
       <HowItWorks />
       <DemoCTA />
       <Testimonials />

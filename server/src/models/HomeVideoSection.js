@@ -17,11 +17,11 @@ const HomeVideoSection = sequelize.define(
     },
     badge: {
       type: DataTypes.STRING(255),
-      defaultValue: "Why Apna Vidya ?",
+      defaultValue: "Why ApnaVidya ?",
     },
     title: {
       type: DataTypes.STRING(255),
-      defaultValue: "Discover the Apna Vidya Difference",
+      defaultValue: "Discover the ApnaVidya Difference",
     },
     subtitle: {
       type: DataTypes.TEXT,

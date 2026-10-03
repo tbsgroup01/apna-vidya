@@ -172,7 +172,7 @@ const SyllabusAdmin = () => {
               <button
                 type="button"
                 onClick={() => setShowAddModule(true)}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 cursor-pointer active:scale-95 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 cursor-pointer active:scale-95 transition-all"
               >
                 <Plus size={15} />
                 <span>Add Module</span>
@@ -338,7 +338,7 @@ const SyllabusAdmin = () => {
             <button
               type="submit"
               disabled={submittingModule}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm disabled:opacity-50"
             >
               <Plus size={14} />
               <span>{submittingModule ? "Saving..." : "Add Module to Curriculum"}</span>
@@ -360,7 +360,7 @@ const SyllabusAdmin = () => {
             >
               <div className="bg-slate-50/70 p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white font-mono text-xs font-bold shadow-xs">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#FD8006] text-white font-mono text-xs font-bold shadow-xs">
                     {modIdx + 1}
                   </span>
                   <div>
@@ -387,7 +387,7 @@ const SyllabusAdmin = () => {
                       setActiveLessonModId(activeLessonModId === mod.id ? null : mod.id)
                     }
                     className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${activeLessonModId === mod.id
-                      ? "bg-blue-600 text-white border-blue-600"
+                      ? "bg-[#FD8006] text-white border-blue-600"
                       : "border-slate-200 bg-white text-[13px]late-700 hover:bg-slate-50"
                       }`}
                   >
@@ -440,7 +440,7 @@ const SyllabusAdmin = () => {
                         type="button"
                         disabled={submittingLesson}
                         onClick={() => handleAddLesson(mod.id)}
-                        className="flex-1 sm:flex-initial rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm disabled:opacity-50"
+                        className="flex-1 sm:flex-initial rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm disabled:opacity-50"
                       >
                         {submittingLesson ? "Saving..." : "Save Lesson"}
                       </button>
@@ -503,7 +503,7 @@ const SyllabusAdmin = () => {
           <button
             type="button"
             onClick={() => setShowAddModule(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white hover:bg-blue-700 cursor-pointer shadow-sm"
           >
             <Plus size={15} />
             <span>Create First Module</span>

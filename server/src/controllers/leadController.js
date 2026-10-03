@@ -239,9 +239,8 @@ const updateLead = async (req, res) => {
       await LeadActivity.create({
         leadId: lead.id,
         action: "Status Updated",
-        detail: `Status changed from "${previousStatus}" to "${status}" by ${
-          req.user?.name || "Staff"
-        }`,
+        detail: `Status changed from "${previousStatus}" to "${status}" by ${req.user?.name || "Staff"
+          }`,
       });
     }
 
@@ -292,9 +291,8 @@ const updateLeadStatus = async (req, res) => {
     await LeadActivity.create({
       leadId: lead.id,
       action: "Status Changed",
-      detail: `Changed from "${oldStatus}" to "${status}" by ${
-        req.user?.name || "Staff"
-      }`,
+      detail: `Changed from "${oldStatus}" to "${status}" by ${req.user?.name || "Staff"
+        }`,
     });
 
     return res.status(200).json({
@@ -494,9 +492,8 @@ const convertLead = async (req, res) => {
     await LeadActivity.create({
       leadId: lead.id,
       action: "Lead Converted",
-      detail: `Successfully converted into Student Record #${student.id} (${
-        student.name
-      }) by ${req.user?.name || "Staff"}`,
+      detail: `Successfully converted into Student Record #${student.id} (${student.name
+        }) by ${req.user?.name || "Staff"}`,
     });
 
     const enrolledStudent = await Student.findByPk(student.id, {
@@ -570,9 +567,9 @@ const createPublicLead = async (req, res) => {
     if (email && email.includes("@")) {
       sendEmailFromSettings({
         to: email,
-        subject: `Thank you for contacting Apna Vidya - ${course || "Admissions"}`,
-        text: `Hello ${name},\n\nThank you for reaching out to Apna Vidya regarding "${course || "Admissions"}".\nOur senior academic counselor has received your inquiry and will contact you at ${phone} shortly.\n\nWarm regards,\nApna Vidya Admissions Team`,
-      }).catch(() => {});
+        subject: `Thank you for contacting ApnaVidya - ${course || "Admissions"}`,
+        text: `Hello ${name},\n\nThank you for reaching out to ApnaVidya regarding "${course || "Admissions"}".\nOur senior academic counselor has received your inquiry and will contact you at ${phone} shortly.\n\nWarm regards,\nApnaVidya Admissions Team`,
+      }).catch(() => { });
     }
 
     return res.status(201).json({

@@ -70,7 +70,7 @@ const BlogDetails = () => {
         </p>
         <Link
           to="/blog"
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white hover:bg-blue-700"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-bold text-white hover:bg-blue-700"
         >
           <ArrowLeft size={14} />
           <span>Back to Articles</span>

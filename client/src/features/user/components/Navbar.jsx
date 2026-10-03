@@ -3,12 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import {
     Menu,
     X,
-    GraduationCap,
     BookOpen,
     FileText,
     PlayCircle,
-    Newspaper,
-    Phone,
     Home,
     User,
     LayoutDashboard,
@@ -16,6 +13,8 @@ import {
     ChevronDown,
     ShieldCheck,
     Users,
+    Mail,
+    ArrowRight,
 } from "lucide-react";
 
 import { useDemoModal } from "../../../context/DemoModalContext";
@@ -33,7 +32,7 @@ const Navbar = () => {
     const { settings } = useSettings();
 
     const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, logo);
-    const siteName = settings.general?.siteName || "Apna Vidya";
+    const siteName = settings.general?.siteName || "ApnaVidya";
 
     const dashboardPath = user?.role === "Student" ? "/student/dashboard" : "/admin/dashboard";
 
@@ -49,22 +48,22 @@ const Navbar = () => {
         {
             name: "About Us",
             path: "/about",
-            icon: BookOpen,
+            icon: Users,
         },
         {
             name: "Courses",
             path: "/courses",
-            icon: GraduationCap,
+            icon: BookOpen,
         },
         {
             name: "Blog",
             path: "/blog",
-            icon: Newspaper,
+            icon: FileText,
         },
         {
             name: "Contact Us",
             path: "/contact",
-            icon: Phone,
+            icon: Mail,
         },
     ];
 
@@ -91,10 +90,54 @@ const Navbar = () => {
     }, []);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-20 items-center justify-between">
+        <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.05)] border-b border-slate-100">
+            {/* Top Multi-color Gradient Accent Line */}
+            <div className="h-[2px] w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-[#FD8006]" />
 
+            {/* Background Corner Wave Accents */}
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+                {/* Left Corner Soft Blue Wave */}
+                <svg
+                    className="absolute -top-1 -left-2 h-20 w-32 sm:w-44 text-sky-200/50"
+                    viewBox="0 0 160 80"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M0 0 C50 15 80 50 160 75 L0 80 Z"
+                        fill="url(#navLeftGrad)"
+                    />
+                    <defs>
+                        <linearGradient id="navLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#bae6fd" stopOpacity="0.7" />
+                            <stop offset="100%" stopColor="#e0f2fe" stopOpacity="0.1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                {/* Right Corner Soft Peach Wave */}
+                <svg
+                    className="absolute -bottom-2 -right-2 h-20 w-32 sm:w-44 text-orange-200/50"
+                    viewBox="0 0 160 80"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M160 0 C110 20 80 50 0 75 L160 80 Z"
+                        fill="url(#navRightGrad)"
+                    />
+                    <defs>
+                        <linearGradient id="navRightGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#fed7aa" stopOpacity="0.75" />
+                            <stop offset="100%" stopColor="#ffedd5" stopOpacity="0.15" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="flex h-18 sm:h-20 items-center justify-between">
+                    {/* Left: Brand Logo */}
                     <Link
                         to="/"
                         onClick={closeMobileMenu}
@@ -109,66 +152,79 @@ const Navbar = () => {
                                     e.currentTarget.src = logo;
                                 }
                             }}
-                            className="h-13 sm:h-14 md:h-16 w-auto max-h-16 max-w-[210px] sm:max-w-[250px] object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                            className="h-11 sm:h-13 md:h-14 w-auto max-h-14 max-w-[210px] sm:max-w-[240px] object-contain transition-transform duration-200 group-hover:scale-[1.02]"
                         />
                     </Link>
 
+                    {/* Center: Desktop Navigation Links with Icons */}
                     <nav className="hidden items-center gap-1.5 lg:flex">
                         {navLinks.map((link) => {
+                            const Icon = link.icon;
                             const active = isLinkActive(link.path, link.exact);
                             return (
                                 <Link
                                     key={link.name}
                                     to={link.path}
-                                    className={`relative rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${
+                                    className={`relative flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition-all duration-150 ${
                                         active
                                             ? "text-blue-600 bg-blue-50/90 font-bold shadow-2xs"
                                             : "text-slate-600 hover:text-blue-600 hover:bg-slate-50/80"
                                     }`}
                                 >
+                                    <Icon
+                                        size={16}
+                                        strokeWidth={active ? 2.3 : 1.9}
+                                        className={active ? "text-blue-600" : "text-slate-500 group-hover:text-blue-600"}
+                                    />
                                     <span>{link.name}</span>
                                     {active && (
-                                        <span className="absolute bottom-1 left-3.5 right-3.5 h-0.5 rounded-full bg-blue-600 shadow-xs" />
+                                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full bg-[#FD8006] shadow-xs" />
                                     )}
                                 </Link>
                             );
                         })}
                     </nav>
 
+                    {/* Right: Actions (Demo Button + Profile Pill) */}
                     <div className="hidden lg:flex items-center gap-3">
-                        {isAuthenticated && user && (
+                        {/* Demo Button */}
+                        <button
+                            type="button"
+                            onClick={() => openDemoModal()}
+                            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FD8006] to-[#f97316] px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(253,128,6,0.35)] transition-all hover:shadow-[0_6px_20px_rgba(253,128,6,0.45)] hover:scale-[1.02] active:scale-95 cursor-pointer"
+                        >
+                            <PlayCircle size={18} className="fill-white/20 text-white shrink-0" />
+                            <span>Demo</span>
+                            <ArrowRight size={15} strokeWidth={2.5} className="shrink-0" />
+                        </button>
+
+                        {/* Profile Dropdown Capsule */}
+                        {isAuthenticated && user ? (
                             <div className="relative" ref={profileDropdownRef}>
                                 <button
                                     type="button"
                                     onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                    className="flex items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white hover:bg-slate-50/80 p-1.5 pr-3 shadow-2xs hover:shadow-xs transition-all cursor-pointer group focus:outline-none"
+                                    className="flex items-center gap-2 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 p-1 pl-1 pr-2.5 shadow-2xs hover:shadow-xs transition-all cursor-pointer group focus:outline-none"
                                     aria-expanded={isProfileOpen}
                                     aria-label="User Profile Menu"
                                 >
-                                    <div className="relative shrink-0">
+                                    <div className="relative">
                                         <img
                                             src={
                                                 user.profileImage ||
                                                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
                                             }
                                             alt={user.name || "User"}
-                                            className="h-9 w-9 rounded-xl object-cover object-top ring-2 ring-blue-500/20 shadow-2xs group-hover:ring-blue-500/40 transition-all"
+                                            className="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover object-top transition-all"
                                             style={{ objectPosition: "top center" }}
                                         />
                                         <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
                                     </div>
-                                    <div className="text-left hidden xl:block">
-                                        <p className="text-xs font-bold text-slate-800 leading-tight group-hover:text-blue-600 transition-colors truncate max-w-[120px]">
-                                            {user.name || "Admin"}
-                                        </p>
-                                        <p className="text-[10px] font-semibold text-blue-600 leading-tight">
-                                            {user.role || "Administrator"}
-                                        </p>
-                                    </div>
                                     <ChevronDown
                                         size={14}
-                                        className={`text-slate-400 group-hover:text-slate-600 transition-transform duration-200 ${isProfileOpen ? "rotate-180 text-blue-600" : ""
-                                            }`}
+                                        className={`text-slate-400 group-hover:text-slate-600 transition-transform duration-200 ${
+                                            isProfileOpen ? "rotate-180 text-blue-600" : ""
+                                        }`}
                                     />
                                 </button>
 
@@ -182,7 +238,7 @@ const Navbar = () => {
                                                     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
                                                 }
                                                 alt={user.name || "User"}
-                                                className="h-10 w-10 rounded-xl object-cover object-top ring-2 ring-blue-500/20 shrink-0"
+                                                className="h-10 w-10 rounded-full object-cover object-top ring-2 ring-blue-500/20 shrink-0"
                                                 style={{ objectPosition: "top center" }}
                                             />
                                             <div className="min-w-0 flex-1">
@@ -258,17 +314,18 @@ const Navbar = () => {
                                     </div>
                                 )}
                             </div>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 shadow-2xs hover:border-blue-500 hover:text-blue-600 transition-all"
+                            >
+                                <User size={14} className="text-slate-500" />
+                                <span>Sign In</span>
+                            </Link>
                         )}
-                        <button
-                            type="button"
-                            onClick={() => openDemoModal()}
-                            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-95 cursor-pointer"
-                        >
-                            <PlayCircle size={17} />
-                            Demo
-                        </button>
                     </div>
 
+                    {/* Mobile Hamburger Button */}
                     <button
                         type="button"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -279,8 +336,9 @@ const Navbar = () => {
                     </button>
                 </div>
 
+                {/* Mobile Menu Dropdown */}
                 {isMenuOpen && (
-                    <div className="border-t border-gray-100 py-4 lg:hidden">
+                    <div className="border-t border-gray-100 py-4 lg:hidden animate-in fade-in slide-in-from-top-2 duration-150">
                         <nav className="space-y-1">
                             {isAuthenticated && user && (
                                 <div className="mb-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
@@ -291,7 +349,7 @@ const Navbar = () => {
                                                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
                                             }
                                             alt={user.name || "User"}
-                                            className="h-11 w-11 rounded-xl object-cover object-top ring-2 ring-blue-500/20"
+                                            className="h-11 w-11 rounded-full object-cover object-top ring-2 ring-blue-500/20"
                                             style={{ objectPosition: "top center" }}
                                         />
                                         <div className="min-w-0 flex-1">
@@ -310,7 +368,7 @@ const Navbar = () => {
                                         <Link
                                             to={dashboardPath}
                                             onClick={closeMobileMenu}
-                                            className="flex items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-3 py-2 text-xs font-bold text-white shadow-2xs"
+                                            className="flex items-center justify-center gap-1.5 rounded-xl bg-[#FD8006] px-3 py-2 text-xs font-bold text-white shadow-2xs"
                                         >
                                             <LayoutDashboard size={14} />
                                             <span>Dashboard</span>
@@ -354,18 +412,30 @@ const Navbar = () => {
                                 );
                             })}
 
-                            <div className="pt-3 border-t border-gray-100 mt-2">
+                            <div className="pt-3 border-t border-gray-100 mt-2 space-y-2">
                                 <button
                                     type="button"
                                     onClick={() => {
                                         closeMobileMenu();
                                         openDemoModal();
                                     }}
-                                    className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
+                                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FD8006] to-[#f97316] px-4 py-3 text-sm font-semibold text-white hover:opacity-95 transition-all shadow-sm cursor-pointer"
                                 >
-                                    <PlayCircle size={17} />
-                                    Demo
+                                    <PlayCircle size={18} className="fill-white/20 text-white shrink-0" />
+                                    <span>Demo</span>
+                                    <ArrowRight size={15} strokeWidth={2.5} className="shrink-0" />
                                 </button>
+
+                                {!isAuthenticated && (
+                                    <Link
+                                        to="/login"
+                                        onClick={closeMobileMenu}
+                                        className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-all cursor-pointer"
+                                    >
+                                        <User size={16} className="text-slate-500" />
+                                        <span>Sign In</span>
+                                    </Link>
+                                )}
                             </div>
                         </nav>
                     </div>

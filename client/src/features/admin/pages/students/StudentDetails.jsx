@@ -119,7 +119,7 @@ const StudentDetails = () => {
         <p className="mt-1 text-xs text-[13px]late-500">Record #{id} could not be located.</p>
         <Link
           to="/admin/students"
-          className="mt-4 inline-block rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white"
+          className="mt-4 inline-block rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white"
         >
           Return to Student Directory
         </Link>
@@ -136,7 +136,7 @@ const StudentDetails = () => {
   const digits = rawPhone.replace(/\D/g, "");
   const waNumber = digits.length === 10 ? `91${digits}` : digits;
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(
-    `Hello ${student.name}, greetings from Apna Vidya!`
+    `Hello ${student.name}, greetings from ApnaVidya!`
   )}`;
   const telUrl = `tel:${rawPhone}`;
 
@@ -168,7 +168,7 @@ const StudentDetails = () => {
             </Link>
             <a
               href={telUrl}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-blue-200/90 bg-blue-50 px-3.5 py-2.5 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-blue-200/90 bg-blue-50 px-3.5 py-2.5 text-xs font-bold text-blue-700 hover:bg-[#FD8006] hover:text-white transition-all shadow-2xs"
             >
               <PhoneCall size={14} />
               <span>Normal Call</span>
@@ -184,7 +184,7 @@ const StudentDetails = () => {
             </a>
             <Link
               to={`/admin/students/${student.id}/edit`}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all"
             >
               <Edit size={15} />
               <span>Edit Profile</span>
@@ -199,10 +199,9 @@ const StudentDetails = () => {
             <div
               className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-slate-100 bg-cover bg-no-repeat ring-2 ring-blue-500/20 shadow-xs shrink-0"
               style={{
-                backgroundImage: `url("${
-                  student.profileImage ||
+                backgroundImage: `url("${student.profileImage ||
                   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-                }")`,
+                  }")`,
                 backgroundPosition: "top center",
                 backgroundSize: "cover",
               }}
@@ -314,7 +313,7 @@ const StudentDetails = () => {
                       <span className="font-medium font-mono text-[13px]late-800">{student.phone}</span>
                       <a
                         href={telUrl}
-                        className="rounded-md bg-blue-100 hover:bg-blue-600 text-blue-700 hover:text-white px-2 py-0.5 text-[12px] font-bold transition-colors inline-flex items-center gap-1"
+                        className="rounded-md bg-blue-100 hover:bg-[#FD8006] text-blue-700 hover:text-white px-2 py-0.5 text-[12px] font-bold transition-colors inline-flex items-center gap-1"
                         title="Call"
                       >
                         <PhoneCall size={10} />

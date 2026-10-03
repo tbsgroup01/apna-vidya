@@ -5,15 +5,15 @@ const User = require("../models/User");
 const DEFAULT_SETTINGS = {
   key: "platform_settings",
   general: {
-    siteName: "Apna Vidya",
+    siteName: "ApnaVidya",
     tagline: "Learn • Grow • Succeed",
     logoUrl: "/images/logo.png",
     faviconUrl: "/favicon.ico",
   },
   seo: {
-    metaTitle: "Apna Vidya - Learn • Grow • Succeed | Leading Tech Education",
+    metaTitle: "ApnaVidya - Learn • Grow • Succeed | Leading Tech Education",
     metaDescription: "Master Full Stack Development, Data Science, Python, and DSA with live 1-on-1 mentoring, verified certifications, and guaranteed career support.",
-    keywords: "coding bootcamp, web development, data science, apna vidya, full stack course, learn react, python dsa",
+    keywords: "coding bootcamp, web development, data science, ApnaVidya, full stack course, learn react, python dsa",
     ogImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   },
   customTags: [],
@@ -23,7 +23,7 @@ const DEFAULT_SETTINGS = {
     email: "admissions@apnavidya.com",
     supportEmail: "support@apnavidya.com",
     whatsapp: "+91 98765 43210",
-    address: "Apna Vidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
+    address: "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
     workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
     googleMapsUrl: "https://maps.google.com/?q=Noida+Sector+62",
     social: {
@@ -39,7 +39,7 @@ const DEFAULT_SETTINGS = {
     smtpPort: 465,
     encryption: "SSL",
     fromEmail: "notifications@apnavidya.com",
-    fromName: "Apna Vidya Academy",
+    fromName: "ApnaVidya Academy",
     gmailAppPassword: "",
   },
 };
@@ -119,7 +119,7 @@ const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, tex
         rejectUnauthorized: false,
         timeout: 12000,
       },
-      () => {}
+      () => { }
     );
 
     const cleanup = () => {
@@ -127,7 +127,7 @@ const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, tex
       try {
         socket.end();
         socket.destroy();
-      } catch (err) {}
+      } catch (err) { }
     };
 
     timer = setTimeout(() => {
@@ -174,11 +174,11 @@ const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, tex
       } else if (step === 7 && code === 354) {
         step = 8;
         const senderHeader = fromName ? `"${fromName}" <${from || user}>` : `<${from || user}>`;
-        const mailSubject = subject || "Apna Vidya - SMTP Configuration Test Verified";
+        const mailSubject = subject || "ApnaVidya - SMTP Configuration Test Verified";
         const defaultBody = [
           `Congratulations!`,
           ``,
-          `Your Gmail App SMTP relay on Apna Vidya is correctly configured and operational.`,
+          `Your Gmail App SMTP relay on ApnaVidya is correctly configured and operational.`,
           ``,
           `Configuration Details:`,
           `- SMTP Server: ${socketHost}:${socketPort}`,
@@ -187,7 +187,7 @@ const sendSmtpMail = ({ host, port, user, pass, from, fromName, to, subject, tex
           `- Timestamp: ${new Date().toLocaleString("en-IN")}`,
           ``,
           `--`,
-          `Apna Vidya Platform Automation Engine`,
+          `ApnaVidya Platform Automation Engine`,
         ].join("\r\n");
 
         const bodyContent = html || text || defaultBody;
@@ -460,7 +460,7 @@ const sendEmailFromSettings = async ({ to, subject, text, html }) => {
     const port = emailConf.smtpPort || 465;
     const user = emailConf.fromEmail;
     const from = emailConf.fromEmail;
-    const fromName = emailConf.fromName || "Apna Vidya";
+    const fromName = emailConf.fromName || "ApnaVidya";
 
     return await sendSmtpMail({
       host,

@@ -105,17 +105,17 @@ const Login = () => {
   return (
     <div className="min-h-screen flex bg-slate-50">
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 p-12 text-white flex-col justify-between">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl" />
+        <div className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[#FD8006]/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
 
         <div className="relative">
           <Link to="/" className="inline-flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 font-black text-white shadow-lg shadow-blue-500/30">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FD8006] font-black text-white shadow-lg shadow-blue-500/30">
               AV
             </div>
             <div>
               <span className="text-xl font-extrabold tracking-tight">
-                Apna Vidya
+                ApnaVidya
               </span>
               <span className="block text-[13px] font-medium text-blue-300">
                 Learn • Grow • Succeed
@@ -155,7 +155,7 @@ const Login = () => {
         </div>
 
         <div className="relative text-xs text-[13px]late-400 flex items-center justify-between">
-          <span>© 2026 Apna Vidya Edutech Pvt. Ltd.</span>
+          <span>© 2026 ApnaVidya Edutech Pvt. Ltd.</span>
           <span>Security Protocol TLS 1.3</span>
         </div>
       </div>
@@ -165,11 +165,11 @@ const Login = () => {
           <div className="mb-8">
             <div className="lg:hidden mb-6">
               <Link to="/" className="inline-flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-bold text-white">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FD8006] font-bold text-white">
                   AV
                 </div>
                 <span className="text-lg font-bold text-[13px]late-900">
-                  Apna Vidya
+                  ApnaVidya
                 </span>
               </Link>
             </div>
@@ -251,7 +251,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 py-3 text-[13px]m font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-98 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#FD8006] py-3 text-[13px]m font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-98 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -328,7 +328,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setForgotModalOpen(false)}
-                  className="w-full rounded-xl bg-blue-600 py-2.5 text-xs font-semibold text-white hover:bg-blue-700"
+                  className="w-full rounded-xl bg-[#FD8006] py-2.5 text-xs font-semibold text-white hover:bg-blue-700"
                 >
                   Close
                 </button>
@@ -364,7 +364,7 @@ const Login = () => {
                   <button
                     type="submit"
                     disabled={forgotLoading}
-                    className="rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+                    className="rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
                   >
                     {forgotLoading ? "Sending..." : "Send Reset Link"}
                   </button>

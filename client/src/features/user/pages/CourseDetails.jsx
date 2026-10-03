@@ -132,7 +132,7 @@ const CourseDetails = () => {
             lmsAccess: c.lmsAccess || "Lifetime Revision Access",
             doubtResolution: c.doubtResolution || "Daily Live 1-on-1 Windows",
             prerequisites: c.prerequisites || fallback.prerequisites || "Basic computer skills and passion for technology.",
-            certificateInfo: c.certificateInfo || fallback.certificate || "Apna Vidya Certified Industry Credentials with Verifiable ID.",
+            certificateInfo: c.certificateInfo || fallback.certificate || "ApnaVidya Certified Industry Credentials with Verifiable ID.",
             targetAudience: c.targetAudience || "College graduates, junior developers, and professionals seeking career transitions.",
             modules: mappedModules,
             faqs: parsedFaqs,
@@ -156,7 +156,7 @@ const CourseDetails = () => {
     <div className="bg-slate-50 min-h-screen py-10 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-slate-900 p-6 text-white sm:p-12 lg:p-16 relative overflow-hidden">
-          <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-blue-600/20 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#FD8006]/20 blur-3xl" />
           <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-emerald-600/10 blur-3xl" />
           <div className="max-w-3xl relative">
             <div className="flex items-center gap-2 flex-wrap">
@@ -341,7 +341,7 @@ const CourseDetails = () => {
 
                 <Link
                   to="/contact"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-blue-600 bg-blue-600 text-white py-3 text-sm font-semibold  hover:bg-slate-50 hover:text-slate-700  transition-colors"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-blue-600 bg-[#FD8006] text-white py-3 text-sm font-semibold  hover:bg-slate-50 hover:text-slate-700  transition-colors"
                 >
                   <span>Talk to Academic Advisor</span>
                 </Link>

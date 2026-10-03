@@ -3,6 +3,34 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Clock, Newspaper } from "lucide-react";
 import api from "../../../services/api";
 
+const stripHtml = (html) => {
+  if (!html) return "";
+  if (typeof html !== "string") return "";
+  return html
+    .replace(/<[^>]*>?/gm, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
+const getExcerpt = (blog, maxLen = 140) => {
+  if (!blog) return "";
+  if (blog.excerpt && typeof blog.excerpt === "string" && blog.excerpt.trim()) {
+    return blog.excerpt.trim();
+  }
+  if (blog.summary && typeof blog.summary === "string" && blog.summary.trim()) {
+    return blog.summary.trim();
+  }
+  if (blog.description && typeof blog.description === "string" && blog.description.trim()) {
+    return blog.description.trim();
+  }
+  const clean = stripHtml(blog.content);
+  if (clean) {
+    return clean.length > maxLen ? clean.slice(0, maxLen).trim() + "..." : clean;
+  }
+  return "Explore industry insights, technical roadmaps, and career development tips curated by experienced mentors.";
+};
+
 const LatestBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,14 +62,14 @@ const LatestBlogs = () => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
+            <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600 border border-blue-100">
               <Newspaper size={14} />
               Educational Insights
             </span>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[13px]late-900 sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
               Latest from Our <span className="text-blue-600">Blog</span>
             </h2>
-            <p className="mt-3 text-[13px]m text-[13px]late-500 sm:text-base">
+            <p className="mt-3 text-sm text-slate-500 sm:text-base">
               Articles, career guides, interview preparation tips, and study
               strategies curated by top educators.
             </p>
@@ -49,7 +77,7 @@ const LatestBlogs = () => {
 
           <Link
             to="/blog"
-            className="group inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-[13px]m font-semibold text-[13px]late-700 shadow-sm transition-all hover:border-blue-300 hover:text-blue-600 cursor-pointer"
+            className="group inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-blue-300 hover:text-blue-600 cursor-pointer"
           >
             <span>View All Articles</span>
             <ArrowRight
@@ -96,7 +124,7 @@ const LatestBlogs = () => {
 
                 <div className="flex flex-1 flex-col justify-between p-6">
                   <div>
-                    <div className="flex items-center gap-3 text-xs text-[13px]late-400">
+                    <div className="flex items-center gap-3 text-xs text-slate-400">
                       <span>{blog.publishedDate || blog.date}</span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
@@ -105,17 +133,17 @@ const LatestBlogs = () => {
                       </span>
                     </div>
 
-                    <h3 className="mt-3 text-lg font-bold leading-snug text-[13px]late-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <h3 className="mt-3 text-lg font-bold leading-snug text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {blog.title}
                     </h3>
 
-                    <p className="mt-2.5 text-xs leading-relaxed text-[13px]late-500 line-clamp-2">
-                      {blog.excerpt || blog.summary}
+                    <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-500 line-clamp-3">
+                      {getExcerpt(blog, 140)}
                     </p>
                   </div>
 
                   <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                    <span className="text-xs font-medium text-[13px]late-600">
+                    <span className="text-xs font-medium text-slate-600">
                       By {blog.author}
                     </span>
                     <Link

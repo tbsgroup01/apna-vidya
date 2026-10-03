@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
             Privacy Policy
           </h1>
           <p className="mt-2 text-xs text-[13px]late-400">
-            Last Updated: September 2025 • Apna Vidya Private Limited
+            Last Updated: September 2025 • ApnaVidya Private Limited
           </p>
 
           <div className="mt-8 space-y-8 text-[13px]m leading-relaxed text-[13px]late-600 border-t border-slate-100 pt-8">

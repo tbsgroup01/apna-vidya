@@ -150,7 +150,7 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FD8006] px-6 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
             >
               <Save size={16} />
               <span>Save Contact Details</span>
@@ -165,11 +165,11 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-black text-[13px]m">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FD8006] text-white font-black text-[13px]m">
                 AV
               </div>
               <div>
-                <h4 className="font-bold text-[13px]late-900 text-[13px]m">Apna Vidya Contact</h4>
+                <h4 className="font-bold text-[13px]late-900 text-[13px]m">ApnaVidya Contact</h4>
                 <p className="text-[13px] text-[13px]late-400">{data.workingHours}</p>
               </div>
             </div>
