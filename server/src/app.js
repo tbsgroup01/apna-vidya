@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
-const path = require("path");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const publicRoutes = require("./routes/publicRoutes");
@@ -10,19 +9,16 @@ const publicRoutes = require("./routes/publicRoutes");
 dotenv.config();
 
 const app = express();
-// app.set("trust proxy", 1);
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   console.log("Requested origin:", origin);
 
   if (origin) {
-    // res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
   } else {
     res.setHeader("Access-Control-Allow-Origin", "*");
   }
-  // res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Accept");
   if (req.method === "OPTIONS") {
     return res.status(200).end();
