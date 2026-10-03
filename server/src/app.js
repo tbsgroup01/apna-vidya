@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to ApnaVidya API V2");
+  res.send("Welcome to ApnaVidya API V22222222222222222222222222222");
 });
 
 
