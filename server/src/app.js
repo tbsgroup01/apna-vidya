@@ -10,23 +10,7 @@ dotenv.config();
 
 const app = express();
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  console.log("Requested origin:", origin);
-
-  if (origin) {
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-  } else {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-  }
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Accept");
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-  next();
-});
-
-
+app.use(cors({ origin: ["https://towsindia.com", "https://ajaykumarthakur.in"], credentials: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
