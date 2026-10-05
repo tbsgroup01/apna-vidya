@@ -237,7 +237,7 @@ const VideoSection = () => {
           </h2>
 
           {/* Subtitle */}
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500 sm:text-base font-normal">
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-500 sm:text-base font-normal">
             Discover the ApnaVidya Difference - Premium Education with Flexible
             Learning and Expert Guidance.
           </p>
@@ -331,11 +331,10 @@ const VideoSection = () => {
                         {/* Icon and Title Row */}
                         <div className="flex items-start gap-3">
                           <div
-                            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${
-                              isOrangeIcon
+                            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${isOrangeIcon
                                 ? "bg-orange-50 text-[#FD8006]"
                                 : "bg-blue-50 text-blue-600"
-                            } shadow-2xs`}
+                              } shadow-2xs`}
                           >
                             <Icon size={20} />
                           </div>
@@ -381,11 +380,10 @@ const VideoSection = () => {
                 key={dotIdx}
                 type="button"
                 onClick={() => setCurrentIndex(dotIdx)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentIndex === dotIdx
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === dotIdx
                     ? "w-7 bg-[#FD8006]"
                     : "w-2 bg-blue-100 hover:bg-blue-200"
-                }`}
+                  }`}
                 aria-label={`Go to slide ${dotIdx + 1}`}
               />
             ))}

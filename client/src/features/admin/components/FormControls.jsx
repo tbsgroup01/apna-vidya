@@ -276,7 +276,7 @@ export const ImageUploadPreview = ({
             <img
               src={value}
               alt="Preview"
-              className="h-full w-full"
+              className="h-full w-full object-cover"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80";

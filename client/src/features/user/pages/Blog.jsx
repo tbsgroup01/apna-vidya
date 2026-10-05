@@ -123,54 +123,59 @@ const Blog = () => {
         </div>
 
         {featuredBlog && (
-          <div className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-xl lg:grid lg:grid-cols-12">
-            <div className="lg:col-span-7 relative h-64 lg:h-auto overflow-hidden bg-slate-100">
+          <div className="mt-12 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-xl lg:grid lg:grid-cols-12 lg:h-[390px]">
+            <div className="lg:col-span-7 relative h-64 sm:h-72 lg:h-full overflow-hidden bg-slate-100">
               <img
                 src={
                   featuredBlog.featuredImage ||
                   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
                 }
                 alt={featuredBlog.title}
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src =
+                    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80";
+                }}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
               />
-              <span className="absolute left-4 top-4 rounded-full bg-[#FD8006] px-3.5 py-1 text-xs font-bold text-white shadow-sm">
+              <span className="absolute left-4 top-4 rounded-full bg-[#FD8006] px-3.5 py-1 text-xs font-bold text-white shadow-sm z-10">
                 Featured Guide
               </span>
             </div>
-            <div className="p-6 sm:p-10 lg:col-span-5 flex flex-col justify-between">
+            <div className="p-6 sm:p-8 lg:p-8 lg:col-span-5 flex flex-col justify-between lg:h-full overflow-hidden">
               <div>
                 <div className="flex items-center gap-3 text-xs text-slate-400">
                   <span className="font-semibold text-blue-600">
-                    {featuredBlog.category}
+                    {featuredBlog.category || "General"}
                   </span>
                   <span>•</span>
-                  <span>{featuredBlog.publishedDate}</span>
+                  <span>{featuredBlog.publishedDate || "Recently added"}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
                     <Clock size={12} />
-                    {featuredBlog.readTime}
+                    {featuredBlog.readTime || "5 min read"}
                   </span>
                 </div>
-                <h2 className="mt-3 text-2xl font-bold leading-tight text-slate-900 sm:text-3xl line-clamp-3">
+                <h2 className="mt-3 text-2xl font-bold leading-tight text-slate-900 sm:text-3xl line-clamp-2">
                   {featuredBlog.title}
                 </h2>
                 {/* Blog Paragraph / Excerpt */}
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 line-clamp-4">
+                <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-slate-600 line-clamp-3 sm:line-clamp-4">
                   {getBlogExcerpt(featuredBlog, 240)}
                 </p>
               </div>
 
-              <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
+              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
                 <div>
                   <p className="text-xs font-bold text-slate-900">
-                    {featuredBlog.author}
+                    {featuredBlog.author || "ApnaVidya Team"}
                   </p>
                   <p className="text-xs text-slate-400">
                     {featuredBlog.authorRole || "Senior Mentor"}
                   </p>
                 </div>
                 <Link
-                  to={`/blog/${featuredBlog.slug}`}
+                  to={`/blog/${featuredBlog.slug || featuredBlog.id}`}
                   className="inline-flex items-center gap-1.5 rounded-xl bg-[#FD8006] px-4 py-2 text-xs font-bold text-white hover:bg-orange-600 transition-colors shadow-sm cursor-pointer"
                 >
                   <span>Read Full Article</span>
@@ -263,9 +268,14 @@ const Blog = () => {
                         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
                       }
                       alt={blog.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src =
+                          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80";
+                      }}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-blue-600 shadow-sm backdrop-blur-xs">
+                    <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-blue-600 shadow-sm backdrop-blur-xs z-10">
                       {blog.category}
                     </span>
                   </div>

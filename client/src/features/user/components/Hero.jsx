@@ -21,7 +21,7 @@ const DEFAULT_SLIDER = {
   subtitle: "Learn Today. Lead Tomorrow.",
   description:
     "Learn industry-relevant skills from experienced educators, explore practical courses, and take the next step toward building a successful career.",
-  image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+  image: "",
   buttonText: "Explore Courses",
   buttonUrl: "/courses",
   secondaryButtonText: "Book a Demo Class",

@@ -44,7 +44,7 @@ const Testimonials = () => {
   return (
     <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-7">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1.5 text-xs font-semibold text-blue-600">
             Real Student Stories
           </span>
