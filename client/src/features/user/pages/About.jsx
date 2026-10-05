@@ -13,20 +13,115 @@ import {
   ArrowRight,
   Sparkles,
   GraduationCap,
+  BookOpen,
+  Lightbulb,
+  TrendingUp,
 } from "lucide-react";
 import api from "../../../services/api";
 
+// Pixel-perfect pillar icons matching user reference
+const StudentFirstPillarIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 32 32" fill="none">
+    {/* Radiating ticks above the book */}
+    <line x1="10" y1="4" x2="11" y2="7" stroke="#2563EB" strokeWidth="2.4" strokeLinecap="round" />
+    <line x1="16" y1="2.5" x2="16" y2="6" stroke="#2563EB" strokeWidth="2.4" strokeLinecap="round" />
+    <line x1="22" y1="4" x2="21" y2="7" stroke="#2563EB" strokeWidth="2.4" strokeLinecap="round" />
+    {/* Open book pages */}
+    <path
+      d="M15 10.5 C 11.5 9.4, 6.2 10.2, 4.3 11.2 C 4.1 11.3, 4 11.6, 4 12 L 4 23.5 C 4 24.1, 4.6 24.6, 5.2 24.4 C 7.2 23.7, 11.4 23, 15 24 Z"
+      fill="#3B82F6"
+    />
+    <path
+      d="M17 10.5 C 20.5 9.4, 25.8 10.2, 27.7 11.2 C 27.9 11.3, 28 11.6, 28 12 L 28 23.5 C 28 24.1, 27.4 24.6, 26.8 24.4 C 24.8 23.7, 20.6 23, 17 24 Z"
+      fill="#2563EB"
+    />
+    <line x1="16" y1="10.5" x2="16" y2="24" stroke="#ffffff" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+);
+
+const ContinuousLearningPillarIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 32 32" fill="none">
+    {/* Lightbulb body */}
+    <path
+      d="M16 4 C 10.8 4, 6.8 8.2, 6.8 13.5 C 6.8 16.8, 8.4 19.6, 11 21.3 L 11 23.5 C 11 24.3, 11.7 25, 12.5 25 L 19.5 25 C 20.3 25, 21 24.3, 21 23.5 L 21 21.3 C 23.6 19.6, 25.2 16.8, 25.2 13.5 C 25.2 8.2, 21.2 4, 16 4 Z"
+      fill="#F97316"
+    />
+    {/* Bulb screw base */}
+    <path d="M12.5 27.5 L 19.5 27.5" stroke="#EA580C" strokeWidth="2.2" strokeLinecap="round" />
+    <path d="M13.5 29.8 L 18.5 29.8" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const IntegrityTrustPillarIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 32 32" fill="none">
+    {/* Left person */}
+    <circle cx="9" cy="11.5" r="3.2" fill="#34D399" />
+    <path d="M3.5 22.5 C 3.5 19.2, 6.5 17, 10.5 17 C 11.7 17, 12.7 17.3, 13.6 17.8 C 12.8 19.1, 12.4 20.7, 12.4 22.5 Z" fill="#34D399" />
+    {/* Right person */}
+    <circle cx="23" cy="11.5" r="3.2" fill="#34D399" />
+    <path d="M28.5 22.5 C 28.5 19.2, 25.5 17, 21.5 17 C 20.3 17, 19.3 17.3, 18.4 17.8 C 19.2 19.1, 19.6 20.7, 19.6 22.5 Z" fill="#34D399" />
+    {/* Center front person */}
+    <circle cx="16" cy="9.5" r="4.2" fill="#10B981" />
+    <path d="M8.5 23.5 C 8.5 19.2, 11.8 16.5, 16 16.5 C 20.2 16.5, 23.5 19.2, 23.5 23.5 Z" fill="#10B981" />
+  </svg>
+);
+
+const InnovationImpactPillarIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 32 32" fill="none">
+    {/* Rising chart bars */}
+    <rect x="5.5" y="18" width="4.5" height="9" rx="1.5" fill="#C084FC" />
+    <rect x="12" y="13" width="4.5" height="14" rx="1.5" fill="#A855F7" />
+    <rect x="18.5" y="8" width="4.5" height="19" rx="1.5" fill="#7E22CE" />
+    {/* Upward trending arrow */}
+    <path d="M7 13 L 20 4 M 13.5 3.5 L 20.5 3.5 L 20.5 10.5" stroke="#7E22CE" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const ICON_MAP = {
+  BookOpen: StudentFirstPillarIcon,
+  Lightbulb: ContinuousLearningPillarIcon,
+  Users: IntegrityTrustPillarIcon,
+  TrendingUp: InnovationImpactPillarIcon,
   Target,
   Heart,
   ShieldCheck,
   Award,
   Compass,
-  Users,
   Sparkles,
   GraduationCap,
   Eye,
 };
+
+const CARD_THEMES = [
+  {
+    iconBg: "bg-[#EBF3FE]",
+    iconColor: "text-blue-600",
+    iconBorder: "border-blue-100/80",
+    barColor: "bg-blue-600",
+    blobBg: "bg-blue-100/50",
+  },
+  {
+    iconBg: "bg-[#FFF4E5]",
+    iconColor: "text-amber-500",
+    iconBorder: "border-amber-100/80",
+    barColor: "bg-[#F59E0B]",
+    blobBg: "bg-[#FFF5E8]",
+  },
+  {
+    iconBg: "bg-[#EAF8F0]",
+    iconColor: "text-emerald-600",
+    iconBorder: "border-emerald-100/80",
+    barColor: "bg-[#10B981]",
+    blobBg: "bg-[#EBF9F1]",
+  },
+  {
+    iconBg: "bg-[#F5EEFD]",
+    iconColor: "text-purple-600",
+    iconBorder: "border-purple-100/80",
+    barColor: "bg-[#8B5CF6]",
+    blobBg: "bg-[#F6EFFE]",
+  },
+];
 
 const DEFAULT_ABOUT = {
   heroBadge: "About ApnaVidya",
@@ -51,26 +146,28 @@ const DEFAULT_ABOUT = {
     "To become India's most student-centric learning community where anybody with grit and curiosity can transition into a thriving software engineering career.",
   valuesTag: "Our Pillars",
   valuesTitle: "Values That Drive Everything We Do",
+  valuesSubtitle:
+    "These core values guide our mission, shape our culture, and inspire us to create a better learning experience for every student.",
   values: [
     {
-      icon: "Target",
-      title: "Outcome Driven",
-      desc: "We focus on what truly matters in the industry: shipping production code, building real portfolios, and cracking job interviews.",
+      icon: "BookOpen",
+      title: "Student First",
+      desc: "We put students at the center of everything we do, focusing on their growth, confidence and success.",
     },
     {
-      icon: "Heart",
-      title: "Student-First Mentorship",
-      desc: "Every student learns at their own pace. Our dedicated 1-on-1 doubt sessions ensure nobody gets left behind.",
+      icon: "Lightbulb",
+      title: "Continuous Learning",
+      desc: "We believe in lifelong learning, constantly evolving to deliver better solutions and stay ahead.",
     },
     {
-      icon: "ShieldCheck",
-      title: "Uncompromising Quality",
-      desc: "Our curriculum is reviewed by senior engineers at top product companies to guarantee modern relevance.",
+      icon: "Users",
+      title: "Integrity & Trust",
+      desc: "We build honest relationships and maintain transparency in all our actions.",
     },
     {
-      icon: "Award",
-      title: "Verifiable Excellence",
-      desc: "Every credential earned through ApnaVidya is backed by ISO 9001:2015 standards and independent digital verification.",
+      icon: "TrendingUp",
+      title: "Innovation for Impact",
+      desc: "We embrace new ideas and technology to create meaningful change in education.",
     },
   ],
   teamTag: "Experienced Educators",
@@ -273,34 +370,134 @@ const About = () => {
       </section>
 
       {valuesList.length > 0 && (
-        <section className="bg-slate-50 py-16 sm:py-20 lg:py-7">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
-                {data?.valuesTag || "Our Pillars"}
-              </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                {data?.valuesTitle || "Values That Drive Everything We Do"}
-              </h2>
+        <section className="relative overflow-hidden bg-[#FAFCFF] py-20 sm:py-24 border-y border-slate-100">
+          {/* Ambient Background & Decorative Accents matching screenshot */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+            {/* Left subtle blue dot grid */}
+            <div className="absolute left-6 sm:left-12 top-10 sm:top-14 select-none hidden lg:block opacity-80">
+              <svg width="64" height="96" viewBox="0 0 64 96" fill="none">
+                {[0, 1, 2, 3].map((col) =>
+                  [0, 1, 2, 3, 4, 5].map((row) => (
+                    <circle
+                      key={`${col}-${row}`}
+                      cx={col * 18 + 5}
+                      cy={row * 16 + 5}
+                      r="2.2"
+                      fill="#BFDBFE"
+                    />
+                  ))
+                )}
+              </svg>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Top-Right Flying Blue Paper Airplane with curved looping dashed trail */}
+            <div className="absolute right-4 sm:right-10 lg:right-16 top-6 sm:top-8 select-none hidden md:block">
+              <svg className="w-64 sm:w-80 h-40 sm:h-48 overflow-visible" viewBox="0 0 280 160" fill="none">
+                {/* Curved looping dashed flight trail */}
+                <path
+                  d="M 20 135 C 50 80, 110 50, 150 90 C 180 120, 215 90, 260 25"
+                  stroke="#93C5FD"
+                  strokeWidth="2.2"
+                  strokeDasharray="4 6"
+                  strokeLinecap="round"
+                />
+                {/* Folded origami paper plane */}
+                <g transform="translate(252, 12) rotate(24)">
+                  <polygon points="0,26 36,0 14,34 11,22" fill="#3B82F6" />
+                  <polygon points="11,22 36,0 24,9" fill="#60A5FA" />
+                  <polygon points="11,22 14,34 8,19" fill="#2563EB" />
+                </g>
+              </svg>
+            </div>
+
+            {/* Soft ambient background glows */}
+            <div className="absolute -left-20 top-20 h-72 w-72 rounded-full bg-blue-100/35 blur-3xl pointer-events-none" />
+            <div className="absolute -top-24 left-1/3 h-80 w-80 rounded-full bg-blue-50/50 blur-3xl pointer-events-none" />
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {/* Top Pill Flanked by Horizontal Lines */}
+            <div className="flex items-center justify-center gap-3">
+              <span className="h-[2px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
+              <span className="rounded-full bg-blue-50/90 border border-blue-100/90 px-4 py-1 text-xs sm:text-sm font-semibold text-blue-600 shadow-2xs">
+                {data?.valuesTag || "Our Pillars"}
+              </span>
+              <span className="h-[2px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
+            </div>
+
+            {/* Heading with playful blue sunburst/rays accents */}
+            <div className="mx-auto mt-4 max-w-3xl text-center">
+              <div className="relative inline-block px-7 sm:px-11">
+                {/* Left decorative rays */}
+                <svg
+                  className="absolute -top-3.5 -left-1 sm:-left-2 w-7 h-7 text-blue-500"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                >
+                  <line x1="8" y1="22" x2="3" y2="12" stroke="#3B82F6" strokeWidth="3.5" strokeLinecap="round" />
+                  <line x1="18" y1="18" x2="13" y2="7" stroke="#3B82F6" strokeWidth="3.5" strokeLinecap="round" />
+                </svg>
+
+                <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-[42px] leading-tight">
+                  {data?.valuesTitle || "Values That Drive Everything We Do"}
+                </h2>
+
+                {/* Right decorative rays */}
+                <svg
+                  className="absolute -top-3.5 -right-1 sm:-right-2 w-7 h-7 text-blue-500"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                >
+                  <line x1="20" y1="22" x2="25" y2="12" stroke="#3B82F6" strokeWidth="3.5" strokeLinecap="round" />
+                  <line x1="10" y1="18" x2="15" y2="7" stroke="#3B82F6" strokeWidth="3.5" strokeLinecap="round" />
+                </svg>
+              </div>
+
+              {/* Subheading */}
+              <p className="mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-slate-500 font-normal">
+                {data?.valuesSubtitle ||
+                  "These core values guide our mission, shape our culture, and inspire us to create a better learning experience for every student."}
+              </p>
+            </div>
+
+            {/* The 4 Value Cards Grid */}
+            <div className="mt-12 sm:mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {valuesList.map((val, idx) => {
-                const Icon = (val?.icon && ICON_MAP[val.icon]) || Target;
+                const Icon = (val?.icon && ICON_MAP[val.icon]) || ICON_MAP.BookOpen;
+                const theme = CARD_THEMES[idx % CARD_THEMES.length];
                 return (
                   <div
                     key={idx}
-                    className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+                    className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 sm:p-8 shadow-[0_8px_30px_rgba(219,234,254,0.25)] hover:shadow-[0_20px_45px_rgba(30,58,138,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                      <Icon size={24} />
+                    {/* Top-Right Soft Colored Blob Watermark */}
+                    <div
+                      className={`pointer-events-none absolute -top-8 -right-8 h-32 w-32 rounded-full ${theme.blobBg} transition-transform duration-500 group-hover:scale-125`}
+                    />
+
+                    <div>
+                      {/* Icon Box */}
+                      <div
+                        className={`relative flex h-14 w-14 items-center justify-center rounded-2xl ${theme.iconBg} ${theme.iconColor} ${theme.iconBorder} border shadow-xs transition-transform duration-300 group-hover:scale-105`}
+                      >
+                        <Icon className="w-7 h-7" size={26} strokeWidth={2.2} />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="relative mt-6 text-xl font-bold text-slate-900 tracking-tight">
+                        {val.title}
+                      </h3>
+
+                      {/* Colorful Accent Bar Under Title */}
+                      <div
+                        className={`relative mt-2.5 mb-4 h-1 w-8 rounded-full ${theme.barColor}`}
+                      />
+
+                      {/* Description */}
+                      <p className="relative text-sm leading-relaxed text-slate-500 font-normal">
+                        {val.desc}
+                      </p>
                     </div>
-                    <h3 className="mt-4 text-base font-bold text-slate-900">
-                      {val.title}
-                    </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                      {val.desc}
-                    </p>
                   </div>
                 );
               })}
@@ -310,13 +507,18 @@ const About = () => {
       )}
 
       {teamList.length > 0 && (
-        <section className="py-16 sm:py-20 lg:py-7">
+        <section className="py-16 sm:py-20 lg:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600">
-                {data?.teamTag || "Experienced Educators"}
-              </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              {/* Experienced Educators pill with flanking lines matching screenshot */}
+              <div className="flex items-center justify-center gap-3">
+                <span className="h-[1.5px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
+                <span className="rounded-full bg-blue-50/90 border border-blue-100/90 px-4 py-1 text-xs sm:text-sm font-semibold text-blue-600 shadow-2xs">
+                  {data?.teamTag || "Experienced Educators"}
+                </span>
+                <span className="h-[1.5px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
+              </div>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
                 {data?.teamTitle || "Meet the Mentors Behind ApnaVidya"}
               </h2>
               {data?.teamSubtitle && (
@@ -340,14 +542,14 @@ const About = () => {
                       style={{ objectPosition: "top center" }}
                     />
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-base font-bold text-slate-900">
+                  <div className="p-5 bg-[#029EFB] text-center text-white">
+                    <h3 className="text-base font-bold ">
                       {member.name}
                     </h3>
-                    <p className="text-xs font-semibold text-blue-600 mt-0.5">
+                    <p className="text-xs font-semibold mt-0.5">
                       {member.role}
                     </p>
-                    <p className="mt-2 text-xs text-slate-500">
+                    <p className="mt-2 text-xs ">
                       {member.credentials}
                     </p>
                   </div>
@@ -358,13 +560,20 @@ const About = () => {
         </section>
       )}
 
-      <section className="bg-[#FD8006] py-16 text-white">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold sm:text-4xl">
+      <section className="relative overflow-hidden bg-[#070D1E] py-20 text-white sm:py-24 border-t border-slate-800/60">
+        {/* Ambient Dark Theme Glows matching reference image */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-72 w-[650px] rounded-full bg-blue-600/15 blur-[110px]" />
+          <div className="absolute -bottom-24 right-1/4 h-80 w-80 rounded-full bg-indigo-600/10 blur-[90px]" />
+          <div className="absolute top-1/4 -left-20 h-64 w-64 rounded-full bg-blue-500/10 blur-[80px]" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-extrabold sm:text-4xl text-white tracking-tight">
             {data?.ctaTitle || "Experience the ApnaVidya Way of Learning"}
           </h2>
           {data?.ctaDescription && (
-            <p className="mx-auto mt-4 max-w-2xl text-base text-blue-100">
+            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300 leading-relaxed">
               {data.ctaDescription}
             </p>
           )}
@@ -372,15 +581,16 @@ const About = () => {
             <button
               type="button"
               onClick={() => openDemoModal()}
-              className="rounded-xl bg-white px-8 py-3.5 text-[13px]m font-bold text-blue-600 shadow-lg hover:bg-blue-50 transition-colors cursor-pointer active:scale-95"
+              className="rounded-xl bg-[#FD8006] hover:bg-[#ea7300] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2"
             >
-              {data?.ctaPrimaryText || "Book a Free Demo Class"}
+              <span>{data?.ctaPrimaryText || "Book a Free Demo Class"}</span>
+              <ArrowRight size={16} />
             </button>
             <Link
               to={data?.ctaSecondaryLink || "/courses"}
-              className="rounded-xl border border-blue-400 px-8 py-3.5 text-[13px]m font-bold text-white hover:bg-blue-700 transition-colors"
+              className="rounded-xl border border-slate-700/90 bg-slate-800/50 hover:bg-slate-800 px-8 py-3.5 text-sm font-bold text-slate-200 hover:text-white transition-all inline-flex items-center gap-2"
             >
-              {data?.ctaSecondaryText || "Explore All Courses"}
+              <span>{data?.ctaSecondaryText || "Explore All Courses"}</span>
             </Link>
           </div>
         </div>

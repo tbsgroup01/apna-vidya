@@ -58,10 +58,10 @@ const LatestBlogs = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-14">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
+          <div className="max-w-4xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600 border border-blue-100">
               <Newspaper size={14} />
               Educational Insights

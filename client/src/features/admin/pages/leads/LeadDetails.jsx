@@ -68,6 +68,7 @@ const LeadDetails = () => {
       const res = await api.patch(`/admin/leads/${id}/status`, { status: newStatus });
       if (res.data.success) {
         fetchLead();
+        window.dispatchEvent(new CustomEvent("leads-updated"));
       }
     } catch (err) {
       alert(err.response?.data?.message || "Failed to update status");

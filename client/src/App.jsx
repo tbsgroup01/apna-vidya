@@ -57,6 +57,7 @@ import VideoSectionAdmin from "./features/admin/pages/VideoSectionAdmin";
 import ContactDetailsAdmin from "./features/admin/pages/ContactDetailsAdmin";
 import HolidayEmailsList from "./features/admin/pages/holidayEmails/HolidayEmailsList";
 import HolidayEmailForm from "./features/admin/pages/holidayEmails/HolidayEmailForm";
+import TestimonialsAdmin from "./features/admin/pages/TestimonialsAdmin";
 import UsersAdmin from "./features/admin/pages/UsersAdmin";
 import RolesPermissions from "./features/admin/pages/RolesPermissions";
 import ActivityLogs from "./features/admin/pages/ActivityLogs";
@@ -157,6 +158,8 @@ function AppContent() {
             <Route path="contact-details" element={<ContactDetailsAdmin />} />
             <Route path="holiday-emails" element={<HolidayEmailsList />} />
             <Route path="holiday-emails/create" element={<HolidayEmailForm />} />
+            <Route path="testimonials" element={<TestimonialsAdmin />} />
+            <Route path="testimonials/create" element={<TestimonialsAdmin />} />
             <Route path="users" element={<UsersAdmin />} />
             <Route path="roles" element={<RolesPermissions />} />
             <Route path="activity-logs" element={<ActivityLogs />} />
@@ -176,7 +179,7 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter basename="/apna-vidya">
+    <BrowserRouter basename="/">
       <AuthProvider>
         <SettingsProvider>
           <DemoModalProvider>

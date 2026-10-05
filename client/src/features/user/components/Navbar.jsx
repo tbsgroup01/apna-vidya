@@ -165,11 +165,10 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     to={link.path}
-                                    className={`relative flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition-all duration-150 ${
-                                        active
-                                            ? "text-blue-600 bg-blue-50/90 font-bold shadow-2xs"
-                                            : "text-slate-600 hover:text-blue-600 hover:bg-slate-50/80"
-                                    }`}
+                                    className={`relative flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition-all duration-150 ${active
+                                        ? "text-blue-600 bg-blue-50/90 font-bold shadow-2xs"
+                                        : "text-slate-600 hover:text-blue-600 hover:bg-slate-50/80"
+                                        }`}
                                 >
                                     <Icon
                                         size={16}
@@ -222,9 +221,8 @@ const Navbar = () => {
                                     </div>
                                     <ChevronDown
                                         size={14}
-                                        className={`text-slate-400 group-hover:text-slate-600 transition-transform duration-200 ${
-                                            isProfileOpen ? "rotate-180 text-blue-600" : ""
-                                        }`}
+                                        className={`text-slate-400 group-hover:text-slate-600 transition-transform duration-200 ${isProfileOpen ? "rotate-180 text-blue-600" : ""
+                                            }`}
                                     />
                                 </button>
 
@@ -335,112 +333,123 @@ const Navbar = () => {
                         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
+            </div>
 
-                {/* Mobile Menu Dropdown */}
-                {isMenuOpen && (
-                    <div className="border-t border-gray-100 py-4 lg:hidden animate-in fade-in slide-in-from-top-2 duration-150">
-                        <nav className="space-y-1">
-                            {isAuthenticated && user && (
-                                <div className="mb-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <img
-                                            src={
-                                                user.profileImage ||
-                                                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-                                            }
-                                            alt={user.name || "User"}
-                                            className="h-11 w-11 rounded-full object-cover object-top ring-2 ring-blue-500/20"
-                                            style={{ objectPosition: "top center" }}
-                                        />
-                                        <div className="min-w-0 flex-1">
-                                            <p className="text-sm font-bold text-slate-900 truncate">
-                                                {user.name || "User"}
-                                            </p>
-                                            <p className="text-xs text-slate-500 truncate">
-                                                {user.email || "admin@apnavidya.com"}
-                                            </p>
-                                            <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700 mt-1">
-                                                {user.role || "Administrator"}
-                                            </span>
+            {/* Mobile Menu Dropdown (Floating overlay - does NOT push page content down) */}
+            {isMenuOpen && (
+                <>
+                    {/* Backdrop Overlay to close on tap outside */}
+                    <div
+                        className="fixed inset-0 top-[72px] sm:top-[80px] bg-slate-900/35 backdrop-blur-2xs z-40 lg:hidden animate-in fade-in duration-150"
+                        onClick={closeMobileMenu}
+                        aria-hidden="true"
+                    />
+
+                    {/* Floating Mobile Dropdown Menu */}
+                    <div className="absolute top-full left-0 right-0 w-full bg-white/98 backdrop-blur-xl border-t border-b border-slate-200 shadow-2xl py-4 px-4 sm:px-6 lg:hidden animate-in fade-in slide-in-from-top-2 duration-150 max-h-[calc(100vh-5rem)] overflow-y-auto z-50">
+                        <div className="mx-auto max-w-7xl">
+                            <nav className="space-y-1">
+                                {isAuthenticated && user && (
+                                    <div className="mb-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <img
+                                                src={
+                                                    user.profileImage ||
+                                                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
+                                                }
+                                                alt={user.name || "User"}
+                                                className="h-11 w-11 rounded-full object-cover object-top ring-2 ring-blue-500/20"
+                                                style={{ objectPosition: "top center" }}
+                                            />
+                                            <div className="min-w-0 flex-1">
+                                                <p className="text-sm font-bold text-slate-900 truncate">
+                                                    {user.name || "User"}
+                                                </p>
+                                                <p className="text-xs text-slate-500 truncate">
+                                                    {user.email || "admin@apnavidya.com"}
+                                                </p>
+                                                <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700 mt-1">
+                                                    {user.role || "Administrator"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <Link
+                                                to={dashboardPath}
+                                                onClick={closeMobileMenu}
+                                                className="flex items-center justify-center gap-1.5 rounded-xl bg-[#FD8006] px-3 py-2 text-xs font-bold text-white shadow-2xs"
+                                            >
+                                                <LayoutDashboard size={14} />
+                                                <span>Dashboard</span>
+                                            </Link>
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    closeMobileMenu();
+                                                    logout();
+                                                }}
+                                                className="flex items-center justify-center gap-1.5 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-bold text-rose-700 cursor-pointer"
+                                            >
+                                                <LogOut size={14} />
+                                                <span>Sign Out</span>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-2">
+                                )}
+
+                                {navLinks.map((link) => {
+                                    const Icon = link.icon;
+                                    const active = isLinkActive(link.path, link.exact);
+
+                                    return (
                                         <Link
-                                            to={dashboardPath}
+                                            key={link.name}
+                                            to={link.path}
                                             onClick={closeMobileMenu}
-                                            className="flex items-center justify-center gap-1.5 rounded-xl bg-[#FD8006] px-3 py-2 text-xs font-bold text-white shadow-2xs"
-                                        >
-                                            <LayoutDashboard size={14} />
-                                            <span>Dashboard</span>
-                                        </Link>
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                closeMobileMenu();
-                                                logout();
-                                            }}
-                                            className="flex items-center justify-center gap-1.5 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-bold text-rose-700 cursor-pointer"
-                                        >
-                                            <LogOut size={14} />
-                                            <span>Sign Out</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-
-                            {navLinks.map((link) => {
-                                const Icon = link.icon;
-                                const active = isLinkActive(link.path, link.exact);
-
-                                return (
-                                    <Link
-                                        key={link.name}
-                                        to={link.path}
-                                        onClick={closeMobileMenu}
-                                        className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-150 ${
-                                            active
+                                            className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-150 ${active
                                                 ? "bg-blue-50 text-blue-600 font-bold border-l-4 border-blue-600 pl-3.5 shadow-2xs"
                                                 : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                                        }`}
-                                    >
-                                        <Icon
-                                            size={18}
-                                            className={active ? "text-blue-600" : "text-slate-400"}
-                                        />
-                                        <span>{link.name}</span>
-                                    </Link>
-                                );
-                            })}
+                                                }`}
+                                        >
+                                            <Icon
+                                                size={18}
+                                                className={active ? "text-blue-600" : "text-slate-400"}
+                                            />
+                                            <span>{link.name}</span>
+                                        </Link>
+                                    );
+                                })}
 
-                            <div className="pt-3 border-t border-gray-100 mt-2 space-y-2">
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        closeMobileMenu();
-                                        openDemoModal();
-                                    }}
-                                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FD8006] to-[#f97316] px-4 py-3 text-sm font-semibold text-white hover:opacity-95 transition-all shadow-sm cursor-pointer"
-                                >
-                                    <PlayCircle size={18} className="fill-white/20 text-white shrink-0" />
-                                    <span>Demo</span>
-                                    <ArrowRight size={15} strokeWidth={2.5} className="shrink-0" />
-                                </button>
-
-                                {!isAuthenticated && (
-                                    <Link
-                                        to="/login"
-                                        onClick={closeMobileMenu}
-                                        className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-all cursor-pointer"
+                                <div className="pt-3 border-t border-gray-100 mt-2 space-y-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            closeMobileMenu();
+                                            openDemoModal();
+                                        }}
+                                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FD8006] to-[#f97316] px-4 py-3 text-sm font-semibold text-white hover:opacity-95 transition-all shadow-sm cursor-pointer"
                                     >
-                                        <User size={16} className="text-slate-500" />
-                                        <span>Sign In</span>
-                                    </Link>
-                                )}
-                            </div>
-                        </nav>
+                                        <PlayCircle size={18} className="fill-white/20 text-white shrink-0" />
+                                        <span>Demo</span>
+                                        <ArrowRight size={15} strokeWidth={2.5} className="shrink-0" />
+                                    </button>
+
+                                    {!isAuthenticated && (
+                                        <Link
+                                            to="/login"
+                                            onClick={closeMobileMenu}
+                                            className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-all cursor-pointer"
+                                        >
+                                            <User size={16} className="text-slate-500" />
+                                            <span>Sign In</span>
+                                        </Link>
+                                    )}
+                                </div>
+                            </nav>
+                        </div>
                     </div>
-                )}
-            </div>
+                </>
+            )}
         </header>
     );
 };

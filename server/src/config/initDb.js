@@ -26,6 +26,8 @@ const { DEFAULT_SETTINGS } = require("../controllers/settingController");
 const HomeVideoSection = require("../models/HomeVideoSection");
 const { DEFAULT_VIDEO_SECTION } = require("../controllers/videoSectionController");
 const HolidayEmail = require("../models/HolidayEmail");
+const Testimonial = require("../models/Testimonial");
+const { DEFAULT_TESTIMONIALS } = require("../controllers/testimonialController");
 
 User.belongsTo(Role, { foreignKey: "roleId", as: "role" });
 Role.hasMany(User, { foreignKey: "roleId", as: "users" });
@@ -283,6 +285,13 @@ const seedDatabase = async () => {
   if (videoCount === 0) {
     await HomeVideoSection.create(DEFAULT_VIDEO_SECTION);
   }
+
+  const testimonialCount = await Testimonial.count();
+  if (testimonialCount === 0) {
+    for (const item of DEFAULT_TESTIMONIALS) {
+      await Testimonial.create(item);
+    }
+  }
 };
 
 const initDb = async () => {
@@ -355,4 +364,5 @@ module.exports = {
   PlatformSetting,
   HomeVideoSection,
   HolidayEmail,
+  Testimonial,
 };

@@ -117,7 +117,8 @@
     display: none !important;
   }
 
-  body, html {
+  body,
+  html {
     background: #ffffff !important;
     color: #0f172a !important;
     margin: 0 !important;

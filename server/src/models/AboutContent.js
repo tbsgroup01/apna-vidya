@@ -83,6 +83,12 @@ const AboutContent = sequelize.define(
       type: DataTypes.STRING(255),
       defaultValue: "Values That Drive Everything We Do",
     },
+    valuesSubtitle: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue:
+        "These core values guide our mission, shape our culture, and inspire us to create a better learning experience for every student.",
+    },
     values: {
       type: DataTypes.JSON,
       defaultValue: [],

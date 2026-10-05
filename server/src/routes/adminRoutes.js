@@ -22,6 +22,7 @@ const settingController = require("../controllers/settingController");
 const uploadController = require("../controllers/uploadController");
 const authController = require("../controllers/authController");
 const holidayEmailController = require("../controllers/holidayEmailController");
+const testimonialController = require("../controllers/testimonialController");
 
 router.use(authenticate);
 router.post("/upload", upload.any(), uploadController.uploadImage);
@@ -416,5 +417,12 @@ router.post("/holiday-emails", holidayEmailController.createHolidayEmail);
 router.post("/holiday-emails/:id/send", holidayEmailController.sendHolidayEmailNow);
 router.delete("/holiday-emails/:id", holidayEmailController.deleteHolidayEmail);
 router.post("/holiday-emails/bulk-delete", holidayEmailController.bulkDeleteHolidayEmails);
+
+router.get("/testimonials", testimonialController.getAdminTestimonials);
+router.get("/testimonials/:id", testimonialController.getTestimonialById);
+router.post("/testimonials", upload.any(), testimonialController.createTestimonial);
+router.put("/testimonials/:id", upload.any(), testimonialController.updateTestimonial);
+router.delete("/testimonials/:id", testimonialController.deleteTestimonial);
+router.post("/testimonials/bulk-delete", testimonialController.bulkDeleteTestimonials);
 
 module.exports = router;

@@ -20,18 +20,24 @@ import {
   GraduationCap,
   Image as ImageIcon,
   ArrowRight,
+  BookOpen,
+  Lightbulb,
+  TrendingUp,
 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import { FormInput, FormTextarea, ImageUploadPreview } from "../components/FormControls";
 import api from "../../../services/api";
 
 const ICON_OPTIONS = [
+  { label: "Book (Student First)", value: "BookOpen" },
+  { label: "Lightbulb (Continuous Learning)", value: "Lightbulb" },
+  { label: "Users (Integrity & Trust)", value: "Users" },
+  { label: "Trending Up (Innovation for Impact)", value: "TrendingUp" },
   { label: "Target (Outcome)", value: "Target" },
   { label: "Heart (Empathy)", value: "Heart" },
   { label: "Shield Check (Quality)", value: "ShieldCheck" },
   { label: "Award (Excellence)", value: "Award" },
   { label: "Compass (Direction)", value: "Compass" },
-  { label: "Users (Community)", value: "Users" },
   { label: "Sparkles (Innovation)", value: "Sparkles" },
   { label: "Graduation Cap (Academic)", value: "GraduationCap" },
 ];
@@ -86,26 +92,28 @@ const INITIAL_FORM = {
     "To become India's most student-centric learning community where anybody with grit and curiosity can transition into a thriving software engineering career.",
   valuesTag: "Our Pillars",
   valuesTitle: "Values That Drive Everything We Do",
+  valuesSubtitle:
+    "These core values guide our mission, shape our culture, and inspire us to create a better learning experience for every student.",
   values: [
     {
-      icon: "Target",
-      title: "Outcome Driven",
-      desc: "We focus on what truly matters in the industry: shipping production code, building real portfolios, and cracking job interviews.",
+      icon: "BookOpen",
+      title: "Student First",
+      desc: "We put students at the center of everything we do, focusing on their growth, confidence and success.",
     },
     {
-      icon: "Heart",
-      title: "Student-First Mentorship",
-      desc: "Every student learns at their own pace. Our dedicated 1-on-1 doubt sessions ensure nobody gets left behind.",
+      icon: "Lightbulb",
+      title: "Continuous Learning",
+      desc: "We believe in lifelong learning, constantly evolving to deliver better solutions and stay ahead.",
     },
     {
-      icon: "ShieldCheck",
-      title: "Uncompromising Quality",
-      desc: "Our curriculum is reviewed by senior engineers at top product companies to guarantee modern relevance.",
+      icon: "Users",
+      title: "Integrity & Trust",
+      desc: "We build honest relationships and maintain transparency in all our actions.",
     },
     {
-      icon: "Award",
-      title: "Verifiable Excellence",
-      desc: "Every credential earned through ApnaVidya is backed by ISO 9001:2015 standards and independent digital verification.",
+      icon: "TrendingUp",
+      title: "Innovation for Impact",
+      desc: "We embrace new ideas and technology to create meaningful change in education.",
     },
   ],
   teamTag: "Experienced Educators",
@@ -576,6 +584,14 @@ const AboutUsAdmin = () => {
                 placeholder="e.g. Values That Drive Everything We Do"
               />
             </div>
+
+            <FormTextarea
+              label="Section Subtitle / Description"
+              rows={2}
+              value={form.valuesSubtitle}
+              onChange={(e) => setForm({ ...form, valuesSubtitle: e.target.value })}
+              placeholder="e.g. These core values guide our mission, shape our culture, and inspire us..."
+            />
 
             <div className="space-y-4 pt-2">
               {(form.values || []).map((val, idx) => (

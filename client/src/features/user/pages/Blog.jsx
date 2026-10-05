@@ -116,7 +116,7 @@ const Blog = () => {
           <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
             Articles & <span className="text-blue-600">Guides</span>
           </h1>
-          <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
+          <p className="mt-3 text-base text-slate-600 max-w-4xl mx-auto">
             Expert insights on software engineering careers, coding interviews,
             technology trends, and career development strategies.
           </p>
@@ -216,11 +216,10 @@ const Blog = () => {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
-                  selectedCategory === cat
+                className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${selectedCategory === cat
                     ? "bg-[#FD8006] text-white shadow-sm"
                     : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
-                }`}
+                  }`}
               >
                 {cat}
               </button>

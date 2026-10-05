@@ -15,6 +15,7 @@ import {
   Settings,
   UserCircle,
   LogOut,
+  MessageSquareQuote,
 } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
 import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
@@ -105,6 +106,13 @@ const navSections = [
         icon: Building2,
         color: "text-teal-600",
         bgColor: "bg-teal-50",
+      },
+      {
+        label: "Testimonials",
+        path: "/admin/testimonials",
+        icon: MessageSquareQuote,
+        color: "text-amber-600",
+        bgColor: "bg-amber-50",
       },
     ],
   },

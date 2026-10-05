@@ -220,9 +220,9 @@ const VideoSection = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+
         <div className="relative mb-12 flex flex-col items-center justify-center text-center">
-          {/* Badge */}
+
           <div className="mb-3.5 inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-100 px-4 py-1.5 text-xs font-bold text-blue-600">
             <div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#FD8006] text-white">
               <Play size={8} className="fill-white ml-0.5" />
@@ -332,8 +332,8 @@ const VideoSection = () => {
                         <div className="flex items-start gap-3">
                           <div
                             className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${isOrangeIcon
-                                ? "bg-orange-50 text-[#FD8006]"
-                                : "bg-blue-50 text-blue-600"
+                              ? "bg-orange-50 text-[#FD8006]"
+                              : "bg-blue-50 text-blue-600"
                               } shadow-2xs`}
                           >
                             <Icon size={20} />
@@ -381,8 +381,8 @@ const VideoSection = () => {
                 type="button"
                 onClick={() => setCurrentIndex(dotIdx)}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === dotIdx
-                    ? "w-7 bg-[#FD8006]"
-                    : "w-2 bg-blue-100 hover:bg-blue-200"
+                  ? "w-7 bg-[#FD8006]"
+                  : "w-2 bg-blue-100 hover:bg-blue-200"
                   }`}
                 aria-label={`Go to slide ${dotIdx + 1}`}
               />

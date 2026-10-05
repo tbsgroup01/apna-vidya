@@ -10,26 +10,14 @@ const publicRoutes = require("./routes/publicRoutes");
 dotenv.config();
 
 const app = express();
-app.set("trust proxy", 1);
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  console.log("Requested origin:", origin);
 
-  if (origin) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-  } else {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-  }
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Accept");
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-  next();
-});
-
+app.use(cors({
+  origin: ["https://apnavidya.tech", "http://localhost:tech", "http://apnavidya.tech"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+  credentials: true,
+}));
 
 
 app.use(express.json());
@@ -37,8 +25,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
+
+
 app.get("/", (req, res) => {
-  res.send("Welcome to ApnaVidya API v22222");
+  res.send("Welcome to ApnaVidya API Final");
 });
 
 

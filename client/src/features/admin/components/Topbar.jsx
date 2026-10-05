@@ -83,6 +83,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
     if (path.includes("/video-section")) return "Home Video Section CMS";
     if (path.includes("/contact-details")) return "Contact Details CMS";
     if (path.includes("/holiday-emails")) return "Holiday Email Campaigns";
+    if (path.includes("/testimonials")) return "Student Testimonials";
     if (path.includes("/users")) return "Admin Users";
     if (path.includes("/roles")) return "Roles & Permissions";
     if (path.includes("/activity-logs")) return "Audit Activity Logs";

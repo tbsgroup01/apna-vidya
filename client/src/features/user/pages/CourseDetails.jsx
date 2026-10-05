@@ -158,7 +158,7 @@ const CourseDetails = () => {
         <div className="rounded-3xl bg-slate-900 p-6 text-white sm:p-12 lg:p-16 relative overflow-hidden">
           <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#FD8006]/20 blur-3xl" />
           <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-emerald-600/10 blur-3xl" />
-          <div className="max-w-3xl relative">
+          <div className=" relative">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-3.5 py-1 text-xs font-semibold text-blue-300 border border-blue-500/20">
                 {course.category} • {course.level}

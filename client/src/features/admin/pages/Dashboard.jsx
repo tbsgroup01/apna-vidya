@@ -24,6 +24,7 @@ import {
   DemandingProgramsBarChart,
   CoursePopularityBars,
   LeadConversionDonut,
+  LeadDetailsDonutChart,
 } from "../components/ChartComponents";
 import api from "../../../services/api";
 
@@ -79,20 +80,25 @@ const Dashboard = () => {
   const [mostDemandingPrograms, setMostDemandingPrograms] = useState([]);
   const [recentPayments, setRecentPayments] = useState([]);
   const [leadConversionData, setLeadConversionData] = useState([]);
+  const [leadBreakdownData, setLeadBreakdownData] = useState([]);
+  const [rawLeadsList, setRawLeadsList] = useState([]);
+  const [totalLeadsCount, setTotalLeadsCount] = useState(0);
+  const [conversionRateVal, setConversionRateVal] = useState(0);
 
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
         const [statsRes, leadsRes] = await Promise.allSettled([
           api.get("/admin/dashboard/stats"),
-          api.get("/admin/leads?limit=250"),
+          api.get("/admin/leads?limit=500"),
         ]);
 
         let liveDemanding = [];
 
         // 1. Process leads directly from /admin/leads to guarantee 100% sync with /admin/demo-classes
         if (leadsRes.status === "fulfilled" && leadsRes.value.data?.data?.leads) {
-          const allFetchedLeads = leadsRes.value.data.data.leads;
+          const allFetchedLeads = leadsRes.value.data.data.leads || [];
+          setRawLeadsList(allFetchedLeads);
           const demoLeads = allFetchedLeads.filter(
             (l) =>
               (l.source && l.source.toLowerCase().includes("demo")) ||
@@ -221,6 +227,68 @@ const Dashboard = () => {
           }
         }
 
+        // 3. Compute comprehensive lead details for Donut Chart
+        let calculatedBreakdown = [];
+        let totalCount = 0;
+        let convRate = 0;
+
+        if (statsRes.status === "fulfilled" && statsRes.value.data?.data) {
+          const d = statsRes.value.data.data;
+          totalCount = d.stats?.totalLeads || 0;
+          convRate = d.stats?.conversionRate || 0;
+          if (Array.isArray(d.leadConversion) && d.leadConversion.length > 0) {
+            calculatedBreakdown = d.leadConversion.map((item) => ({
+              label: item.label,
+              count: item.value,
+              color: item.color,
+            }));
+          }
+        }
+
+        if (leadsRes.status === "fulfilled" && leadsRes.value.data?.data?.leads) {
+          const allFetchedLeads = leadsRes.value.data.data.leads;
+          if (allFetchedLeads.length > 0) {
+            totalCount = allFetchedLeads.length;
+
+            const statusMeta = {
+              Converted: { label: "Converted", color: "#10b981" },
+              New: { label: "New Leads", color: "#3b82f6" },
+              Contacted: { label: "Follow-up", color: "#f59e0b" },
+              "In Progress": { label: "In Progress", color: "#f59e0b" },
+              "Follow-up": { label: "Follow-up", color: "#f59e0b" },
+              Interested: { label: "Interested", color: "#8b5cf6" },
+              "Demo Scheduled": { label: "Demo Scheduled", color: "#ec4899" },
+              "Not Interested": { label: "Lost", color: "#f43f5e" },
+              Lost: { label: "Lost", color: "#f43f5e" },
+              Closed: { label: "Closed", color: "#94a3b8" },
+            };
+
+            const counts = {};
+            allFetchedLeads.forEach((l) => {
+              const st = (l.status && l.status.trim()) || "New";
+              counts[st] = (counts[st] || 0) + 1;
+            });
+
+            const convertedCount = counts["Converted"] || 0;
+            convRate = totalCount > 0 ? Math.round((convertedCount / totalCount) * 100) : 0;
+
+            calculatedBreakdown = Object.entries(counts)
+              .map(([rawStatus, count]) => {
+                const meta = statusMeta[rawStatus] || { label: rawStatus, color: "#6366f1" };
+                return {
+                  label: meta.label,
+                  count,
+                  color: meta.color,
+                };
+              })
+              .sort((a, b) => b.count - a.count);
+          }
+        }
+
+        setLeadBreakdownData(calculatedBreakdown);
+        setTotalLeadsCount(totalCount);
+        setConversionRateVal(convRate);
+
         setMostDemandingPrograms(liveDemanding);
       } catch (err) {
         console.error("Dashboard stats error:", err);
@@ -228,17 +296,20 @@ const Dashboard = () => {
     };
 
     fetchDashboardStats();
-    const interval = setInterval(fetchDashboardStats, 10000); // 10-second real-time poll
-    const handleFocus = () => fetchDashboardStats();
-    const handleDemoUpdate = () => fetchDashboardStats();
+    const interval = setInterval(fetchDashboardStats, 4000); // 4-second real-time poll
+    const handleUpdate = () => fetchDashboardStats();
 
-    window.addEventListener("focus", handleFocus);
-    window.addEventListener("demo-classes-updated", handleDemoUpdate);
+    window.addEventListener("focus", handleUpdate);
+    window.addEventListener("leads-updated", handleUpdate);
+    window.addEventListener("demo-classes-updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener("focus", handleFocus);
-      window.removeEventListener("demo-classes-updated", handleDemoUpdate);
+      window.removeEventListener("focus", handleUpdate);
+      window.removeEventListener("leads-updated", handleUpdate);
+      window.removeEventListener("demo-classes-updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
     };
   }, []);
 
@@ -404,57 +475,105 @@ const Dashboard = () => {
       </div>
 
 
-      {/* Most Demanding Programs (Full Width) */}
-      <div className="relative overflow-hidden rounded-2xl border border-purple-200/80 bg-gradient-to-br from-purple-50/40 via-white to-fuchsia-50/20 p-5 shadow-xs hover:border-purple-300 transition-all w-full">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600" />
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white shadow-xs">
-              <BookOpen size={18} strokeWidth={2.2} />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-slate-900">
-                  Most Demanding Programs
-                </h3>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/90 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Live Sync
-                </span>
+      {/* Row: Most Demanding Programs (70%) & Leads Details Donut Chart (30%) */}
+      <div className="grid grid-cols-1 lg:grid-cols-10 gap-5 items-stretch w-full">
+        {/* 70% Column: Most Demanding Programs Bar Chart */}
+        <div className="lg:col-span-7 relative overflow-hidden rounded-2xl border border-purple-200/80 bg-gradient-to-br from-purple-50/40 via-white to-fuchsia-50/20 p-5 shadow-xs hover:border-purple-300 transition-all flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600" />
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white shadow-xs">
+                <BookOpen size={18} strokeWidth={2.2} />
               </div>
-              <p className="text-xs text-slate-500">
-                Real-time ranking based on live demo class requests
-              </p>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-bold text-slate-900">
+                    Most Demanding Programs
+                  </h3>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/90 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Live Sync
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500">
+                  Real-time ranking based on live demo class requests
+                </p>
+              </div>
             </div>
-          </div>
-          <Link
-            to="/admin/demo-classes"
-            className="inline-flex items-center gap-1 rounded-xl bg-purple-100/90 border border-purple-200/60 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-600 hover:text-white transition-all shadow-2xs"
-          >
-            <span>View Demo Classes</span>
-            <ArrowRight size={12} />
-          </Link>
-        </div>
-        {mostDemandingPrograms.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-100 text-purple-600 mb-3">
-              <BookOpen size={24} />
-            </div>
-            <p className="text-sm font-bold text-slate-800">No demo class requests recorded yet</p>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm">
-              Real-time course demand rankings will appear here automatically when visitors book demo classes.
-            </p>
             <Link
               to="/admin/demo-classes"
-              className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-purple-50 border border-purple-200 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-100 transition-colors"
+              className="inline-flex items-center gap-1 rounded-xl bg-purple-100/90 border border-purple-200/60 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-600 hover:text-white transition-all shadow-2xs"
             >
-              <span>Check Demo Classes</span>
+              <span>View Demo Classes</span>
               <ArrowRight size={12} />
             </Link>
           </div>
-        ) : (
-          <DemandingProgramsBarChart data={mostDemandingPrograms} />
-        )}
+
+          <div className="flex-1 flex flex-col justify-center">
+            {mostDemandingPrograms.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center my-auto">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-100 text-purple-600 mb-3">
+                  <BookOpen size={24} />
+                </div>
+                <p className="text-sm font-bold text-slate-800">No demo class requests recorded yet</p>
+                <p className="text-xs text-slate-400 mt-1 max-w-sm">
+                  Real-time course demand rankings will appear here automatically when visitors book demo classes.
+                </p>
+                <Link
+                  to="/admin/demo-classes"
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-purple-50 border border-purple-200 px-3 py-1.5 text-xs font-bold text-purple-700 hover:bg-purple-100 transition-colors"
+                >
+                  <span>Check Demo Classes</span>
+                  <ArrowRight size={12} />
+                </Link>
+              </div>
+            ) : (
+              <DemandingProgramsBarChart data={mostDemandingPrograms} />
+            )}
+          </div>
+        </div>
+
+        {/* 30% Column: Leads Details Donut Chart */}
+        <div className="lg:col-span-3 relative overflow-hidden rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/40 via-white to-indigo-50/20 p-5 shadow-xs hover:border-blue-300 transition-all flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-600" />
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xs">
+                <Target size={18} strokeWidth={2.2} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-bold text-slate-900">
+                    Leads Overview
+                  </h3>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/90 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Live Sync
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500">
+                  Real-time data from /admin/leads
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/admin/leads"
+              className="inline-flex items-center gap-1 rounded-xl bg-blue-100/90 border border-blue-200/60 px-3 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs"
+            >
+              <span>View Leads</span>
+              <ArrowRight size={12} />
+            </Link>
+          </div>
+
+          <div className="flex-1 flex flex-col justify-center">
+            <LeadDetailsDonutChart
+              data={leadBreakdownData}
+              leads={rawLeadsList}
+              totalCount={totalLeadsCount}
+              conversionRate={conversionRateVal}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">

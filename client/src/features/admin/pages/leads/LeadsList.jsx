@@ -117,6 +117,7 @@ const LeadsList = () => {
       setLeads((prev) => prev.filter((l) => l.id !== leadToDelete.id));
       setDeleteModalOpen(false);
       setLeadToDelete(null);
+      window.dispatchEvent(new CustomEvent("leads-updated"));
     } catch (err) {
       alert(err.response?.data?.message || "Failed to delete lead");
     }
@@ -135,6 +136,7 @@ const LeadsList = () => {
         setLeads((prev) => prev.filter((l) => !selectedLeadIds.includes(l.id)));
         setBulkDeleteModalOpen(false);
         setSelectedLeadIds([]);
+        window.dispatchEvent(new CustomEvent("leads-updated"));
       }
     } catch (err) {
       alert(err.response?.data?.message || "Failed to bulk delete leads");
@@ -160,6 +162,7 @@ const LeadsList = () => {
       );
       setStatusModalOpen(false);
       setLeadToUpdate(null);
+      window.dispatchEvent(new CustomEvent("leads-updated"));
     } catch (err) {
       alert(err.response?.data?.message || "Failed to update status");
     }
@@ -180,6 +183,7 @@ const LeadsList = () => {
           source: "Contact Form",
           city: "",
         });
+        window.dispatchEvent(new CustomEvent("leads-updated"));
       }
     } catch (err) {
       alert(err.response?.data?.message || "Failed to create lead");
@@ -214,6 +218,7 @@ const LeadsList = () => {
         );
         setConvertModalOpen(false);
         setLeadToConvert(null);
+        window.dispatchEvent(new CustomEvent("leads-updated"));
         navigate(`/admin/students/${res.data.data.student.id}`);
       }
     } catch (err) {

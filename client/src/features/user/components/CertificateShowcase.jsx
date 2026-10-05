@@ -138,10 +138,9 @@ const CertificateShowcase = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24 border-b border-slate-100">
-      {/* Background Decor: Side Dot Grids and Corner Waves matching screenshot */}
+    <section className="relative overflow-hidden bg-white border-b border-slate-100 py-10">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-        {/* Left Orange Dotted Grid (4x6 dots) */}
+
         <div
           className="absolute left-4 sm:left-10 top-1/4 h-28 w-28 opacity-60 hidden sm:block"
           style={{
@@ -150,23 +149,20 @@ const CertificateShowcase = () => {
           }}
         />
 
-        {/* Top-left soft sky-blue glow */}
+
         <div className="absolute -top-12 -left-12 h-72 w-72 rounded-full bg-gradient-to-br from-sky-200/40 via-blue-100/20 to-transparent blur-3xl" />
 
-        {/* Right side elegant multi-layered wavy ribbons matching screenshot */}
         <svg
           className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 h-[95%] w-72 lg:w-96 select-none z-0 hidden md:block"
           viewBox="0 0 280 600"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Layer 1: Peach / Orange Ribbon */}
           <path
             d="M280 0 C180 140 140 260 210 390 C250 470 210 550 280 600 L280 600 Z"
             fill="url(#sectionPeachWave)"
             opacity="0.8"
           />
-          {/* Layer 2: Sky Blue Ribbon */}
           <path
             d="M280 90 C210 200 180 290 235 410 C270 480 240 560 280 600 L280 600 Z"
             fill="url(#sectionBlueWave)"
@@ -186,21 +182,17 @@ const CertificateShowcase = () => {
           </defs>
         </svg>
 
-        {/* Bottom Left Flowing Glow */}
         <div className="absolute -bottom-14 -left-14 h-80 w-80 rounded-full bg-gradient-to-tr from-sky-300/30 via-blue-200/15 to-transparent blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="relative mx-auto max-w-3xl text-center">
-          {/* Laurel Wreath behind header matching screenshot */}
           <svg
             className="pointer-events-none absolute left-1/2 -top-6 -translate-x-1/2 w-[92%] max-w-2xl h-48 text-blue-200/50 select-none z-0"
             viewBox="0 0 650 180"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Left Wreath Branch */}
             <path
               d="M280 160 C245 130 190 90 200 30"
               stroke="currentColor"
@@ -213,7 +205,6 @@ const CertificateShowcase = () => {
             <path d="M232 58 C215 52 206 39 211 26 C225 34 231 46 232 58 Z" fill="currentColor" />
             <path d="M216 32 C204 27 197 17 201 6 C211 14 216 23 216 32 Z" fill="currentColor" />
 
-            {/* Right Wreath Branch */}
             <path
               d="M370 160 C405 130 460 90 450 30"
               stroke="currentColor"
@@ -227,18 +218,14 @@ const CertificateShowcase = () => {
             <path d="M434 32 C446 27 453 17 449 6 C439 14 434 23 434 32 Z" fill="currentColor" />
           </svg>
 
-          {/* Badge */}
           <div className="relative z-10 mb-4 inline-flex items-center gap-2 rounded-full border border-blue-100/80 bg-[#f0f6ff] px-4 py-1.5 text-xs font-bold text-blue-600 shadow-2xs">
             <Award size={15} className="text-blue-600 stroke-[2.2]" />
             <span>Institutional Honors & Certifications</span>
           </div>
-
-          {/* Heading with 2 orange diagonal slash lines */}
           <h2 className="relative z-10 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-[42px] leading-tight">
             Recognized & Certified{" "}
             <span className="relative inline-block">
               by
-              {/* 2 orange slash lines exactly like screenshot */}
               <span
                 className="absolute -top-2.5 -right-6 text-[#FD8006] select-none font-bold text-xl leading-none inline-flex gap-0.5 tracking-tighter"
                 aria-hidden="true"
@@ -251,14 +238,13 @@ const CertificateShowcase = () => {
             <span className="text-[#FD8006]">Global Authorities</span>
           </h2>
 
-          {/* Subtitle */}
           <p className="relative z-10 mt-3.5 text-sm sm:text-base text-slate-500 max-w-2xl mx-auto leading-relaxed font-normal">
             ApnaVidya is backed by internationally recognized quality management
             frameworks and honors to ensure your learning credentials hold authentic global value.
           </p>
         </div>
 
-        {/* Cards Grid */}
+
         {loading ? (
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[1, 2, 3, 4].map((i) => (

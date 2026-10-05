@@ -713,3 +713,287 @@ export const LeadConversionDonut = ({ data = [] }) => {
     </div>
   );
 };
+
+export const LeadDetailsDonutChart = ({
+  data = [],
+  leads = [],
+  totalCount = null,
+  conversionRate = null,
+}) => {
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [groupMode, setGroupMode] = useState("status"); // "status" | "source"
+
+  const statusMeta = {
+    Converted: { label: "Converted", color: "#10b981" },
+    New: { label: "New Leads", color: "#3b82f6" },
+    Contacted: { label: "Follow-up", color: "#f59e0b" },
+    "In Progress": { label: "In Progress", color: "#f59e0b" },
+    "Follow-up": { label: "Follow-up", color: "#f59e0b" },
+    Interested: { label: "Interested", color: "#8b5cf6" },
+    "Demo Scheduled": { label: "Demo Scheduled", color: "#ec4899" },
+    "Not Interested": { label: "Lost", color: "#f43f5e" },
+    Lost: { label: "Lost", color: "#f43f5e" },
+    Closed: { label: "Closed", color: "#94a3b8" },
+  };
+
+  const sourceMeta = {
+    "Contact Form": { label: "Contact Form", color: "#3b82f6" },
+    "Demo Class": { label: "Demo Class", color: "#ec4899" },
+    "Course Enquiry": { label: "Course Enquiry", color: "#8b5cf6" },
+    Website: { label: "Website", color: "#10b981" },
+    Homepage: { label: "Homepage", color: "#06b6d4" },
+    "Direct Call": { label: "Direct Call", color: "#f59e0b" },
+    Other: { label: "Other", color: "#64748b" },
+  };
+
+  const statusColorPalette = [
+    "#10b981", "#3b82f6", "#f59e0b", "#8b5cf6", "#ec4899", "#f43f5e", "#06b6d4",
+  ];
+
+  let displayData = [];
+  let calculatedTotal = 0;
+  let dynamicConvRate = conversionRate;
+
+  if (Array.isArray(leads) && leads.length > 0) {
+    calculatedTotal = leads.length;
+    const counts = {};
+
+    if (groupMode === "source") {
+      leads.forEach((l) => {
+        const src = (l.source && l.source.trim()) || "Website";
+        counts[src] = (counts[src] || 0) + 1;
+      });
+
+      displayData = Object.entries(counts)
+        .map(([rawSource, count]) => {
+          const meta = sourceMeta[rawSource] || { label: rawSource, color: "#6366f1" };
+          return { label: meta.label, count, color: meta.color };
+        })
+        .sort((a, b) => b.count - a.count);
+    } else {
+      leads.forEach((l) => {
+        const st = (l.status && l.status.trim()) || "New";
+        counts[st] = (counts[st] || 0) + 1;
+      });
+
+      const convertedCount = counts["Converted"] || 0;
+      dynamicConvRate = Math.round((convertedCount / calculatedTotal) * 100);
+
+      displayData = Object.entries(counts)
+        .map(([rawStatus, count]) => {
+          const meta = statusMeta[rawStatus] || { label: rawStatus, color: "#6366f1" };
+          return { label: meta.label, count, color: meta.color };
+        })
+        .sort((a, b) => b.count - a.count);
+    }
+  } else {
+    displayData = (data || []).map((d, i) => ({
+      ...d,
+      color: d.color || statusColorPalette[i % statusColorPalette.length],
+      count: Number(d.count ?? d.value ?? 0),
+    }));
+    calculatedTotal = displayData.reduce((acc, curr) => acc + curr.count, 0);
+  }
+
+  const total = totalCount !== null && totalCount !== undefined && totalCount > 0 ? totalCount : calculatedTotal;
+
+  if (total === 0 || displayData.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-8 text-center my-auto">
+        <div className="relative h-28 w-28 mb-3">
+          <svg viewBox="0 0 36 36" className="h-full w-full">
+            <circle
+              cx="18"
+              cy="18"
+              r="15.915"
+              fill="none"
+              stroke="#e2e8f0"
+              strokeWidth="4"
+              strokeDasharray="4 4"
+            />
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <span className="text-xl font-black text-slate-400">0</span>
+            <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">
+              No Leads
+            </span>
+          </div>
+        </div>
+        <p className="text-xs font-bold text-slate-700">No leads recorded yet</p>
+        <p className="text-[11px] text-slate-400 mt-0.5 max-w-[200px]">
+          Inquiries submitted via website will appear here in real time.
+        </p>
+      </div>
+    );
+  }
+
+  let accumulatedPercent = 0;
+  const activeItem = hoveredIdx !== null ? displayData[hoveredIdx] : null;
+
+  return (
+    <div className="w-full flex flex-col items-center justify-between h-full pt-1">
+      {/* Mode Switcher: By Status vs By Source */}
+      {Array.isArray(leads) && leads.length > 0 && (
+        <div className="flex items-center gap-1 p-1 bg-slate-100/90 rounded-xl mb-2 text-[11px] font-bold">
+          <button
+            type="button"
+            onClick={() => {
+              setGroupMode("status");
+              setHoveredIdx(null);
+            }}
+            className={`px-3 py-0.5 rounded-lg transition-all cursor-pointer ${
+              groupMode === "status"
+                ? "bg-white text-blue-700 shadow-2xs"
+                : "text-slate-500 hover:text-slate-800"
+            }`}
+          >
+            By Status
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setGroupMode("source");
+              setHoveredIdx(null);
+            }}
+            className={`px-3 py-0.5 rounded-lg transition-all cursor-pointer ${
+              groupMode === "source"
+                ? "bg-white text-blue-700 shadow-2xs"
+                : "text-slate-500 hover:text-slate-800"
+            }`}
+          >
+            By Source
+          </button>
+        </div>
+      )}
+
+      {/* Centered Donut Ring */}
+      <div className="relative h-32 w-32 sm:h-36 sm:w-36 shrink-0 select-none my-1">
+        <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
+          <defs>
+            <filter id="leadDonutGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.18" />
+            </filter>
+          </defs>
+
+          {/* Background circle */}
+          <circle
+            cx="18"
+            cy="18"
+            r="15.915"
+            fill="none"
+            stroke="#f1f5f9"
+            strokeWidth="4.2"
+          />
+
+          {displayData.map((slice, i) => {
+            const rawPercent = total > 0 ? (slice.count / total) * 100 : 0;
+            const strokeDasharray = `${rawPercent} ${100 - rawPercent}`;
+            const strokeDashoffset = -accumulatedPercent;
+            accumulatedPercent += rawPercent;
+            const isHovered = hoveredIdx === i;
+
+            return (
+              <circle
+                key={i}
+                cx="18"
+                cy="18"
+                r="15.915"
+                fill="none"
+                stroke={slice.color}
+                strokeWidth={isHovered ? 5.6 : 4.4}
+                strokeDasharray={strokeDasharray}
+                strokeDashoffset={strokeDashoffset}
+                filter={isHovered ? "url(#leadDonutGlow)" : undefined}
+                className="transition-all duration-200 cursor-pointer"
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+              />
+            );
+          })}
+        </svg>
+
+        {/* Center label & metrics with micro-interaction */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none transition-all duration-200">
+          {activeItem ? (
+            <>
+              <span
+                className="text-2xl font-black tracking-tight transition-all duration-200"
+                style={{ color: activeItem.color }}
+              >
+                {activeItem.count}
+              </span>
+              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider truncate max-w-[85px] px-1">
+                {activeItem.label}
+              </span>
+              <span
+                className="text-[10px] font-mono font-bold mt-0.5 px-1.5 py-0.2 rounded"
+                style={{ backgroundColor: `${activeItem.color}15`, color: activeItem.color }}
+              >
+                {total > 0 ? `${Math.round((activeItem.count / total) * 100)}%` : "0%"}
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="text-2xl font-black text-slate-900 tracking-tight">
+                {total}
+              </span>
+              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                Total Leads
+              </span>
+              {dynamicConvRate !== null && dynamicConvRate !== undefined && (
+                <span className="text-[10px] font-bold text-emerald-600 mt-0.5">
+                  {dynamicConvRate}% Conv.
+                </span>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Breakdown Legend List */}
+      <div className="w-full mt-3 space-y-1.5 pt-2.5 border-t border-slate-100 max-h-44 overflow-y-auto pr-0.5">
+        {displayData.map((item, idx) => {
+          const isHovered = hoveredIdx === idx;
+          const percent = total > 0 ? Math.round((item.count / total) * 100) : 0;
+
+          return (
+            <div
+              key={idx}
+              onMouseEnter={() => setHoveredIdx(idx)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              className={`flex items-center justify-between text-xs rounded-xl px-2.5 py-1.5 transition-all cursor-pointer ${
+                isHovered
+                  ? "bg-slate-100/90 shadow-2xs translate-x-1"
+                  : "hover:bg-slate-50"
+              }`}
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <span
+                  className="h-2.5 w-2.5 rounded-full ring-2 ring-white shrink-0 shadow-2xs transition-transform"
+                  style={{
+                    backgroundColor: item.color,
+                    transform: isHovered ? "scale(1.25)" : "scale(1)",
+                  }}
+                />
+                <span className={`font-bold truncate text-[11px] ${isHovered ? "text-slate-900" : "text-slate-700"}`}>
+                  {item.label}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span className="text-xs font-mono font-bold text-slate-700">
+                  {item.count}
+                </span>
+                <span
+                  className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-md"
+                  style={{ backgroundColor: `${item.color}18`, color: item.color }}
+                >
+                  {percent}%
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};

@@ -2,24 +2,24 @@ const AboutContent = require("../models/AboutContent");
 
 const DEFAULT_VALUES = [
   {
-    icon: "Target",
-    title: "Outcome Driven",
-    desc: "We focus on what truly matters in the industry: shipping production code, building real portfolios, and cracking job interviews.",
+    icon: "BookOpen",
+    title: "Student First",
+    desc: "We put students at the center of everything we do, focusing on their growth, confidence and success.",
   },
   {
-    icon: "Heart",
-    title: "Student-First Mentorship",
-    desc: "Every student learns at their own pace. Our dedicated 1-on-1 doubt sessions ensure nobody gets left behind.",
+    icon: "Lightbulb",
+    title: "Continuous Learning",
+    desc: "We believe in lifelong learning, constantly evolving to deliver better solutions and stay ahead.",
   },
   {
-    icon: "ShieldCheck",
-    title: "Uncompromising Quality",
-    desc: "Our curriculum is reviewed by senior engineers at top product companies to guarantee modern relevance.",
+    icon: "Users",
+    title: "Integrity & Trust",
+    desc: "We build honest relationships and maintain transparency in all our actions.",
   },
   {
-    icon: "Award",
-    title: "Verifiable Excellence",
-    desc: "Every credential earned through ApnaVidya is backed by ISO 9001:2015 standards and independent digital verification.",
+    icon: "TrendingUp",
+    title: "Innovation for Impact",
+    desc: "We embrace new ideas and technology to create meaningful change in education.",
   },
 ];
 
@@ -74,6 +74,8 @@ const DEFAULT_ABOUT = {
     "To become India's most student-centric learning community where anybody with grit and curiosity can transition into a thriving software engineering career.",
   valuesTag: "Our Pillars",
   valuesTitle: "Values That Drive Everything We Do",
+  valuesSubtitle:
+    "These core values guide our mission, shape our culture, and inspire us to create a better learning experience for every student.",
   values: DEFAULT_VALUES,
   teamTag: "Experienced Educators",
   teamTitle: "Meet the Mentors Behind ApnaVidya",
@@ -159,6 +161,7 @@ const updateAboutContent = async (req, res) => {
       "visionDescription",
       "valuesTag",
       "valuesTitle",
+      "valuesSubtitle",
       "values",
       "teamTag",
       "teamTitle",
