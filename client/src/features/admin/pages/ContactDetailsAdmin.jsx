@@ -12,8 +12,11 @@ import {
 import PageHeader from "../components/PageHeader";
 import { FormInput, FormTextarea } from "../components/FormControls";
 import { initialContactCMS } from "../../../data/admin/cmsData";
+import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
+import defaultLogo from "../../../assets/apnavidya.png";
 
 const ContactDetailsAdmin = ({ isEmbedded = false }) => {
+  const { settings } = useSettings();
   const [data, setData] = useState(initialContactCMS);
   const [saved, setSaved] = useState(false);
 
@@ -165,9 +168,14 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FD8006] text-white font-black text-[13px]m">
-                AV
-              </div>
+              <img
+                src={sanitizeAssetUrl(settings.general.logoUrl, defaultLogo)}
+                alt="Logo"
+                className="h-10 w-auto max-w-[140px] object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = defaultLogo;
+                }}
+              />
               <div>
                 <h4 className="font-bold text-[13px]late-900 text-[13px]m">ApnaVidya Contact</h4>
                 <p className="text-[13px] text-[13px]late-400">{data.workingHours}</p>

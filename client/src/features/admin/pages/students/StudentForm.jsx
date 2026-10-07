@@ -241,6 +241,8 @@ const StudentForm = () => {
               value={formData.profileImage}
               onChange={(url) => handleChange("profileImage", url)}
               aspect="square"
+              imageClassName="object-top"
+              objectPosition="top"
               helperText="Passport size photo for student identity card and batch records"
             />
           </div>

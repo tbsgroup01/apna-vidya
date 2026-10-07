@@ -23,6 +23,7 @@ const uploadController = require("../controllers/uploadController");
 const authController = require("../controllers/authController");
 const holidayEmailController = require("../controllers/holidayEmailController");
 const testimonialController = require("../controllers/testimonialController");
+const alertNotificationController = require("../controllers/alertNotificationController");
 
 router.use(authenticate);
 router.post("/upload", upload.any(), uploadController.uploadImage);
@@ -330,12 +331,14 @@ router.post(
   upload.single("image"),
   blogController.createBlog
 );
+
 router.put(
   "/blogs/:id",
   authorizePermission("content.edit"),
   upload.single("image"),
   blogController.updateBlog
 );
+
 router.delete(
   "/blogs/:id",
   authorizePermission("content.delete"),
@@ -424,5 +427,13 @@ router.post("/testimonials", upload.any(), testimonialController.createTestimoni
 router.put("/testimonials/:id", upload.any(), testimonialController.updateTestimonial);
 router.delete("/testimonials/:id", testimonialController.deleteTestimonial);
 router.post("/testimonials/bulk-delete", testimonialController.bulkDeleteTestimonials);
+
+router.get("/alert-notifications", alertNotificationController.getAdminAlerts);
+router.get("/alert-notifications/:id", alertNotificationController.getAlertById);
+router.post("/alert-notifications", alertNotificationController.createAlert);
+router.put("/alert-notifications/:id", alertNotificationController.updateAlert);
+router.patch("/alert-notifications/:id/status", alertNotificationController.toggleStatus);
+router.delete("/alert-notifications/:id", alertNotificationController.deleteAlert);
+router.post("/alert-notifications/bulk-delete", alertNotificationController.bulkDeleteAlerts);
 
 module.exports = router;

@@ -13,12 +13,15 @@ import {
 } from "lucide-react";
 import { adminProfileData } from "../../../data/admin/settingsData";
 import { useAuth } from "../../../context/AuthContext";
+import { useSettings } from "../../../context/SettingsContext";
 import api from "../../../services/api";
 
 const Topbar = ({ sidebarOpen, toggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
+  const { settings } = useSettings();
+  const siteName = settings.general?.siteName || "ApnaVidya";
   const [notifications, setNotifications] = useState([]);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -26,12 +29,28 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const notifRef = useRef(null);
   const profileRef = useRef(null);
+  const [readNotifIds, setReadNotifIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem("admin_read_notifications");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
 
   useEffect(() => {
     const fetchRecentAlerts = async () => {
       try {
         const res = await api.get("/admin/leads?limit=5");
         if (res.data?.data?.leads) {
+          const storedRead = (() => {
+            try {
+              return JSON.parse(localStorage.getItem("admin_read_notifications") || "[]");
+            } catch {
+              return [];
+            }
+          })();
+
           setNotifications(
             res.data.data.leads.map((l) => ({
               id: l.id,
@@ -40,7 +59,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
                 : "New Lead Inquiry",
               description: `${l.name} (${l.course || "General Inquiry"})`,
               time: new Date(l.createdAt).toLocaleDateString(),
-              unread: l.status === "New",
+              unread: l.status === "New" && !storedRead.includes(l.id),
             }))
           );
         }
@@ -50,6 +69,29 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
     };
     fetchRecentAlerts();
   }, []);
+
+  const handleMarkAllAsRead = () => {
+    const allIds = notifications.map((n) => n.id);
+    const updated = Array.from(new Set([...readNotifIds, ...allIds]));
+    setReadNotifIds(updated);
+    try {
+      localStorage.setItem("admin_read_notifications", JSON.stringify(updated));
+    } catch {}
+    setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })));
+  };
+
+  const handleNotificationClick = (notif) => {
+    const updated = Array.from(new Set([...readNotifIds, notif.id]));
+    setReadNotifIds(updated);
+    try {
+      localStorage.setItem("admin_read_notifications", JSON.stringify(updated));
+    } catch {}
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === notif.id ? { ...n, unread: false } : n))
+    );
+    setNotificationsOpen(false);
+    navigate(`/admin/leads/${notif.id}`);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -132,7 +174,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
 
           <div className="flex flex-col">
             <span className="text-xs font-semibold text-blue-600 hidden sm:block">
-              ApnaVidya Admin
+              {siteName} Admin
             </span>
             <h2 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
               {getPageTitle()}
@@ -180,9 +222,24 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
                     Recent Inquiries & Alerts
                   </h4>
-                  <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[12px] font-bold text-blue-600">
-                    {notifications.filter((n) => n.unread).length} New
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {notifications.some((n) => n.unread) && (
+                      <button
+                        type="button"
+                        onClick={handleMarkAllAsRead}
+                        className="text-[11px] font-semibold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer"
+                      >
+                        Mark all read
+                      </button>
+                    )}
+                    <span className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
+                      notifications.some((n) => n.unread)
+                        ? "bg-blue-50 text-blue-600"
+                        : "bg-slate-100 text-slate-500"
+                    }`}>
+                      {notifications.filter((n) => n.unread).length} New
+                    </span>
+                  </div>
                 </div>
 
                 <div className="mt-2 divide-y divide-slate-50 max-h-72 overflow-y-auto">
@@ -194,18 +251,25 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
                     notifications.map((notif) => (
                       <div
                         key={notif.id}
-                        className={`py-2.5 px-2 rounded-xl transition-colors ${notif.unread ? "bg-blue-50/40" : "hover:bg-slate-50"
-                          }`}
+                        onClick={() => handleNotificationClick(notif)}
+                        className={`py-2.5 px-2 rounded-xl transition-colors cursor-pointer ${
+                          notif.unread ? "bg-blue-50/50 hover:bg-blue-50/80" : "hover:bg-slate-50"
+                        }`}
                       >
                         <div className="flex items-start justify-between gap-2">
-                          <p className="text-xs font-bold text-slate-900">
-                            {notif.title}
-                          </p>
-                          <span className="text-[12px] text-slate-400 shrink-0">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            {notif.unread && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
+                            )}
+                            <p className="text-xs font-bold text-slate-900 truncate">
+                              {notif.title}
+                            </p>
+                          </div>
+                          <span className="text-[11px] text-slate-400 shrink-0">
                             {notif.time}
                           </span>
                         </div>
-                        <p className="mt-1 text-xs text-slate-600 leading-snug">
+                        <p className="mt-1 text-xs text-slate-600 leading-snug pl-3">
                           {notif.description}
                         </p>
                       </div>

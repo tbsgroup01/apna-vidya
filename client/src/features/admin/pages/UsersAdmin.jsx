@@ -115,7 +115,8 @@ const UsersAdmin = () => {
           <img
             src={row.avatar}
             alt={row.name}
-            className="h-9 w-9 rounded-xl object-cover ring-1 ring-slate-200 shrink-0"
+            className="h-9 w-9 rounded-xl object-cover object-top ring-1 ring-slate-200 shrink-0"
+            style={{ objectPosition: "top" }}
           />
           <div>
             <span className="font-bold text-slate-900 block">{row.name}</span>
@@ -274,6 +275,8 @@ const UsersAdmin = () => {
                 value={form.avatar}
                 onChange={(url) => setForm({ ...form, avatar: url })}
                 aspect="square"
+                imageClassName="object-top"
+                objectPosition="top"
                 helperText="Upload profile picture or paste an avatar URL"
               />
 

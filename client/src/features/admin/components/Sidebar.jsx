@@ -16,6 +16,7 @@ import {
   UserCircle,
   LogOut,
   MessageSquareQuote,
+  Megaphone,
 } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
 import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
@@ -119,6 +120,13 @@ const navSections = [
   {
     title: "Communication",
     items: [
+      {
+        label: "Alert Notifications",
+        path: "/admin/notifications",
+        icon: Megaphone,
+        color: "text-amber-500",
+        bgColor: "bg-amber-50",
+      },
       {
         label: "Holiday Emails",
         path: "/admin/holiday-emails",

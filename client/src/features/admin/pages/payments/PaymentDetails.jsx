@@ -20,6 +20,7 @@ const WhatsAppIcon = ({ size = 15, className = "" }) => (
     fill="currentColor"
     className={className}
   >
+    
     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.53c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.78.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.3z" />
   </svg>
 );
@@ -112,7 +113,8 @@ const PaymentDetails = () => {
   const studentPhone = payment.studentPhone || "";
   const digits = studentPhone.replace(/\D/g, "");
   const waNumber = digits.length === 10 ? `91${digits}` : digits;
-  const publicReceiptUrl = `${window.location.origin}/apna-vidya/receipt/${payment.id}`;
+  const base = import.meta.env.BASE_URL || "/";
+  const publicReceiptUrl = `${window.location.origin}${base}receipt/${payment.id}`.replace(/([^:]\/)\/+/g, "$1");
 
   const shareText =
     `*ApnaVidya - Official Fee Receipt*\n\n` +
@@ -188,7 +190,6 @@ const PaymentDetails = () => {
       </div>
 
       <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs space-y-3.5 print:border print:border-slate-300 print:rounded-2xl print:shadow-none print:p-6 print:m-0 print:w-full print:space-y-3">
-        {/* Company Header with Official Logo, NO GSTIN line, compact gap */}
         <div className="flex items-start justify-between border-b border-slate-100 pb-3">
           <div className="flex items-center gap-3">
             <img
@@ -209,7 +210,6 @@ const PaymentDetails = () => {
           </div>
         </div>
 
-        {/* Student & Voucher Details with Roll No, DOJ, Batch Name, Duration, Next Due Date, Late Fee, Remaining Balance */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs border-b border-slate-100 pb-4">
           <div className="space-y-1">
             <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
@@ -237,35 +237,7 @@ const PaymentDetails = () => {
             </div>
           </div>
 
-          {/* <div className="text-left sm:text-right space-y-1">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Payment Voucher Details
-            </p>
-            <p className="font-mono text-slate-700">
-              Receipt No: <span className="font-bold text-slate-900">{payment.id}</span>
-            </p>
-            <p className="text-slate-500">Date: {payment.date}</p>
-            <p className="text-slate-500">Method: {payment.method}</p>
-            <p className="font-mono text-[11px] text-slate-400 truncate mt-0.5">
-              Ref: {payment.transactionRef}
-            </p>
-            <div className="mt-2 pt-2 border-t border-slate-100/80 space-y-1">
-              <p className="text-slate-700">
-                <span className="text-slate-400 font-medium">Next Due Date:</span>{" "}
-                <span className="font-semibold text-amber-700">{nextDueDate}</span>
-              </p>
-              <p className="text-slate-700">
-                <span className="text-slate-400 font-medium">Late Fee (if any):</span>{" "}
-                <span className="text-slate-700 font-mono">{lateFee}</span>
-              </p>
-              <p className="text-slate-700">
-                <span className="text-slate-400 font-medium">Remaining Balance:</span>{" "}
-                <span className="font-bold font-mono text-rose-600">
-                  ₹{remainingBalance.toLocaleString()}
-                </span>
-              </p>
-            </div>
-          </div> */}
+
         </div>
 
         {/* Program / Fee Table */}

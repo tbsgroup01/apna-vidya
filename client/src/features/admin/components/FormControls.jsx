@@ -145,13 +145,18 @@ export const ImageUploadPreview = ({
   maxSizeMB = 1,
   helperText = "",
   required = false,
+  imageClassName = "",
+  objectPosition = "",
 }) => {
   const [mode, setMode] = useState("file");
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [isReplacing, setIsReplacing] = useState(false);
+  const [pos, setPos] = useState(objectPosition || (aspect === "square" ? "top" : "center"));
   const fileInputRef = useRef(null);
+
+  const currentPosition = objectPosition || pos;
 
   const getAspectClass = () => {
     switch (aspect) {
@@ -276,7 +281,14 @@ export const ImageUploadPreview = ({
             <img
               src={value}
               alt="Preview"
-              className="h-full w-full object-cover"
+              className={`h-full w-full object-cover ${
+                currentPosition === "top"
+                  ? "object-top"
+                  : currentPosition === "bottom"
+                  ? "object-bottom"
+                  : "object-center"
+              } ${imageClassName}`}
+              style={{ objectPosition: currentPosition }}
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80";
@@ -284,7 +296,7 @@ export const ImageUploadPreview = ({
             />
           </div>
 
-          <div className="mt-2.5 flex items-center justify-between gap-2 px-1">
+          <div className="mt-2.5 flex items-center justify-between gap-2 px-1 flex-wrap">
             <div className="flex items-center gap-1.5 min-w-0 flex-1">
               <span className="shrink-0 rounded-md bg-emerald-50 px-2 py-0.5 text-[12px] font-bold text-emerald-700 border border-emerald-200/60">
                 Active Image
@@ -295,6 +307,35 @@ export const ImageUploadPreview = ({
             </div>
 
             <div className="flex items-center gap-1.5 shrink-0">
+              {/* Image alignment focus control */}
+              <div className="inline-flex items-center gap-0.5 rounded-lg border border-slate-200 bg-white p-0.5 text-[11px] font-medium text-slate-600 shadow-2xs">
+                <span className="px-1 text-[10px] text-slate-400 font-semibold uppercase">Focus:</span>
+                <button
+                  type="button"
+                  onClick={() => setPos("top")}
+                  className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
+                    currentPosition === "top"
+                      ? "bg-blue-600 text-white font-bold shadow-2xs"
+                      : "hover:bg-slate-100 text-slate-600"
+                  }`}
+                  title="Focus from top (best for face / passport photos)"
+                >
+                  Top
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPos("center")}
+                  className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
+                    currentPosition === "center"
+                      ? "bg-blue-600 text-white font-bold shadow-2xs"
+                      : "hover:bg-slate-100 text-slate-600"
+                  }`}
+                  title="Focus center"
+                >
+                  Center
+                </button>
+              </div>
+
               <button
                 type="button"
                 onClick={() => setIsReplacing(true)}

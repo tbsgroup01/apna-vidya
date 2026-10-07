@@ -13,6 +13,7 @@ const upload = require("../middlewares/uploadMiddleware");
 const uploadController = require("../controllers/uploadController");
 const otpController = require("../controllers/otpController");
 const testimonialController = require("../controllers/testimonialController");
+const alertNotificationController = require("../controllers/alertNotificationController");
 
 router.post("/upload", upload.any(), uploadController.uploadImage);
 
@@ -47,6 +48,7 @@ router.get("/video-section", videoSectionController.getPublicVideoSection);
 router.get("/settings", settingController.getPublicSettings);
 router.get("/settings/contact", settingController.getPublicContactSettings);
 router.get("/testimonials", testimonialController.getPublicTestimonials);
+router.get("/alert-notifications", alertNotificationController.getPublicAlerts);
 
 module.exports = router;
 

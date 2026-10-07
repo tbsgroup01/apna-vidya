@@ -18,9 +18,14 @@ import {
   X,
 } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
+import { useSettings, sanitizeAssetUrl } from "../../../context/SettingsContext";
+import defaultLogo from "../../../assets/apnavidya.png";
 
 const StudentLayout = () => {
   const { user, logout } = useAuth();
+  const { settings } = useSettings();
+  const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, defaultLogo);
+  const siteName = settings.general?.siteName || "ApnaVidya";
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -39,19 +44,21 @@ const StudentLayout = () => {
       <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-6">
-            <Link to="/student/dashboard" className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 text-white font-extrabold text-base shadow-md shadow-blue-500/20">
-                AV
-              </div>
-              <div className="flex flex-col">
-                <span className="text-base font-black tracking-tight text-[13px]late-900 leading-tight">
-                  ApnaVidya
-                </span>
-                <span className="inline-flex items-center gap-1 text-[12px] font-bold uppercase tracking-wider text-blue-600">
-                  <Sparkles size={10} />
-                  Student Portal
-                </span>
-              </div>
+            <Link to="/student/dashboard" className="flex items-center gap-3 group" aria-label={`${siteName} Student Portal`}>
+              <img
+                src={logoSrc}
+                alt={`${siteName} Logo`}
+                onError={(e) => {
+                  if (e.currentTarget.src !== defaultLogo) {
+                    e.currentTarget.src = defaultLogo;
+                  }
+                }}
+                className="h-10 sm:h-11 w-auto max-w-[180px] object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              />
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-blue-700">
+                <Sparkles size={10} />
+                Student Portal
+              </span>
             </Link>
 
             <nav className="hidden md:flex items-center gap-1">

@@ -9,7 +9,6 @@ const startServer = async () => {
   try {
     await initDb();
 
-    // One call to feed certificate, courses, testimonials, 5 blogs
     await seedData();
 
     app.listen(PORT, () => {

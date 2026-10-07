@@ -28,6 +28,8 @@ const { DEFAULT_VIDEO_SECTION } = require("../controllers/videoSectionController
 const HolidayEmail = require("../models/HolidayEmail");
 const Testimonial = require("../models/Testimonial");
 const { DEFAULT_TESTIMONIALS } = require("../controllers/testimonialController");
+const AlertNotification = require("../models/AlertNotification");
+const { DEFAULT_ALERTS } = require("../controllers/alertNotificationController");
 
 User.belongsTo(Role, { foreignKey: "roleId", as: "role" });
 Role.hasMany(User, { foreignKey: "roleId", as: "users" });
@@ -292,6 +294,13 @@ const seedDatabase = async () => {
       await Testimonial.create(item);
     }
   }
+
+  const alertCount = await AlertNotification.count();
+  if (alertCount === 0) {
+    for (const item of DEFAULT_ALERTS) {
+      await AlertNotification.create(item);
+    }
+  }
 };
 
 const initDb = async () => {
@@ -329,6 +338,12 @@ const initDb = async () => {
         "UPDATE blogs SET excerpt = SUBSTRING(REPLACE(REPLACE(content, '<p>', ''), '</p>', ' '), 1, 240) WHERE excerpt IS NULL OR excerpt = ''"
       );
     } catch (e) {}
+    try {
+      await sequelize.query("ALTER TABLE alert_notifications ADD COLUMN bgColor VARCHAR(50) DEFAULT '#FD8006'");
+    } catch (e) {}
+    try {
+      await sequelize.query("ALTER TABLE alert_notifications ADD COLUMN textColor VARCHAR(50) DEFAULT '#ffffff'");
+    } catch (e) {}
     console.log("Database models synchronized successfully.");
     await seedDatabase();
     console.log("Database seeded successfully.");
@@ -365,4 +380,5 @@ module.exports = {
   HomeVideoSection,
   HolidayEmail,
   Testimonial,
+  AlertNotification,
 };

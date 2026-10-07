@@ -528,7 +528,8 @@ const TestimonialsAdmin = () => {
                         e.currentTarget.src =
                           "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
                       }}
-                      className="h-12 w-12 rounded-full object-cover ring-2 ring-blue-100 shrink-0"
+                      className="h-12 w-12 rounded-full object-cover object-top ring-2 ring-blue-100 shrink-0"
+                      style={{ objectPosition: "top" }}
                     />
                     <div>
                       <h4 className="text-sm font-bold text-slate-900 line-clamp-1">
@@ -735,6 +736,8 @@ const TestimonialsAdmin = () => {
                   aspect="square"
                   presets={PRESET_AVATARS}
                   helperText="Upload a student photo or select a preset avatar"
+                  imageClassName="object-top"
+                  objectPosition="top"
                 />
               </div>
 

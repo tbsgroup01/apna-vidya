@@ -534,38 +534,38 @@ const Dashboard = () => {
         </div>
 
         {/* 30% Column: Leads Details Donut Chart */}
-        <div className="lg:col-span-3 relative overflow-hidden rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/40 via-white to-indigo-50/20 p-5 shadow-xs hover:border-blue-300 transition-all flex flex-col justify-between">
+        <div className="lg:col-span-3 relative overflow-hidden rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/40 via-white to-indigo-50/20 p-4 sm:p-5 shadow-xs hover:border-blue-300 transition-all flex flex-col justify-between min-w-0">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-600" />
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xs">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xs">
                 <Target size={18} strokeWidth={2.2} />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-base font-bold text-slate-900">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <h3 className="text-base font-bold text-slate-900 truncate">
                     Leads Overview
                   </h3>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/90 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200/90 px-1.5 py-0.5 text-[9px] font-bold text-emerald-700 shrink-0">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     Live Sync
                   </span>
                 </div>
-                <p className="text-xs text-slate-500">
+                <p className="text-[11px] text-slate-500 truncate">
                   Real-time data from /admin/leads
                 </p>
               </div>
             </div>
             <Link
               to="/admin/leads"
-              className="inline-flex items-center gap-1 rounded-xl bg-blue-100/90 border border-blue-200/60 px-3 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs"
+              className="inline-flex items-center gap-1 rounded-xl bg-blue-100/90 border border-blue-200/60 px-2.5 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-600 hover:text-white transition-all shadow-2xs shrink-0 ml-1"
             >
               <span>View Leads</span>
               <ArrowRight size={12} />
             </Link>
           </div>
 
-          <div className="flex-1 flex flex-col justify-center">
+          <div className="flex-1 flex flex-col justify-center min-w-0 overflow-hidden w-full">
             <LeadDetailsDonutChart
               data={leadBreakdownData}
               leads={rawLeadsList}
@@ -714,7 +714,8 @@ const Dashboard = () => {
                               "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
                             }
                             alt={stu.name}
-                            className="h-8 w-8 rounded-xl object-cover ring-2 ring-purple-200"
+                            className="h-8 w-8 rounded-xl object-cover object-top ring-2 ring-purple-200"
+                            style={{ objectPosition: "top" }}
                           />
                           <div>
                             <p className="font-bold text-slate-900">{stu.name}</p>

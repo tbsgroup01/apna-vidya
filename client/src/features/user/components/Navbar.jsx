@@ -89,6 +89,24 @@ const Navbar = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    // Auto close mobile menu & profile on page route change
+    useEffect(() => {
+        setIsMenuOpen(false);
+        setIsProfileOpen(false);
+    }, [location.pathname]);
+
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isMenuOpen]);
+
     return (
         <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.05)] border-b border-slate-100">
             {/* Top Multi-color Gradient Accent Line */}
@@ -327,10 +345,14 @@ const Navbar = () => {
                     <button
                         type="button"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100 lg:hidden cursor-pointer"
-                        aria-label="Toggle navigation menu"
+                        className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-200 lg:hidden cursor-pointer active:scale-90 shadow-2xs ${
+                            isMenuOpen
+                                ? "bg-rose-50 border-rose-200 text-rose-600"
+                                : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300"
+                        }`}
+                        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                     >
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
             </div>
@@ -340,13 +362,13 @@ const Navbar = () => {
                 <>
                     {/* Backdrop Overlay to close on tap outside */}
                     <div
-                        className="fixed inset-0 top-[72px] sm:top-[80px] bg-slate-900/35 backdrop-blur-2xs z-40 lg:hidden animate-in fade-in duration-150"
+                        className="fixed inset-0 top-[66px] sm:top-[74px] bg-slate-900/40 backdrop-blur-xs z-40 lg:hidden animate-in fade-in duration-200"
                         onClick={closeMobileMenu}
                         aria-hidden="true"
                     />
 
                     {/* Floating Mobile Dropdown Menu */}
-                    <div className="absolute top-full left-0 right-0 w-full bg-white/98 backdrop-blur-xl border-t border-b border-slate-200 shadow-2xl py-4 px-4 sm:px-6 lg:hidden animate-in fade-in slide-in-from-top-2 duration-150 max-h-[calc(100vh-5rem)] overflow-y-auto z-50">
+                    <div className="absolute top-full left-0 right-0 w-full bg-white/98 backdrop-blur-xl border-t border-b border-slate-200/90 shadow-2xl py-4 px-4 sm:px-6 lg:hidden animate-in fade-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-4.5rem)] overflow-y-auto z-50">
                         <div className="mx-auto max-w-7xl">
                             <nav className="space-y-1">
                                 {isAuthenticated && user && (

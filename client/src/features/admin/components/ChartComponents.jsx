@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 export const EnrollmentLineChart = ({ data = [] }) => {
   const [hoveredIdx, setHoveredIdx] = useState(null);
@@ -722,28 +722,36 @@ export const LeadDetailsDonutChart = ({
 }) => {
   const [hoveredIdx, setHoveredIdx] = useState(null);
   const [groupMode, setGroupMode] = useState("status"); // "status" | "source"
+  const [tooltipState, setTooltipState] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    data: null,
+    containerWidth: 280,
+  });
+  const containerRef = useRef(null);
 
   const statusMeta = {
-    Converted: { label: "Converted", color: "#10b981" },
-    New: { label: "New Leads", color: "#3b82f6" },
-    Contacted: { label: "Follow-up", color: "#f59e0b" },
-    "In Progress": { label: "In Progress", color: "#f59e0b" },
-    "Follow-up": { label: "Follow-up", color: "#f59e0b" },
-    Interested: { label: "Interested", color: "#8b5cf6" },
-    "Demo Scheduled": { label: "Demo Scheduled", color: "#ec4899" },
-    "Not Interested": { label: "Lost", color: "#f43f5e" },
-    Lost: { label: "Lost", color: "#f43f5e" },
-    Closed: { label: "Closed", color: "#94a3b8" },
+    Converted: { label: "Converted", color: "#10b981", tag: "Won" },
+    New: { label: "New Leads", color: "#3b82f6", tag: "Fresh" },
+    Contacted: { label: "Follow-up", color: "#f59e0b", tag: "Follow-up" },
+    "In Progress": { label: "In Progress", color: "#f59e0b", tag: "Active" },
+    "Follow-up": { label: "Follow-up", color: "#f59e0b", tag: "Follow-up" },
+    Interested: { label: "Interested", color: "#8b5cf6", tag: "Warm" },
+    "Demo Scheduled": { label: "Demo Scheduled", color: "#ec4899", tag: "Demo" },
+    "Not Interested": { label: "Lost", color: "#f43f5e", tag: "Closed" },
+    Lost: { label: "Lost", color: "#f43f5e", tag: "Closed" },
+    Closed: { label: "Closed", color: "#94a3b8", tag: "Archived" },
   };
 
   const sourceMeta = {
-    "Contact Form": { label: "Contact Form", color: "#3b82f6" },
-    "Demo Class": { label: "Demo Class", color: "#ec4899" },
-    "Course Enquiry": { label: "Course Enquiry", color: "#8b5cf6" },
-    Website: { label: "Website", color: "#10b981" },
-    Homepage: { label: "Homepage", color: "#06b6d4" },
-    "Direct Call": { label: "Direct Call", color: "#f59e0b" },
-    Other: { label: "Other", color: "#64748b" },
+    "Contact Form": { label: "Contact Form", color: "#3b82f6", tag: "Direct" },
+    "Demo Class": { label: "Demo Class", color: "#ec4899", tag: "Demo" },
+    "Course Enquiry": { label: "Course Enquiry", color: "#8b5cf6", tag: "Enquiry" },
+    Website: { label: "Website", color: "#10b981", tag: "Online" },
+    Homepage: { label: "Homepage", color: "#06b6d4", tag: "Home" },
+    "Direct Call": { label: "Direct Call", color: "#f59e0b", tag: "Phone" },
+    Other: { label: "Other", color: "#64748b", tag: "General" },
   };
 
   const statusColorPalette = [
@@ -766,8 +774,8 @@ export const LeadDetailsDonutChart = ({
 
       displayData = Object.entries(counts)
         .map(([rawSource, count]) => {
-          const meta = sourceMeta[rawSource] || { label: rawSource, color: "#6366f1" };
-          return { label: meta.label, count, color: meta.color };
+          const meta = sourceMeta[rawSource] || { label: rawSource, color: "#6366f1", tag: "Lead" };
+          return { label: meta.label, count, color: meta.color, tag: meta.tag };
         })
         .sort((a, b) => b.count - a.count);
     } else {
@@ -781,8 +789,8 @@ export const LeadDetailsDonutChart = ({
 
       displayData = Object.entries(counts)
         .map(([rawStatus, count]) => {
-          const meta = statusMeta[rawStatus] || { label: rawStatus, color: "#6366f1" };
-          return { label: meta.label, count, color: meta.color };
+          const meta = statusMeta[rawStatus] || { label: rawStatus, color: "#6366f1", tag: "Lead" };
+          return { label: meta.label, count, color: meta.color, tag: meta.tag };
         })
         .sort((a, b) => b.count - a.count);
     }
@@ -791,11 +799,32 @@ export const LeadDetailsDonutChart = ({
       ...d,
       color: d.color || statusColorPalette[i % statusColorPalette.length],
       count: Number(d.count ?? d.value ?? 0),
+      tag: d.tag || "Lead",
     }));
     calculatedTotal = displayData.reduce((acc, curr) => acc + curr.count, 0);
   }
 
   const total = totalCount !== null && totalCount !== undefined && totalCount > 0 ? totalCount : calculatedTotal;
+
+  const handleHover = (e, item, idx) => {
+    setHoveredIdx(idx);
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setTooltipState({
+      visible: true,
+      x,
+      y,
+      data: item,
+      containerWidth: rect.width || 280,
+    });
+  };
+
+  const handleLeave = () => {
+    setHoveredIdx(null);
+    setTooltipState((prev) => ({ ...prev, visible: false, data: null }));
+  };
 
   if (total === 0 || displayData.length === 0) {
     return (
@@ -831,21 +860,88 @@ export const LeadDetailsDonutChart = ({
   const activeItem = hoveredIdx !== null ? displayData[hoveredIdx] : null;
 
   return (
-    <div className="w-full flex flex-col items-center justify-between h-full pt-1">
+    <div
+      ref={containerRef}
+      className="relative w-full flex flex-col items-center justify-between h-full pt-1 overflow-x-hidden"
+    >
+      {/* Interactive Floating Tooltip */}
+      {tooltipState.visible && tooltipState.data && (
+        <div
+          className="pointer-events-none absolute z-50 transition-all duration-75 ease-out select-none"
+          style={{
+            left: `${Math.max(68, Math.min(tooltipState.x, (tooltipState.containerWidth || 280) - 68))}px`,
+            top: tooltipState.y < 78 ? `${tooltipState.y + 14}px` : `${tooltipState.y - 12}px`,
+            transform: tooltipState.y < 78 ? "translate(-50%, 0)" : "translate(-50%, -100%)",
+          }}
+        >
+          <div className="relative bg-slate-900/95 backdrop-blur-md text-white px-3 py-2 rounded-xl shadow-2xl border border-slate-700/80 text-xs min-w-[136px] flex flex-col gap-1">
+            {/* Tooltip pointer triangle */}
+            <div
+              className={`absolute left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900/95 border-slate-700/80 rotate-45 ${tooltipState.y < 78
+                  ? "-top-1 border-t border-l"
+                  : "-bottom-1 border-b border-r"
+                }`}
+            />
+            <div className="flex items-center justify-between gap-2 border-b border-slate-700/70 pb-1">
+              <div className="flex items-center gap-1.5 truncate">
+                <span
+                  className="h-2 w-2 rounded-full shrink-0 shadow-xs ring-2 ring-white/30"
+                  style={{ backgroundColor: tooltipState.data.color }}
+                />
+                <span className="font-bold truncate text-[11px] text-slate-100">
+                  {tooltipState.data.label}
+                </span>
+              </div>
+              {tooltipState.data.tag && (
+                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 shrink-0">
+                  {tooltipState.data.tag}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-baseline justify-between gap-3 pt-0.5">
+              <div className="flex items-baseline gap-1">
+                <span className="text-base font-black text-white font-mono">
+                  {tooltipState.data.count}
+                </span>
+                <span className="text-[10px] text-slate-400 font-medium">
+                  {tooltipState.data.count === 1 ? "lead" : "leads"}
+                </span>
+              </div>
+              <span
+                className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-md"
+                style={{
+                  backgroundColor: `${tooltipState.data.color}25`,
+                  color: tooltipState.data.color,
+                }}
+              >
+                {total > 0 ? `${Math.round((tooltipState.data.count / total) * 100)}%` : "0%"}
+              </span>
+            </div>
+
+            <div className="text-[9px] text-slate-400 flex items-center justify-between border-t border-slate-800/80 pt-1 mt-0.5">
+              <span>Contribution:</span>
+              <span className="font-mono text-slate-300 font-bold">
+                {tooltipState.data.count} of {total}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Mode Switcher: By Status vs By Source */}
       {Array.isArray(leads) && leads.length > 0 && (
-        <div className="flex items-center gap-1 p-1 bg-slate-100/90 rounded-xl mb-2 text-[11px] font-bold">
+        <div className="flex items-center gap-1 p-1 bg-slate-100/90 rounded-xl mb-2 text-[11px] font-bold border border-slate-200/50 shadow-2xs">
           <button
             type="button"
             onClick={() => {
               setGroupMode("status");
-              setHoveredIdx(null);
+              handleLeave();
             }}
-            className={`px-3 py-0.5 rounded-lg transition-all cursor-pointer ${
-              groupMode === "status"
-                ? "bg-white text-blue-700 shadow-2xs"
+            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${groupMode === "status"
+                ? "bg-white text-blue-700 shadow-xs ring-1 ring-black/5"
                 : "text-slate-500 hover:text-slate-800"
-            }`}
+              }`}
           >
             By Status
           </button>
@@ -853,13 +949,12 @@ export const LeadDetailsDonutChart = ({
             type="button"
             onClick={() => {
               setGroupMode("source");
-              setHoveredIdx(null);
+              handleLeave();
             }}
-            className={`px-3 py-0.5 rounded-lg transition-all cursor-pointer ${
-              groupMode === "source"
-                ? "bg-white text-blue-700 shadow-2xs"
+            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${groupMode === "source"
+                ? "bg-white text-blue-700 shadow-xs ring-1 ring-black/5"
                 : "text-slate-500 hover:text-slate-800"
-            }`}
+              }`}
           >
             By Source
           </button>
@@ -870,8 +965,8 @@ export const LeadDetailsDonutChart = ({
       <div className="relative h-32 w-32 sm:h-36 sm:w-36 shrink-0 select-none my-1">
         <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
           <defs>
-            <filter id="leadDonutGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.18" />
+            <filter id="leadDonutGlow" x="-25%" y="-25%" width="150%" height="150%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#000" floodOpacity="0.25" />
             </filter>
           </defs>
 
@@ -900,20 +995,21 @@ export const LeadDetailsDonutChart = ({
                 r="15.915"
                 fill="none"
                 stroke={slice.color}
-                strokeWidth={isHovered ? 5.6 : 4.4}
+                strokeWidth={isHovered ? 5.8 : 4.4}
                 strokeDasharray={strokeDasharray}
                 strokeDashoffset={strokeDashoffset}
                 filter={isHovered ? "url(#leadDonutGlow)" : undefined}
                 className="transition-all duration-200 cursor-pointer"
-                onMouseEnter={() => setHoveredIdx(i)}
-                onMouseLeave={() => setHoveredIdx(null)}
+                onMouseEnter={(e) => handleHover(e, slice, i)}
+                onMouseMove={(e) => handleHover(e, slice, i)}
+                onMouseLeave={handleLeave}
               />
             );
           })}
         </svg>
 
         {/* Center label & metrics with micro-interaction */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none transition-all duration-200">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none transition-all duration-200 px-2">
           {activeItem ? (
             <>
               <span
@@ -922,7 +1018,7 @@ export const LeadDetailsDonutChart = ({
               >
                 {activeItem.count}
               </span>
-              <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider truncate max-w-[85px] px-1">
+              <span className="text-[10px] uppercase font-bold text-slate-600 tracking-wider truncate max-w-[85px] px-1">
                 {activeItem.label}
               </span>
               <span
@@ -941,7 +1037,7 @@ export const LeadDetailsDonutChart = ({
                 Total Leads
               </span>
               {dynamicConvRate !== null && dynamicConvRate !== undefined && (
-                <span className="text-[10px] font-bold text-emerald-600 mt-0.5">
+                <span className="text-[10px] font-bold text-emerald-600 mt-0.5 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-100">
                   {dynamicConvRate}% Conv.
                 </span>
               )}
@@ -950,50 +1046,7 @@ export const LeadDetailsDonutChart = ({
         </div>
       </div>
 
-      {/* Breakdown Legend List */}
-      <div className="w-full mt-3 space-y-1.5 pt-2.5 border-t border-slate-100 max-h-44 overflow-y-auto pr-0.5">
-        {displayData.map((item, idx) => {
-          const isHovered = hoveredIdx === idx;
-          const percent = total > 0 ? Math.round((item.count / total) * 100) : 0;
 
-          return (
-            <div
-              key={idx}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              className={`flex items-center justify-between text-xs rounded-xl px-2.5 py-1.5 transition-all cursor-pointer ${
-                isHovered
-                  ? "bg-slate-100/90 shadow-2xs translate-x-1"
-                  : "hover:bg-slate-50"
-              }`}
-            >
-              <div className="flex items-center gap-2 min-w-0">
-                <span
-                  className="h-2.5 w-2.5 rounded-full ring-2 ring-white shrink-0 shadow-2xs transition-transform"
-                  style={{
-                    backgroundColor: item.color,
-                    transform: isHovered ? "scale(1.25)" : "scale(1)",
-                  }}
-                />
-                <span className={`font-bold truncate text-[11px] ${isHovered ? "text-slate-900" : "text-slate-700"}`}>
-                  {item.label}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <span className="text-xs font-mono font-bold text-slate-700">
-                  {item.count}
-                </span>
-                <span
-                  className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-md"
-                  style={{ backgroundColor: `${item.color}18`, color: item.color }}
-                >
-                  {percent}%
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 };

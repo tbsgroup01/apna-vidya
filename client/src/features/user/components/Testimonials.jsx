@@ -313,7 +313,8 @@ const Testimonials = () => {
                           e.currentTarget.src =
                             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80";
                         }}
-                        className="h-10 w-10 rounded-full object-cover ring-2 ring-blue-100 shrink-0"
+                        className="h-10 w-10 rounded-full object-cover object-top ring-2 ring-blue-100 shrink-0"
+                        style={{ objectPosition: "top" }}
                       />
                       <div>
                         <div className="flex items-center gap-1.5">

@@ -4,6 +4,7 @@ import { DemoModalProvider } from "./context/DemoModalContext";
 import { AuthProvider } from "./context/AuthContext";
 import { SettingsProvider } from "./context/SettingsContext";
 import Navbar from "./features/user/components/Navbar";
+import AlertMarqueeBanner from "./features/user/components/AlertMarqueeBanner";
 import Footer from "./features/user/components/Footer";
 import Breadcrumb, { BreadcrumbProvider } from "./features/user/components/Breadcrumb";
 import Home from "./features/user/pages/Home";
@@ -87,6 +88,7 @@ function AppContent() {
   return (
     <>
       <ScrollToTop />
+      {!hidePublicChrome && <AlertMarqueeBanner />}
       {!hidePublicChrome && <Navbar />}
       {!hidePublicChrome && <Breadcrumb />}
 

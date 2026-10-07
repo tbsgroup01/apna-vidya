@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Scrollbar Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
 .font-handwriting {
   font-family: 'Caveat', 'Dancing Script', cursive, sans-serif;
 }
@@ -134,4 +146,51 @@
     max-width: 100% !important;
     overflow: visible !important;
   }
+}
+
+/* Custom CSS: Student Avatar & Portrait Image Positioning (Aligns properly from top) */
+.avatar-top,
+.img-top,
+.avatar-img-top {
+  object-fit: cover !important;
+  object-position: top center !important;
+}
+
+.avatar-crop-proper {
+  object-fit: cover !important;
+  object-position: 50% 0% !important;
+}
+
+/* Continuous Marquee Ticker Animations */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 45s linear infinite;
+}
+
+.animate-marquee-normal {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.animate-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 18s linear infinite;
+}
+
+.animate-marquee-slow:hover,
+.animate-marquee-normal:hover,
+.animate-marquee-fast:hover {
+  animation-play-state: paused;
 }
