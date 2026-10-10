@@ -57,6 +57,11 @@ const buildHolidayEmailHtml = ({ holidayName, date, subject, content, studentNam
     })
     : "Upcoming Holiday";
 
+  let logoUrl = generalSettings?.logoUrl;
+  if (!logoUrl || logoUrl === "/images/logo.png" || !logoUrl.startsWith("http")) {
+    logoUrl = "https://apnavidya.co.in/images/logo.png";
+  }
+
   const safeContent = (content || "")
     .split("\n")
     .map((line) => line.trim())
@@ -74,8 +79,10 @@ const buildHolidayEmailHtml = ({ holidayName, date, subject, content, studentNam
   <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 18px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);">
     
     <!-- Top Header - CLEAN WHITE, NO BLUE, LARGER LOGO -->
-    <div style="background-color: #ffffff; padding: 32px 24px 20px 24px; text-align: center; border-bottom: 1px solid #e2e8f0;">
-      <img src="cid:apnavidya-logo" alt="ApnaVidya" style="height: 68px; width: auto; max-width: 320px; object-fit: contain; display: block; margin: 0 auto;" />
+    <div style="background-color: #ffffff; padding: 28px 24px 20px 24px; text-align: center; border-bottom: 1px solid #e2e8f0;">
+      <a href="https://apnavidya.co.in" target="_blank" style="text-decoration: none; display: inline-block;">
+        <img src="${logoUrl}" alt="${institutionName}" style="height: 64px; width: auto; max-width: 280px; object-fit: contain; display: block; margin: 0 auto; border: 0;" />
+      </a>
     </div>
 
     <!-- Main Content Area -->
@@ -555,3 +562,4 @@ module.exports = {
   bulkDeleteHolidayEmails,
   getAudienceStats,
 };
+

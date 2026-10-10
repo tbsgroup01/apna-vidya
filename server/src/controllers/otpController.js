@@ -1,12 +1,11 @@
 const { PlatformSetting } = require("../models/PlatformSetting");
 
-const DEFAULT_AUTH_KEY = "h5DpCOAGoMlCM-Sw9BdayFbSiVNIi_ODoxyR1y703gk";
+const DEFAULT_AUTH_KEY = "NLF3TbqOOEScIhvobdMrQjlGlv6TQFHszhpYOl9MFyU";
 const GATEWAY_URL = "https://apitxt.com/api/sendOTP";
 
-// In-memory store for active OTPs: mobile -> { otp, expiresAt, lastSentAt, attempts, verified }
+
 const otpStore = new Map();
 
-// Sweep expired entries every 10 minutes
 setInterval(() => {
   const now = Date.now();
   for (const [key, value] of otpStore.entries()) {

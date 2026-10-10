@@ -58,7 +58,7 @@ const parseVideoUrl = (url = "") => {
 const DEFAULT_VIDEOS = [
   {
     id: 1,
-    title: "Why Learn With ApnaVidya",
+    title: "Why Learn With APNAVIDYA",
     description: "Know how we help students build real skills and successful careers.",
     videoSourceType: "url",
     videoUrl: "https://www.youtube.com/watch?v=rfscVS0vtbw",
@@ -232,13 +232,13 @@ const VideoSection = () => {
 
           {/* Heading */}
           <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-[40px]">
-            Why <span className="text-blue-600">Apna</span>
-            <span className="text-[#FD8006]">Vidya</span> ?
+            Why <span className="text-blue-600">APNA</span>
+            <span className="text-[#FD8006]">VIDYA</span> ?
           </h2>
 
           {/* Subtitle */}
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-500 sm:text-base font-normal">
-            Discover the ApnaVidya Difference - Premium Education with Flexible
+            Discover the APNAVIDYA Difference - Premium Education with Flexible
             Learning and Expert Guidance.
           </p>
 
@@ -341,7 +341,7 @@ const VideoSection = () => {
 
                           <div className="min-w-0 flex-1">
                             <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2">
-                              {vid.title || `ApnaVidya Video ${idx + 1}`}
+                              {vid.title || `APNAVIDYA Video ${idx + 1}`}
                             </h3>
                           </div>
                         </div>
@@ -407,7 +407,7 @@ const VideoSection = () => {
               <div className="flex items-center gap-2">
                 <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse" />
                 <span className="text-xs font-bold text-slate-200 truncate max-w-md">
-                  {activeModalVideo.title || "ApnaVidya Video Player"}
+                  {activeModalVideo.title || "APNAVIDYA Video Player"}
                 </span>
               </div>
               <button

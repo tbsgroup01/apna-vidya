@@ -181,7 +181,22 @@ const updateAboutContent = async (req, res) => {
       }
     }
 
-    await about.update(updates);
+    try {
+      await about.update(updates);
+    } catch (dbErr) {
+      if (dbErr.message && dbErr.message.includes("valuesSubtitle")) {
+        try {
+          await AboutContent.sequelize.query(
+            "ALTER TABLE about_contents ADD COLUMN valuesSubtitle TEXT NULL"
+          );
+          await about.update(updates);
+        } catch (retryErr) {
+          throw dbErr;
+        }
+      } else {
+        throw dbErr;
+      }
+    }
 
     return res.status(200).json({
       success: true,

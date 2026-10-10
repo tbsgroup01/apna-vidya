@@ -344,6 +344,9 @@ const initDb = async () => {
     try {
       await sequelize.query("ALTER TABLE alert_notifications ADD COLUMN textColor VARCHAR(50) DEFAULT '#ffffff'");
     } catch (e) {}
+    try {
+      await sequelize.query("ALTER TABLE about_contents ADD COLUMN valuesSubtitle TEXT NULL");
+    } catch (e) {}
     console.log("Database models synchronized successfully.");
     await seedDatabase();
     console.log("Database seeded successfully.");

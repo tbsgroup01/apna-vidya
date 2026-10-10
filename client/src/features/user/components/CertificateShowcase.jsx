@@ -12,58 +12,71 @@ import {
   Copy,
   Check,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import api from "../../../services/api";
 
 const DEFAULT_AWARDS = [
   {
-    id: "AVTC-2025-01",
-    title: "Certificate of Completion",
-    description: "Recognizing successful completion of training programs at ApnaVidya.",
+    id: 1,
+    title: "Certificate of Academic Excellence (ISO 9001:2015)",
+    description: "Certified for maintaining benchmark quality management standards in digital education, practical training methodologies, and mentor-led curriculums.",
     year: "2025",
     image: "/images/cert_completion_gold.jpg",
-    verificationUrl: "/verify-certificate?id=AVTC-2025-01",
+    verificationUrl: "https://APNAVIDYA.com/verify/ISO-9001-2025",
+    issuer: "International Academic Standards Organization",
     theme: "blue",
-    issuer: "ApnaVidya Academic Council (ISO 9001:2015)",
-    recipient: "Eleanor Jane Ramsey",
-    course: "Full Stack Web Development",
   },
   {
-    id: "AVTC-2025-02",
-    title: "Demo Award",
-    description: "Awarded for outstanding performance and project demonstration.",
+    id: 2,
+    title: "National Ed-Tech Innovation Award",
+    description: "Awarded in recognition of innovative live online mentoring, interactive doubt resolution windows, and student placement empowerment across tier-1 and tier-2 cities.",
     year: "2025",
     image: "/images/cert_completion_blue.jpg",
-    verificationUrl: "/verify-certificate?id=AVTC-2025-02",
+    verificationUrl: "https://APNAVIDYA.com/verify/EDTECH-INNOV-2025",
+    issuer: "National Council for Skill Advancement",
     theme: "orange",
-    issuer: "ApnaVidya Technology Institute",
-    recipient: "Alexander James Reed",
-    course: "Advanced Data Analytics & AI",
   },
   {
-    id: "AVTC-2025-03",
-    title: "Certificate",
-    description: "Globally recognized certification validating your skills and knowledge.",
+    id: 3,
+    title: "Authorized Technology Learning Partner",
+    description: "Official academic accreditation verifying curriculum alignment with current industry-demanded tech competencies, modern cloud platforms, and full stack frameworks.",
     year: "2025",
     image: "/images/cert_award_ornate.jpg",
-    verificationUrl: "/verify-certificate?id=AVTC-2025-03",
+    verificationUrl: "https://APNAVIDYA.com/verify/TECH-PARTNER-2025",
+    issuer: "Global Tech Education Consortium",
     theme: "blue",
-    issuer: "ApnaVidya Academic Council",
-    recipient: "Eleanor Grace Vance",
-    course: "Cloud Architecture & Full Stack",
   },
   {
-    id: "AVTC-2025-04",
-    title: "About",
-    description: "I am a Power Platform Developer with expertise in designing and developing...",
+    id: 4,
+    title: "Certified Professional Skill Development Institute",
+    description: "Honored for empowering over 5,000+ learners across India with job-ready tech proficiencies, practical coding portfolios, and verifiable career credentials.",
     year: "2025",
-    image: "/images/developer_headshot.jpg",
-    verificationUrl: "/verify-certificate?id=AVTC-2025-04",
+    image: "/images/cert_completion_gold.jpg",
+    verificationUrl: "https://APNAVIDYA.com/verify/SKILL-INDIA-2025",
+    issuer: "Skill India Development Forum",
     theme: "orange",
-    isDeveloperProfile: true,
-    issuer: "ApnaVidya Enterprise Council",
-    recipient: "Amit Kumar",
-    course: "Microsoft Power Platform & Cloud Solutions",
+  },
+  {
+    id: 5,
+    title: "Global AI & Data Science Education Accreditation",
+    description: "Accredited for curriculum excellence in machine learning, generative AI architectures, and practical neural networks.",
+    year: "2025",
+    image: "/images/cert_award_ornate.jpg",
+    verificationUrl: "https://APNAVIDYA.com/verify/AI-DATA-2025",
+    issuer: "International Artificial Intelligence Alliance",
+    theme: "blue",
+  },
+  {
+    id: 6,
+    title: "Emerging EdTech Leader of the Year",
+    description: "Recognized as a premier high-impact tech training platform empowering career transitioners and college graduates with job-ready skills.",
+    year: "2025",
+    image: "/images/cert_completion_blue.jpg",
+    verificationUrl: "https://APNAVIDYA.com/verify/EDTECH-LEADER-2025",
+    issuer: "Asia Education Leadership Summit",
+    theme: "orange",
   },
 ];
 
@@ -74,10 +87,58 @@ const CertificateShowcase = () => {
   const [previewAward, setPreviewAward] = useState(null);
   const [copied, setCopied] = useState(false);
 
+  // Carousel & Window state (matching VideoSection)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const itemsPerView = windowWidth >= 1024 ? 4 : windowWidth >= 640 ? 2 : 1;
+  const maxIndex = Math.max(0, awards.length - itemsPerView);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
+
+  const translatePercent = currentIndex * (100 / itemsPerView);
+
+  // Touch Swipe handlers for mobile/tablet
+  const minSwipeDistance = 50;
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      handleNext();
+    } else if (distance < -minSwipeDistance) {
+      handlePrev();
+    }
+  };
+
+  // Dynamic API Fetching
   useEffect(() => {
     let isMounted = true;
     const fetchAwards = async () => {
       try {
+        setLoading(true);
         const res = await api.get("/public/certificates");
         if (
           isMounted &&
@@ -85,16 +146,17 @@ const CertificateShowcase = () => {
           Array.isArray(res.data.data.awards) &&
           res.data.data.awards.length > 0
         ) {
-          // Merge API awards with our styled defaults
-          const merged = res.data.data.awards.map((item, idx) => ({
-            ...DEFAULT_AWARDS[idx % DEFAULT_AWARDS.length],
+          // Dynamic certificates directly from the API with alternating theme
+          const dynamicAwards = res.data.data.awards.map((item, idx) => ({
             ...item,
             theme: idx % 2 === 0 ? "blue" : "orange",
           }));
-          setAwards(merged);
+          setAwards(dynamicAwards);
         }
       } catch (err) {
         // Fall back gracefully to DEFAULT_AWARDS
+      } finally {
+        if (isMounted) setLoading(false);
       }
     };
 
@@ -123,13 +185,14 @@ const CertificateShowcase = () => {
 
   const handleCopyId = (id) => {
     if (!id) return;
-    navigator.clipboard.writeText(id);
+    navigator.clipboard.writeText(String(id));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleVerifyNavigate = (url) => {
     setPreviewAward(null);
+    if (!url) return;
     if (url.startsWith("/")) {
       navigate(url);
     } else {
@@ -186,7 +249,7 @@ const CertificateShowcase = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mb-12 flex flex-col items-center justify-center text-center">
           <svg
             className="pointer-events-none absolute left-1/2 -top-6 -translate-x-1/2 w-[92%] max-w-2xl h-48 text-blue-200/50 select-none z-0"
             viewBox="0 0 650 180"
@@ -239,11 +302,34 @@ const CertificateShowcase = () => {
           </h2>
 
           <p className="relative z-10 mt-3.5 text-sm sm:text-base text-slate-500 max-w-2xl mx-auto leading-relaxed font-normal">
-            ApnaVidya is backed by internationally recognized quality management
+            APNAVIDYA is backed by internationally recognized quality management
             frameworks and honors to ensure your learning credentials hold authentic global value.
           </p>
-        </div>
 
+          {/* Carousel Arrows on Top-Right (matching VideoSection) */}
+          {awards.length > itemsPerView && (
+            <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 items-center gap-2.5">
+              <button
+                type="button"
+                onClick={handlePrev}
+                disabled={currentIndex === 0}
+                className="flex h-10 w-10 items-center justify-center rounded-2xl border border-blue-100 bg-white text-blue-600 shadow-2xs hover:bg-blue-50 hover:shadow-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                aria-label="Previous certificates"
+              >
+                <ChevronLeft size={18} strokeWidth={2.5} />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                disabled={currentIndex >= maxIndex}
+                className="flex h-10 w-10 items-center justify-center rounded-2xl border border-orange-100 bg-white text-[#FD8006] shadow-2xs hover:bg-orange-50 hover:shadow-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                aria-label="Next certificates"
+              >
+                <ChevronRight size={18} strokeWidth={2.5} />
+              </button>
+            </div>
+          )}
+        </div>
 
         {loading ? (
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -261,138 +347,163 @@ const CertificateShowcase = () => {
             ))}
           </div>
         ) : (
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {awards.map((award, idx) => {
-              const isOrangeTheme = award.theme === "orange" || idx % 2 === 1;
+          /* Carousel Container matching VideoSection */
+          <div
+            className="overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex transition-transform duration-500 ease-out py-2"
+              style={{
+                transform: `translateX(-${translatePercent}%)`,
+              }}
+            >
+              {awards.map((award, idx) => {
+                const isOrangeTheme = award.theme === "orange" || idx % 2 === 1;
 
-              return (
-                <div
-                  key={award.id || idx}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-blue-50/80 bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-200"
-                >
-                  {/* Crisp SVG Corner Wave swoosh inside card matching screenshot */}
-                  {!isOrangeTheme ? (
-                    /* Blue bottom-left curved wave */
-                    <svg
-                      className="pointer-events-none absolute bottom-0 left-0 w-36 h-28 select-none z-0 transition-transform duration-500 group-hover:scale-110"
-                      viewBox="0 0 160 120"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 120 L0 55 C25 75 55 90 95 80 C135 70 148 98 160 120 Z"
-                        fill="url(#cardBlueWave)"
-                        opacity="0.9"
-                      />
-                      <defs>
-                        <linearGradient id="cardBlueWave" x1="0" y1="120" x2="160" y2="55" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#60a5fa" />
-                          <stop offset="1" stopColor="#93c5fd" stopOpacity="0.45" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  ) : (
-                    /* Peach / Orange bottom curved wave */
-                    <svg
-                      className="pointer-events-none absolute bottom-0 right-0 w-36 h-28 select-none z-0 transition-transform duration-500 group-hover:scale-110"
-                      viewBox="0 0 160 120"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M160 120 L160 55 C135 75 105 90 65 80 C25 70 12 98 0 120 Z"
-                        fill="url(#cardOrangeWave)"
-                        opacity="0.9"
-                      />
-                      <defs>
-                        <linearGradient id="cardOrangeWave" x1="160" y1="120" x2="0" y2="55" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#fb923c" />
-                          <stop offset="1" stopColor="#fed7aa" stopOpacity="0.45" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  )}
-
-                  <div className="relative z-10">
-                    {/* Certificate Thumbnail Box */}
-                    <div
-                      className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-50/80 flex items-center justify-center cursor-pointer group/img transition-all group-hover:border-blue-200"
-                      onClick={() => setPreviewAward(award)}
-                      title="Click to view full certificate"
-                    >
-                      {/* If developer profile photo (Card 4), render with amber wave behind */}
-                      {award.isDeveloperProfile ? (
-                        <div className="relative h-full w-full overflow-hidden rounded-xl bg-gradient-to-b from-sky-50 via-slate-50 to-orange-50/60 flex items-center justify-center">
-                          {/* Amber backdrop curve behind portrait */}
-                          <div className="absolute -bottom-6 -left-6 h-28 w-28 rounded-full bg-gradient-to-tr from-amber-400/40 via-orange-300/30 to-transparent blur-md" />
-                          <div className="absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-gradient-to-tl from-orange-400/30 via-amber-200/20 to-transparent blur-md" />
-                          <img
-                            src={award.image || "/images/developer_headshot.jpg"}
-                            alt={award.title}
-                            className="relative z-10 h-full w-auto object-cover rounded-lg shadow-2xs transition-transform duration-500 group-hover:scale-105"
+                return (
+                  <div
+                    key={award.id || idx}
+                    className="w-full sm:w-1/2 lg:w-1/4 shrink-0 px-3 flex flex-col"
+                  >
+                    <div className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-blue-50/80 bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-200 h-full">
+                      {/* Crisp SVG Corner Wave swoosh inside card matching screenshot */}
+                      {!isOrangeTheme ? (
+                        /* Blue bottom-left curved wave */
+                        <svg
+                          className="pointer-events-none absolute bottom-0 left-0 w-36 h-28 select-none z-0 transition-transform duration-500 group-hover:scale-110"
+                          viewBox="0 0 160 120"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 120 L0 55 C25 75 55 90 95 80 C135 70 148 98 160 120 Z"
+                            fill="url(#cardBlueWave)"
+                            opacity="0.9"
                           />
-                        </div>
+                          <defs>
+                            <linearGradient id="cardBlueWave" x1="0" y1="120" x2="160" y2="55" gradientUnits="userSpaceOnUse">
+                              <stop stopColor="#60a5fa" />
+                              <stop offset="1" stopColor="#93c5fd" stopOpacity="0.45" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
                       ) : (
-                        <img
-                          src={award.image || "/images/cert_completion_gold.jpg"}
-                          alt={award.title}
-                          className="max-h-full max-w-full object-contain rounded shadow-2xs transition-transform duration-500 group-hover:scale-105"
-                        />
+                        /* Peach / Orange bottom curved wave */
+                        <svg
+                          className="pointer-events-none absolute bottom-0 right-0 w-36 h-28 select-none z-0 transition-transform duration-500 group-hover:scale-110"
+                          viewBox="0 0 160 120"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M160 120 L160 55 C135 75 105 90 65 80 C25 70 12 98 0 120 Z"
+                            fill="url(#cardOrangeWave)"
+                            opacity="0.9"
+                          />
+                          <defs>
+                            <linearGradient id="cardOrangeWave" x1="160" y1="120" x2="0" y2="55" gradientUnits="userSpaceOnUse">
+                              <stop stopColor="#fb923c" />
+                              <stop offset="1" stopColor="#fed7aa" stopOpacity="0.45" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
                       )}
 
-                      {/* Quick Preview Hover Eye Overlay Button */}
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setPreviewAward(award);
-                        }}
-                        className="absolute top-2.5 right-2.5 rounded-xl bg-slate-900/70 p-2 text-white backdrop-blur-xs hover:bg-[#FD8006] transition-all opacity-0 group-hover/img:opacity-100 cursor-pointer shadow-sm"
-                        title="Enlarge Certificate"
-                      >
-                        <Eye size={14} />
-                      </button>
-                    </div>
+                      <div className="relative z-10">
+                        {/* Certificate Thumbnail Box */}
+                        <div
+                          className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-50/80 flex items-center justify-center cursor-pointer group/img transition-all group-hover:border-blue-200"
+                          onClick={() => setPreviewAward(award)}
+                          title="Click to view full certificate"
+                        >
+                          <img
+                            src={award.image || (isOrangeTheme ? "/images/cert_completion_blue.jpg" : "/images/cert_completion_gold.jpg")}
+                            alt={award.title || "Certificate"}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = isOrangeTheme
+                                ? "/images/cert_completion_blue.jpg"
+                                : "/images/cert_completion_gold.jpg";
+                            }}
+                            className="max-h-full max-w-full object-contain rounded shadow-2xs transition-transform duration-500 group-hover:scale-105"
+                          />
 
-                    {/* Meta Details */}
-                    <div className="mt-4">
-                      {/* Year Badge */}
-                      <div className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-600 mb-2">
-                        <Calendar size={13} className="text-blue-600" />
-                        <span>{award.year || "2025"}</span>
+                          {/* Quick Preview Hover Eye Overlay Button */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setPreviewAward(award);
+                            }}
+                            className="absolute top-2.5 right-2.5 rounded-xl bg-slate-900/70 p-2 text-white backdrop-blur-xs hover:bg-[#FD8006] transition-all opacity-0 group-hover/img:opacity-100 cursor-pointer shadow-sm"
+                            title="Enlarge Certificate"
+                          >
+                            <Eye size={14} />
+                          </button>
+                        </div>
+
+                        {/* Meta Details */}
+                        <div className="mt-4">
+                          {/* Year Badge */}
+                          <div className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-600 mb-2">
+                            <Calendar size={13} className="text-blue-600" />
+                            <span>{award.year || "2025"}</span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="text-sm sm:text-base font-bold text-slate-900 line-clamp-1 leading-snug group-hover:text-blue-600 transition-colors">
+                            {award.title}
+                          </h3>
+
+                          {/* Description */}
+                          <p className="mt-1.5 text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
+                            {award.description ||
+                              "Globally recognized certification validating your skills and knowledge."}
+                          </p>
+                        </div>
                       </div>
 
-                      {/* Title */}
-                      <h3 className="text-sm sm:text-base font-bold text-slate-900 line-clamp-1 leading-snug group-hover:text-blue-600 transition-colors">
-                        {award.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="mt-1.5 text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
-                        {award.description ||
-                          "Globally recognized certification validating your skills and knowledge."}
-                      </p>
+                      {/* Details Button matching screenshot pill */}
+                      <div className="relative z-10 mt-5 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => setPreviewAward(award)}
+                          className="group/btn flex w-full items-center justify-center gap-1.5 rounded-full bg-[#eef5ff] hover:bg-blue-100/90 text-blue-600 font-bold text-xs py-2.5 px-4 transition-all cursor-pointer border border-blue-100/60 shadow-2xs"
+                        >
+                          <span>Details</span>
+                          <ArrowRight
+                            size={14}
+                            strokeWidth={2.5}
+                            className="transition-transform group-hover/btn:translate-x-1"
+                          />
+                        </button>
+                      </div>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
-                  {/* Details Button matching screenshot pill */}
-                  <div className="relative z-10 mt-5 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setPreviewAward(award)}
-                      className="group/btn flex w-full items-center justify-center gap-1.5 rounded-full bg-[#eef5ff] hover:bg-blue-100/90 text-blue-600 font-bold text-xs py-2.5 px-4 transition-all cursor-pointer border border-blue-100/60 shadow-2xs"
-                    >
-                      <span>Details</span>
-                      <ArrowRight
-                        size={14}
-                        strokeWidth={2.5}
-                        className="transition-transform group-hover/btn:translate-x-1"
-                      />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+        {/* Carousel Pagination Dots (matching VideoSection) */}
+        {awards.length > itemsPerView && (
+          <div className="mt-8 flex items-center justify-center gap-2">
+            {Array.from({ length: maxIndex + 1 }).map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                type="button"
+                onClick={() => setCurrentIndex(dotIdx)}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === dotIdx
+                  ? "w-7 bg-[#FD8006]"
+                  : "w-2 bg-blue-100 hover:bg-blue-200"
+                  }`}
+                aria-label={`Go to slide ${dotIdx + 1}`}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -412,6 +523,10 @@ const CertificateShowcase = () => {
               <img
                 src={previewAward.image || "/images/cert_completion_gold.jpg"}
                 alt={previewAward.title}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/images/cert_completion_gold.jpg";
+                }}
                 className="max-h-full max-w-full object-contain rounded-md shadow-md"
               />
 
@@ -491,15 +606,7 @@ const CertificateShowcase = () => {
                   >
                     Close
                   </button>
-                  {/* <button
-                    type="button"
-                    onClick={() => window.print()}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 cursor-pointer shadow-2xs transition-colors"
-                    title="Print or Save Certificate"
-                  >
-                    <Printer size={13} />
-                    <span>Print / Save</span>
-                  </button> */}
+
                 </div>
 
                 {previewAward.verificationUrl && (

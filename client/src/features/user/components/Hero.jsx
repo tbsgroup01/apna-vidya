@@ -17,7 +17,7 @@ import { useDemoModal } from "../../../context/DemoModalContext";
 import api from "../../../services/api";
 
 const DEFAULT_SLIDER = {
-  title: "Build Your Future With ApnaVidya",
+  title: "Build Your Future With APNAVIDYA",
   subtitle: "Learn Today. Lead Tomorrow.",
   description:
     "Learn industry-relevant skills from experienced educators, explore practical courses, and take the next step toward building a successful career.",
@@ -159,6 +159,17 @@ const Hero = () => {
       onMouseLeave={() => setIsHovered(false)}
       className="relative min-h-[auto] lg:min-h-[88vh] flex items-center overflow-hidden bg-slate-50 pt-3 pb-8 sm:pt-4 sm:pb-12 lg:py-0 transition-colors duration-700"
     >
+      <style>{`
+        .tbs_glass {
+          padding: 10px 20px;
+          background: rgba(255, 255, 255, 0.02);
+          backdrop-filter: blur(14.75px);
+          -webkit-backdrop-filter: blur(14.75px);
+          border-radius: 20px;
+          border-left: 1.5px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+        }
+      `}</style>
       {/* 1. Mobile Ambient Background Orbs */}
       <div className="pointer-events-none absolute inset-0 lg:hidden overflow-hidden" aria-hidden="true">
         <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-blue-100/60 blur-3xl" />
@@ -172,8 +183,9 @@ const Hero = () => {
           <img
             key={activeSlide.image}
             src={activeSlide.image}
-            alt={activeSlide.title || "ApnaVidya"}
-            className="h-full w-full object-cover object-center transition-all duration-700 ease-out"
+            alt={activeSlide.title || "APNAVIDYA"}
+            style={{ objectPosition: "right center" }}
+            className="h-full w-full object-cover object-right transition-all duration-700 ease-out"
           />
         ) : (
           <div className="h-full w-full bg-gradient-to-br from-blue-50 to-indigo-100" />
@@ -189,7 +201,7 @@ const Hero = () => {
           <button
             type="button"
             onClick={handlePrev}
-            className="pointer-events-auto absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 hover:bg-white text-slate-800 shadow-lg backdrop-blur-md transition-all active:scale-90 hover:scale-105 cursor-pointer"
+            className="pointer-events-auto absolute left-3 xl:left-5 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 hover:bg-white text-slate-800 shadow-lg backdrop-blur-md transition-all opacity-80 hover:opacity-100 active:scale-90 hover:scale-105 cursor-pointer"
             aria-label="Previous slide"
           >
             <ChevronLeft size={22} />
@@ -197,7 +209,7 @@ const Hero = () => {
           <button
             type="button"
             onClick={handleNext}
-            className="pointer-events-auto absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 hover:bg-white text-slate-800 shadow-lg backdrop-blur-md transition-all active:scale-90 hover:scale-105 cursor-pointer"
+            className="pointer-events-auto absolute right-3 xl:right-5 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/85 hover:bg-white text-slate-800 shadow-lg backdrop-blur-md transition-all opacity-80 hover:opacity-100 active:scale-90 hover:scale-105 cursor-pointer"
             aria-label="Next slide"
           >
             <ChevronRight size={22} />
@@ -210,12 +222,12 @@ const Hero = () => {
             MOBILE ONLY: BANNER IMAGE ON TOP (image upar banner image upar)
            ======================================================== */}
         <div className="lg:hidden mb-6 relative w-full overflow-hidden rounded-2xl shadow-lg border border-slate-200/90 bg-slate-900 group">
-          <div className="relative w-full h-[220px] xs:h-[260px] sm:h-[340px] select-none">
+          <div className="relative w-full h-auto select-none">
             {activeSlide?.image ? (
               <img
                 key={activeSlide.image || currentIndex}
                 src={activeSlide.image}
-                alt={activeSlide.title || "ApnaVidya Banner"}
+                alt={activeSlide.title || "APNAVIDYA Banner"}
                 className="h-full w-full object-cover object-center transition-all duration-700 ease-out"
               />
             ) : (
@@ -223,7 +235,7 @@ const Hero = () => {
                 <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md">
                   <GraduationCap size={36} strokeWidth={1.5} />
                 </div>
-                <p className="text-xl font-extrabold tracking-tight">ApnaVidya</p>
+                <p className="text-xl font-extrabold tracking-tight">APNAVIDYA</p>
                 <p className="mt-1 text-xs text-blue-100 font-medium">
                   Learn • Grow • Succeed
                 </p>
@@ -280,14 +292,14 @@ const Hero = () => {
             CONTENT: DOWN ON MOBILE, ON IMAGE ON DESKTOP
            ======================================================== */}
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-8 max-w-2xl py-1 sm:py-2 lg:p-6">
+          <div className="tbs_glass lg:col-span-8 max-w-2xl py-1 sm:py-2 lg:p-6">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-blue-700 shadow-2xs">
               <Sparkles size={15} className="text-[#FD8006]" />
               <span>{activeSlide?.subtitle || "Learn Today. Lead Tomorrow."}</span>
             </div>
 
             <h1 className="text-3xl font-extrabold leading-[1.18] tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              {activeSlide?.title || "Build Your Future With ApnaVidya"}
+              {activeSlide?.title || "Build Your Future With APNAVIDYA"}
             </h1>
 
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -310,47 +322,6 @@ const Hero = () => {
                 )}
             </div>
 
-            {sliders.length > 1 && (
-              <div className="mt-6 flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  {sliders.map((_, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setCurrentIndex(idx)}
-                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === idx
-                        ? "w-7 bg-[#FD8006]"
-                        : "w-2 bg-slate-300 hover:bg-slate-400"
-                        }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-1 ml-2">
-                  <button
-                    type="button"
-                    onClick={handlePrev}
-                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-2xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
-                    aria-label="Previous slide"
-                  >
-                    <ChevronLeft size={15} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNext}
-                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 shadow-2xs hover:bg-slate-50 active:scale-95 cursor-pointer transition-all"
-                    aria-label="Next slide"
-                  >
-                    <ChevronRight size={15} />
-                  </button>
-                </div>
-
-                <span className="text-xs text-slate-400 font-medium ml-1">
-                  {currentIndex + 1} / {sliders.length}
-                </span>
-              </div>
-            )}
 
             {/* Feature Checkpoints */}
             <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-200/80 pt-5">

@@ -9,6 +9,7 @@ const publicRoutes = require("./routes/publicRoutes");
 
 dotenv.config();
 
+
 const app = express();
 
 
@@ -48,5 +49,7 @@ app.use((err, req, res, next) => {
     errors: err.errors || [],
   });
 });
+
+
 
 module.exports = app;

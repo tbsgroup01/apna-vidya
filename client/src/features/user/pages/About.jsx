@@ -19,14 +19,13 @@ import {
 } from "lucide-react";
 import api from "../../../services/api";
 
-// Pixel-perfect pillar icons matching user reference
 const StudentFirstPillarIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 32 32" fill="none">
-    {/* Radiating ticks above the book */}
+
     <line x1="10" y1="4" x2="11" y2="7" stroke="#2563EB" strokeWidth="2.4" strokeLinecap="round" />
     <line x1="16" y1="2.5" x2="16" y2="6" stroke="#2563EB" strokeWidth="2.4" strokeLinecap="round" />
     <line x1="22" y1="4" x2="21" y2="7" stroke="#2563EB" strokeWidth="2.4" strokeLinecap="round" />
-    {/* Open book pages */}
+
     <path
       d="M15 10.5 C 11.5 9.4, 6.2 10.2, 4.3 11.2 C 4.1 11.3, 4 11.6, 4 12 L 4 23.5 C 4 24.1, 4.6 24.6, 5.2 24.4 C 7.2 23.7, 11.4 23, 15 24 Z"
       fill="#3B82F6"
@@ -41,12 +40,10 @@ const StudentFirstPillarIcon = ({ className }) => (
 
 const ContinuousLearningPillarIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 32 32" fill="none">
-    {/* Lightbulb body */}
     <path
       d="M16 4 C 10.8 4, 6.8 8.2, 6.8 13.5 C 6.8 16.8, 8.4 19.6, 11 21.3 L 11 23.5 C 11 24.3, 11.7 25, 12.5 25 L 19.5 25 C 20.3 25, 21 24.3, 21 23.5 L 21 21.3 C 23.6 19.6, 25.2 16.8, 25.2 13.5 C 25.2 8.2, 21.2 4, 16 4 Z"
       fill="#F97316"
     />
-    {/* Bulb screw base */}
     <path d="M12.5 27.5 L 19.5 27.5" stroke="#EA580C" strokeWidth="2.2" strokeLinecap="round" />
     <path d="M13.5 29.8 L 18.5 29.8" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" />
   </svg>
@@ -54,13 +51,13 @@ const ContinuousLearningPillarIcon = ({ className }) => (
 
 const IntegrityTrustPillarIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 32 32" fill="none">
-    {/* Left person */}
+
     <circle cx="9" cy="11.5" r="3.2" fill="#34D399" />
     <path d="M3.5 22.5 C 3.5 19.2, 6.5 17, 10.5 17 C 11.7 17, 12.7 17.3, 13.6 17.8 C 12.8 19.1, 12.4 20.7, 12.4 22.5 Z" fill="#34D399" />
-    {/* Right person */}
+
     <circle cx="23" cy="11.5" r="3.2" fill="#34D399" />
     <path d="M28.5 22.5 C 28.5 19.2, 25.5 17, 21.5 17 C 20.3 17, 19.3 17.3, 18.4 17.8 C 19.2 19.1, 19.6 20.7, 19.6 22.5 Z" fill="#34D399" />
-    {/* Center front person */}
+
     <circle cx="16" cy="9.5" r="4.2" fill="#10B981" />
     <path d="M8.5 23.5 C 8.5 19.2, 11.8 16.5, 16 16.5 C 20.2 16.5, 23.5 19.2, 23.5 23.5 Z" fill="#10B981" />
   </svg>
@@ -68,11 +65,11 @@ const IntegrityTrustPillarIcon = ({ className }) => (
 
 const InnovationImpactPillarIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 32 32" fill="none">
-    {/* Rising chart bars */}
+
     <rect x="5.5" y="18" width="4.5" height="9" rx="1.5" fill="#C084FC" />
     <rect x="12" y="13" width="4.5" height="14" rx="1.5" fill="#A855F7" />
     <rect x="18.5" y="8" width="4.5" height="19" rx="1.5" fill="#7E22CE" />
-    {/* Upward trending arrow */}
+
     <path d="M7 13 L 20 4 M 13.5 3.5 L 20.5 3.5 L 20.5 10.5" stroke="#7E22CE" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
@@ -124,16 +121,16 @@ const CARD_THEMES = [
 ];
 
 const DEFAULT_ABOUT = {
-  heroBadge: "About ApnaVidya",
+  heroBadge: "About APNAVIDYA",
   heroTitle: "Empowering the Next Generation of India's Builders",
   heroDescription:
-    "ApnaVidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
+    "APNAVIDYA is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
   storyTag: "Our Story",
   storyTitle: "Bridging the Gap Between College Degrees and Industry Careers",
   storyParagraph1:
     "Over 1.5 million engineering and computer science students graduate in India every year, yet less than 15% possess the skills required to build modern software applications.",
   storyParagraph2:
-    "ApnaVidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
+    "APNAVIDYA was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
   stat1Value: "50,000+",
   stat1Label: "Graduated Students",
   stat2Value: "120+",
@@ -171,7 +168,7 @@ const DEFAULT_ABOUT = {
     },
   ],
   teamTag: "Experienced Educators",
-  teamTitle: "Meet the Mentors Behind ApnaVidya",
+  teamTitle: "Meet the Mentors Behind APNAVIDYA",
   teamSubtitle:
     "Learn from engineers who have shipped software at scale and trained thousands of successful graduates.",
   team: [
@@ -200,7 +197,7 @@ const DEFAULT_ABOUT = {
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
     },
   ],
-  ctaTitle: "Experience the ApnaVidya Way of Learning",
+  ctaTitle: "Experience the APNAVIDYA Way of Learning",
   ctaDescription:
     "Join a live session, speak with our instructors, and explore how our curriculum can help you achieve your career aspirations.",
   ctaPrimaryText: "Book a Free Demo Class",
@@ -284,7 +281,7 @@ const About = () => {
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold text-blue-300">
             <Compass size={14} />
-            {data?.heroBadge || "About ApnaVidya"}
+            {data?.heroBadge || "About APNAVIDYA"}
           </span>
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-4xl">
             {data?.heroTitle || "Empowering the Next Generation of India's Builders"}
@@ -371,9 +368,9 @@ const About = () => {
 
       {valuesList.length > 0 && (
         <section className="relative overflow-hidden bg-[#FAFCFF] py-20 sm:py-24 border-y border-slate-100">
-          {/* Ambient Background & Decorative Accents matching screenshot */}
+
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-            {/* Left subtle blue dot grid */}
+
             <div className="absolute left-6 sm:left-12 top-10 sm:top-14 select-none hidden lg:block opacity-80">
               <svg width="64" height="96" viewBox="0 0 64 96" fill="none">
                 {[0, 1, 2, 3].map((col) =>
@@ -390,10 +387,9 @@ const About = () => {
               </svg>
             </div>
 
-            {/* Top-Right Flying Blue Paper Airplane with curved looping dashed trail */}
             <div className="absolute right-4 sm:right-10 lg:right-16 top-6 sm:top-8 select-none hidden md:block">
               <svg className="w-64 sm:w-80 h-40 sm:h-48 overflow-visible" viewBox="0 0 280 160" fill="none">
-                {/* Curved looping dashed flight trail */}
+
                 <path
                   d="M 20 135 C 50 80, 110 50, 150 90 C 180 120, 215 90, 260 25"
                   stroke="#93C5FD"
@@ -401,7 +397,6 @@ const About = () => {
                   strokeDasharray="4 6"
                   strokeLinecap="round"
                 />
-                {/* Folded origami paper plane */}
                 <g transform="translate(252, 12) rotate(24)">
                   <polygon points="0,26 36,0 14,34 11,22" fill="#3B82F6" />
                   <polygon points="11,22 36,0 24,9" fill="#60A5FA" />
@@ -410,13 +405,12 @@ const About = () => {
               </svg>
             </div>
 
-            {/* Soft ambient background glows */}
             <div className="absolute -left-20 top-20 h-72 w-72 rounded-full bg-blue-100/35 blur-3xl pointer-events-none" />
             <div className="absolute -top-24 left-1/3 h-80 w-80 rounded-full bg-blue-50/50 blur-3xl pointer-events-none" />
           </div>
 
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            {/* Top Pill Flanked by Horizontal Lines */}
+
             <div className="flex items-center justify-center gap-3">
               <span className="h-[2px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
               <span className="rounded-full bg-blue-50/90 border border-blue-100/90 px-4 py-1 text-xs sm:text-sm font-semibold text-blue-600 shadow-2xs">
@@ -425,10 +419,9 @@ const About = () => {
               <span className="h-[2px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
             </div>
 
-            {/* Heading with playful blue sunburst/rays accents */}
             <div className="mx-auto mt-4 max-w-3xl text-center">
               <div className="relative inline-block px-7 sm:px-11">
-                {/* Left decorative rays */}
+
                 <svg
                   className="absolute -top-3.5 -left-1 sm:-left-2 w-7 h-7 text-blue-500"
                   viewBox="0 0 28 28"
@@ -442,7 +435,6 @@ const About = () => {
                   {data?.valuesTitle || "Values That Drive Everything We Do"}
                 </h2>
 
-                {/* Right decorative rays */}
                 <svg
                   className="absolute -top-3.5 -right-1 sm:-right-2 w-7 h-7 text-blue-500"
                   viewBox="0 0 28 28"
@@ -453,14 +445,12 @@ const About = () => {
                 </svg>
               </div>
 
-              {/* Subheading */}
               <p className="mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-slate-500 font-normal">
                 {data?.valuesSubtitle ||
                   "These core values guide our mission, shape our culture, and inspire us to create a better learning experience for every student."}
               </p>
             </div>
 
-            {/* The 4 Value Cards Grid */}
             <div className="mt-12 sm:mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {valuesList.map((val, idx) => {
                 const Icon = (val?.icon && ICON_MAP[val.icon]) || ICON_MAP.BookOpen;
@@ -470,30 +460,26 @@ const About = () => {
                     key={idx}
                     className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 sm:p-8 shadow-[0_8px_30px_rgba(219,234,254,0.25)] hover:shadow-[0_20px_45px_rgba(30,58,138,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
                   >
-                    {/* Top-Right Soft Colored Blob Watermark */}
+
                     <div
                       className={`pointer-events-none absolute -top-8 -right-8 h-32 w-32 rounded-full ${theme.blobBg} transition-transform duration-500 group-hover:scale-125`}
                     />
 
                     <div>
-                      {/* Icon Box */}
                       <div
                         className={`relative flex h-14 w-14 items-center justify-center rounded-2xl ${theme.iconBg} ${theme.iconColor} ${theme.iconBorder} border shadow-xs transition-transform duration-300 group-hover:scale-105`}
                       >
                         <Icon className="w-7 h-7" size={26} strokeWidth={2.2} />
                       </div>
 
-                      {/* Title */}
                       <h3 className="relative mt-6 text-xl font-bold text-slate-900 tracking-tight">
                         {val.title}
                       </h3>
 
-                      {/* Colorful Accent Bar Under Title */}
                       <div
                         className={`relative mt-2.5 mb-4 h-1 w-8 rounded-full ${theme.barColor}`}
                       />
 
-                      {/* Description */}
                       <p className="relative text-sm leading-relaxed text-slate-500 font-normal">
                         {val.desc}
                       </p>
@@ -510,7 +496,6 @@ const About = () => {
         <section className="py-16 sm:py-20 lg:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              {/* Experienced Educators pill with flanking lines matching screenshot */}
               <div className="flex items-center justify-center gap-3">
                 <span className="h-[1.5px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
                 <span className="rounded-full bg-blue-50/90 border border-blue-100/90 px-4 py-1 text-xs sm:text-sm font-semibold text-blue-600 shadow-2xs">
@@ -519,7 +504,7 @@ const About = () => {
                 <span className="h-[1.5px] w-8 sm:w-12 bg-blue-200/90 rounded-full" />
               </div>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                {data?.teamTitle || "Meet the Mentors Behind ApnaVidya"}
+                {data?.teamTitle || "Meet the Mentors Behind APNAVIDYA"}
               </h2>
               {data?.teamSubtitle && (
                 <p className="mt-3 text-sm text-slate-500 sm:text-base">
@@ -534,15 +519,15 @@ const About = () => {
                   key={idx}
                   className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white text-center shadow-sm transition-all hover:shadow-lg"
                 >
-                  <div className="h-64 w-full overflow-hidden bg-slate-100">
+                  <div className="h-auto md:h-80 w-full overflow-hidden bg-slate-100 " >
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      className="h-full w-full object-top transition-transform duration-300 group-hover:scale-105"
                       style={{ objectPosition: "top center" }}
                     />
                   </div>
-                  <div className="p-5 bg-[#029EFB] text-center text-white">
+                  <div className="relative h-auto p-5 bg-[#029EFB] text-center text-white border-t border-blue-100/90">
                     <h3 className="text-base font-bold ">
                       {member.name}
                     </h3>
@@ -561,7 +546,7 @@ const About = () => {
       )}
 
       <section className="relative overflow-hidden bg-[#070D1E] py-20 text-white sm:py-24 border-t border-slate-800/60">
-        {/* Ambient Dark Theme Glows matching reference image */}
+
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 h-72 w-[650px] rounded-full bg-blue-600/15 blur-[110px]" />
           <div className="absolute -bottom-24 right-1/4 h-80 w-80 rounded-full bg-indigo-600/10 blur-[90px]" />
@@ -570,7 +555,7 @@ const About = () => {
 
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold sm:text-4xl text-white tracking-tight">
-            {data?.ctaTitle || "Experience the ApnaVidya Way of Learning"}
+            {data?.ctaTitle || "Experience the APNAVIDYA Way of Learning"}
           </h2>
           {data?.ctaDescription && (
             <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300 leading-relaxed">
