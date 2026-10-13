@@ -18,7 +18,7 @@ const DemoCTA = () => {
               100% Free Live Trial Session
             </span>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-3xl">
-              Experience ApnaVidya Live Before Enrolling
+              Experience APNAVIDYA Live Before Enrolling
             </h2>
             <p className="mt-3 text-[13px]m leading-relaxed text-blue-100 sm:text-base">
               Attend a live class, interact with senior educators, experience

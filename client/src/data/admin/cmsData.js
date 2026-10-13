@@ -14,7 +14,7 @@ export const initialAboutUsCMS = {
     rating: "4.9 / 5.0"
   },
   video: {
-    title: "Inside ApnaVidya Live Classrooms",
+    title: "Inside APNAVIDYA Live Classrooms",
     youtubeEmbedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     duration: "3 mins"
   }
@@ -26,7 +26,7 @@ export const initialContactCMS = {
   email: "admissions@apnavidya.com",
   supportEmail: "support@apnavidya.com",
   whatsapp: "+91 98765 43210",
-  address: "ApnaVidya Edutech Tower, 4th Floor, Tech Park Boulevard, Sector 62, Noida, UP 201301",
+  address: "APNAVIDYA Edutech Tower, 4th Floor, Tech Park Boulevard, Sector 62, Noida, UP 201301",
   workingHours: "Monday - Saturday: 9:00 AM - 8:00 PM IST",
   googleMapsUrl: "https://maps.google.com/?q=Noida+Sector+62",
   social: {

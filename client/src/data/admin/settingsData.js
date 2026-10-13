@@ -1,6 +1,6 @@
 export const initialSettings = {
   general: {
-    siteName: "ApnaVidya",
+    siteName: "APNAVIDYA",
     tagline: "Learn • Grow • Succeed",
     timezone: "Asia/Kolkata (IST +5:30)",
     currency: "INR (₹)",
@@ -19,7 +19,7 @@ export const initialSettings = {
     phone: "+91 98765 43210",
     tollFree: "1800-123-4567",
     email: "admissions@apnavidya.com",
-    address: "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301"
+    address: "APNAVIDYA Tower, 4th Floor, Sector 62, Noida, UP - 201301"
   },
   social: {
     facebook: "https://facebook.com/apnavidya",
@@ -31,14 +31,14 @@ export const initialSettings = {
     smtpHost: "smtp.sendgrid.net",
     smtpPort: 587,
     fromEmail: "notifications@apnavidya.com",
-    fromName: "ApnaVidya Academy",
+    fromName: "APNAVIDYA Academy",
     sendWelcomeEmail: true,
     sendReceiptEmail: true
   },
   seo: {
-    metaTitle: "ApnaVidya - Learn • Grow • Succeed | Leading Tech Education",
+    metaTitle: "APNAVIDYA - Learn • Grow • Succeed | Leading Tech Education",
     metaDescription: "Master Full Stack Development, Data Science, Python, and DSA with live 1-on-1 mentoring, verified certifications, and guaranteed career support.",
-    keywords: "coding bootcamp, web development, data science, ApnaVidya, full stack course, learn react, python dsa"
+    keywords: "coding bootcamp, web development, data science, APNAVIDYA, full stack course, learn react, python dsa"
   },
   security: {
     twoFactorAuth: false,

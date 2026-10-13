@@ -33,15 +33,15 @@ import defaultLogo from "../../../assets/apnavidya.png";
 
 const DEFAULT_SETTINGS = {
   general: {
-    siteName: "ApnaVidya",
+    siteName: "APNAVIDYA",
     tagline: "Learn • Grow • Succeed",
     logoUrl: "/images/logo.png",
     faviconUrl: "/favicon.ico",
   },
   seo: {
-    metaTitle: "ApnaVidya - Learn • Grow • Succeed | Leading Tech Education",
+    metaTitle: "APNAVIDYA - Learn • Grow • Succeed | Leading Tech Education",
     metaDescription: "Master Full Stack Development, Data Science, Python, and DSA with live 1-on-1 mentoring, verified certifications, and guaranteed career support.",
-    keywords: "coding bootcamp, web development, data science, ApnaVidya, full stack course, learn react, python dsa",
+    keywords: "coding bootcamp, web development, data science, APNAVIDYA, full stack course, learn react, python dsa",
     ogImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   },
   customTags: [],
@@ -51,7 +51,7 @@ const DEFAULT_SETTINGS = {
     email: "admissions@apnavidya.com",
     supportEmail: "support@apnavidya.com",
     whatsapp: "+91 98765 43210",
-    address: "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
+    address: "APNAVIDYA Tower, 4th Floor, Sector 62, Noida, UP - 201301",
     workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
     googleMapsUrl: "https://maps.google.com/?q=Noida+Sector+62",
     social: {
@@ -67,7 +67,7 @@ const DEFAULT_SETTINGS = {
     smtpPort: 465,
     encryption: "SSL",
     fromEmail: "notifications@apnavidya.com",
-    fromName: "ApnaVidya Academy",
+    fromName: "APNAVIDYA Academy",
     gmailAppPassword: "",
   },
 };
@@ -473,7 +473,7 @@ const SettingsAdmin = () => {
               label="Global Keywords (Comma-separated)"
               value={settings.seo.keywords}
               onChange={(e) => handleNestedChange("seo", "keywords", e.target.value)}
-              placeholder="coding bootcamp, web development, ApnaVidya, full stack course"
+              placeholder="coding bootcamp, web development, APNAVIDYA, full stack course"
             />
 
             <ImageUploadPreview
@@ -869,7 +869,7 @@ const SettingsAdmin = () => {
                 <ol className="list-decimal list-inside space-y-1 text-amber-800 text-[12px] pl-1">
                   <li>Ensure <strong>2-Step Verification</strong> is enabled in your Google Account.</li>
                   <li>Visit <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="underline font-bold text-amber-950 inline-flex items-center gap-1">Google App Passwords <ExternalLink size={11} /></a>.</li>
-                  <li>Type an App name (e.g. <em>ApnaVidya Portal</em>) and click <strong>Create</strong>.</li>
+                  <li>Type an App name (e.g. <em>APNAVIDYA Portal</em>) and click <strong>Create</strong>.</li>
                   <li>Copy the 16-character password (e.g. <span className="font-mono bg-amber-100 px-1.5 py-0.5 rounded text-amber-950 font-bold">abcd efgh ijkl mnop</span>) and paste it below.</li>
                 </ol>
               </div>
@@ -920,7 +920,7 @@ const SettingsAdmin = () => {
                   required
                   value={settings.email.fromName}
                   onChange={(e) => handleNestedChange("email", "fromName", e.target.value)}
-                  placeholder="ApnaVidya Academy"
+                  placeholder="APNAVIDYA Academy"
                 />
               </div>
 

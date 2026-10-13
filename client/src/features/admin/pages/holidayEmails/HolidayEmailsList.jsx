@@ -426,7 +426,7 @@ const HolidayEmailsList = () => {
                   <div className="mx-auto flex items-center justify-center">
                     <img
                       src={logoSrc}
-                      alt="ApnaVidya Logo"
+                      alt="APNAVIDYA Logo"
                       className="h-12 sm:h-14 w-auto max-h-16 max-w-[260px] object-contain"
                       onError={(e) => {
                         e.currentTarget.onerror = null;

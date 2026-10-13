@@ -132,7 +132,7 @@ const CourseDetails = () => {
             lmsAccess: c.lmsAccess || "Lifetime Revision Access",
             doubtResolution: c.doubtResolution || "Daily Live 1-on-1 Windows",
             prerequisites: c.prerequisites || fallback.prerequisites || "Basic computer skills and passion for technology.",
-            certificateInfo: c.certificateInfo || fallback.certificate || "ApnaVidya Certified Industry Credentials with Verifiable ID.",
+            certificateInfo: c.certificateInfo || fallback.certificate || "APNAVIDYA Certified Industry Credentials with Verifiable ID.",
             targetAudience: c.targetAudience || "College graduates, junior developers, and professionals seeking career transitions.",
             modules: mappedModules,
             faqs: parsedFaqs,

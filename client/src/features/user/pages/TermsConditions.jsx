@@ -14,7 +14,7 @@ const TermsConditions = () => {
             Terms & Conditions
           </h1>
           <p className="mt-2 text-xs text-[13px]late-400">
-            Effective Date: September 2025 • ApnaVidya Private Limited
+            Effective Date: September 2025 • APNAVIDYA Private Limited
           </p>
 
           <div className="mt-8 space-y-8 text-[13px]m leading-relaxed text-[13px]late-600 border-t border-slate-100 pt-8">
@@ -23,7 +23,7 @@ const TermsConditions = () => {
                 1. Acceptance of Terms
               </h2>
               <p className="mt-2">
-                By accessing ApnaVidya’s website, registering for courses, or
+                By accessing APNAVIDYA’s website, registering for courses, or
                 participating in live demo classes, you agree to comply with
                 these Terms and Conditions and our Privacy Policy.
               </p>
@@ -48,7 +48,7 @@ const TermsConditions = () => {
               </h2>
               <p className="mt-2">
                 All video lectures, notes, project repositories, logos, and
-                curriculum blueprints are proprietary assets of ApnaVidya.
+                curriculum blueprints are proprietary assets of APNAVIDYA.
                 Students are granted a personal, non-transferable license to
                 access materials for their individual learning.
               </p>

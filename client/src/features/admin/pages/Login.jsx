@@ -28,7 +28,7 @@ const Login = () => {
   const { login, isAuthenticated, user } = useAuth();
   const { settings } = useSettings();
   const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, defaultLogo);
-  const siteName = settings.general?.siteName || "ApnaVidya";
+  const siteName = settings.general?.siteName || "APNAVIDYA";
   const tagline = settings.general?.tagline || "Learn • Grow • Succeed";
 
 

@@ -21,7 +21,7 @@ const Topbar = ({ sidebarOpen, toggleSidebar }) => {
   const location = useLocation();
   const { user, logout } = useAuth();
   const { settings } = useSettings();
-  const siteName = settings.general?.siteName || "ApnaVidya";
+  const siteName = settings.general?.siteName || "APNAVIDYA";
   const [notifications, setNotifications] = useState([]);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);

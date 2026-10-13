@@ -177,7 +177,7 @@ const ContactDetailsAdmin = ({ isEmbedded = false }) => {
                 }}
               />
               <div>
-                <h4 className="font-bold text-[13px]late-900 text-[13px]m">ApnaVidya Contact</h4>
+                <h4 className="font-bold text-[13px]late-900 text-[13px]m">APNAVIDYA Contact</h4>
                 <p className="text-[13px] text-[13px]late-400">{data.workingHours}</p>
               </div>
             </div>

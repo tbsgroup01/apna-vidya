@@ -117,7 +117,7 @@ const PaymentDetails = () => {
   const publicReceiptUrl = `${window.location.origin}${base}receipt/${payment.id}`.replace(/([^:]\/)\/+/g, "$1");
 
   const shareText =
-    `*ApnaVidya - Official Fee Receipt*\n\n` +
+    `*APNAVIDYA - Official Fee Receipt*\n\n` +
     `Hello ${payment.studentName},\n` +
     `Here are your payment voucher details:\n\n` +
     `• *Receipt No:* ${payment.id}\n` +
@@ -129,14 +129,14 @@ const PaymentDetails = () => {
     `• *Remaining Balance:* ₹${remainingBalance.toLocaleString()}\n` +
     `• *Late Fee:* ${lateFee}\n` +
     `• *Transaction Ref:* ${payment.transactionRef}\n\n` +
-    `Thank you for choosing ApnaVidya!`;
+    `Thank you for choosing APNAVIDYA!`;
 
   const waShareUrl = waNumber
     ? `https://wa.me/${waNumber}?text=${encodeURIComponent(shareText)}`
     : `https://wa.me/?text=${encodeURIComponent(shareText)}`;
 
   const emailShareUrl = `mailto:${payment.studentEmail || ""}?subject=${encodeURIComponent(
-    `Official Fee Receipt: ${payment.id} - ApnaVidya`
+    `Official Fee Receipt: ${payment.id} - APNAVIDYA`
   )}&body=${encodeURIComponent(shareText)}`;
 
   const handlePrint = () => {
@@ -194,7 +194,7 @@ const PaymentDetails = () => {
           <div className="flex items-center gap-3">
             <img
               src={logo}
-              alt="ApnaVidya Logo"
+              alt="APNAVIDYA Logo"
               className="h-11 sm:h-12 w-auto object-contain shrink-0"
             />
 

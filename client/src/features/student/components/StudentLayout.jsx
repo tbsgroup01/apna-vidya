@@ -25,7 +25,7 @@ const StudentLayout = () => {
   const { user, logout } = useAuth();
   const { settings } = useSettings();
   const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, defaultLogo);
-  const siteName = settings.general?.siteName || "ApnaVidya";
+  const siteName = settings.general?.siteName || "APNAVIDYA";
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -210,7 +210,7 @@ const StudentLayout = () => {
 
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-[13px]late-500">
         <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>© 2026 ApnaVidya Edutech. All rights reserved.</p>
+          <p>© 2026 APNAVIDYA Edutech. All rights reserved.</p>
           <div className="flex items-center gap-4 text-xs font-medium text-[13px]late-600">
             <a href="mailto:support@apnavidya.com" className="hover:text-blue-600 transition-colors">
               Student Helpdesk

@@ -403,7 +403,7 @@ const Dashboard = () => {
               Live Administrative Dashboard
             </h1>
             <p className="mt-1 text-xs sm:text-sm text-slate-500 max-w-2xl">
-              Real-time student admissions, fees reconciliation, courses health, and institutional workflows for ApnaVidya.
+              Real-time student admissions, fees reconciliation, courses health, and institutional workflows for APNAVIDYA.
             </p>
           </div>
 

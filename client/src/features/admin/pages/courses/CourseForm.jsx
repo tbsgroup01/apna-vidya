@@ -139,7 +139,7 @@ const CourseForm = () => {
                 ],
               image: c.image || "",
               syllabusUrl: c.syllabusUrl || "",
-              seoTitle: c.name ? `${c.name} | ApnaVidya` : "",
+              seoTitle: c.name ? `${c.name} | APNAVIDYA` : "",
               seoDescription: c.description || "",
             });
           }
@@ -686,7 +686,7 @@ const CourseForm = () => {
               label="Meta Title"
               value={formData.seoTitle}
               onChange={(e) => handleChange("seoTitle", e.target.value)}
-              placeholder="e.g. Best Ethical Hacking Masterclass 2026 | ApnaVidya"
+              placeholder="e.g. Best Ethical Hacking Masterclass 2026 | APNAVIDYA"
             />
             <FormTextarea
               label="Meta Description"

@@ -47,6 +47,7 @@ export const coursesData = [
       {
         module: "Module 3: Backend & Database Architecture",
         duration: "6 Weeks",
+
         topics: [
           "Node.js runtime, event loop, and modular architecture",
           "Building robust RESTful APIs with Express.js",
@@ -68,6 +69,7 @@ export const coursesData = [
       {
         module: "Module 5: Production Deployment & Placement",
         duration: "4 Weeks",
+
         topics: [
           "CI/CD pipelines with GitHub Actions",
           "Containerization with Docker basics",
@@ -144,7 +146,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "Anyone interested in building websites. No coding background required.",
-    certificate: "ApnaVidya Certified Frontend Specialist Certificate.",
+    certificate: "APNAVIDYA Certified Frontend Specialist Certificate.",
   },
   {
     id: 3,
@@ -210,7 +212,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "High school mathematics and willingness to practice problem solving.",
-    certificate: "ApnaVidya Certificate of Excellence in Problem Solving & DSA.",
+    certificate: "APNAVIDYA Certificate of Excellence in Problem Solving & DSA.",
   },
   {
     id: 4,
@@ -275,7 +277,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "Basic understanding of JavaScript and React concepts is recommended.",
-    certificate: "ApnaVidya Certified Mobile Application Developer Certificate.",
+    certificate: "APNAVIDYA Certified Mobile Application Developer Certificate.",
   },
   {
     id: 5,
@@ -341,7 +343,7 @@ export const coursesData = [
       },
     ],
     prerequisites: "High school math foundation. Basic coding familiarity is helpful but taught from scratch.",
-    certificate: "ApnaVidya Data Science & Artificial Intelligence Professional Certificate.",
+    certificate: "APNAVIDYA Data Science & Artificial Intelligence Professional Certificate.",
   },
   {
     id: 6,
@@ -396,6 +398,6 @@ export const coursesData = [
       },
     ],
     prerequisites: "Enrolled in Class 8th, 9th, 10th, 11th, or 12th.",
-    certificate: "ApnaVidya Academic Excellence Certificate.",
+    certificate: "APNAVIDYA Academic Excellence Certificate.",
   },
 ];

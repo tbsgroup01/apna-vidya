@@ -21,7 +21,7 @@ const DEFAULT_TESTIMONIALS = [
     avatar:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
     review:
-      "Coming from a non-CS background, I was terrified of learning React and Node.js. ApnaVidya's daily doubt clearance and mentor code reviews gave me the exact confidence I needed. Cracked a 9 LPA package within 5 months!",
+      "Coming from a non-CS background, I was terrified of learning React and Node.js. APNAVIDYA's daily doubt clearance and mentor code reviews gave me the exact confidence I needed. Cracked a 9 LPA package within 5 months!",
     company: "Innovaccer",
   },
   {

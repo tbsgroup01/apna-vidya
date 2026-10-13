@@ -66,11 +66,11 @@ const Footer = () => {
     const [courseLinks, setCourseLinks] = useState(defaultCourseLinks);
 
     const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, logo);
-    const siteName = settings.general?.siteName || "ApnaVidya";
+    const siteName = settings.general?.siteName || "APNAVIDYA";
     const contact = settings.contact || {};
     const social = contact.social || {};
 
-    const address = contact.address || "Apna Vidya Tower, 4th Floor, Sector 62, Noida, UP - 201301";
+    const address = contact.address || "APNAVIDYA Tower, 4th Floor, Sector 62, Noida, UP - 201301";
     const phone = contact.phone || "+91 98765 43210";
     const email = contact.email || "admissions@apnavidya.com";
     const workingHours = contact.workingHours || "Mon - Sat: 9:00 AM - 7:00 PM";

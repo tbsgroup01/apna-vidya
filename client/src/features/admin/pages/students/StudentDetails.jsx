@@ -136,7 +136,7 @@ const StudentDetails = () => {
   const digits = rawPhone.replace(/\D/g, "");
   const waNumber = digits.length === 10 ? `91${digits}` : digits;
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(
-    `Hello ${student.name}, greetings from ApnaVidya!`
+    `Hello ${student.name}, greetings from APNAVIDYA!`
   )}`;
   const telUrl = `tel:${rawPhone}`;
 

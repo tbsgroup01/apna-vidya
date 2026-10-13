@@ -140,7 +140,7 @@ const LeadDetails = () => {
                     ? `91${lead.phone.replace(/\D/g, "")}`
                     : lead.phone.replace(/\D/g, "")
                     }?text=${encodeURIComponent(
-                      `Hello ${lead.name}, greetings from ApnaVidya!`
+                      `Hello ${lead.name}, greetings from APNAVIDYA!`
                     )}`}
                   target="_blank"
                   rel="noopener noreferrer"

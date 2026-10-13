@@ -14,7 +14,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: ["https://apnavidya.tech", "http://localhost:5173", "https://server.apnavidya.tech"],
+  origin: ["https://apnavidya.tech", "https://apnavidya.co.in", "https://www.apnavidya.co.in", "https://server.apnavidya.tech"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
   credentials: true,
@@ -28,9 +28,10 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Welcome to ApnaVidya API Final");
 });
+
 
 
 

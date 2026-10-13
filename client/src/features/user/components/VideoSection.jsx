@@ -131,6 +131,7 @@ const VideoSection = () => {
   const [isActive, setIsActive] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeModalVideo, setActiveModalVideo] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -176,6 +177,15 @@ const VideoSection = () => {
     };
   }, [activeModalVideo]);
 
+  const touchStartXRef = React.useRef(null);
+  const touchStartYRef = React.useRef(null);
+  const touchEndXRef = React.useRef(null);
+  const touchEndYRef = React.useRef(null);
+  const mouseStartXRef = React.useRef(null);
+  const mouseEndXRef = React.useRef(null);
+  const isMouseDownRef = React.useRef(false);
+  const isSwipedRef = React.useRef(false);
+
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
@@ -189,15 +199,130 @@ const VideoSection = () => {
   const itemsPerView = windowWidth >= 1024 ? 4 : windowWidth >= 640 ? 2 : 1;
   const maxIndex = Math.max(0, videos.length - itemsPerView);
 
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(Math.max(0, maxIndex));
+    }
+  }, [maxIndex, currentIndex]);
+
   const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  // Auto-scroll timer like Testimonials (pauses on hover or when modal is open)
+  useEffect(() => {
+    if (isPaused || maxIndex <= 0 || activeModalVideo) return;
+    const timer = setInterval(() => {
+      handleNext();
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isPaused, maxIndex, currentIndex, activeModalVideo]);
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    setIsPaused(true);
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+    touchEndXRef.current = null;
+    touchEndYRef.current = null;
+    isSwipedRef.current = false;
+  };
+
+  const handleTouchMove = (e) => {
+    if (touchStartXRef.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    touchEndXRef.current = currentX;
+    touchEndYRef.current = currentY;
+
+    const diffX = Math.abs(currentX - touchStartXRef.current);
+    if (diffX > 10) {
+      isSwipedRef.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartXRef.current !== null && touchEndXRef.current !== null) {
+      const diffX = touchStartXRef.current - touchEndXRef.current;
+      const diffY = Math.abs((touchStartYRef.current || 0) - (touchEndYRef.current || 0));
+      const minSwipeDistance = 35;
+
+      // Only swipe if horizontal drag is significantly greater than vertical scroll
+      if (Math.abs(diffX) > diffY && Math.abs(diffX) > minSwipeDistance) {
+        if (diffX > 0) {
+          handleNext();
+        } else {
+          handlePrev();
+        }
+      }
+    }
+
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+    touchEndXRef.current = null;
+    touchEndYRef.current = null;
+
+    setTimeout(() => {
+      isSwipedRef.current = false;
+      setIsPaused(false);
+    }, 120);
+  };
+
+  // Mouse drag handlers for desktop / testing
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return;
+    setIsPaused(true);
+    mouseStartXRef.current = e.clientX;
+    mouseEndXRef.current = null;
+    isMouseDownRef.current = true;
+    isSwipedRef.current = false;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMouseDownRef.current || mouseStartXRef.current === null) return;
+    mouseEndXRef.current = e.clientX;
+    const diffX = Math.abs(e.clientX - mouseStartXRef.current);
+    if (diffX > 10) {
+      isSwipedRef.current = true;
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (isMouseDownRef.current && mouseStartXRef.current !== null && mouseEndXRef.current !== null) {
+      const diffX = mouseStartXRef.current - mouseEndXRef.current;
+      const minSwipeDistance = 35;
+
+      if (Math.abs(diffX) > minSwipeDistance) {
+        if (diffX > 0) {
+          handleNext();
+        } else {
+          handlePrev();
+        }
+      }
+    }
+
+    isMouseDownRef.current = false;
+    mouseStartXRef.current = null;
+    mouseEndXRef.current = null;
+
+    setTimeout(() => {
+      isSwipedRef.current = false;
+      setIsPaused(false);
+    }, 120);
+  };
+
+  const handleMouseLeave = () => {
+    if (isMouseDownRef.current) {
+      handleMouseUp();
+    }
   };
 
   const openVideoModal = (video) => {
+    if (isSwipedRef.current) return;
     setActiveModalVideo(video);
   };
 
@@ -208,7 +333,11 @@ const VideoSection = () => {
   const translatePercent = currentIndex * (100 / itemsPerView);
 
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24 border-b border-slate-100">
+    <section
+      className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24 border-b border-slate-100"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       {/* Ambient background waves matching overall theme */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
         {/* Top-Left Peach Flowing Curve */}
@@ -242,14 +371,13 @@ const VideoSection = () => {
             Learning and Expert Guidance.
           </p>
 
-          {/* Carousel Arrows on Top-Right */}
+          {/* Carousel Arrows on Top-Right (Desktop) */}
           {videos.length > itemsPerView && (
             <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 items-center gap-2.5">
               <button
                 type="button"
                 onClick={handlePrev}
-                disabled={currentIndex === 0}
-                className="flex h-10 w-10 items-center justify-center rounded-2xl border border-blue-100 bg-white text-blue-600 shadow-2xs hover:bg-blue-50 hover:shadow-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-2xl border border-blue-100 bg-white text-blue-600 shadow-2xs hover:bg-blue-50 hover:shadow-xs active:scale-95 transition-all cursor-pointer"
                 aria-label="Previous videos"
               >
                 <ChevronLeft size={18} strokeWidth={2.5} />
@@ -257,8 +385,7 @@ const VideoSection = () => {
               <button
                 type="button"
                 onClick={handleNext}
-                disabled={currentIndex >= maxIndex}
-                className="flex h-10 w-10 items-center justify-center rounded-2xl border border-orange-100 bg-white text-[#FD8006] shadow-2xs hover:bg-orange-50 hover:shadow-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                className="flex h-10 w-10 items-center justify-center rounded-2xl border border-orange-100 bg-white text-[#FD8006] shadow-2xs hover:bg-orange-50 hover:shadow-xs active:scale-95 transition-all cursor-pointer"
                 aria-label="Next videos"
               >
                 <ChevronRight size={18} strokeWidth={2.5} />
@@ -267,8 +394,17 @@ const VideoSection = () => {
           )}
         </div>
 
-        {/* Carousel Container */}
-        <div className="overflow-hidden">
+        {/* Carousel Container with Touch & Mouse Swipe */}
+        <div
+          className="overflow-hidden touch-pan-y select-none cursor-grab active:cursor-grabbing"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+        >
           <div
             className="flex transition-transform duration-500 ease-out py-2"
             style={{
@@ -285,6 +421,7 @@ const VideoSection = () => {
               const Icon = getVideoCardIcon(vid, idx);
               const description = getVideoDescription(vid, idx);
               const isOrangeIcon = idx % 2 === 0;
+              const displayTitle = (vid.title || `APNAVIDYA Video ${idx + 1}`).replace(/ApnaVidya|Apna Vidya/gi, "APNAVIDYA");
 
               return (
                 <div
@@ -293,18 +430,19 @@ const VideoSection = () => {
                 >
                   <div
                     onClick={() => openVideoModal(vid)}
-                    className="group relative cursor-pointer overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-[0_10px_35px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full"
+                    className="group relative cursor-pointer overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-[0_10px_35px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between h-full select-none"
                   >
                     {/* Top Thumbnail Section (16:9) with Corner Wave Accents */}
                     <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
                       <img
                         src={thumbnail}
-                        alt={vid.title || `Video ${idx + 1}`}
+                        alt={displayTitle}
+                        draggable={false}
                         onError={(e) => {
                           e.currentTarget.src =
                             "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80";
                         }}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none select-none"
                       />
 
                       {/* Soft Corner Wave Overlays on Thumbnail */}
@@ -341,7 +479,7 @@ const VideoSection = () => {
 
                           <div className="min-w-0 flex-1">
                             <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2">
-                              {vid.title || `APNAVIDYA Video ${idx + 1}`}
+                              {displayTitle}
                             </h3>
                           </div>
                         </div>
@@ -372,21 +510,44 @@ const VideoSection = () => {
           </div>
         </div>
 
-        {/* Carousel Pagination Dots */}
+        {/* Carousel Pagination Dots & Mobile Navigation Controls */}
         {videos.length > itemsPerView && (
-          <div className="mt-8 flex items-center justify-center gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, dotIdx) => (
-              <button
-                key={dotIdx}
-                type="button"
-                onClick={() => setCurrentIndex(dotIdx)}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === dotIdx
-                  ? "w-7 bg-[#FD8006]"
-                  : "w-2 bg-blue-100 hover:bg-blue-200"
-                  }`}
-                aria-label={`Go to slide ${dotIdx + 1}`}
-              />
-            ))}
+          <div className="mt-8 flex items-center justify-center gap-3">
+            {/* Mobile Previous Button */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Previous video"
+              className="flex md:hidden h-8 w-8 items-center justify-center rounded-xl border border-blue-100 bg-white text-blue-600 shadow-2xs active:scale-95 transition-all cursor-pointer"
+            >
+              <ChevronLeft size={16} strokeWidth={2.5} />
+            </button>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center gap-2">
+              {Array.from({ length: maxIndex + 1 }).map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  type="button"
+                  onClick={() => setCurrentIndex(dotIdx)}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${currentIndex === dotIdx
+                    ? "w-7 bg-[#FD8006]"
+                    : "w-2 bg-blue-100 hover:bg-blue-200"
+                    }`}
+                  aria-label={`Go to slide ${dotIdx + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Mobile Next Button */}
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Next video"
+              className="flex md:hidden h-8 w-8 items-center justify-center rounded-xl border border-orange-100 bg-white text-[#FD8006] shadow-2xs active:scale-95 transition-all cursor-pointer"
+            >
+              <ChevronRight size={16} strokeWidth={2.5} />
+            </button>
           </div>
         )}
       </div>

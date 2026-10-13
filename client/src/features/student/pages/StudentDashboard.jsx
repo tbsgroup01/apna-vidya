@@ -188,7 +188,7 @@ const StudentDashboard = () => {
               href="#live-class"
               onClick={(e) => {
                 e.preventDefault();
-                alert("Joining ApnaVidya Live Classroom. Loading stream...");
+                alert("Joining APNAVIDYA Live Classroom. Loading stream...");
               }}
               className="flex items-center justify-center gap-2.5 rounded-2xl bg-[#FD8006] px-6 py-3.5 text-[13px]m font-bold text-white shadow-lg shadow-blue-500/40 hover:bg-blue-500 hover:shadow-blue-500/60 active:scale-95 transition-all cursor-pointer"
             >
@@ -515,7 +515,7 @@ const StudentDashboard = () => {
                     <span className="font-mono font-bold text-blue-700">AV-2025-0842</span>
                   </p>
                   <p className="text-[13px] text-[13px]late-500 mt-1">
-                    Graduation Date: 30 August 2026 • Issued by ApnaVidya Council
+                    Graduation Date: 30 August 2026 • Issued by APNAVIDYA Council
                   </p>
                 </div>
               </div>
@@ -523,7 +523,7 @@ const StudentDashboard = () => {
               <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => handleDownload("ApnaVidya_Certificate_AV-2025-0842.pdf")}
+                  onClick={() => handleDownload("APNAVIDYA_Certificate_AV-2025-0842.pdf")}
                   className="flex items-center gap-2 rounded-xl bg-[#FD8006] px-4 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-blue-700 cursor-pointer"
                 >
                   <Download size={15} />

@@ -16,7 +16,7 @@ export const initialAdminCourses = [
     shortDescription: "Complete frontend and backend engineering with React, Node.js, Express, MongoDB, and Cloud Deployment.",
     fullDescription: "Master industry-standard web engineering. From foundational JavaScript to building microservices, auth workflows, real-time WebSockets, and deploying scalable architectures to AWS and Vercel.",
     courseType: "Live Interactive",
-    seoTitle: "Best Full Stack Web Development Course 2026 | ApnaVidya",
+    seoTitle: "Best Full Stack Web Development Course 2026 | APNAVIDYA",
     seoDescription: "Learn Full Stack Web Development with 1-on-1 live mentoring, capstone projects, and placement assistance.",
     modules: [
       {
@@ -77,7 +77,7 @@ export const initialAdminCourses = [
     shortDescription: "Python, Pandas, Machine Learning, Deep Learning, and Generative AI prompt engineering.",
     fullDescription: "Gain practical data mastery with statistics, EDA, supervised/unsupervised machine learning, neural networks with PyTorch, and large language model integration.",
     courseType: "Live Interactive",
-    seoTitle: "Data Science and AI Certification Training | ApnaVidya",
+    seoTitle: "Data Science and AI Certification Training | APNAVIDYA",
     seoDescription: "Become an industry-ready Data Scientist with hands-on projects in Python, ML, NLP, and AI models.",
     modules: [
       {
@@ -118,7 +118,7 @@ export const initialAdminCourses = [
     shortDescription: "Build modern, responsive, high-speed websites with HTML5, CSS3, JavaScript, Tailwind, and React.",
     fullDescription: "Essential web training starting from scratch with responsive design systems, CSS animations, JavaScript DOM manipulations, and practical portfolio building.",
     courseType: "Live Interactive",
-    seoTitle: "Web Development Course for Beginners | ApnaVidya",
+    seoTitle: "Web Development Course for Beginners | APNAVIDYA",
     seoDescription: "Step-by-step web design and development training with practical live mentors.",
     modules: [
       {
@@ -149,7 +149,7 @@ export const initialAdminCourses = [
     shortDescription: "Cross-platform mobile apps for iOS and Android with single codebase Dart/Flutter and React Native.",
     fullDescription: "From mobile UI widgets to device sensor integration, state management, local database storage, push notifications, and Play Store publishing.",
     courseType: "Live Interactive",
-    seoTitle: "Mobile App Development Certification Course | ApnaVidya",
+    seoTitle: "Mobile App Development Certification Course | APNAVIDYA",
     seoDescription: "Build production iOS and Android apps with senior mobile engineering leads.",
     modules: [
       {
@@ -180,7 +180,7 @@ export const initialAdminCourses = [
     shortDescription: "Master DSA in Java / C++ / Python. Crack FAANG and top product-based company coding rounds.",
     fullDescription: "Comprehensive deep-dive into arrays, linked lists, stacks, queues, trees, graphs, dynamic programming, time-space complexity, and 250+ LeetCode problems.",
     courseType: "Live Interactive",
-    seoTitle: "DSA Bootcamp for Tech Placements | ApnaVidya",
+    seoTitle: "DSA Bootcamp for Tech Placements | APNAVIDYA",
     seoDescription: "Crack technical coding rounds with confidence guided by senior software engineers.",
     modules: [
       {
@@ -211,7 +211,7 @@ export const initialAdminCourses = [
     shortDescription: "Linux, Git, Docker, Kubernetes, Terraform, AWS Cloud and Jenkins CI/CD pipelines.",
     fullDescription: "Enterprise infrastructure automation and site reliability engineering training.",
     courseType: "Live Interactive",
-    seoTitle: "DevOps Cloud Engineering Certification | ApnaVidya",
+    seoTitle: "DevOps Cloud Engineering Certification | APNAVIDYA",
     seoDescription: "Automate delivery pipelines and scale cloud infrastructure.",
     modules: []
   }

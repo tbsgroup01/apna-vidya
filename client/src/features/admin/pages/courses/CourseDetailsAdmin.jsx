@@ -851,7 +851,7 @@ const CourseDetailsAdmin = () => {
                     </div>
                     <div>
                       <span className="text-[13px]late-400 font-bold block">Certificate Credential:</span>
-                      <span className="text-[13px]late-700">{course.certificateInfo || "ApnaVidya Industry Professional Credential"}</span>
+                      <span className="text-[13px]late-700">{course.certificateInfo || "APNAVIDYA Industry Professional Credential"}</span>
                     </div>
                     <div>
                       <span className="text-[13px]late-400 font-bold block">Target Audience:</span>

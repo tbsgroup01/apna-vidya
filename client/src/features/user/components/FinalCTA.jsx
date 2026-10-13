@@ -18,7 +18,7 @@ const FinalCTA = () => {
         <h2 className="mt-6 text-3xl font-black tracking-tight sm:text-5xl lg:text-4xl">
           Ready to Build Your Future with{" "}
           <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-            ApnaVidya?
+            APNAVIDYA?
           </span>
         </h2>
 

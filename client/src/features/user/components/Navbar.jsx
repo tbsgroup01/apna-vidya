@@ -32,7 +32,7 @@ const Navbar = () => {
     const { settings } = useSettings();
 
     const logoSrc = sanitizeAssetUrl(settings.general?.logoUrl, logo);
-    const siteName = settings.general?.siteName || "ApnaVidya";
+    const siteName = settings.general?.siteName || "APNAVIDYA";
 
     const dashboardPath = user?.role === "Student" ? "/student/dashboard" : "/admin/dashboard";
 

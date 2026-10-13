@@ -14,7 +14,7 @@ const RefundPolicy = () => {
             Refund & Cancellation Policy
           </h1>
           <p className="mt-2 text-xs text-[13px]late-400">
-            Last Updated: September 2025 • ApnaVidya
+            Last Updated: September 2025 • APNAVIDYA
           </p>
 
           <div className="mt-6 rounded-2xl bg-blue-50/80 border border-blue-100 p-5 text-xs sm:text-[13px]m text-blue-900">

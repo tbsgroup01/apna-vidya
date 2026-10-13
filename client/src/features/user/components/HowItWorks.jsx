@@ -45,7 +45,7 @@ const HowItWorks = () => {
             Simple 4-Step Process
           </span>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-3xl">
-            How ApnaVidya{" "}
+            How APNAVIDYA{" "}
             <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
               Transforms Your Career
             </span>

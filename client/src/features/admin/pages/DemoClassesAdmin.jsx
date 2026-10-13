@@ -213,7 +213,7 @@ const DemoClassesAdmin = () => {
         const waNumber = digits.length === 10 ? `91${digits}` : digits;
         const waUrl = digits
           ? `https://wa.me/${waNumber}?text=${encodeURIComponent(
-            `Hello ${row.name || "there"}, greetings from ApnaVidya regarding your Demo Class!`
+            `Hello ${row.name || "there"}, greetings from APNAVIDYA regarding your Demo Class!`
           )}`
           : null;
         const telUrl = `tel:${rawPhone.replace(/\s+/g, "")}`;

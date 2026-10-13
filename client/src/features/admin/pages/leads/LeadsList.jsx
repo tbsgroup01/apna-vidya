@@ -242,7 +242,7 @@ const LeadsList = () => {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "apna_vidya_leads.csv");
+    link.setAttribute("download", "APNAVIDYA_leads.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -328,7 +328,7 @@ const LeadsList = () => {
         const waNumber = digits.length === 10 ? `91${digits}` : digits;
         const waUrl = digits
           ? `https://wa.me/${waNumber}?text=${encodeURIComponent(
-            `Hello ${row.name || "there"}, greetings from ApnaVidya!`
+            `Hello ${row.name || "there"}, greetings from APNAVIDYA!`
           )}`
           : null;
         const telUrl = `tel:${rawPhone.replace(/\s+/g, "")}`;

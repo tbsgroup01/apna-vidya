@@ -19,17 +19,20 @@ export const sanitizeAssetUrl = (url, fallback = "") => {
   return trimmed;
 };
 
+
+
+
 const DEFAULT_SETTINGS = {
   general: {
-    siteName: "ApnaVidya",
+    siteName: "APNAVIDYA",
     tagline: "Learn • Grow • Succeed",
     logoUrl: defaultLogo,
     faviconUrl: defaultFavicon,
   },
   seo: {
-    metaTitle: "ApnaVidya - Learn • Grow • Succeed | Leading Tech Education",
+    metaTitle: "APNAVIDYA - Learn • Grow • Succeed | Leading Tech Education",
     metaDescription: "Master Full Stack Development, Data Science, Python, and DSA with live 1-on-1 mentoring, verified certifications, and guaranteed career support.",
-    keywords: "coding bootcamp, web development, data science, ApnaVidya, full stack course, learn react, python dsa",
+    keywords: "coding bootcamp, web development, data science, APNAVIDYA, full stack course, learn react, python dsa",
     ogImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
   },
   customTags: [],
@@ -39,7 +42,7 @@ const DEFAULT_SETTINGS = {
     email: "admissions@apnavidya.com",
     supportEmail: "support@apnavidya.com",
     whatsapp: "+91 98765 43210",
-    address: "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301",
+    address: "APNAVIDYA Tower, 4th Floor, Sector 62, Noida, UP - 201301",
     workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
     googleMapsUrl: "https://maps.google.com/?q=Noida+Sector+62",
     social: {

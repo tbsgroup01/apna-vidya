@@ -193,12 +193,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
           <Link
             to="/admin/dashboard"
             className="flex items-center justify-center overflow-hidden flex-1 group"
-            title={sidebarOpen ? "ApnaVidya Admin Dashboard" : "ApnaVidya"}
+            title={sidebarOpen ? "APNAVIDYA Admin Dashboard" : "APNAVIDYA"}
           >
             {sidebarOpen ? (
               <img
                 src={logoSrc}
-                alt="ApnaVidya Logo"
+                alt="APNAVIDYA Logo"
                 className="h-12 max-h-14 w-auto max-w-[180px] object-contain transition-all duration-300"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
@@ -209,7 +209,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, toggleSidebar }) => {
               <div className="relative flex items-center justify-center h-12 w-12 rounded-xl hover:bg-orange-50/70 transition-all duration-200 p-1">
                 <img
                   src={faviconSrc}
-                  alt="ApnaVidya Favicon"
+                  alt="APNAVIDYA Favicon"
                   className="h-10 w-10 object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-110"
                   onError={(e) => {
                     e.currentTarget.onerror = null;

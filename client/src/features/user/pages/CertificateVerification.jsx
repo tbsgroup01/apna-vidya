@@ -23,7 +23,7 @@ const sampleCertificates = {
     issueDate: "November 14, 2025",
     grade: "Distinction (96%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Dr. Elizabeth Vance (Lead Academic Director)",
   },
   "AVTC-2025-02": {
@@ -33,7 +33,7 @@ const sampleCertificates = {
     issueDate: "September 28, 2025",
     grade: "Grade A+ (94%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Dr. Evelyn Moore & Prof. David Chen",
   },
   "AVTC-2025-03": {
@@ -43,7 +43,7 @@ const sampleCertificates = {
     issueDate: "October 15, 2025",
     grade: "Distinction (98%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Dr. Alistair J. Croft (Honors Committee Chair)",
   },
   "AVTC-2025-04": {
@@ -53,7 +53,7 @@ const sampleCertificates = {
     issueDate: "August 20, 2025",
     grade: "Mastery Level (95%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council & Tech Laureate",
+    verificationAuthority: "APNAVIDYA Academic Council & Tech Laureate",
     instructor: "Vikramaditya Sen (Enterprise Mentor)",
   },
   "AV-2025-0842": {
@@ -63,7 +63,7 @@ const sampleCertificates = {
     issueDate: "September 10, 2025",
     grade: "Distinction (94%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Amit Verma (Lead Tech Mentor)",
   },
   "AV-2025-0914": {
@@ -73,7 +73,7 @@ const sampleCertificates = {
     issueDate: "August 24, 2025",
     grade: "Grade A+ (91%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Rajesh Mehrotra (Systems Architect)",
   },
   "AV-2025-0720": {
@@ -83,7 +83,7 @@ const sampleCertificates = {
     issueDate: "September 15, 2025",
     grade: "Grade A (89%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Amitabh Roy (Lead Instructor)",
   },
   "AV-2025-0611": {
@@ -93,7 +93,7 @@ const sampleCertificates = {
     issueDate: "September 02, 2025",
     grade: "Grade A+ (95%)",
     status: "Verified & Active",
-    verificationAuthority: "ApnaVidya Academic Council (ISO 9001:2015)",
+    verificationAuthority: "APNAVIDYA Academic Council (ISO 9001:2015)",
     instructor: "Er. Neha Kashyap (AI Mentor)",
   },
 };
@@ -155,7 +155,7 @@ const CertificateVerification = () => {
             Certificate <span className="text-blue-600">Verification</span>
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
-            Employers, recruiters, and institutions can authenticate ApnaVidya
+            Employers, recruiters, and institutions can authenticate APNAVIDYA
             course completion credentials by entering the unique Certificate ID.
           </p>
         </div>
@@ -231,7 +231,7 @@ const CertificateVerification = () => {
                     Officially Verified Credential
                   </h3>
                   <p className="text-xs text-emerald-600 font-semibold">
-                    Valid Record in ApnaVidya Central Registry
+                    Valid Record in APNAVIDYA Central Registry
                   </p>
                 </div>
               </div>

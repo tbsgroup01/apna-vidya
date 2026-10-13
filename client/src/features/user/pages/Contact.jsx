@@ -17,7 +17,7 @@ import OtpVerificationStep from "../components/OtpVerificationStep";
 const Contact = () => {
   const { settings } = useSettings();
   const contact = settings.contact || {};
-  const siteName = settings.general?.siteName || "ApnaVidya";
+  const siteName = settings.general?.siteName || "APNAVIDYA";
 
   const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
@@ -114,7 +114,7 @@ const Contact = () => {
   const alternatePhone = contact.alternatePhone;
   const primaryEmail = contact.email || "admissions@apnavidya.com";
   const supportEmail = contact.supportEmail || "support@apnavidya.com";
-  const address = contact.address || "ApnaVidya Tower, 4th Floor, Sector 62, Noida, UP - 201301";
+  const address = contact.address || "APNAVIDYA Tower, 4th Floor, Sector 62, Noida, UP - 201301";
   const workingHours = contact.workingHours || "Mon - Sat: 9:00 AM - 7:00 PM";
   const googleMapsUrl = contact.googleMapsUrl;
 

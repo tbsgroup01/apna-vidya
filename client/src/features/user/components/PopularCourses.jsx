@@ -151,7 +151,7 @@ const PopularCourses = () => {
 
                         <p className="mt-3 text-sm leading-relaxed text-slate-500 sm:text-base font-normal">
                             Choose from industry-focused learning programs and start
-                            your journey with ApnaVidya.
+                            your journey with APNAVIDYA.
                         </p>
                     </div>
 

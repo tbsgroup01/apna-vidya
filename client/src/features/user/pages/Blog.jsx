@@ -111,7 +111,7 @@ const Blog = () => {
         <div className="mx-auto max-w-4xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-600 border border-blue-100">
             <Newspaper size={15} />
-            ApnaVidya Knowledge Base
+            APNAVIDYA Knowledge Base
           </span>
           <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
             Articles & <span className="text-blue-600">Guides</span>
@@ -168,7 +168,7 @@ const Blog = () => {
               <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
                 <div>
                   <p className="text-xs font-bold text-slate-900">
-                    {featuredBlog.author || "ApnaVidya Team"}
+                    {featuredBlog.author || "APNAVIDYA Team"}
                   </p>
                   <p className="text-xs text-slate-400">
                     {featuredBlog.authorRole || "Senior Mentor"}

@@ -65,7 +65,7 @@ export const getEmbedVideoInfo = (url = "") => {
 const DEFAULT_VIDEOS = [
   {
     id: 1,
-    title: "Why Learn With ApnaVidya",
+    title: "Why Learn With APNAVIDYA",
     videoSourceType: "url",
     videoUrl: "https://www.youtube.com/watch?v=rfscVS0vtbw",
     thumbnailUrl:
@@ -389,7 +389,7 @@ const VideoSectionAdmin = () => {
           <div>
             <div className="flex items-center gap-2.5">
               <h2 className="text-sm font-bold text-slate-900">
-                Why ApnaVidya - Video Showcase Carousel
+                Why APNAVIDYA - Video Showcase Carousel
               </h2>
               <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-bold text-blue-700">
                 {videos.length} / 5 Videos
@@ -509,7 +509,7 @@ const VideoSectionAdmin = () => {
                           onChange={(e) =>
                             handleUpdateVideo(index, "title", e.target.value)
                           }
-                          placeholder="e.g. Why Learn With ApnaVidya"
+                          placeholder="e.g. Why Learn With APNAVIDYA"
                           className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-800 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-100"
                         />
                       </div>

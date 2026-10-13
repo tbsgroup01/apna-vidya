@@ -3,7 +3,7 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
-    q: "Who can enroll in ApnaVidya courses?",
+    q: "Who can enroll in APNAVIDYA courses?",
     a: "Anyone with an enthusiasm to learn! Whether you are a school student in Classes 8-12 preparing for boards, a college student aiming for your first tech job, or a working professional looking to upskill into Full Stack or AI, our roadmaps are tailored for all backgrounds.",
   },
   {

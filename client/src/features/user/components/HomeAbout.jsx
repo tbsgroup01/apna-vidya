@@ -136,7 +136,7 @@ const HomeAbout = () => {
           <div className="order-1 lg:order-2">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-100/80 px-3.5 py-1 text-xs font-bold text-blue-600">
               <Landmark size={14} className="text-blue-600" />
-              <span>{aboutData?.heroBadge || "About ApnaVidya"}</span>
+              <span>{aboutData?.heroBadge || "About APNAVIDYA"}</span>
             </div>
 
             <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-[42px] leading-[1.18]">
@@ -158,7 +158,7 @@ const HomeAbout = () => {
 
             <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600">
               {aboutData?.storyParagraph2 ||
-                "ApnaVidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews."}
+                "APNAVIDYA was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews."}
             </p>
 
             <div className="mt-6 space-y-3.5">

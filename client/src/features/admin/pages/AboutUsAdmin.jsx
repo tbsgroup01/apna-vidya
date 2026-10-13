@@ -70,16 +70,16 @@ const MENTOR_PRESET_IMAGES = [
 ];
 
 const INITIAL_FORM = {
-  heroBadge: "About ApnaVidya",
+  heroBadge: "About APNAVIDYA",
   heroTitle: "Empowering the Next Generation of India's Builders",
   heroDescription:
-    "ApnaVidya is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
+    "APNAVIDYA is an edtech platform committed to making high-impact, practical computer science and academic education accessible to every student in India.",
   storyTag: "Our Story",
   storyTitle: "Bridging the Gap Between College Degrees and Industry Careers",
   storyParagraph1:
     "Over 1.5 million engineering and computer science students graduate in India every year, yet less than 15% possess the skills required to build modern software applications.",
   storyParagraph2:
-    "ApnaVidya was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
+    "APNAVIDYA was founded to address this exact reality. We discarded passive rote learning in favor of high-engagement live workshops, real product development, and continuous 1-on-1 code reviews.",
   stat1Value: "50,000+",
   stat1Label: "Graduated Students",
   stat2Value: "120+",
@@ -117,7 +117,7 @@ const INITIAL_FORM = {
     },
   ],
   teamTag: "Experienced Educators",
-  teamTitle: "Meet the Mentors Behind ApnaVidya",
+  teamTitle: "Meet the Mentors Behind APNAVIDYA",
   teamSubtitle:
     "Learn from engineers who have shipped software at scale and trained thousands of successful graduates.",
   team: [
@@ -146,7 +146,7 @@ const INITIAL_FORM = {
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
     },
   ],
-  ctaTitle: "Experience the ApnaVidya Way of Learning",
+  ctaTitle: "Experience the APNAVIDYA Way of Learning",
   ctaDescription:
     "Join a live session, speak with our instructors, and explore how our curriculum can help you achieve your career aspirations.",
   ctaPrimaryText: "Book a Free Demo Class",
@@ -404,7 +404,7 @@ const AboutUsAdmin = () => {
                 required
                 value={form.heroBadge}
                 onChange={(e) => setForm({ ...form, heroBadge: e.target.value })}
-                placeholder="e.g. About ApnaVidya"
+                placeholder="e.g. About APNAVIDYA"
               />
               <FormInput
                 label="Main Heading Headline *"
@@ -421,7 +421,7 @@ const AboutUsAdmin = () => {
               required
               value={form.heroDescription}
               onChange={(e) => setForm({ ...form, heroDescription: e.target.value })}
-              placeholder="Lead introduction describing ApnaVidya's mission and purpose..."
+              placeholder="Lead introduction describing APNAVIDYA's mission and purpose..."
             />
           </div>
         )}
@@ -465,7 +465,7 @@ const AboutUsAdmin = () => {
                 rows={3}
                 value={form.storyParagraph2}
                 onChange={(e) => setForm({ ...form, storyParagraph2: e.target.value })}
-                placeholder="How ApnaVidya addresses this reality through practical projects..."
+                placeholder="How APNAVIDYA addresses this reality through practical projects..."
               />
             </div>
 
@@ -531,7 +531,7 @@ const AboutUsAdmin = () => {
                 rows={3}
                 value={form.missionDescription}
                 onChange={(e) => setForm({ ...form, missionDescription: e.target.value })}
-                placeholder="Actionable statement about what ApnaVidya provides..."
+                placeholder="Actionable statement about what APNAVIDYA provides..."
               />
             </div>
 
@@ -680,7 +680,7 @@ const AboutUsAdmin = () => {
                   label="Section Title"
                   value={form.teamTitle}
                   onChange={(e) => setForm({ ...form, teamTitle: e.target.value })}
-                  placeholder="e.g. Meet the Mentors Behind ApnaVidya"
+                  placeholder="e.g. Meet the Mentors Behind APNAVIDYA"
                 />
               </div>
             </div>
@@ -763,7 +763,7 @@ const AboutUsAdmin = () => {
               label="Banner Headline *"
               value={form.ctaTitle}
               onChange={(e) => setForm({ ...form, ctaTitle: e.target.value })}
-              placeholder="Experience the ApnaVidya Way of Learning"
+              placeholder="Experience the APNAVIDYA Way of Learning"
             />
 
             <FormTextarea
